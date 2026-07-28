@@ -16,11 +16,11 @@ CTrade trade;
 
 //=== INPUTS ===
 input long   InpMagic          = 20260730;
-input double InpSLATR          = 1.0;       // SL = 1.0 × ATR14
+input double InpSLATR          = 0.7;       // SL = 0.7 × ATR14
 input double InpTrailATR       = 6.0;       // Trailing Stop = 6.0 × ATR14
 input double InpBaseLot        = 0.06;      // Base lot (compounds with balance)
-input int    InpMaxPositions   = 3;         // Max simultaneous positions
-input double InpDailyLossPct   = 0.10;      // Daily loss cap (10% of day start balance)
+input int    InpMaxPositions   = 1;         // Max simultaneous positions
+input double InpDailyLossPct   = 0.04;      // Daily loss cap (4% of day start balance)
 input double InpMaxLot         = 0.08;      // Absolute max lot
 input int    InpMaxSpread      = 50;        // Max spread points
 input int    InpEMAFast        = 5;
