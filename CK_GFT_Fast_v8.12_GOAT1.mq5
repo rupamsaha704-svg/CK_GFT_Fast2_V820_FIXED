@@ -1,10 +1,10 @@
 //+------------------------------------------------------------------+
-//|                                    CK GFT Fast v8.18 SIMPLE      |
+//|                                    CK GFT Fast v8.19 FINAL      |
+//|   NO OVERNIGHT TRADES - Auto close before market close           |
 //|   ONE TRADE PER DAY. Win=$10, Loss=$10. DONE.                    |
-//|   No complex detection. Simple state machine.                     |
 //+------------------------------------------------------------------+
 #property copyright "CK GFT Fast"
-#property version   "8.18"
+#property version   "8.19"
 #property strict
 
 #include <Trade\Trade.mqh>
@@ -13,11 +13,11 @@ CTrade trade;
 //--- Inputs
 input long   InpMagic             = 20260715;
 input double InpFixedLot          = 0.02;
-input double InpTPDollars         = 10.0;        // Close at +$10
-input double InpSLDollars         = 10.0;        // Close at -$10
-input double InpBEDollars         = 6.0;         // BE at +$6
-input double InpFloatingLossMax   = 1.8;         // Emergency 1.8%
-input int    InpMinTradeDuration  = 120;         // 2 min rule
+input double InpTPDollars         = 10.0;
+input double InpSLDollars         = 10.0;
+input double InpBEDollars         = 6.0;
+input double InpFloatingLossMax   = 1.8;
+input int    InpMinTradeDuration  = 120;
 input int    InpMaxSpreadPoints   = 50;
 input bool   InpUseTrend          = true;
 input int    InpEMAPeriod         = 21;
@@ -25,24 +25,29 @@ input int    InpEMASlow           = 50;
 input int    InpKneeMinRun        = 2;
 input int    InpValidBars         = 5;
 
+// TIME FILTERS - Broker server time
+input int    InpTradeStartHour    = 8;           // Don't trade before this hour
+input int    InpTradeStopHour     = 20;          // Don't OPEN new trades after this
+input int    InpForceCloseHour    = 22;          // FORCE close all trades at this hour
+input bool   InpNoFriday          = true;        // No trading on Friday
+
 //--- State
 enum ENUM_DAY_STATE
 {
-   STATE_LOOKING,       // Looking for setup
-   STATE_ARMED,         // Setup found, waiting trigger
-   STATE_IN_TRADE,      // Trade open
-   STATE_DONE_WIN,      // Won today - done
-   STATE_DONE_LOSS      // Lost today - done
+   STATE_LOOKING,
+   STATE_ARMED,
+   STATE_IN_TRADE,
+   STATE_DONE_WIN,
+   STATE_DONE_LOSS
 };
 
 int      atrHandle, emaFastHandle, emaSlowHandle;
-datetime lastBarTime       = 0;
-datetime g_dayStart        = 0;
-ENUM_DAY_STATE g_state     = STATE_LOOKING;
-double   g_trigger         = 0.0;
-double   g_kneeHigh        = 0.0;
-int      g_barsLeft        = 0;
-bool     g_beApplied       = false;
+datetime lastBarTime  = 0;
+datetime g_dayStart   = 0;
+ENUM_DAY_STATE g_state = STATE_LOOKING;
+double   g_trigger    = 0.0;
+int      g_barsLeft   = 0;
+bool     g_beApplied  = false;
 
 //+------------------------------------------------------------------+
 int OnInit()
@@ -67,8 +72,6 @@ void OnDeinit(const int reason)
 }
 
 //+------------------------------------------------------------------+
-//| Helpers                                                           |
-//+------------------------------------------------------------------+
 double EMAFast(int s) { double b[]; if(CopyBuffer(emaFastHandle,0,s,1,b)<=0) return(0); return(b[0]); }
 double EMASlow(int s) { double b[]; if(CopyBuffer(emaSlowHandle,0,s,1,b)<=0) return(0); return(b[0]); }
 bool IsNewBar() { datetime t=iTime(_Symbol,_Period,0); if(t!=lastBarTime){lastBarTime=t;return(true);} return(false); }
@@ -77,7 +80,45 @@ bool IsRed(int s)   { return(iClose(_Symbol,_Period,s)<iOpen(_Symbol,_Period,s))
 bool IsTrendBuy() { return(EMAFast(1)>EMASlow(1) && iClose(_Symbol,_Period,1)>EMAFast(1)); }
 
 //+------------------------------------------------------------------+
-//| Get my position profit (returns 0 if no position)                 |
+//| Time helpers                                                      |
+//+------------------------------------------------------------------+
+int CurrentHour()
+{
+   MqlDateTime dt;
+   TimeToStruct(TimeCurrent(), dt);
+   return(dt.hour);
+}
+
+int CurrentDayOfWeek()
+{
+   MqlDateTime dt;
+   TimeToStruct(TimeCurrent(), dt);
+   return(dt.day_of_week);
+}
+
+bool IsGoodTimeToTrade()
+{
+   int hour = CurrentHour();
+   int dow  = CurrentDayOfWeek();
+   
+   // No Sunday
+   if(dow == 0) return(false);
+   // No Friday if enabled
+   if(InpNoFriday && dow == 5) return(false);
+   // Only during trading window
+   if(hour < InpTradeStartHour) return(false);
+   if(hour >= InpTradeStopHour) return(false);
+   return(true);
+}
+
+bool IsForceCloseTime()
+{
+   int hour = CurrentHour();
+   return(hour >= InpForceCloseHour);
+}
+
+//+------------------------------------------------------------------+
+//| Position helpers                                                  |
 //+------------------------------------------------------------------+
 double GetProfit()
 {
@@ -140,64 +181,75 @@ void MoveSLtoEntry()
 }
 
 //+------------------------------------------------------------------+
-//| MAIN TICK - Simple state machine                                  |
+//| MAIN TICK                                                         |
 //+------------------------------------------------------------------+
 void OnTick()
 {
-   // === NEW DAY? RESET ===
+   // NEW DAY - reset state
    if(iTime(_Symbol, PERIOD_D1, 0) != g_dayStart)
    {
       g_dayStart = iTime(_Symbol, PERIOD_D1, 0);
       if(!HasPosition())
          g_state = STATE_LOOKING;
-      // If still in trade from yesterday, let it continue
    }
 
-   // === STATE: DONE (win or loss) - do nothing ===
+   // FORCE CLOSE at 22:00 - NO OVERNIGHT TRADES!
+   if(HasPosition() && IsForceCloseTime())
+   {
+      double p = GetProfit();
+      ClosePosition();
+      Print("*** FORCE CLOSE (end of day): $", DoubleToString(p,2), " ***");
+      if(p < -1.0) g_state = STATE_DONE_LOSS;
+      else if(p > 1.0) g_state = STATE_DONE_WIN;
+      else g_state = STATE_DONE_LOSS;  // treat BE as done too
+      return;
+   }
+
+   // If DONE - nothing else
    if(g_state == STATE_DONE_WIN || g_state == STATE_DONE_LOSS)
       return;
 
-   // === STATE: IN TRADE - manage it ===
+   // STATE_IN_TRADE - manage
    if(g_state == STATE_IN_TRADE)
    {
       if(!HasPosition())
       {
-         // Position was closed by broker (SL hit or something)
+         // Broker closed it (SL/gap)
          g_state = STATE_DONE_LOSS;
-         Print("*** POSITION GONE (broker closed) - DONE FOR DAY ***");
+         Print("*** POSITION GONE - DONE ***");
          return;
       }
       
       double profit = GetProfit();
       int elapsed = GetElapsed();
       
-      // LOSS: Close at -$10
+      // LOSS - close at -$10
       if(profit <= -InpSLDollars)
       {
          ClosePosition();
          g_state = STATE_DONE_LOSS;
-         Print("*** LOSS: $", DoubleToString(profit,2), " - DONE FOR DAY ***");
+         Print("*** SL: $", DoubleToString(profit,2), " - DONE ***");
          return;
       }
       
-      // WIN: Close at +$10 (after 2 min)
+      // WIN - close at +$10 after 2 min
       if(profit >= InpTPDollars && elapsed >= InpMinTradeDuration)
       {
          ClosePosition();
          g_state = STATE_DONE_WIN;
-         Print("*** WIN: $", DoubleToString(profit,2), " - DONE FOR DAY ***");
+         Print("*** TP: $", DoubleToString(profit,2), " - DONE ***");
          return;
       }
       
-      // BE: Move SL to entry at +$6
+      // BE - move SL to entry at +$6
       if(profit >= InpBEDollars && !g_beApplied)
       {
          MoveSLtoEntry();
          g_beApplied = true;
-         Print("*** BE APPLIED at profit=$", DoubleToString(profit,2), " ***");
+         Print("*** BE at $", DoubleToString(profit,2), " ***");
       }
       
-      // Floating guard 1.8%
+      // Floating guard
       double bal = AccountInfoDouble(ACCOUNT_BALANCE);
       if(bal > 0 && profit <= -(bal * InpFloatingLossMax / 100.0))
       {
@@ -206,11 +258,13 @@ void OnTick()
          Print("*** FLOATING GUARD: $", DoubleToString(profit,2), " ***");
          return;
       }
-      
-      return;  // While in trade, don't look for new setups
+      return;
    }
 
-   // === STATE: ARMED - waiting for trigger ===
+   // Below: LOOKING or ARMED - need good time to trade
+   if(!IsGoodTimeToTrade()) return;
+
+   // STATE_ARMED - wait for trigger
    if(g_state == STATE_ARMED)
    {
       if(IsNewBar())
@@ -223,24 +277,24 @@ void OnTick()
          }
       }
       
-      if(SymbolInfoInteger(_Symbol, SYMBOL_SPREAD) > InpMaxSpreadPoints) return;
+      if(SymbolInfoInteger(_Symbol,SYMBOL_SPREAD) > InpMaxSpreadPoints) return;
       
       double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
       if(ask >= g_trigger)
       {
-         // OPEN TRADE - no broker TP/SL (only wide emergency SL)
+         // OPEN TRADE - tight emergency SL (30 points, ~$6 max)
          int dg=(int)SymbolInfoInteger(_Symbol,SYMBOL_DIGITS);
-         double emergSL = NormalizeDouble(ask - 80.0, dg);  // ~$16 max if EA fails
+         double emergSL = NormalizeDouble(ask - 30.0, dg);
          
          trade.Buy(InpFixedLot, _Symbol, 0, emergSL, 0);
          g_state = STATE_IN_TRADE;
          g_beApplied = false;
-         Print("*** OPENED at ", DoubleToString(ask,dg), " ***");
+         Print("*** OPEN @ ", DoubleToString(ask,dg), " ***");
       }
       return;
    }
 
-   // === STATE: LOOKING - find setup ===
+   // STATE_LOOKING
    if(g_state == STATE_LOOKING)
    {
       if(IsNewBar())
@@ -255,7 +309,7 @@ void OnTick()
                g_trigger  = iHigh(_Symbol, _Period, 1);
                g_barsLeft = InpValidBars;
                g_state    = STATE_ARMED;
-               Print("*** ARMED: trigger=", DoubleToString(g_trigger,2), " ***");
+               Print("*** ARMED @ ", DoubleToString(g_trigger,2), " ***");
             }
          }
       }
