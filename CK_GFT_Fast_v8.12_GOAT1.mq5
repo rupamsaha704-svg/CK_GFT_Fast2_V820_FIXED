@@ -134,14 +134,14 @@ double CalcTPPrice(double entryPrice)
    double ts = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
    if(tv <= 0 || ts <= 0) return(0);
 
-   // $10 profit: how many ticks needed?
-   // PnL = (ticks) * tick_value * lots
-   // ticks = target$ / (tick_value * lots)
    double ticks = InpTPDollars / (tv * InpFixedLot);
    double tpDist = ticks * ts;
 
    int dg = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
-   return(NormalizeDouble(entryPrice + tpDist, dg));
+   double result = NormalizeDouble(entryPrice + tpDist, dg);
+   Print("DEBUG TP: tv=", tv, " ts=", ts, " lot=", InpFixedLot,
+         " ticks=", ticks, " dist=", tpDist, " TP=", result);
+   return(result);
 }
 
 //+------------------------------------------------------------------+
@@ -153,13 +153,14 @@ double CalcSLPrice(double entryPrice)
    double ts = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
    if(tv <= 0 || ts <= 0) return(0);
 
-   // Same method as TP but going down
-   // ticks = SL$ / (tick_value * lots)
    double ticks = InpSLDollars / (tv * InpFixedLot);
    double slDist = ticks * ts;
 
    int dg = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
-   return(NormalizeDouble(entryPrice - slDist, dg));
+   double result = NormalizeDouble(entryPrice - slDist, dg);
+   Print("DEBUG SL: tv=", tv, " ts=", ts, " lot=", InpFixedLot,
+         " ticks=", ticks, " dist=", slDist, " SL=", result);
+   return(result);
 }
 
 //+------------------------------------------------------------------+
@@ -314,13 +315,23 @@ void OpenTrade(int dir)
 {
    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
    
-   // Fixed SL: 50 pips below entry
+   // Fixed SL: $10 loss below entry (same formula as TP)
    double sl = CalcSLPrice(ask);
-   if(sl <= 0) return;
+   if(sl <= 0 || sl >= ask) return;
    
-   // Fixed TP: $10 profit
+   // Fixed TP: $10 profit above entry
    double tp = CalcTPPrice(ask);
    if(tp <= ask) return;
+
+   // SAFETY CHECK: Verify SL and TP distances are equal (both should be $10)
+   double slDist = ask - sl;
+   double tpDist = tp - ask;
+   // If SL distance is more than 2x TP distance, something is wrong
+   if(slDist > tpDist * 2.0)
+   {
+      Print("ERROR: SL distance (", slDist, ") >> TP distance (", tpDist, ") - SKIPPING TRADE");
+      return;
+   }
 
    int dg = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
    sl = NormalizeDouble(sl, dg);
@@ -331,9 +342,9 @@ void OpenTrade(int dir)
 
    Print("TRADE OPENED: Lot=", DoubleToString(InpFixedLot, 2),
          " Entry=", DoubleToString(ask, dg),
-         " SL=", DoubleToString(sl, dg), " (", InpSLPips, " pips)",
-         " TP=", DoubleToString(tp, dg),
-         " (Target $", DoubleToString(InpTPDollars, 2), ")");
+         " SL=", DoubleToString(sl, dg), " (dist=", DoubleToString(slDist, dg), ")",
+         " TP=", DoubleToString(tp, dg), " (dist=", DoubleToString(tpDist, dg), ")",
+         " Target=$", DoubleToString(InpTPDollars, 2));
 }
 
 //+------------------------------------------------------------------+
