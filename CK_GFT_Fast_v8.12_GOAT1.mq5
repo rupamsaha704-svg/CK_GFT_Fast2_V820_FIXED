@@ -1,7 +1,8 @@
 //+------------------------------------------------------------------+
 //|                                              CK GFT Fast v8.12   |
 //|                        Copyright - CK GFT Fast                   |
-//|   Goat $1 Model - $10/day TP, 1.8% guard, 2min duration guard   |
+//|   Goat $1 Model - $10/day, 1.8% guard, 2min guard, BE@$6        |
+//|   Broker: Tick Size=0.01, Tick Value=0.1, Contract=100           |
 //+------------------------------------------------------------------+
 #property copyright "CK GFT Fast"
 #property version   "8.12"
@@ -13,22 +14,19 @@ CTrade trade;
 //--- Inputs
 input long   InpMagic             = 20260715;
 input double InpFixedLot          = 0.02;        // Fixed lot size
-input double InpTPDollars         = 10.0;        // TP in dollars ($10 = 50 pips on 0.02)
-input int    InpSLPips            = 50;          // Fixed SL in pips (backup)
-input double InpSLDollars         = 10.0;        // SL in dollars (same as TP = $10)
-input int    InpBEPips            = 30;          // Move SL to BE after this many pips profit
-input bool   InpBreakEvenAt1R     = true;        // Enable break-even feature
+input double InpTPDollars         = 10.0;        // TP target in dollars
+input double InpSLDollars         = 10.0;        // SL risk in dollars
+input double InpBEDollars         = 6.0;         // Move SL to BE after this $ profit
 input int    InpMaxTradesPerDay   = 3;
 input double InpDailyProfitTarget = 10.0;        // Daily profit cap in $
 input double InpFloatingLossMax   = 1.8;         // Max floating loss % (safety)
-input int    InpMinTradeDuration  = 120;         // Min trade duration in seconds (2 min)
+input int    InpMinTradeDuration  = 120;         // Min trade duration seconds (2 min)
 input int    InpMaxSpreadPoints   = 50;
 input bool   InpUseTrend          = true;
 input int    InpEMAPeriod         = 21;
 input int    InpEMASlow           = 50;
 input int    InpKneeMinRun        = 2;
 input int    InpValidBars         = 5;
-input double InpSLBufferATR       = 0.3;         // (legacy - not used with fixed SL)
 
 //--- Handles & State
 int      atrHandle, emaFastHandle, emaSlowHandle;
@@ -40,10 +38,9 @@ int      g_dir          = 0;
 double   g_trigger      = 0.0;
 double   g_kneeLow      = 0.0;
 double   g_kneeHigh     = 0.0;
-double   g_pendingSL    = 0.0;
 int      g_barsLeft     = 0;
 bool     g_floatingBreached = false;
-bool     g_lossToday    = false;   // True if SL hit with actual loss today
+bool     g_lossToday    = false;
 
 //+------------------------------------------------------------------+
 //| Expert initialization                                             |
@@ -61,9 +58,6 @@ int OnInit()
    return(INIT_SUCCEEDED);
 }
 
-//+------------------------------------------------------------------+
-//| Expert deinitialization                                           |
-//+------------------------------------------------------------------+
 void OnDeinit(const int reason)
 {
    if(atrHandle != INVALID_HANDLE)     IndicatorRelease(atrHandle);
@@ -106,6 +100,37 @@ bool IsGreen(int s) { return(iClose(_Symbol, _Period, s) > iOpen(_Symbol, _Perio
 bool IsRed(int s)   { return(iClose(_Symbol, _Period, s) < iOpen(_Symbol, _Period, s)); }
 
 //+------------------------------------------------------------------+
+//| Calculate price distance for a given dollar amount                |
+//| Formula: distance = dollars / (tick_value * lots / tick_size)     |
+//| Which is: distance = dollars * tick_size / (tick_value * lots)    |
+//+------------------------------------------------------------------+
+double DollarsToDistance(double dollars)
+{
+   double tv = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);
+   double ts = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
+   if(tv <= 0 || ts <= 0 || InpFixedLot <= 0) return(0);
+   
+   // How much $ per 1 unit of price move for our lot size:
+   // $ per point = tick_value * lot / tick_size
+   // For XAUUSD: $0.1 * 0.02 / 0.01 = $0.2 per 0.01 move
+   // Wait... that gives $0.2 per 0.01 move = $20 per 1.00 move
+   // For $10: distance = $10 / ($0.2 per 0.01) = 50 ticks = 50 * 0.01 = 0.50
+   // But we SAW in backtest: distance = 50.00 (not 0.50!)
+   
+   // Let me recalculate:
+   // tick_value = $0.1 means: 1 tick (0.01 move) on 1.0 lot = $0.10
+   // For 0.02 lot: 1 tick = $0.10 * 0.02 = $0.002
+   // For $10 target: ticks needed = $10 / $0.002 = 5000 ticks
+   // distance = 5000 * 0.01 = 50.00 ✓
+   
+   double dollarPerTick = tv * InpFixedLot;  // $ per tick for our lot
+   double ticksNeeded = dollars / dollarPerTick;
+   double distance = ticksNeeded * ts;
+   
+   return(distance);
+}
+
+//+------------------------------------------------------------------+
 //| Daily Reset                                                       |
 //+------------------------------------------------------------------+
 void ResetDaily()
@@ -117,50 +142,9 @@ void ResetDaily()
    g_lossToday    = false;
 }
 
-//+------------------------------------------------------------------+
-//| Today's realized profit in $                                      |
-//+------------------------------------------------------------------+
 double RealizedProfitToday()
 {
    return(AccountInfoDouble(ACCOUNT_BALANCE) - g_dayStartBal);
-}
-
-//+------------------------------------------------------------------+
-//| Calculate TP price for exact $10 profit                           |
-//+------------------------------------------------------------------+
-double CalcTPPrice(double entryPrice)
-{
-   double tv = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);
-   double ts = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
-   if(tv <= 0 || ts <= 0) return(0);
-
-   double ticks = InpTPDollars / (tv * InpFixedLot);
-   double tpDist = ticks * ts;
-
-   int dg = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
-   double result = NormalizeDouble(entryPrice + tpDist, dg);
-   Print("DEBUG TP: tv=", tv, " ts=", ts, " lot=", InpFixedLot,
-         " ticks=", ticks, " dist=", tpDist, " TP=", result);
-   return(result);
-}
-
-//+------------------------------------------------------------------+
-//| Calculate fixed SL price ($10 loss below entry)                   |
-//+------------------------------------------------------------------+
-double CalcSLPrice(double entryPrice)
-{
-   double tv = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);
-   double ts = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
-   if(tv <= 0 || ts <= 0) return(0);
-
-   double ticks = InpSLDollars / (tv * InpFixedLot);
-   double slDist = ticks * ts;
-
-   int dg = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
-   double result = NormalizeDouble(entryPrice - slDist, dg);
-   Print("DEBUG SL: tv=", tv, " ts=", ts, " lot=", InpFixedLot,
-         " ticks=", ticks, " dist=", slDist, " SL=", result);
-   return(result);
 }
 
 //+------------------------------------------------------------------+
@@ -201,9 +185,6 @@ void CheckFloatingLossGuard()
    }
 }
 
-//+------------------------------------------------------------------+
-//| Close all positions for this symbol/magic                         |
-//+------------------------------------------------------------------+
 void CloseAllPositions()
 {
    for(int i = PositionsTotal() - 1; i >= 0; i--)
@@ -218,9 +199,6 @@ void CloseAllPositions()
 
 //+------------------------------------------------------------------+
 //| 2-Minute Duration Guard + $10 Profit Close                        |
-//| - If profit >= $10 AND trade open > 2 min → close                |
-//| - If TP hit by broker before 2 min, TP stays (broker closes it)  |
-//|   but we also manage manually to be safe                         |
 //+------------------------------------------------------------------+
 void ManageProfitClose()
 {
@@ -235,7 +213,6 @@ void ManageProfitClose()
       datetime openTime = (datetime)PositionGetInteger(POSITION_TIME);
       int elapsed = (int)(TimeCurrent() - openTime);
 
-      // If profit >= $10 and trade has been open > 2 minutes → close
       if(profit >= InpTPDollars && elapsed >= InpMinTradeDuration)
       {
          trade.PositionClose(tk);
@@ -246,12 +223,45 @@ void ManageProfitClose()
 }
 
 //+------------------------------------------------------------------+
+//| Break-even: Move SL to entry when profit reaches $6               |
+//+------------------------------------------------------------------+
+void ManageBE()
+{
+   int dg = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
+   
+   for(int i = PositionsTotal() - 1; i >= 0; i--)
+   {
+      ulong tk = PositionGetTicket(i);
+      if(tk == 0) continue;
+      if(PositionGetInteger(POSITION_MAGIC) != InpMagic) continue;
+      if(PositionGetString(POSITION_SYMBOL) != _Symbol) continue;
+      
+      double open = PositionGetDouble(POSITION_PRICE_OPEN);
+      double slc  = PositionGetDouble(POSITION_SL);
+      double tp   = PositionGetDouble(POSITION_TP);
+      double bid  = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+      double be   = NormalizeDouble(open, dg);
+      
+      // Calculate profit in dollars for this position
+      double profit = PositionGetDouble(POSITION_PROFIT) + PositionGetDouble(POSITION_SWAP);
+      
+      // If profit >= $6 AND SL is still below entry → move SL to entry
+      if(profit >= InpBEDollars && slc < be)
+      {
+         trade.PositionModify(tk, be, tp);
+         Print("BE MOVED: SL to entry at ", DoubleToString(be, dg),
+               " (profit=$", DoubleToString(profit, 2), ")");
+      }
+   }
+}
+
+//+------------------------------------------------------------------+
 //| Disarm setup                                                      |
 //+------------------------------------------------------------------+
 void Disarm()
 {
    g_dir = 0; g_trigger = 0; g_kneeLow = 0;
-   g_kneeHigh = 0; g_barsLeft = 0; g_pendingSL = 0;
+   g_kneeHigh = 0; g_barsLeft = 0;
 }
 
 //+------------------------------------------------------------------+
@@ -267,10 +277,6 @@ bool IsTrendBuy()
 //+------------------------------------------------------------------+
 void TryArmSetup()
 {
-   double atr = ATR();
-   if(atr <= 0) return;
-   double buf = InpSLBufferATR * atr;
-
    if(IsRed(1))
    {
       int run = 0;
@@ -282,12 +288,11 @@ void TryArmSetup()
       bool trendOK = (!InpUseTrend) || IsTrendBuy();
       if(run >= InpKneeMinRun && trendOK)
       {
-         g_dir       = +1;
-         g_kneeHigh  = iHigh(_Symbol, _Period, 1);
-         g_kneeLow   = iLow(_Symbol, _Period, 1);
-         g_trigger   = g_kneeHigh;
-         g_pendingSL = g_kneeLow - buf;
-         g_barsLeft  = InpValidBars;
+         g_dir      = +1;
+         g_kneeHigh = iHigh(_Symbol, _Period, 1);
+         g_kneeLow  = iLow(_Symbol, _Period, 1);
+         g_trigger  = g_kneeHigh;
+         g_barsLeft = InpValidBars;
       }
    }
 }
@@ -309,81 +314,37 @@ int MyPositions()
 }
 
 //+------------------------------------------------------------------+
-//| Open trade - Fixed 0.02 lot, TP = $10 (50 pips)                  |
+//| Open trade                                                        |
+//| TP = entry + $10 distance                                         |
+//| SL = entry - $10 distance                                         |
+//| Both use same DollarsToDistance() so MUST be equal                 |
 //+------------------------------------------------------------------+
 void OpenTrade(int dir)
 {
    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
    
-   // Fixed SL: $10 loss below entry (same formula as TP)
-   double sl = CalcSLPrice(ask);
-   if(sl <= 0 || sl >= ask) return;
+   double tpDist = DollarsToDistance(InpTPDollars);
+   double slDist = DollarsToDistance(InpSLDollars);
    
-   // Fixed TP: $10 profit above entry
-   double tp = CalcTPPrice(ask);
-   if(tp <= ask) return;
-
-   // SAFETY CHECK: Verify SL and TP distances are equal (both should be $10)
-   double slDist = ask - sl;
-   double tpDist = tp - ask;
-   // If SL distance is more than 2x TP distance, something is wrong
-   if(slDist > tpDist * 2.0)
+   if(tpDist <= 0 || slDist <= 0)
    {
-      Print("ERROR: SL distance (", slDist, ") >> TP distance (", tpDist, ") - SKIPPING TRADE");
+      Print("ERROR: Cannot calculate distance. tpDist=", tpDist, " slDist=", slDist);
       return;
    }
-
+   
    int dg = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
-   sl = NormalizeDouble(sl, dg);
-   tp = NormalizeDouble(tp, dg);
+   double tp = NormalizeDouble(ask + tpDist, dg);
+   double sl = NormalizeDouble(ask - slDist, dg);
+   
+   if(sl >= ask || tp <= ask) return;
+
+   Print("TRADE: Entry=", DoubleToString(ask, dg),
+         " TP=", DoubleToString(tp, dg), "(+", DoubleToString(tpDist, dg), ")",
+         " SL=", DoubleToString(sl, dg), "(-", DoubleToString(slDist, dg), ")",
+         " Lot=", DoubleToString(InpFixedLot, 2));
 
    trade.Buy(InpFixedLot, _Symbol, 0, sl, tp);
    g_tradesToday++;
-
-   Print("TRADE OPENED: Lot=", DoubleToString(InpFixedLot, 2),
-         " Entry=", DoubleToString(ask, dg),
-         " SL=", DoubleToString(sl, dg), " (dist=", DoubleToString(slDist, dg), ")",
-         " TP=", DoubleToString(tp, dg), " (dist=", DoubleToString(tpDist, dg), ")",
-         " Target=$", DoubleToString(InpTPDollars, 2));
-}
-
-//+------------------------------------------------------------------+
-//| Break-even management - Move SL to entry after 60% of TP profit  |
-//| ($6 profit on $10 TP = same as 30 pips)                          |
-//+------------------------------------------------------------------+
-void ManageBE()
-{
-   if(!InpBreakEvenAt1R) return;
-   int dg = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
-   
-   // Calculate BE trigger distance: 60% of TP distance (= $6 of $10)
-   double tv = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);
-   double ts = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
-   if(tv <= 0 || ts <= 0) return;
-   double beDollars = InpTPDollars * 0.6;  // $6 trigger (60% of $10)
-   double beTicks = beDollars / (tv * InpFixedLot);
-   double beDist = beTicks * ts;
-   
-   for(int i = PositionsTotal() - 1; i >= 0; i--)
-   {
-      ulong tk = PositionGetTicket(i);
-      if(tk == 0) continue;
-      if(PositionGetInteger(POSITION_MAGIC) != InpMagic) continue;
-      if(PositionGetString(POSITION_SYMBOL) != _Symbol) continue;
-      double open = PositionGetDouble(POSITION_PRICE_OPEN);
-      double slc  = PositionGetDouble(POSITION_SL);
-      double tp   = PositionGetDouble(POSITION_TP);
-      double bid  = SymbolInfoDouble(_Symbol, SYMBOL_BID);
-      double be   = NormalizeDouble(open, dg);
-      
-      // If price moved $6+ in profit AND SL is still below entry → move to BE
-      if(bid >= open + beDist && slc < be)
-      {
-         trade.PositionModify(tk, be, tp);
-         Print("BE MOVED: SL moved to entry at ", DoubleToString(be, dg),
-               " (profit reached $", DoubleToString(beDollars, 2), ")");
-      }
-   }
 }
 
 //+------------------------------------------------------------------+
@@ -392,23 +353,21 @@ void ManageBE()
 bool TradingAllowed()
 {
    if(g_floatingBreached) return(false);
-   if(g_lossToday) return(false);            // Lost today → no more trades
+   if(g_lossToday) return(false);
    if(RealizedProfitToday() >= InpDailyProfitTarget) return(false);
    if(g_tradesToday >= InpMaxTradesPerDay) return(false);
    return(true);
 }
 
 //+------------------------------------------------------------------+
-//| Detect trade close - Loss = stop, BE = retry allowed              |
+//| Detect trade close - Loss=stop day, BE=retry                      |
 //+------------------------------------------------------------------+
 void OnTradeTransaction(const MqlTradeTransaction &trans,
                         const MqlTradeRequest &request,
                         const MqlTradeResult &result)
 {
-   // Only care about deal additions (trade closed)
    if(trans.type != TRADE_TRANSACTION_DEAL_ADD) return;
    
-   // Check if it's our deal
    ulong dealTicket = trans.deal;
    if(dealTicket == 0) return;
    
@@ -419,25 +378,24 @@ void OnTradeTransaction(const MqlTradeTransaction &trans,
       long entry = HistoryDealGetInteger(dealTicket, DEAL_ENTRY);
       
       if(magic != InpMagic || symbol != _Symbol) return;
-      if(entry != DEAL_ENTRY_OUT) return;  // Only exits
+      if(entry != DEAL_ENTRY_OUT) return;
       
       double profit = HistoryDealGetDouble(dealTicket, DEAL_PROFIT)
                     + HistoryDealGetDouble(dealTicket, DEAL_SWAP)
                     + HistoryDealGetDouble(dealTicket, DEAL_COMMISSION);
       
-      if(profit < -1.0)  // Actual loss (more than -$1 to avoid tiny rounding)
+      if(profit < -1.0)
       {
          g_lossToday = true;
-         Print("LOSS DETECTED: $", DoubleToString(profit, 2), " - NO MORE TRADES TODAY");
+         Print("LOSS: $", DoubleToString(profit, 2), " - NO MORE TRADES TODAY");
       }
-      else if(profit >= -1.0 && profit < 1.0)  // Break-even (near zero)
+      else if(profit >= -1.0 && profit < 1.0)
       {
          Print("BREAK-EVEN: $", DoubleToString(profit, 2), " - RETRY ALLOWED");
-         // g_lossToday stays false → can trade again
       }
-      else if(profit >= InpTPDollars - 1.0)  // TP hit
+      else
       {
-         Print("TP HIT: $", DoubleToString(profit, 2), " - DAILY TARGET DONE");
+         Print("WIN: $", DoubleToString(profit, 2), " - DAILY TARGET CHECK");
       }
    }
 }
@@ -450,17 +408,17 @@ void OnTick()
    // Daily reset
    if(iTime(_Symbol, PERIOD_D1, 0) != g_dayStart) ResetDaily();
 
-   // *** SAFETY FIRST - EVERY TICK ***
+   // SAFETY FIRST - every tick
    CheckFloatingLossGuard();
    if(g_floatingBreached) return;
 
-   // *** $10 PROFIT CLOSE + 2 MIN DURATION GUARD ***
+   // $10 profit close + 2 min duration guard
    ManageProfitClose();
 
-   // Break-even management
+   // Break-even at $6 profit
    ManageBE();
 
-   // Daily target already reached? Stop.
+   // Daily target reached? Stop.
    if(RealizedProfitToday() >= InpDailyProfitTarget) return;
 
    // New bar logic
