@@ -15,7 +15,7 @@ CTrade trade;
 input long   InpMagic             = 20260715;
 input double InpFixedLot          = 0.02;        // Fixed lot size
 input double InpTPDollars         = 10.0;        // TP target in dollars
-input double InpSLDollars         = 10.0;        // SL risk in dollars
+input double InpSLDollars         = 6.0;         // SL risk in dollars (actual loss ~$10 due to tick_value variation)
 input double InpBEDollars         = 6.0;         // Move SL to BE after this $ profit
 input int    InpMaxTradesPerDay   = 3;
 input double InpDailyProfitTarget = 10.0;        // Daily profit cap in $
