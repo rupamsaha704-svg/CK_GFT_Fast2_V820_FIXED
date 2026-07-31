@@ -14,7 +14,8 @@ CTrade trade;
 input long   InpMagic             = 20260715;
 input double InpFixedLot          = 0.02;        // Fixed lot size
 input double InpTPDollars         = 10.0;        // TP in dollars ($10 = 50 pips on 0.02)
-input int    InpSLPips            = 50;          // Fixed SL in pips (50 pips = $10 on 0.02)
+input int    InpSLPips            = 50;          // Fixed SL in pips (backup)
+input double InpSLDollars         = 10.0;        // SL in dollars (same as TP = $10)
 input int    InpBEPips            = 30;          // Move SL to BE after this many pips profit
 input bool   InpBreakEvenAt1R     = true;        // Enable break-even feature
 input int    InpMaxTradesPerDay   = 3;
@@ -144,17 +145,20 @@ double CalcTPPrice(double entryPrice)
 }
 
 //+------------------------------------------------------------------+
-//| Calculate fixed SL price (50 pips below entry)                    |
+//| Calculate fixed SL price ($10 loss below entry)                   |
 //+------------------------------------------------------------------+
 double CalcSLPrice(double entryPrice)
 {
-   double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);
+   double tv = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);
+   double ts = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
+   if(tv <= 0 || ts <= 0) return(0);
+
+   // Same method as TP but going down
+   // ticks = SL$ / (tick_value * lots)
+   double ticks = InpSLDollars / (tv * InpFixedLot);
+   double slDist = ticks * ts;
+
    int dg = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
-   // For Gold (2 decimal): 1 pip = 0.1 = 10 points
-   // For Forex (5 decimal): 1 pip = 0.0001 = 10 points
-   // For Forex (4 decimal): 1 pip = 0.01 = 1 point
-   double pipSize = (dg == 3 || dg == 5) ? point * 10 : (dg == 2) ? 0.1 : point;
-   double slDist = InpSLPips * pipSize;
    return(NormalizeDouble(entryPrice - slDist, dg));
 }
 
@@ -333,16 +337,21 @@ void OpenTrade(int dir)
 }
 
 //+------------------------------------------------------------------+
-//| Break-even management - Move SL to entry after 30 pips profit    |
+//| Break-even management - Move SL to entry after 60% of TP profit  |
+//| ($6 profit on $10 TP = same as 30 pips)                          |
 //+------------------------------------------------------------------+
 void ManageBE()
 {
    if(!InpBreakEvenAt1R) return;
    int dg = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
    
-   double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);
-   double pipSize = (dg == 3 || dg == 5) ? point * 10 : (dg == 2) ? 0.1 : point;
-   double beDist = InpBEPips * pipSize;  // 30 pips distance
+   // Calculate BE trigger distance: 60% of TP distance (= $6 of $10)
+   double tv = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);
+   double ts = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
+   if(tv <= 0 || ts <= 0) return;
+   double beDollars = InpTPDollars * 0.6;  // $6 trigger (60% of $10)
+   double beTicks = beDollars / (tv * InpFixedLot);
+   double beDist = beTicks * ts;
    
    for(int i = PositionsTotal() - 1; i >= 0; i--)
    {
@@ -356,12 +365,12 @@ void ManageBE()
       double bid  = SymbolInfoDouble(_Symbol, SYMBOL_BID);
       double be   = NormalizeDouble(open, dg);
       
-      // If price moved 30+ pips in profit AND SL is still below entry → move to BE
+      // If price moved $6+ in profit AND SL is still below entry → move to BE
       if(bid >= open + beDist && slc < be)
       {
          trade.PositionModify(tk, be, tp);
          Print("BE MOVED: SL moved to entry at ", DoubleToString(be, dg),
-               " (price reached +", InpBEPips, " pips)");
+               " (profit reached $", DoubleToString(beDollars, 2), ")");
       }
    }
 }
