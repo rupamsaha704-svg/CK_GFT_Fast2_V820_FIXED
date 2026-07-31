@@ -17,7 +17,7 @@ input double InpFixedLot          = 0.02;        // Fixed lot size
 input double InpTPDollars         = 10.0;        // Close when profit reaches $10
 input double InpSLDollars         = 10.0;        // Close when loss reaches -$10
 input double InpBEDollars         = 6.0;         // Move SL to entry after $6 profit
-input int    InpMaxTradesPerDay   = 3;
+input int    InpMaxTradesPerDay   = 2;           // Max 2 trades/day (BE retry + 1)
 input double InpDailyProfitTarget = 10.0;        // Stop trading after $10/day
 input double InpFloatingLossMax   = 1.8;         // Emergency close at 1.8% floating loss
 input int    InpMinTradeDuration  = 120;         // Min 2 minutes before closing for profit
@@ -193,29 +193,40 @@ void ManageOpenTrade()
 void DetectTradeClose()
 {
    int curPos = MyPositions();
-   double curBal = AccountInfoDouble(ACCOUNT_BALANCE);
    
-   if(curPos < g_prevPosCount && g_prevPosCount > 0)
+   // Only check when position count CHANGES
+   if(curPos != g_prevPosCount)
    {
-      double pnl = curBal - g_prevBalance;
-      if(pnl < -1.0)
+      if(curPos < g_prevPosCount && g_prevPosCount > 0)
       {
-         g_lossToday = true;
-         Print("*** LOSS CLOSED: $", DoubleToString(pnl,2), " - STOP TODAY ***");
+         // Position closed - check balance change
+         double curBal = AccountInfoDouble(ACCOUNT_BALANCE);
+         double pnl = curBal - g_prevBalance;
+         
+         if(pnl < -1.0)
+         {
+            g_lossToday = true;
+            Print("*** LOSS: $", DoubleToString(pnl,2), " - NO MORE TRADES TODAY ***");
+         }
+         else if(pnl < 1.0)
+         {
+            Print("*** BE: $", DoubleToString(pnl,2), " - RETRY OK ***");
+         }
+         else
+         {
+            Print("*** WIN: $", DoubleToString(pnl,2), " ***");
+         }
+         g_beApplied = false;
+         g_prevBalance = curBal;  // Update balance ONLY after close
       }
-      else if(pnl < 1.0)
+      else if(curPos > g_prevPosCount)
       {
-         Print("*** BE CLOSED: $", DoubleToString(pnl,2), " - RETRY OK ***");
+         // New position opened - save balance BEFORE trade
+         g_prevBalance = AccountInfoDouble(ACCOUNT_BALANCE);
       }
-      else
-      {
-         Print("*** WIN CLOSED: $", DoubleToString(pnl,2), " ***");
-      }
-      g_beApplied = false;  // reset for next trade
+      g_prevPosCount = curPos;
    }
-   
-   g_prevPosCount = curPos;
-   g_prevBalance  = curBal;
+   // NOTE: g_prevBalance is NOT updated every tick anymore!
 }
 
 //+------------------------------------------------------------------+
@@ -288,9 +299,8 @@ void OpenTrade()
    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
    int dg = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
 
-   // NO SL and NO TP set on broker - EA will manage!
-   // Only set a wide emergency SL (300 points) in case EA crashes
-   double emergencySL = NormalizeDouble(ask - 300.0, dg);
+   // Emergency SL only - EA manages at -$10, this is just crash protection
+   double emergencySL = NormalizeDouble(ask - 100.0, dg);
    
    trade.Buy(InpFixedLot, _Symbol, 0, emergencySL, 0);
    g_tradesToday++;
