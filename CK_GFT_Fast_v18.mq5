@@ -1,27 +1,18 @@
 //+------------------------------------------------------------------+
 //|                                             CK_GFT_Fast_v18.mq5  |
-//|  Base: v17 + RR 1:1.33                                            |
+//|  Base: v17 + RR 1.33 + BE at 65% with +20% profit lock           |
 //|                                                                    |
 //|  CHANGES from v17:                                                 |
-//|   - RR: 3.0 -> 1.33 (Risk:Reward = 1:1.33)                        |
-//|   - Everything else IDENTICAL to v17                              |
+//|   - RR: 3.0 -> 1.33                                               |
+//|   - BE at 65%: SL moves to ENTRY + 20% of TP distance            |
+//|     (not breakeven, but profit-lock — we NEVER exit at loss       |
+//|     once 65% is reached)                                           |
+//|   - Everything else IDENTICAL to v17 (sell active, partial TP)    |
 //|                                                                    |
-//|  BUY setup (unchanged):                                            |
-//|   - Green run + Red knee + uptrend (EMA21 > EMA50)                |
-//|   - Trigger: break ABOVE knee HIGH                                |
-//|   - SL: knee LOW - ATR buffer                                     |
-//|   - TP: entry + 3R                                                 |
-//|                                                                    |
-//|  SELL setup (NEW - mirror):                                        |
-//|   - Red run + Green knee + downtrend (EMA21 < EMA50)              |
-//|   - Trigger: break BELOW knee LOW                                 |
-//|   - SL: knee HIGH + ATR buffer                                    |
-//|   - TP: entry - 3R                                                 |
-//|                                                                    |
-//|  Risk Management (from v16):                                       |
-//|   - Partial TP1 at 10% -> close 25%                               |
-//|   - Partial TP2 at 60% -> close 25%                               |
-//|   - BE at 65% (SL fixed until this)                               |
+//|  Logic:                                                            |
+//|   65% reach → SL = Entry + 20% of (TP - Entry)                   |
+//|   This means even if price reverses after 65%, minimum exit       |
+//|   = 20% profit locked. NEVER goes to zero or loss after 65%.     |
 //+------------------------------------------------------------------+
 #property copyright "CK GFT Fast v18"
 #property version   "18.00"
@@ -33,7 +24,7 @@ CTrade trade;
 //=== CORE ===
 input long   InpMagic            = 20260715;
 input double InpRiskPercent      = 0.35;
-input double InpRR               = 1.33;  // CHANGED v18: was 3.0, now 1.33 (1:1.33)
+input double InpRR               = 1.33;   // RR 1:1.33
 input int    InpMaxTradesPerDay  = 3;
 input double InpDailyLossStopR   = 1.0;
 input double InpDailyProfitStopR = 3.0;
@@ -46,19 +37,21 @@ input int    InpValidBars        = 5;
 input double InpSLBufferATR      = 0.3;
 input double InpMaxLot           = 0.09;
 
-//=== SELL SIDE (NEW v17) ===
-input bool   InpAllowBuy         = true;   // Enable buy trades
-input bool   InpAllowSell        = true;   // Enable sell trades (NEW)
+//=== DIRECTIONS ===
+input bool   InpAllowBuy         = true;
+input bool   InpAllowSell        = true;
 
-//=== RISK MANAGEMENT (from v16) ===
+//=== PARTIAL TP ===
 input bool   InpUsePartialTP     = true;
-input double InpTP1Progress      = 0.10;
+input double InpTP1Progress      = 0.10;   // 10% → close 25%
 input double InpTP1CloseRatio    = 0.25;
-input double InpTP2Progress      = 0.60;
+input double InpTP2Progress      = 0.60;   // 60% → close 25%
 input double InpTP2CloseRatio    = 0.25;
 
+//=== BREAK-EVEN (PROFIT LOCK) ===
 input bool   InpUseBreakEven     = true;
-input double InpBEProgress       = 0.65;
+input double InpBEProgress       = 0.65;   // Trigger at 65% progress
+input double InpBELockPercent    = 0.20;   // Lock 20% profit above entry (not zero!)
 
 //=== HANDLES / STATE ===
 int      atrHandle, emaFastHandle, emaSlowHandle;
@@ -67,7 +60,7 @@ datetime g_dayStart   = 0;
 double   g_dayStartBal= 0.0;
 double   g_oneR_money = 0.0;
 int      g_tradesToday= 0;
-int      g_dir        = 0;       // +1 = buy, -1 = sell
+int      g_dir        = 0;
 double   g_trigger    = 0.0;
 double   g_kneeLow    = 0.0;
 double   g_kneeHigh   = 0.0;
@@ -76,7 +69,6 @@ double   g_pendingTP  = 0.0;
 int      g_barsLeft   = 0;
 
 //=== Trade state ===
-ulong    g_activeTicket  = 0;
 double   g_initialLots   = 0.0;
 int      g_partialsDone  = 0;
 bool     g_beActivated   = false;
@@ -102,362 +94,282 @@ void OnDeinit(const int reason)
    if(emaSlowHandle != INVALID_HANDLE) IndicatorRelease(emaSlowHandle);
 }
 
-double ATR()
-{
-   double b[]; if(CopyBuffer(atrHandle,0,0,1,b)<=0) return(0); return(b[0]);
-}
-double EMAFast(int shift)
-{
-   double b[]; if(CopyBuffer(emaFastHandle,0,shift,1,b)<=0) return(0); return(b[0]);
-}
-double EMASlow(int shift)
-{
-   double b[]; if(CopyBuffer(emaSlowHandle,0,shift,1,b)<=0) return(0); return(b[0]);
-}
-bool IsNewBar()
-{
-   datetime t = iTime(_Symbol,_Period,0);
-   if(t != lastBarTime){ lastBarTime=t; return(true); }
-   return(false);
-}
-bool IsGreen(int s){ return(iClose(_Symbol,_Period,s) > iOpen(_Symbol,_Period,s)); }
-bool IsRed(int s)  { return(iClose(_Symbol,_Period,s) < iOpen(_Symbol,_Period,s)); }
+double ATR(){ double b[]; if(CopyBuffer(atrHandle,0,0,1,b)<=0) return(0); return(b[0]); }
+double EMAFast(int shift){ double b[]; if(CopyBuffer(emaFastHandle,0,shift,1,b)<=0) return(0); return(b[0]); }
+double EMASlow(int shift){ double b[]; if(CopyBuffer(emaSlowHandle,0,shift,1,b)<=0) return(0); return(b[0]); }
+bool IsNewBar(){ datetime t=iTime(_Symbol,_Period,0); if(t!=lastBarTime){lastBarTime=t;return(true);} return(false); }
+bool IsGreen(int s){ return(iClose(_Symbol,_Period,s)>iOpen(_Symbol,_Period,s)); }
+bool IsRed(int s){ return(iClose(_Symbol,_Period,s)<iOpen(_Symbol,_Period,s)); }
 
 void ResetDaily()
 {
    g_dayStart    = iTime(_Symbol,PERIOD_D1,0);
    g_dayStartBal = AccountInfoDouble(ACCOUNT_BALANCE);
-   g_oneR_money  = g_dayStartBal * (InpRiskPercent/100.0);
+   g_oneR_money  = g_dayStartBal*(InpRiskPercent/100.0);
    g_tradesToday = 0;
 }
 
 double RealizedRToday()
 {
    if(g_oneR_money<=0) return(0);
-   return((AccountInfoDouble(ACCOUNT_BALANCE) - g_dayStartBal) / g_oneR_money);
+   return((AccountInfoDouble(ACCOUNT_BALANCE)-g_dayStartBal)/g_oneR_money);
 }
 
-void Disarm()
-{
-   g_dir=0; g_trigger=0; g_kneeLow=0; g_kneeHigh=0;
-   g_barsLeft=0; g_pendingSL=0; g_pendingTP=0;
-}
+void Disarm(){ g_dir=0; g_trigger=0; g_kneeLow=0; g_kneeHigh=0; g_barsLeft=0; g_pendingSL=0; g_pendingTP=0; }
 
 void ResetTradeState()
 {
-   g_activeTicket = 0;
    g_initialLots  = 0.0;
    g_partialsDone = 0;
    g_beActivated  = false;
 }
 
-//=== Trend checks ===
-bool IsTrendBuy()
-{
-   return(EMAFast(1) > EMASlow(1) && iClose(_Symbol,_Period,1) > EMAFast(1));
-}
+bool IsTrendBuy(){ return(EMAFast(1)>EMASlow(1) && iClose(_Symbol,_Period,1)>EMAFast(1)); }
+bool IsTrendSell(){ return(EMAFast(1)<EMASlow(1) && iClose(_Symbol,_Period,1)<EMAFast(1)); }
 
-bool IsTrendSell()
-{
-   return(EMAFast(1) < EMASlow(1) && iClose(_Symbol,_Period,1) < EMAFast(1));
-}
-
-//+------------------------------------------------------------------+
-//| TryArmSetup — BUY + SELL (v17)                                     |
-//+------------------------------------------------------------------+
 void TryArmSetup()
 {
    double atr = ATR();
    if(atr <= 0) return;
    double buf = InpSLBufferATR * atr;
 
-   //=== BUY SETUP: Red knee after green run ===
+   // BUY
    if(InpAllowBuy && IsRed(1))
    {
-      int run = 0;
-      for(int i=2; i<=12; i++){ if(IsGreen(i)) run++; else break; }
-      bool trendOK = (!InpUseTrend) || IsTrendBuy();
-      if(run >= InpKneeMinRun && trendOK)
+      int run=0;
+      for(int i=2;i<=12;i++){if(IsGreen(i))run++;else break;}
+      bool trendOK=(!InpUseTrend)||IsTrendBuy();
+      if(run>=InpKneeMinRun && trendOK)
       {
-         g_dir       = +1;
-         g_kneeHigh  = iHigh(_Symbol, _Period, 1);
-         g_kneeLow   = iLow(_Symbol,  _Period, 1);
-         g_trigger   = g_kneeHigh;
-         g_pendingSL = g_kneeLow - buf;
-         double oneR = g_trigger - g_pendingSL;
-         g_pendingTP = g_trigger + (InpRR * oneR);
-         g_barsLeft  = InpValidBars;
+         g_dir=+1;
+         g_kneeHigh=iHigh(_Symbol,_Period,1);
+         g_kneeLow=iLow(_Symbol,_Period,1);
+         g_trigger=g_kneeHigh;
+         g_pendingSL=g_kneeLow-buf;
+         double oneR=g_trigger-g_pendingSL;
+         g_pendingTP=g_trigger+(InpRR*oneR);
+         g_barsLeft=InpValidBars;
          return;
       }
    }
 
-   //=== SELL SETUP: Green knee after red run (NEW v17) ===
+   // SELL
    if(InpAllowSell && IsGreen(1))
    {
-      int run = 0;
-      for(int i=2; i<=12; i++){ if(IsRed(i)) run++; else break; }
-      bool trendOK = (!InpUseTrend) || IsTrendSell();
-      if(run >= InpKneeMinRun && trendOK)
+      int run=0;
+      for(int i=2;i<=12;i++){if(IsRed(i))run++;else break;}
+      bool trendOK=(!InpUseTrend)||IsTrendSell();
+      if(run>=InpKneeMinRun && trendOK)
       {
-         g_dir       = -1;
-         g_kneeHigh  = iHigh(_Symbol, _Period, 1);
-         g_kneeLow   = iLow(_Symbol,  _Period, 1);
-         g_trigger   = g_kneeLow;                 // Break below knee LOW
-         g_pendingSL = g_kneeHigh + buf;          // SL above knee HIGH
-         double oneR = g_pendingSL - g_trigger;
-         g_pendingTP = g_trigger - (InpRR * oneR);
-         g_barsLeft  = InpValidBars;
+         g_dir=-1;
+         g_kneeHigh=iHigh(_Symbol,_Period,1);
+         g_kneeLow=iLow(_Symbol,_Period,1);
+         g_trigger=g_kneeLow;
+         g_pendingSL=g_kneeHigh+buf;
+         double oneR=g_pendingSL-g_trigger;
+         g_pendingTP=g_trigger-(InpRR*oneR);
+         g_barsLeft=InpValidBars;
       }
    }
 }
 
-//=== Lot sizing ===
 double LotForRisk(double riskMoney, double slDist)
 {
-   if(slDist <= 0) return(0);
-   double tv = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);
-   double ts = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
-   if(tv <= 0 || ts <= 0) return(0);
-   double lossPerLot = (slDist / ts) * tv;
-   if(lossPerLot <= 0) return(0);
-   double lots = riskMoney / lossPerLot;
-   double mn = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN);
-   double st = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_STEP);
-   lots = MathFloor(lots / st) * st;
-   if(lots < mn) lots = mn;
-   if(lots > InpMaxLot) lots = InpMaxLot;
+   if(slDist<=0) return(0);
+   double tv=SymbolInfoDouble(_Symbol,SYMBOL_TRADE_TICK_VALUE);
+   double ts=SymbolInfoDouble(_Symbol,SYMBOL_TRADE_TICK_SIZE);
+   if(tv<=0||ts<=0) return(0);
+   double lpl=(slDist/ts)*tv;
+   if(lpl<=0) return(0);
+   double lots=riskMoney/lpl;
+   double mn=SymbolInfoDouble(_Symbol,SYMBOL_VOLUME_MIN);
+   double st=SymbolInfoDouble(_Symbol,SYMBOL_VOLUME_STEP);
+   lots=MathFloor(lots/st)*st;
+   if(lots<mn) lots=mn;
+   if(lots>InpMaxLot) lots=InpMaxLot;
    return(lots);
 }
 
-double NormalizePartialVolume(double vol)
+double NormVol(double vol)
 {
-   double st = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_STEP);
-   double mn = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN);
-   double n  = MathFloor(vol / st) * st;
-   if(n < mn) return(0);
+   double st=SymbolInfoDouble(_Symbol,SYMBOL_VOLUME_STEP);
+   double mn=SymbolInfoDouble(_Symbol,SYMBOL_VOLUME_MIN);
+   double n=MathFloor(vol/st)*st;
+   if(n<mn) return(0);
    return(n);
 }
 
 int MyPositions()
 {
-   int c = 0;
-   for(int i = PositionsTotal()-1; i >= 0; i--)
+   int c=0;
+   for(int i=PositionsTotal()-1;i>=0;i--)
    {
-      ulong tk = PositionGetTicket(i);
-      if(tk == 0) continue;
-      if(PositionGetInteger(POSITION_MAGIC) == InpMagic &&
-         PositionGetString(POSITION_SYMBOL)  == _Symbol) c++;
+      ulong tk=PositionGetTicket(i);
+      if(tk==0) continue;
+      if(PositionGetInteger(POSITION_MAGIC)==InpMagic && PositionGetString(POSITION_SYMBOL)==_Symbol) c++;
    }
    return(c);
 }
 
 ulong GetMyTicket()
 {
-   for(int i = PositionsTotal()-1; i >= 0; i--)
+   for(int i=PositionsTotal()-1;i>=0;i--)
    {
-      ulong tk = PositionGetTicket(i);
-      if(tk == 0) continue;
-      if(PositionGetInteger(POSITION_MAGIC) == InpMagic &&
-         PositionGetString(POSITION_SYMBOL)  == _Symbol)
+      ulong tk=PositionGetTicket(i);
+      if(tk==0) continue;
+      if(PositionGetInteger(POSITION_MAGIC)==InpMagic && PositionGetString(POSITION_SYMBOL)==_Symbol)
          return(tk);
    }
    return(0);
 }
 
-//+------------------------------------------------------------------+
-//| OpenBuy / OpenSell (v17)                                           |
-//+------------------------------------------------------------------+
 void OpenBuy()
 {
-   double ask  = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
-   double sl   = g_pendingSL;
-   double tp   = g_pendingTP;
-   double oneR = ask - sl;
-   if(oneR <= 0) return;
-
-   double riskMoney = AccountInfoDouble(ACCOUNT_BALANCE) * (InpRiskPercent/100.0);
-   double lots = LotForRisk(riskMoney, oneR);
-   if(lots <= 0) return;
-
-   int dg = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
-   sl = NormalizeDouble(sl, dg);
-   tp = NormalizeDouble(tp, dg);
-
-   if(trade.Buy(lots, _Symbol, 0, sl, tp))
-   {
-      g_tradesToday++;
-      g_initialLots  = lots;
-      g_partialsDone = 0;
-      g_beActivated  = false;
-   }
+   double ask=SymbolInfoDouble(_Symbol,SYMBOL_ASK);
+   double sl=g_pendingSL; double tp=g_pendingTP;
+   double oneR=ask-sl; if(oneR<=0) return;
+   double lots=LotForRisk(AccountInfoDouble(ACCOUNT_BALANCE)*(InpRiskPercent/100.0),oneR);
+   if(lots<=0) return;
+   int dg=(int)SymbolInfoInteger(_Symbol,SYMBOL_DIGITS);
+   sl=NormalizeDouble(sl,dg); tp=NormalizeDouble(tp,dg);
+   if(trade.Buy(lots,_Symbol,0,sl,tp))
+   { g_tradesToday++; g_initialLots=lots; g_partialsDone=0; g_beActivated=false; }
 }
 
 void OpenSell()
 {
-   double bid  = SymbolInfoDouble(_Symbol, SYMBOL_BID);
-   double sl   = g_pendingSL;
-   double tp   = g_pendingTP;
-   double oneR = sl - bid;
-   if(oneR <= 0) return;
-
-   double riskMoney = AccountInfoDouble(ACCOUNT_BALANCE) * (InpRiskPercent/100.0);
-   double lots = LotForRisk(riskMoney, oneR);
-   if(lots <= 0) return;
-
-   int dg = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
-   sl = NormalizeDouble(sl, dg);
-   tp = NormalizeDouble(tp, dg);
-
-   if(trade.Sell(lots, _Symbol, 0, sl, tp))
-   {
-      g_tradesToday++;
-      g_initialLots  = lots;
-      g_partialsDone = 0;
-      g_beActivated  = false;
-   }
+   double bid=SymbolInfoDouble(_Symbol,SYMBOL_BID);
+   double sl=g_pendingSL; double tp=g_pendingTP;
+   double oneR=sl-bid; if(oneR<=0) return;
+   double lots=LotForRisk(AccountInfoDouble(ACCOUNT_BALANCE)*(InpRiskPercent/100.0),oneR);
+   if(lots<=0) return;
+   int dg=(int)SymbolInfoInteger(_Symbol,SYMBOL_DIGITS);
+   sl=NormalizeDouble(sl,dg); tp=NormalizeDouble(tp,dg);
+   if(trade.Sell(lots,_Symbol,0,sl,tp))
+   { g_tradesToday++; g_initialLots=lots; g_partialsDone=0; g_beActivated=false; }
 }
 
 //+------------------------------------------------------------------+
-//| ManageTrade — Handles both BUY and SELL positions                 |
+//| ManageTrade — Partial TPs + Profit Lock at 65%                    |
+//| At 65%: SL = Entry + 20% of TP distance (NOT breakeven!)         |
+//| This guarantees minimum 20% profit on remaining — never loss     |
 //+------------------------------------------------------------------+
 void ManageTrade()
 {
-   if(MyPositions() == 0)
-   {
-      ResetTradeState();
-      return;
-   }
+   if(MyPositions()==0){ ResetTradeState(); return; }
 
-   ulong ticket = GetMyTicket();
-   if(ticket == 0) return;
+   ulong ticket=GetMyTicket();
+   if(ticket==0) return;
    if(!PositionSelectByTicket(ticket)) return;
 
-   double open       = PositionGetDouble(POSITION_PRICE_OPEN);
-   double slc        = PositionGetDouble(POSITION_SL);
-   double tp         = PositionGetDouble(POSITION_TP);
-   double currentVol = PositionGetDouble(POSITION_VOLUME);
-   long   type       = PositionGetInteger(POSITION_TYPE);
-   int    dg         = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
+   double open=PositionGetDouble(POSITION_PRICE_OPEN);
+   double slc=PositionGetDouble(POSITION_SL);
+   double tp=PositionGetDouble(POSITION_TP);
+   double currentVol=PositionGetDouble(POSITION_VOLUME);
+   long type=PositionGetInteger(POSITION_TYPE);
+   int dg=(int)SymbolInfoInteger(_Symbol,SYMBOL_DIGITS);
 
-   double progress = 0.0;
-   double totalDist = 0.0;
+   double totalDist=0, progress=0;
 
-   if(type == POSITION_TYPE_BUY)
+   if(type==POSITION_TYPE_BUY)
    {
-      double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
-      totalDist = tp - open;
-      if(totalDist <= 0) return;
-      progress = (bid - open) / totalDist;
+      double bid=SymbolInfoDouble(_Symbol,SYMBOL_BID);
+      totalDist=tp-open; if(totalDist<=0) return;
+      progress=(bid-open)/totalDist;
    }
-   else if(type == POSITION_TYPE_SELL)
+   else if(type==POSITION_TYPE_SELL)
    {
-      double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
-      totalDist = open - tp;
-      if(totalDist <= 0) return;
-      progress = (open - ask) / totalDist;
+      double ask=SymbolInfoDouble(_Symbol,SYMBOL_ASK);
+      totalDist=open-tp; if(totalDist<=0) return;
+      progress=(open-ask)/totalDist;
    }
    else return;
 
-   if(g_initialLots <= 0) g_initialLots = currentVol;
+   if(g_initialLots<=0) g_initialLots=currentVol;
+   double mnLot=SymbolInfoDouble(_Symbol,SYMBOL_VOLUME_MIN);
 
-   double mnLot = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN);
-
-   //=== TP1 at 10% progress ===
-   if(InpUsePartialTP && g_partialsDone == 0 && progress >= InpTP1Progress)
+   // TP1 at 10%
+   if(InpUsePartialTP && g_partialsDone==0 && progress>=InpTP1Progress)
    {
-      double volToClose = NormalizePartialVolume(g_initialLots * InpTP1CloseRatio);
-      if(volToClose > 0 && currentVol > volToClose && (currentVol - volToClose) >= mnLot)
-      {
-         if(trade.PositionClosePartial(ticket, volToClose))
-         {
-            g_partialsDone = 1;
-            Print(">>> TP1 @ ", (int)(progress*100), "% - closed ", volToClose);
-         }
-      }
-      else
-      {
-         g_partialsDone = 1;
-      }
+      double vol=NormVol(g_initialLots*InpTP1CloseRatio);
+      if(vol>0 && currentVol>vol && (currentVol-vol)>=mnLot)
+      { if(trade.PositionClosePartial(ticket,vol)) g_partialsDone=1; }
+      else g_partialsDone=1;
    }
 
-   //=== TP2 at 60% progress ===
-   if(InpUsePartialTP && g_partialsDone == 1 && progress >= InpTP2Progress)
+   // TP2 at 60%
+   if(InpUsePartialTP && g_partialsDone==1 && progress>=InpTP2Progress)
    {
-      double volToClose = NormalizePartialVolume(g_initialLots * InpTP2CloseRatio);
-      if(volToClose > 0 && currentVol > volToClose && (currentVol - volToClose) >= mnLot)
-      {
-         if(trade.PositionClosePartial(ticket, volToClose))
-         {
-            g_partialsDone = 2;
-            Print(">>> TP2 @ ", (int)(progress*100), "% - closed ", volToClose);
-         }
-      }
-      else
-      {
-         g_partialsDone = 2;
-      }
+      double vol=NormVol(g_initialLots*InpTP2CloseRatio);
+      if(vol>0 && currentVol>vol && (currentVol-vol)>=mnLot)
+      { if(trade.PositionClosePartial(ticket,vol)) g_partialsDone=2; }
+      else g_partialsDone=2;
    }
 
-   //=== BE at 65% progress ===
-   if(InpUseBreakEven && !g_beActivated && progress >= InpBEProgress)
+   // PROFIT LOCK at 65%: SL = Entry + 20% of TP distance
+   // NOT breakeven! This locks minimum 20% profit.
+   if(InpUseBreakEven && !g_beActivated && progress>=InpBEProgress)
    {
-      double be = NormalizeDouble(open, dg);
+      double lockDist = totalDist * InpBELockPercent;  // 20% of TP distance
 
-      if(type == POSITION_TYPE_BUY && slc < be)
+      if(type==POSITION_TYPE_BUY)
       {
-         if(trade.PositionModify(ticket, be, tp))
+         double newSL = NormalizeDouble(open + lockDist, dg);
+         if(slc < newSL)
          {
-            g_beActivated = true;
-            Print(">>> BE (BUY) @ ", (int)(progress*100), "% - SL to ", be);
+            if(trade.PositionModify(ticket, newSL, tp))
+            {
+               g_beActivated=true;
+               Print(">>> PROFIT LOCK (BUY) @ ",DoubleToString(progress*100,0),"% — SL to ",newSL," (+20% locked)");
+            }
          }
+         else g_beActivated=true;
       }
-      else if(type == POSITION_TYPE_SELL && slc > be)
+      else if(type==POSITION_TYPE_SELL)
       {
-         if(trade.PositionModify(ticket, be, tp))
+         double newSL = NormalizeDouble(open - lockDist, dg);
+         if(slc > newSL)
          {
-            g_beActivated = true;
-            Print(">>> BE (SELL) @ ", (int)(progress*100), "% - SL to ", be);
+            if(trade.PositionModify(ticket, newSL, tp))
+            {
+               g_beActivated=true;
+               Print(">>> PROFIT LOCK (SELL) @ ",DoubleToString(progress*100,0),"% — SL to ",newSL," (+20% locked)");
+            }
          }
-      }
-      else
-      {
-         g_beActivated = true;
+         else g_beActivated=true;
       }
    }
 }
 
 bool TradingAllowed()
 {
-   double r = RealizedRToday();
-   if(InpDailyProfitStopR > 0 && r >=  InpDailyProfitStopR) return(false);
-   if(InpDailyLossStopR   > 0 && r <= -InpDailyLossStopR)   return(false);
-   if(g_tradesToday >= InpMaxTradesPerDay) return(false);
+   double r=RealizedRToday();
+   if(InpDailyProfitStopR>0 && r>=InpDailyProfitStopR) return(false);
+   if(InpDailyLossStopR>0 && r<=-InpDailyLossStopR) return(false);
+   if(g_tradesToday>=InpMaxTradesPerDay) return(false);
    return(true);
 }
 
-//+------------------------------------------------------------------+
 void OnTick()
 {
-   if(iTime(_Symbol, PERIOD_D1, 0) != g_dayStart) ResetDaily();
+   if(iTime(_Symbol,PERIOD_D1,0)!=g_dayStart) ResetDaily();
 
    ManageTrade();
 
    if(IsNewBar())
    {
-      if(g_dir != 0){ g_barsLeft--; if(g_barsLeft <= 0) Disarm(); }
-      if(g_dir == 0 && MyPositions() == 0) TryArmSetup();
+      if(g_dir!=0){g_barsLeft--;if(g_barsLeft<=0)Disarm();}
+      if(g_dir==0 && MyPositions()==0) TryArmSetup();
    }
 
-   if(g_dir != 0 && MyPositions() == 0)
+   if(g_dir!=0 && MyPositions()==0)
    {
-      if(SymbolInfoInteger(_Symbol, SYMBOL_SPREAD) > InpMaxSpreadPoints) return;
+      if(SymbolInfoInteger(_Symbol,SYMBOL_SPREAD)>InpMaxSpreadPoints) return;
       if(!TradingAllowed()) return;
-
-      double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
-      double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
-
-      if(g_dir > 0 && ask >= g_trigger)     { OpenBuy();  Disarm(); }
-      else if(g_dir < 0 && bid <= g_trigger){ OpenSell(); Disarm(); }
+      double ask=SymbolInfoDouble(_Symbol,SYMBOL_ASK);
+      double bid=SymbolInfoDouble(_Symbol,SYMBOL_BID);
+      if(g_dir>0 && ask>=g_trigger){OpenBuy();Disarm();}
+      else if(g_dir<0 && bid<=g_trigger){OpenSell();Disarm();}
    }
 }
 //+------------------------------------------------------------------+
