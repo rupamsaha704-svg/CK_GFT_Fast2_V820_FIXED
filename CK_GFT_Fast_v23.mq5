@@ -46,11 +46,11 @@ input double InpMaxLot           = 0.09;
 input bool   InpAllowBuy         = true;   // Enable buy trades
 input bool   InpAllowSell        = true;   // Enable sell trades
 
-//=== RISK MANAGEMENT (v23: TP1 only @ 40%, TP2 removed) ===
+//=== RISK MANAGEMENT (v23: TP1 only @10% default, TP2 removed) ===
 input bool   InpUsePartialTP1    = true;   // TP1 enabled
 input double InpTP1Progress      = 0.10;   // at 10% of TP distance
-input double InpTP1CloseRatio    = 0.40;   // close 40% of position (CHANGED v23)
-input bool   InpUsePartialTP2    = false;  // TP2 REMOVED (v23) - rest runs to full TP
+input double InpTP1CloseRatio    = 0.25;   // close 25% (unchanged from default)
+input bool   InpUsePartialTP2    = false;  // TP2 REMOVED - rest runs to full TP
 input double InpTP2Progress      = 0.60;
 input double InpTP2CloseRatio    = 0.25;
 
