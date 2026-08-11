@@ -10,8 +10,8 @@
 //|  CHANGES FROM v29 (user request, 2026):                            |
 //|   1. NO mid-trade partial booking:                                 |
 //|        - 0.01 "lock" partial close ...... DISABLED (InpUseLock)    |
-//|        - Break-even SL move ............. DISABLED (InpUseBreakEven)|
-//|      => each trade only has ENTRY, SL and TP. Nothing booked mid.  |
+//|        - Break-even SL move ............. ENABLED  (InpUseBreakEven)|
+//|      => no partial profit is booked; break-even only moves the SL. |
 //|   2. FIXED lot 0.02 per trade (auto-risk sizing turned off).       |
 //|   3. Max DAILY loss = $50 -> stop trading that day, resume next.   |
 //|   4. TIME FILTER: block NEW entries during the worst-loss hour     |
@@ -67,7 +67,7 @@ input int    InpMinHoldSeconds   = 120;    // 2-min rule (only used if lock enab
 input bool   InpUseLock          = false;  // v30: 0.01 partial lock DISABLED
 input double InpLockProgress     = 0.25;   // Lock when price >= 25% of TP distance
 input double InpLockLot           = 0.01;  // Lot to lock (close) after 2 min
-input bool   InpUseBreakEven     = false;  // v30: break-even SL move DISABLED
+input bool   InpUseBreakEven     = true;   // break-even SL move at 65% progress (user: ON)
 input double InpBEProgress       = 0.65;   // BE at 65% progress
 
 //=== HANDLES / STATE ===
