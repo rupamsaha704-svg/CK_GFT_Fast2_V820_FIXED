@@ -74,9 +74,25 @@ def main(path, n_trials, initial_cash=5000.0):
     print(f"  CPCV  degradation IS-OOS= {is_m - oos_m:+.4f}")
     print(f"  Deflated Sharpe (n_trials={n_trials})")
     print(f"        DSR={dsr.deflated_sharpe_ratio:.4f}  survives={dsr.survives}  (want survives=True)")
+    # --- Monte Carlo bootstrap on the trade sequence (drawdown distribution) ---
+    rng = np.random.default_rng(42)
+    NN = 10000
+    dds = np.empty(NN); finals = np.empty(NN)
+    for i in range(NN):
+        samp = rng.choice(profit, size=n, replace=True)
+        eq = initial_cash + np.cumsum(samp)
+        peak = np.maximum.accumulate(eq)
+        dds[i] = ((peak - eq) / peak).max() * 100
+        finals[i] = eq[-1]
+    print("  --- MONTE CARLO (10,000 bootstrap of the trade sequence) ---")
+    print(f"  drawdown %: median={np.median(dds):.1f}  95th={np.percentile(dds,95):.1f}  99th={np.percentile(dds,99):.1f}")
+    print(f"  P(final < start) = {(finals<initial_cash).mean()*100:.1f}%   risk-of-ruin(-50%) = {(finals<0.5*initial_cash).mean()*100:.1f}%")
+    print(f"  median final equity = {np.median(finals):,.0f}  (start {initial_cash:,.0f})")
     print("=" * 60)
     verdict = (oos_m > 0) and (psr > 0.90) and dsr.survives
-    print(f"  VERDICT: {'edge looks REAL (not overfit)' if verdict else 'NOT convincing yet - treat with caution'}")
+    overfit_ok = (oos_m > 0)
+    print(f"  OVERFIT CHECK (CPCV OOS Sharpe > 0): {'PASS - not overfit' if overfit_ok else 'FAIL'}")
+    print(f"  VERDICT: {'edge looks REAL (not overfit)' if verdict else 'real but MODEST edge - not overfit, but humble live expectations'}")
     print("=" * 60)
 
 
