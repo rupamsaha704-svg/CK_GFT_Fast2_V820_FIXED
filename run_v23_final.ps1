@@ -32,13 +32,14 @@ $common=Join-Path $dataDir "..\Common\Files"
 $csv=Join-Path $common "ck_v23_trades.csv"
 if(Test-Path $csv){ Remove-Item $csv -Force -ErrorAction SilentlyContinue }
 
-Write-Host "[4/5] Running FULL 12-month backtest (MaxLot 0.09)... please wait"
+Write-Host "[4/5] Running FULL 12-month backtest - REAL TICKS, leverage 1:10, MaxLot 0.09..."
+Write-Host "      (real-tick download can take several minutes the first time - please wait)"
 $ini=Join-Path $research "v23_final.ini"
-$cfg="[Tester]`nExpert=CK_GFT_Fast_v23_ROBUST.ex5`nSymbol=XAUUSD`nPeriod=M15`nModel=0`nFromDate=2025.08.01`nToDate=2026.08.01`nDeposit=5000`nCurrency=USD`nLeverage=100`nOptimization=0`nShutdownTerminal=1`nVisual=0`n[TesterInputs]`nInpRR=3.0`nInpMaxSL_ATR=2.5`nInpRiskPercent=0.5`nInpMaxLot=0.09`n"
+$cfg="[Tester]`nExpert=CK_GFT_Fast_v23_ROBUST.ex5`nSymbol=XAUUSD`nPeriod=M15`nModel=4`nExecutionMode=0`nFromDate=2025.08.01`nToDate=2026.08.01`nForwardMode=0`nDeposit=5000`nCurrency=USD`nLeverage=10`nOptimization=0`nShutdownTerminal=1`nVisual=0`n[TesterInputs]`nInpRR=3.0`nInpMaxSL_ATR=2.5`nInpRiskPercent=0.5`nInpMaxLot=0.09`n"
 Set-Content -Encoding ascii $ini $cfg
 Get-Process terminal64 -ErrorAction SilentlyContinue | Stop-Process -Force; Start-Sleep 3
 $p=Start-Process $term -ArgumentList ('/config:"{0}"' -f $ini) -PassThru
-$p | Wait-Process -Timeout 200 -ErrorAction SilentlyContinue
+$p | Wait-Process -Timeout 900 -ErrorAction SilentlyContinue
 if(-not $p.HasExited){ $p | Stop-Process -Force -ErrorAction SilentlyContinue }
 Start-Sleep 3
 
