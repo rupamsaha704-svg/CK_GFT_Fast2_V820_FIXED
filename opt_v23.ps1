@@ -26,11 +26,11 @@ function RunCfg($rr,$slatr,$from,$to){
   Start-Sleep 3
   return (LastBalance)
 }
-Write-Host "==== v23 IN-SAMPLE optimization (XAUUSD M15, Aug 2025 - Feb 2026) : final balance from 5000 ===="
+Write-Host "==== v23 IN-SAMPLE optimization (XAUUSD M15, Aug 2025 - Apr 2026) : final balance from 5000 ===="
 $rows=@()
 foreach($rr in 1.0,1.5,2.0,3.0){
   foreach($sl in 2.5,4.0){
-    $bal=RunCfg $rr $sl "2025.08.01" "2026.02.01"
+    $bal=RunCfg $rr $sl "2025.08.01" "2026.04.01"
     $net = 0.0; if($bal){ $net = [double]($bal -replace '[^\d\.-]','') - 5000 }
     Write-Host ("RR=" + $rr + "  SL_ATR=" + $sl + "  -> final=" + $bal + "  (net " + ("{0:+0.0;-0.0;0}" -f $net) + ")")
     $rows += [pscustomobject]@{RR=$rr;SL=$sl;Net=$net}
