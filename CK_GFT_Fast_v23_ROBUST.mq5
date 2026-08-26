@@ -25,7 +25,7 @@ CTrade trade;
 input long   InpMagic            = 20260716;
 input double InpRiskPercent      = 0.5;    // % balance risked per trade
 input double InpRR               = 3.0;    // reward:risk for TP
-input double InpMaxLot           = 0.20;
+input double InpMaxLot           = 0.09;   // HARD CAP (risk rule)
 input int    InpMaxTradesPerDay  = 3;
 input double InpDailyLossStopR   = 2.0;    // stop new trades after -2R realised
 input double InpDailyProfitStopR = 4.0;    // stop new trades after +4R realised
@@ -241,6 +241,32 @@ void ManageTrade()
       if(open-tp<=0) return; prog=(open-ask)/(open-tp);
       if(prog>=InpBEProgress && sl>open){ if(trade.PositionModify(tk,NormalizeDouble(open,dg),tp)) g_beActivated=true; }
    }
+}
+
+//+------------------------------------------------------------------+
+//| OnTester: dump every closed-trade net P/L to a CSV (Common\Files) |
+//| so external tools can run DD / Monte Carlo / CPCV analysis.       |
+//+------------------------------------------------------------------+
+double OnTester()
+{
+   int h=FileOpen("ck_v23_trades.csv", FILE_WRITE|FILE_CSV|FILE_COMMON|FILE_ANSI, ",");
+   if(h!=INVALID_HANDLE)
+   {
+      FileWrite(h,"deal","profit");
+      HistorySelect(0,TimeCurrent());
+      int total=HistoryDealsTotal();
+      for(int i=0;i<total;i++)
+      {
+         ulong tk=HistoryDealGetTicket(i);
+         if(tk==0) continue;
+         if(HistoryDealGetString(tk,DEAL_SYMBOL)!=_Symbol) continue;
+         if(HistoryDealGetInteger(tk,DEAL_ENTRY)!=DEAL_ENTRY_OUT) continue;
+         double p=HistoryDealGetDouble(tk,DEAL_PROFIT)+HistoryDealGetDouble(tk,DEAL_SWAP)+HistoryDealGetDouble(tk,DEAL_COMMISSION);
+         FileWrite(h,(string)tk,DoubleToString(p,2));
+      }
+      FileClose(h);
+   }
+   return(0.0);
 }
 
 //+------------------------------------------------------------------+
