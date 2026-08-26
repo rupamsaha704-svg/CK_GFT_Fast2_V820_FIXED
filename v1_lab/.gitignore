@@ -1,0 +1,3 @@
+XAUUSD_M5_clean.csv
+*.csv
+!hello_metrics.csv
