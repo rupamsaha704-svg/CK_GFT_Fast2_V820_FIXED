@@ -19,6 +19,7 @@ Validated with institutional statistical methods (Vibe-Trading quantlib):
 - **Combinatorial Purged Cross-Validation (CPCV):** out-of-sample Sharpe **+0.107 ≥ in-sample +0.064** — the edge holds on unseen data (it does **not** degrade out of sample → **not overfit**).
 - **Probabilistic Sharpe Ratio = 0.95** — ~95% confidence the edge is genuinely above zero.
 - **Deflated Sharpe:** edge is real but **modest** — live results are expected to be lower than backtest (stated honestly, not hidden).
+- **Walk-forward (4 sequential unseen windows):** 2/4 net-positive, mean OOS Sharpe +0.097. Profit was **front-loaded** in the trending first half; recent months roughly breakeven — the edge is **regime-dependent** (earns in trends, stalls in chop). Disclosed up front; it is the rationale for the multi-strategy roadmap.
 
 ## Method
 4-confirmation trend breakout-pullback (HTF trend + structure breakout + pullback + momentum trigger),

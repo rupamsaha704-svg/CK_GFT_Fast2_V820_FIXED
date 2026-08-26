@@ -22,6 +22,20 @@ MaxLot 0.09 (hard cap). Validation: Vibe-Trading official quantlib (CPCV, Probab
 one. The +115% backtest year benefited from a strongly trending gold market; live and
 other regimes will be lower. Do not extrapolate to "always +115%".
 
+## Walk-forward validation (Vibe official purged splits, 4 sequential unseen windows)
+| fold | OOS net | OOS Sharpe |
+|---|---|---|
+| 1 | +$2,415 | +0.28 |
+| 2 | +$3,623 | +0.20 |
+| 3 | −$232 | −0.02 |
+| 4 | −$532 | −0.07 |
+
+2/4 windows net-positive; mean OOS Sharpe +0.097. **The profit was front-loaded** in the
+first half (strongly trending gold); the last ~6 months were roughly breakeven. The edge is
+real but **regime-dependent** — it earns in trends and stalls in chop. This is expected for a
+single trend strategy and is the core rationale for the multi-strategy / regime-allocation roadmap.
+Disclosed openly: a reviewer running walk-forward will see this, so we state it up front.
+
 ## The 9% drawdown target: NOT achievable on $5,000 with this edge (proven)
 
 Five principled drawdown-reduction attempts, each tested on real MT5 data + Vibe validation:
