@@ -31,11 +31,11 @@ $p|Wait-Process -Timeout 900 -ErrorAction SilentlyContinue
 if(-not $p.HasExited){$p|Stop-Process -Force -ErrorAction SilentlyContinue}; Start-Sleep 3
 
 Write-Host "[4/5] reading [v23live] log lines (spread diagnostic + safety triggers)..."
-$diag="(none)"; $safety="(none)"
+$diag="(none)"; $safety="(none)"; $fails=@()
 $logDir=Join-Path $dataDir "Tester\logs"
 if(Test-Path $logDir){ $lg=Get-ChildItem $logDir -Filter *.log -ErrorAction SilentlyContinue|Sort-Object LastWriteTime -Descending|Select-Object -First 4
   foreach($f in $lg){ $m=Select-String -Path $f.FullName -Pattern "\[v23live\]" -ErrorAction SilentlyContinue
-    if($m){ foreach($ln in $m){ $t=$ln.Line.Trim(); if($t -match "digits="){$diag=$t.Substring($t.IndexOf("[v23live]"))}; if($t -match "safety triggers"){$safety=$t.Substring($t.IndexOf("[v23live]"))} }; if($safety -ne "(none)"){break} } } }
+    if($m){ foreach($ln in $m){ $t=$ln.Line.Trim(); $ix=$t.IndexOf("[v23live]"); if($ix -lt 0){continue}; $t=$t.Substring($ix); if($t -match "digits="){$diag=$t}; if($t -match "safety triggers"){$safety=$t}; if($t -match "ORDER_FAIL" -and $fails.Count -lt 10){$fails+=$t} }; if($safety -ne "(none)"){break} } } }
 
 Write-Host "[5/5] A/B row-by-row diff (v23_live vs baseline v23_ts)..."
 function LoadRows($p){ if(-not(Test-Path $p)){return ,@()} $raw=Get-Content $p -Raw; if($null -eq $raw){return ,@()} $r=@(); foreach($l in ($raw -split "`r`n|`n|`r")){ $t=$l.Trim(); if($t -eq ""){continue}; if($t -match "^time,"){continue}; $r+=$t }; return ,$r }
@@ -50,6 +50,7 @@ Write-Host ""
 Write-Host "=====V23LIVE_AB_START====="
 Write-Host $diag
 Write-Host $safety
+if($fails.Count -gt 0){ Write-Host "order-fail detail:"; $fails|ForEach-Object{Write-Host ("  "+$_)} }
 Write-Host ("baseline rows : {0}   net {1:N2}" -f $B.Count,$netB)
 Write-Host ("v23_live rows : {0}   net {1:N2}" -f $L.Count,$netL)
 Write-Host ("mismatched rows: {0}" -f $mism)
