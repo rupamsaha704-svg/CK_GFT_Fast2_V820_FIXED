@@ -17,14 +17,15 @@ if(-not (Test-Path $ex5)){Write-Host "  compile FAILED";exit}; Write-Host "  com
 Write-Host "[2/4] clearing old CSV..."
 if(Test-Path $csv){Remove-Item $csv -Force -ErrorAction SilentlyContinue}
 
-Write-Host "[3/4] MULTI-YEAR backtest 2015->2026 (1-min model, risk 1.7%, MaxLot 0.09 LOCKED)..."
-Write-Host "      (this can take a while - broker may only have a few years of gold history)"
+Write-Host "[3/4] MULTI-YEAR backtest - REAL TICKS (Model 4), risk 1.7%, MaxLot 0.09 LOCKED..."
+Write-Host "      (real ticks = accurate; broker may only have ~1-3 years of gold tick history -"
+Write-Host "       MT5 will test whatever real-tick history exists. Can take a long time.)"
 $ini=Join-Path $research "v23_10yr.ini"
-$cfg="[Tester]`nExpert=CK_GFT_v23_ts.ex5`nSymbol=XAUUSD`nPeriod=M15`nModel=1`nExecutionMode=0`nFromDate=2015.01.01`nToDate=2026.08.01`nForwardMode=0`nDeposit=5000`nCurrency=USD`nLeverage=10`nOptimization=0`nShutdownTerminal=1`nVisual=0`n[TesterInputs]`nInpRR=3.0`nInpMaxSL_ATR=2.5`nInpRiskPercent=1.7`nInpMaxLot=0.09`n"
+$cfg="[Tester]`nExpert=CK_GFT_v23_ts.ex5`nSymbol=XAUUSD`nPeriod=M15`nModel=4`nExecutionMode=0`nFromDate=2015.01.01`nToDate=2026.08.01`nForwardMode=0`nDeposit=5000`nCurrency=USD`nLeverage=10`nOptimization=0`nShutdownTerminal=1`nVisual=0`n[TesterInputs]`nInpRR=3.0`nInpMaxSL_ATR=2.5`nInpRiskPercent=1.7`nInpMaxLot=0.09`n"
 Set-Content -Encoding ascii $ini $cfg
 Get-Process terminal64 -ErrorAction SilentlyContinue|Stop-Process -Force; Start-Sleep 3
 $p=Start-Process $term -ArgumentList ('/config:"{0}"' -f $ini) -PassThru
-$p|Wait-Process -Timeout 1800 -ErrorAction SilentlyContinue
+$p|Wait-Process -Timeout 3000 -ErrorAction SilentlyContinue
 if(-not $p.HasExited){$p|Stop-Process -Force -ErrorAction SilentlyContinue}; Start-Sleep 3
 
 Write-Host "[4/4] per-YEAR results (robustness across regimes):"
