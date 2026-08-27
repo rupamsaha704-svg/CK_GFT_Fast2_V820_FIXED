@@ -66,11 +66,12 @@ int OnInit(){
    GK_DAY="v23l_day_"+scope; GK_BAL="v23l_bal_"+scope; GK_TRD="v23l_trd_"+scope;
    LoadOrResetDaily();
    // FIX1 diagnostic: proves 60*point == InpMaxSpreadPrice on the validated broker
-   PrintFormat("[v23live] digits=%d point=%.5f old60Price=%.5f newMaxPrice=%.5f",
+   PrintFormat("[v23live] digits=%d point=%.5f old60Price=%.5f newMaxPrice=%.5f maxSpreadPts=%d (baseline=60)",
       (int)SymbolInfoInteger(_Symbol,SYMBOL_DIGITS),
       SymbolInfoDouble(_Symbol,SYMBOL_POINT),
       60.0*SymbolInfoDouble(_Symbol,SYMBOL_POINT),
-      InpMaxSpreadPrice);
+      InpMaxSpreadPrice,
+      (int)MathRound(InpMaxSpreadPrice/SymbolInfoDouble(_Symbol,SYMBOL_POINT)));
    return(INIT_SUCCEEDED);
 }
 void OnDeinit(const int r){ if(hEmaHTF!=INVALID_HANDLE)IndicatorRelease(hEmaHTF); if(hEmaLTF!=INVALID_HANDLE)IndicatorRelease(hEmaLTF); if(hAtr!=INVALID_HANDLE)IndicatorRelease(hAtr); }
@@ -193,11 +194,14 @@ void OnTick(){
    ManageTrade();
    if(!IsNewBar())return;
    if(MyPositions()>0)return;
-   double bid=SymbolInfoDouble(_Symbol,SYMBOL_BID),ask=SymbolInfoDouble(_Symbol,SYMBOL_ASK);
-   double spread=ask-bid;                                             // FIX1: absolute $ spread
-   bool newReject=(spread>InpMaxSpreadPrice);
-   bool oldReject=((long)SymbolInfoInteger(_Symbol,SYMBOL_SPREAD)>60); // baseline v23 raw-point rule
-   if(oldReject!=newReject) g_cSpreadDiv++;                            // real A/B criterion
+   // FIX1: portable spread — derive point-count from the absolute $ threshold, then compare the
+   // SAME integer SYMBOL_SPREAD the baseline used. Identical on this broker (0.60/0.01=60pts),
+   // correct on 3/5-digit brokers (0.60/0.001=600pts). No float-boundary divergence.
+   long curPts=(long)SymbolInfoInteger(_Symbol,SYMBOL_SPREAD);
+   long maxPts=(long)MathRound(InpMaxSpreadPrice/SymbolInfoDouble(_Symbol,SYMBOL_POINT));
+   bool newReject=(curPts>maxPts);
+   bool oldReject=(curPts>60);                                        // baseline v23_ts raw-point rule
+   if(oldReject!=newReject) g_cSpreadDiv++;                           // A/B criterion (expect 0 here)
    if(newReject){ g_cSpread++; return; }
    if(!TradingAllowed())return;
    double atr=ATR(); if(atr<=0)return; double buf=InpSLBufferATR*atr;

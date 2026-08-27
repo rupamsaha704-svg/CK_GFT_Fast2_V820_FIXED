@@ -38,8 +38,9 @@ if(Test-Path $logDir){ $lg=Get-ChildItem $logDir -Filter *.log -ErrorAction Sile
     if($m){ foreach($ln in $m){ $t=$ln.Line.Trim(); if($t -match "digits="){$diag=$t.Substring($t.IndexOf("[v23live]"))}; if($t -match "safety triggers"){$safety=$t.Substring($t.IndexOf("[v23live]"))} }; if($safety -ne "(none)"){break} } } }
 
 Write-Host "[5/5] A/B row-by-row diff (v23_live vs baseline v23_ts)..."
-function LoadRows($p){ if(-not(Test-Path $p)){return @()} $r=@(); foreach($l in (Get-Content $p)){ if($l -match "^time,"){continue}; if($l.Trim() -eq ""){continue}; $r+=$l.Trim() }; return $r }
+function LoadRows($p){ if(-not(Test-Path $p)){return ,@()} $raw=Get-Content $p -Raw; if($null -eq $raw){return ,@()} $r=@(); foreach($l in ($raw -split "`r`n|`n|`r")){ $t=$l.Trim(); if($t -eq ""){continue}; if($t -match "^time,"){continue}; $r+=$t }; return ,$r }
 $L=LoadRows $csv; $B=LoadRows $baseCsv
+if($B.Count -eq 0){ Write-Host "  WARN: baseline empty/not downloaded (check network / raw URL)" }
 $netL=0.0; foreach($r in $L){ $netL+=[double]($r -split ",")[1] }
 $netB=0.0; foreach($r in $B){ $netB+=[double]($r -split ",")[1] }
 $mism=0; $firstMism=@(); $max=[Math]::Max($L.Count,$B.Count)
