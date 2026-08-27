@@ -11,7 +11,7 @@
 //|  should match the ~+200% run.) Demo-first; backtest != live.      |
 //+------------------------------------------------------------------+
 #property copyright "CK GOLD PRO FIX09"
-#property version   "1.02"
+#property version   "1.03"
 #property strict
 #include <Trade\Trade.mqh>
 CTrade trade;
@@ -65,6 +65,20 @@ double ATR(){ double b[]; if(CopyBuffer(hAtr,0,0,1,b)<=0)return(0); return(b[0])
 double EmaHTF(int s){ double b[]; if(CopyBuffer(hEmaHTF,0,s,1,b)<=0)return(0); return(b[0]); }
 double EmaLTF(int s){ double b[]; if(CopyBuffer(hEmaLTF,0,s,1,b)<=0)return(0); return(b[0]); }
 bool IsNewBar(){ datetime t=iTime(_Symbol,PERIOD_CURRENT,0); if(t!=lastBarTime){ lastBarTime=t; return(true);} return(false); }
+
+// True if the symbol is inside a trading session now. Fail-open: if broker gives no session info, assume open.
+bool MarketOpen(){
+   MqlDateTime dt; TimeToStruct(TimeCurrent(),dt);
+   int sec=dt.hour*3600+dt.min*60+dt.sec;
+   datetime from,to; bool any=false;
+   for(uint i=0;i<10;i++){
+      if(!SymbolInfoSessionTrade(_Symbol,(ENUM_DAY_OF_WEEK)dt.day_of_week,i,from,to)) break;
+      any=true;
+      if(sec>=(int)from && sec<(int)to) return(true);
+   }
+   if(!any) return(true);   // no session info => never block trading
+   return(false);
+}
 
 // FIXED lot: always InpFixedLot, aligned to broker step, clamped to [min, MaxLot, brokerMax].
 double FixedLot(){
@@ -125,8 +139,9 @@ void ManageTrade(){
    double open=PositionGetDouble(POSITION_PRICE_OPEN),sl=PositionGetDouble(POSITION_SL),tp=PositionGetDouble(POSITION_TP);
    long type=PositionGetInteger(POSITION_TYPE); int dg=(int)SymbolInfoInteger(_Symbol,SYMBOL_DIGITS);
    if(g_beActivated)return; double prog=0;
+   if(!MarketOpen()) return;    // don't attempt BE modify into a closed market (no journal spam)
    datetime cb=iTime(_Symbol,PERIOD_CURRENT,0);
-   if(g_beTryBar==cb) return;   // already attempted this bar; don't retry-spam if it failed (market closed)
+   if(g_beTryBar==cb) return;   // one BE-modify attempt per bar
    if(type==POSITION_TYPE_BUY){ double bid=SymbolInfoDouble(_Symbol,SYMBOL_BID); if(tp-open<=0)return; prog=(bid-open)/(tp-open); if(prog>=InpBEProgress&&sl<open){ g_beTryBar=cb; if(trade.PositionModify(tk,NormalizeDouble(open,dg),tp))g_beActivated=true; } }
    else if(type==POSITION_TYPE_SELL){ double ask=SymbolInfoDouble(_Symbol,SYMBOL_ASK); if(open-tp<=0)return; prog=(open-ask)/(open-tp); if(prog>=InpBEProgress&&sl>open){ g_beTryBar=cb; if(trade.PositionModify(tk,NormalizeDouble(open,dg),tp))g_beActivated=true; } }
 }
@@ -157,6 +172,7 @@ void OnTick(){
    bool oldReject=(curPts>60);
    if(oldReject!=newReject) g_cSpreadDiv++;
    if(newReject){ g_cSpread++; return; }
+   if(!MarketOpen()) return;    // don't attempt entries into a closed market (no journal spam)
    if(!TradingAllowed())return;
    double atr=ATR(); if(atr<=0)return; double buf=InpSLBufferATR*atr;
    double c1=iClose(_Symbol,PERIOD_CURRENT,1),o1=iOpen(_Symbol,PERIOD_CURRENT,1);
