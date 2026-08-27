@@ -14,24 +14,31 @@ $5,000, XAUUSD M15):
 | 0.5% | $5,760 | +115% | risk ×1.0 → return ×1.00 (lot ≈0.035, below cap) |
 | 1.7% | $8,050 | +161% | risk ×3.4 → return ×**1.40** (cap binds → saturates) |
 
-If sizing were uncapped, 3.4× risk should ≈3.4× return. We see ~1.4×. **The 0.09 cap limits the
-strategy's absolute $ output**, not just its %.
+Dollar profit scaled **far less** than the risk increase (0.5%→1.7% = ×3.4 risk, only ×1.4 $). This
+is **strong evidence of cap saturation** — MaxLot 0.09 is materially limiting position-size growth in
+the tested configs.
 
-### Consequence (this is the key finding)
-- With MaxLot 0.09, this single EA's **maximum $ output in the best tested year ≈ $8–9k** — and this
-  ceiling is roughly independent of account size and risk%, because once every trade is at 0.09 lot,
-  more capital / more risk% adds nothing.
-- Therefore **$20,000/year from this one EA under MaxLot 0.09 is not achievable — at any capital or
-  risk — even in the best tested year.** More capital only lowers the % (same $ output on a bigger base).
+**Careful wording (not over-claimed):**
+- We can NOT say "uncapped return would have been ×3.4." Even without the cap, scaling is nonlinear
+  because of compounding, daily ±R gates, trade sequencing, and the changing balance.
+- We can NOT yet call ~$8–9k an *absolute annual ceiling*. Changing risk% changes `g_oneR_money`,
+  which shifts when the daily loss/profit gates fire, which can change trade count and path. The true
+  economic ceiling of the 0.09 cap needs the Phase-2 study below (capped-trade frequency + daily-gate
+  interaction across the full risk range) before any ceiling number is stated.
+
+### What IS defensible right now
+- In the tested configurations, MaxLot 0.09 materially caps dollar output (strong saturation evidence).
+- So raising risk% is not a reliable path to much higher $ profit, and "$20k/year" is very unlikely to
+  be reachable from this single EA under 0.09 — but the exact ceiling is to be measured, not asserted.
 
 ## What $20k/year would actually require
 
 | path | what it needs | verdict vs constraints |
 |---|---|---|
 | Raise lot cap (e.g. ~0.22+) | violates the hard MaxLot 0.09 rule | ❌ breaks constraint |
-| More capital, same EA | doesn't help — 0.09 caps the $ output | ❌ math doesn't work |
-| Multiple UNCORRELATED EAs/instruments | 2–3 independent edges each ~$8k | ⚠️ we tested ~18 alts; most rejected/weak; only 1–2 had low correlation but too weak alone |
-| Accept a lower, honest target | e.g. protect capital + compound over years | ✅ defensible |
+| More capital, same EA | 0.09 cap limits $ output in tested configs (exact ceiling TBD in Phase 2) | ⚠️ likely insufficient — measure first |
+| Multiple UNCORRELATED EAs/instruments | 2–3 independent edges | ⚠️ we tested ~18 alts; most rejected/weak; only 1–2 had low correlation but too weak alone |
+| Accept a lower, honest target | protect capital + compound over years | ✅ defensible |
 
 ## The other reason not to annualize +115–161%
 This is a **single-year sample** and the strategy is a **trend specialist**: walk-forward showed strong
