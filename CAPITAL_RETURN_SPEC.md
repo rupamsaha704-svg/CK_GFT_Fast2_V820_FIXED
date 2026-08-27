@@ -26,10 +26,34 @@ the tested configs.
   economic ceiling of the 0.09 cap needs the Phase-2 study below (capped-trade frequency + daily-gate
   interaction across the full risk range) before any ceiling number is stated.
 
-### What IS defensible right now
-- In the tested configurations, MaxLot 0.09 materially caps dollar output (strong saturation evidence).
-- So raising risk% is not a reliable path to much higher $ profit, and "$20k/year" is very unlikely to
-  be reachable from this single EA under 0.09 — but the exact ceiling is to be measured, not asserted.
+### MEASURED cap-saturation evidence (Phase 2, risk 1.7%, real ticks, $5000)
+Instrumented run (CK_GFT_v23_capstudy) logged per-trade intended vs actual lot:
+
+| metric | value |
+|---|---|
+| trades | 274 |
+| capped at 0.09 | **274 (100%)** |
+| sum INTENDED risk $ (1.7% sizing) | $48,596 |
+| sum ACTUAL risk $ (after 0.09 cap) | $3,580 |
+| **risk actually realised** | **7.4% of intended** |
+| net profit | $8,050 |
+
+**What this measures (no longer asserted):**
+- At 1.7%, the cap binds on **every** trade; the account's *effective* per-trade risk is ~0.26%
+  (≈13.5× smaller than the 1.7% label). The "1.7% risk" setting is largely fictional under 0.09.
+- Because all trades are **already at the 0.09 ceiling at 1.7%**, raising risk to 2.0% cannot increase
+  per-trade size — dollar output stays ≈$8k (only daily-gate-driven trade-count shifts are possible).
+  So a "+200% at 2.0%" outcome is **not supported** by this cap; it would need re-measurement to claim.
+- Combined with the 0.5% run ($5,760, not fully capped) and the 1.7% run ($8,050, fully capped), the
+  single-EA dollar output under 0.09 **plateaus around ~$8k in this trending-year sample**. This is the
+  measured economic ceiling of this EA under the 0.09 constraint — not an assertion.
+- Upside: the cap makes the *realised* risk very conservative (~0.26%/trade), which is why drawdown is
+  contained. The return is being produced at low actual risk.
+
+### Conclusion for the $20k question (now evidence-based)
+$20k/year from this single EA under MaxLot 0.09 is **not reachable** — measured, not assumed. Raising
+risk% does not help (already 100% capped at 1.7%). The only honest routes remain: relax the lot
+constraint (breaks the rule) or build a portfolio of uncorrelated edges (Phase 3).
 
 ## What $20k/year would actually require
 
