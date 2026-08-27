@@ -11,7 +11,7 @@
 //|  should match the ~+200% run.) Demo-first; backtest != live.      |
 //+------------------------------------------------------------------+
 #property copyright "CK GOLD PRO FIX09"
-#property version   "1.01"
+#property version   "1.02"
 #property strict
 #include <Trade\Trade.mqh>
 CTrade trade;
@@ -47,6 +47,7 @@ string   GK_DAY, GK_BAL, GK_TRD;
 int OnInit(){
    trade.SetExpertMagicNumber(InpMagic); trade.SetDeviationInPoints(30);
    trade.SetTypeFillingBySymbol(_Symbol);
+   trade.LogLevel(LOG_LEVEL_NO);   // silence CTrade's verbose journal (we keep our own ORDER_FAIL logging)
    hEmaHTF=iMA(_Symbol,InpHTF,InpTrendEMA,0,MODE_EMA,PRICE_CLOSE);
    hEmaLTF=iMA(_Symbol,PERIOD_CURRENT,InpEntryEMA,0,MODE_EMA,PRICE_CLOSE);
    hAtr=iATR(_Symbol,PERIOD_CURRENT,14);
