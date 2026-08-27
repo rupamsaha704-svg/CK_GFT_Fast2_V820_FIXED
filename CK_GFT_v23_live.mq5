@@ -4,21 +4,25 @@
 //|  SL construction, MaxSL_ATR 2.5, RR 3.0, MaxLot 0.09, BE@+1.5R,   |
 //|  ATR shift-0, 3 trades/day, daily +/-R limits) is UNCHANGED.     |
 //|                                                                    |
-//|  6 live-safety fixes (boss-frozen scope):                         |
+//|  6 live-safety fixes (boss-frozen scope; v2 = review-hardened):   |
 //|   1 Spread: absolute price (Ask-Bid) vs InpMaxSpreadPrice (0.60), |
-//|     digit-independent (NOT raw points).                          |
-//|   2 Order result verified (ResultRetcode DONE/PLACED) before      |
-//|     counting a trade.                                             |
+//|     digit-independent. A/B criterion = spreadDivergence (old raw  |
+//|     >60pts rule vs new rule disagree), NOT raw filtered count.    |
+//|   2 Order result verified: DONE / DONE_PARTIAL + ResultDeal()!=0  |
+//|     before counting (PLACED is for pendings, not our market ord). |
 //|   3 SetTypeFillingBySymbol for broker-correct filling.            |
 //|   4 Sub-minimum calculated lot -> SKIP (never floor to min).      |
-//|   5 Daily state persisted across restart/recompile (GlobalVars).  |
-//|   6 Daily realised R from THIS magic's closed deals only (not     |
-//|     whole-account balance).                                       |
-//|  Each safety trigger is logged; run A/B regression vs v23 to      |
-//|  confirm trade lists match unless a fix genuinely fired.          |
+//|   5 Daily state persisted across restart/recompile (GlobalVars),  |
+//|     key scoped by account-login + symbol + magic (collision-safe).|
+//|   6 Daily realised R from THIS magic+symbol deals only, summing   |
+//|     PROFIT+SWAP+COMMISSION+FEE over ALL deals (entry+exit) so it  |
+//|     matches baseline balance-delta incl. entry-side costs.        |
+//|  Also dumps ck_v23live_regression_detail.csv (position_id,        |
+//|  entry/exit time, side, volume, prices, SL, TP, net) for full     |
+//|  strategy-identity A/B vs baseline.                               |
 //+------------------------------------------------------------------+
 #property copyright "CK GFT v23 live"
-#property version   "23.30"
+#property version   "23.31"
 #property strict
 #include <Trade\Trade.mqh>
 CTrade trade;
@@ -47,7 +51,7 @@ datetime lastBarTime=0,g_dayStart=0;
 double   g_dayStartBal=0,g_oneR_money=0;
 int      g_tradesToday=0; bool g_beActivated=false;
 // safety counters (logged for A/B divergence tracing)
-int      g_cSpread=0, g_cSubMin=0, g_cReject=0;
+int      g_cSpread=0, g_cSpreadDiv=0, g_cSubMin=0, g_cReject=0;
 string   GK_DAY, GK_BAL, GK_TRD;
 
 int OnInit(){
@@ -57,9 +61,16 @@ int OnInit(){
    hEmaLTF=iMA(_Symbol,PERIOD_CURRENT,InpEntryEMA,0,MODE_EMA,PRICE_CLOSE);
    hAtr=iATR(_Symbol,PERIOD_CURRENT,14);
    if(hEmaHTF==INVALID_HANDLE||hEmaLTF==INVALID_HANDLE||hAtr==INVALID_HANDLE)return(INIT_FAILED);
-   string k=IntegerToString(InpMagic);
-   GK_DAY="v23l_day_"+k; GK_BAL="v23l_bal_"+k; GK_TRD="v23l_trd_"+k;
-   LoadOrResetDaily();                               // FIX5
+   // FIX5: collision-safe key = account-login + symbol + magic
+   string scope=IntegerToString((long)AccountInfoInteger(ACCOUNT_LOGIN))+"_"+_Symbol+"_"+IntegerToString(InpMagic);
+   GK_DAY="v23l_day_"+scope; GK_BAL="v23l_bal_"+scope; GK_TRD="v23l_trd_"+scope;
+   LoadOrResetDaily();
+   // FIX1 diagnostic: proves 60*point == InpMaxSpreadPrice on the validated broker
+   PrintFormat("[v23live] digits=%d point=%.5f old60Price=%.5f newMaxPrice=%.5f",
+      (int)SymbolInfoInteger(_Symbol,SYMBOL_DIGITS),
+      SymbolInfoDouble(_Symbol,SYMBOL_POINT),
+      60.0*SymbolInfoDouble(_Symbol,SYMBOL_POINT),
+      InpMaxSpreadPrice);
    return(INIT_SUCCEEDED);
 }
 void OnDeinit(const int r){ if(hEmaHTF!=INVALID_HANDLE)IndicatorRelease(hEmaHTF); if(hEmaLTF!=INVALID_HANDLE)IndicatorRelease(hEmaLTF); if(hAtr!=INVALID_HANDLE)IndicatorRelease(hAtr); }
@@ -86,7 +97,7 @@ void LoadOrResetDaily(){
 void NewDay(){ g_dayStart=iTime(_Symbol,PERIOD_D1,0); g_dayStartBal=AccountInfoDouble(ACCOUNT_BALANCE); g_oneR_money=g_dayStartBal*(InpRiskPercent/100.0); g_tradesToday=0;
    GlobalVariableSet(GK_DAY,(double)g_dayStart); GlobalVariableSet(GK_BAL,g_dayStartBal); GlobalVariableSet(GK_TRD,0); }
 
-// FIX6: daily realised R from THIS magic's closed deals only (not account balance)
+// FIX6: daily realised R from THIS magic+symbol deals only (entry+exit, incl FEE) => baseline balance-delta equivalent
 double RealizedRToday(){
    if(g_oneR_money<=0)return(0);
    double pl=0; if(!HistorySelect(g_dayStart,TimeCurrent()))return(0);
@@ -94,8 +105,8 @@ double RealizedRToday(){
    for(int i=0;i<td;i++){ ulong tk=HistoryDealGetTicket(i); if(tk==0)continue;
       if(HistoryDealGetInteger(tk,DEAL_MAGIC)!=InpMagic)continue;
       if(HistoryDealGetString(tk,DEAL_SYMBOL)!=_Symbol)continue;
-      if(HistoryDealGetInteger(tk,DEAL_ENTRY)!=DEAL_ENTRY_OUT)continue;
-      pl+=HistoryDealGetDouble(tk,DEAL_PROFIT)+HistoryDealGetDouble(tk,DEAL_SWAP)+HistoryDealGetDouble(tk,DEAL_COMMISSION);
+      pl+=HistoryDealGetDouble(tk,DEAL_PROFIT)+HistoryDealGetDouble(tk,DEAL_SWAP)
+         +HistoryDealGetDouble(tk,DEAL_COMMISSION)+HistoryDealGetDouble(tk,DEAL_FEE);
    }
    return(pl/g_oneR_money);
 }
@@ -109,11 +120,12 @@ double LotForRisk(double riskMoney,double slDist){ if(slDist<=0)return(0); doubl
 bool RecentBreakUp(){ for(int s=1;s<=InpBreakoutMaxAge;s++){ int hi=iHighest(_Symbol,InpHTF,MODE_HIGH,InpBreakoutLookback,s+1); if(hi<0)continue; if(iClose(_Symbol,InpHTF,s)>iHigh(_Symbol,InpHTF,hi))return(true);} return(false); }
 bool RecentBreakDown(){ for(int s=1;s<=InpBreakoutMaxAge;s++){ int lo=iLowest(_Symbol,InpHTF,MODE_LOW,InpBreakoutLookback,s+1); if(lo<0)continue; if(iClose(_Symbol,InpHTF,s)<iLow(_Symbol,InpHTF,lo))return(true);} return(false); }
 
-// FIX2: verify order result before counting a trade
+// FIX2: verify actual fill (DONE/DONE_PARTIAL + a real deal). PLACED is for pendings, not our market order.
 void CountIfFilled(bool sent,string tag){
    uint rc=trade.ResultRetcode();
-   if(sent && (rc==TRADE_RETCODE_DONE||rc==TRADE_RETCODE_PLACED)){ g_tradesToday++; g_beActivated=false; GlobalVariableSet(GK_TRD,g_tradesToday); }
-   else { g_cReject++; PrintFormat("[v23live] %s NOT filled rc=%u",tag,rc); }
+   bool filled = sent && (rc==TRADE_RETCODE_DONE||rc==TRADE_RETCODE_DONE_PARTIAL) && trade.ResultDeal()!=0;
+   if(filled){ g_tradesToday++; g_beActivated=false; GlobalVariableSet(GK_TRD,g_tradesToday); }
+   else { g_cReject++; PrintFormat("[v23live] %s NOT filled rc=%u deal=%I64u",tag,rc,trade.ResultDeal()); }
 }
 void OpenBuy(double sl,double tp){ double ask=SymbolInfoDouble(_Symbol,SYMBOL_ASK); double risk=ask-sl; if(risk<=0)return; double lots=LotForRisk(AccountInfoDouble(ACCOUNT_BALANCE)*(InpRiskPercent/100.0),risk); if(lots<=0)return; int dg=(int)SymbolInfoInteger(_Symbol,SYMBOL_DIGITS); sl=NormalizeDouble(sl,dg); tp=NormalizeDouble(tp,dg); bool s=trade.Buy(lots,_Symbol,0,sl,tp); CountIfFilled(s,"BUY"); }
 void OpenSell(double sl,double tp){ double bid=SymbolInfoDouble(_Symbol,SYMBOL_BID); double risk=sl-bid; if(risk<=0)return; double lots=LotForRisk(AccountInfoDouble(ACCOUNT_BALANCE)*(InpRiskPercent/100.0),risk); if(lots<=0)return; int dg=(int)SymbolInfoInteger(_Symbol,SYMBOL_DIGITS); sl=NormalizeDouble(sl,dg); tp=NormalizeDouble(tp,dg); bool s=trade.Sell(lots,_Symbol,0,sl,tp); CountIfFilled(s,"SELL"); }
@@ -127,7 +139,9 @@ void ManageTrade(){
    else if(type==POSITION_TYPE_SELL){ double ask=SymbolInfoDouble(_Symbol,SYMBOL_ASK); if(open-tp<=0)return; prog=(open-ask)/(open-tp); if(prog>=InpBEProgress&&sl>open){ if(trade.PositionModify(tk,NormalizeDouble(open,dg),tp))g_beActivated=true; } }
 }
 double OnTester(){
-   PrintFormat("[v23live] safety triggers: spreadRejects=%d subMinSkips=%d orderRejects=%d",g_cSpread,g_cSubMin,g_cReject);
+   PrintFormat("[v23live] safety triggers: spreadFiltered=%d spreadDivergence=%d subMinSkips=%d orderRejects=%d",
+      g_cSpread,g_cSpreadDiv,g_cSubMin,g_cReject);
+   // (a) baseline-compatible two-column dump (unchanged format)
    int h=FileOpen("ck_v23live_trades.csv", FILE_WRITE|FILE_CSV|FILE_COMMON|FILE_ANSI, ",");
    if(h!=INVALID_HANDLE){
       FileWrite(h,"time","profit");
@@ -140,6 +154,38 @@ double OnTester(){
          FileWrite(h,TimeToString(xt,TIME_DATE|TIME_MINUTES),DoubleToString(p,2)); }
       FileClose(h);
    }
+   // (b) FIX6-review: full strategy-identity detail (entry/exit/side/volume/prices/SL/TP/net)
+   int hd=FileOpen("ck_v23live_regression_detail.csv", FILE_WRITE|FILE_CSV|FILE_COMMON|FILE_ANSI, ",");
+   if(hd!=INVALID_HANDLE){
+      FileWrite(hd,"position_id","entry_time","exit_time","side","volume","entry_price","exit_price","sl","tp","net_profit");
+      HistorySelect(0,TimeCurrent()); int total=HistoryDealsTotal(); int dg=(int)SymbolInfoInteger(_Symbol,SYMBOL_DIGITS);
+      for(int i=0;i<total;i++){ ulong xk=HistoryDealGetTicket(i); if(xk==0)continue;
+         if(HistoryDealGetString(xk,DEAL_SYMBOL)!=_Symbol)continue;
+         if(HistoryDealGetInteger(xk,DEAL_MAGIC)!=InpMagic)continue;
+         if(HistoryDealGetInteger(xk,DEAL_ENTRY)!=DEAL_ENTRY_OUT)continue;
+         long posid=(long)HistoryDealGetInteger(xk,DEAL_POSITION_ID);
+         datetime xt=(datetime)HistoryDealGetInteger(xk,DEAL_TIME);
+         double xprice=HistoryDealGetDouble(xk,DEAL_PRICE);
+         double net=HistoryDealGetDouble(xk,DEAL_PROFIT)+HistoryDealGetDouble(xk,DEAL_SWAP)
+                   +HistoryDealGetDouble(xk,DEAL_COMMISSION)+HistoryDealGetDouble(xk,DEAL_FEE);
+         datetime et=0; double vol=0,eprice=0,sl=0,tp=0; string side="?";
+         for(int j=0;j<total;j++){ ulong ik=HistoryDealGetTicket(j); if(ik==0)continue;
+            if((long)HistoryDealGetInteger(ik,DEAL_POSITION_ID)!=posid)continue;
+            if(HistoryDealGetInteger(ik,DEAL_ENTRY)!=DEAL_ENTRY_IN)continue;
+            et=(datetime)HistoryDealGetInteger(ik,DEAL_TIME);
+            vol=HistoryDealGetDouble(ik,DEAL_VOLUME);
+            eprice=HistoryDealGetDouble(ik,DEAL_PRICE);
+            side=(HistoryDealGetInteger(ik,DEAL_TYPE)==DEAL_TYPE_BUY)?"BUY":"SELL";
+            ulong ord=(ulong)HistoryDealGetInteger(ik,DEAL_ORDER);
+            if(HistoryOrderSelect(ord)){ sl=HistoryOrderGetDouble(ord,ORDER_SL); tp=HistoryOrderGetDouble(ord,ORDER_TP); }
+            break;
+         }
+         FileWrite(hd,IntegerToString(posid),TimeToString(et,TIME_DATE|TIME_MINUTES),TimeToString(xt,TIME_DATE|TIME_MINUTES),
+            side,DoubleToString(vol,2),DoubleToString(eprice,dg),DoubleToString(xprice,dg),
+            DoubleToString(sl,dg),DoubleToString(tp,dg),DoubleToString(net,2));
+      }
+      FileClose(hd);
+   }
    return(0.0);
 }
 void OnTick(){
@@ -147,8 +193,12 @@ void OnTick(){
    ManageTrade();
    if(!IsNewBar())return;
    if(MyPositions()>0)return;
-   double spread=SymbolInfoDouble(_Symbol,SYMBOL_ASK)-SymbolInfoDouble(_Symbol,SYMBOL_BID);  // FIX1: absolute $ spread
-   if(spread>InpMaxSpreadPrice){ g_cSpread++; return; }
+   double bid=SymbolInfoDouble(_Symbol,SYMBOL_BID),ask=SymbolInfoDouble(_Symbol,SYMBOL_ASK);
+   double spread=ask-bid;                                             // FIX1: absolute $ spread
+   bool newReject=(spread>InpMaxSpreadPrice);
+   bool oldReject=((long)SymbolInfoInteger(_Symbol,SYMBOL_SPREAD)>60); // baseline v23 raw-point rule
+   if(oldReject!=newReject) g_cSpreadDiv++;                            // real A/B criterion
+   if(newReject){ g_cSpread++; return; }
    if(!TradingAllowed())return;
    double atr=ATR(); if(atr<=0)return; double buf=InpSLBufferATR*atr;
    double c1=iClose(_Symbol,PERIOD_CURRENT,1),o1=iOpen(_Symbol,PERIOD_CURRENT,1);
@@ -156,12 +206,12 @@ void OnTick(){
    double lo1=iLow(_Symbol,PERIOD_CURRENT,1),hi1=iHigh(_Symbol,PERIOD_CURRENT,1);
    double emaL=EmaLTF(1),closeH1=iClose(_Symbol,InpHTF,1),emaH=EmaHTF(1);
    if((closeH1>emaH) && RecentBreakUp() && (lo1<=emaL) && (c1>o1)&&(c1>emaL)&&(c1>h2)){
-      double sl=MathMin(lo1,l2)-buf; double ask=SymbolInfoDouble(_Symbol,SYMBOL_ASK); double risk=ask-sl;
-      if(risk>0 && risk<=InpMaxSL_ATR*atr){ OpenBuy(sl,ask+InpRR*risk); return; }
+      double sl=MathMin(lo1,l2)-buf; double a2=SymbolInfoDouble(_Symbol,SYMBOL_ASK); double risk=a2-sl;
+      if(risk>0 && risk<=InpMaxSL_ATR*atr){ OpenBuy(sl,a2+InpRR*risk); return; }
    }
    if((closeH1<emaH) && RecentBreakDown() && (hi1>=emaL) && (c1<o1)&&(c1<emaL)&&(c1<l2)){
-      double sl=MathMax(hi1,h2)+buf; double bid=SymbolInfoDouble(_Symbol,SYMBOL_BID); double risk=sl-bid;
-      if(risk>0 && risk<=InpMaxSL_ATR*atr){ OpenSell(sl,bid-InpRR*risk); }
+      double sl=MathMax(hi1,h2)+buf; double b2=SymbolInfoDouble(_Symbol,SYMBOL_BID); double risk=sl-b2;
+      if(risk>0 && risk<=InpMaxSL_ATR*atr){ OpenSell(sl,b2-InpRR*risk); }
    }
 }
 //+------------------------------------------------------------------+
