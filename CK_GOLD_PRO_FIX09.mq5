@@ -11,7 +11,7 @@
 //|  should match the ~+200% run.) Demo-first; backtest != live.      |
 //+------------------------------------------------------------------+
 #property copyright "CK GOLD PRO FIX09"
-#property version   "1.00"
+#property version   "1.01"
 #property strict
 #include <Trade\Trade.mqh>
 CTrade trade;
@@ -40,6 +40,7 @@ int      hEmaHTF,hEmaLTF,hAtr;
 datetime lastBarTime=0,g_dayStart=0;
 double   g_dayStartBal=0,g_oneR_money=0;
 int      g_tradesToday=0; bool g_beActivated=false;
+datetime g_beTryBar=0;   // limits break-even modify to one attempt per bar (kills market-closed retry spam)
 int      g_cSpread=0, g_cSpreadDiv=0, g_cSubMin=0, g_cReject=0;
 string   GK_DAY, GK_BAL, GK_TRD;
 
@@ -123,8 +124,10 @@ void ManageTrade(){
    double open=PositionGetDouble(POSITION_PRICE_OPEN),sl=PositionGetDouble(POSITION_SL),tp=PositionGetDouble(POSITION_TP);
    long type=PositionGetInteger(POSITION_TYPE); int dg=(int)SymbolInfoInteger(_Symbol,SYMBOL_DIGITS);
    if(g_beActivated)return; double prog=0;
-   if(type==POSITION_TYPE_BUY){ double bid=SymbolInfoDouble(_Symbol,SYMBOL_BID); if(tp-open<=0)return; prog=(bid-open)/(tp-open); if(prog>=InpBEProgress&&sl<open){ if(trade.PositionModify(tk,NormalizeDouble(open,dg),tp))g_beActivated=true; } }
-   else if(type==POSITION_TYPE_SELL){ double ask=SymbolInfoDouble(_Symbol,SYMBOL_ASK); if(open-tp<=0)return; prog=(open-ask)/(open-tp); if(prog>=InpBEProgress&&sl>open){ if(trade.PositionModify(tk,NormalizeDouble(open,dg),tp))g_beActivated=true; } }
+   datetime cb=iTime(_Symbol,PERIOD_CURRENT,0);
+   if(g_beTryBar==cb) return;   // already attempted this bar; don't retry-spam if it failed (market closed)
+   if(type==POSITION_TYPE_BUY){ double bid=SymbolInfoDouble(_Symbol,SYMBOL_BID); if(tp-open<=0)return; prog=(bid-open)/(tp-open); if(prog>=InpBEProgress&&sl<open){ g_beTryBar=cb; if(trade.PositionModify(tk,NormalizeDouble(open,dg),tp))g_beActivated=true; } }
+   else if(type==POSITION_TYPE_SELL){ double ask=SymbolInfoDouble(_Symbol,SYMBOL_ASK); if(open-tp<=0)return; prog=(open-ask)/(open-tp); if(prog>=InpBEProgress&&sl>open){ g_beTryBar=cb; if(trade.PositionModify(tk,NormalizeDouble(open,dg),tp))g_beActivated=true; } }
 }
 double OnTester(){
    PrintFormat("[CK_GOLD_PRO_FIX09] fixedLot=%.2f spreadFiltered=%d spreadDivergence=%d subMinSkips=%d orderRejects=%d",FixedLot(),g_cSpread,g_cSpreadDiv,g_cSubMin,g_cReject);
