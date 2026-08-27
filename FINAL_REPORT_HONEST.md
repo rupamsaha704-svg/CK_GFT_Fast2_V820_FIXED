@@ -72,3 +72,37 @@ real and defensible: a validated, non-overfit trend edge with a strong backtest 
   hand-rolled toolkit; runs on any MT5 trade CSV.
 - Multi-strategy + regime weighting can help ONLY if each added strategy is independently
   validated to have a positive, non-overfit edge (mean-reversion did not, this year).
+
+
+## Exhaustive candidate scorecard (all tested on real-tick XAUUSD, 2025-08→2026-08)
+Only ONE strategy survived rigorous validation. Everything else was tested and rejected
+with evidence — this list is the proof of research discipline (guarding against the
+multiple-testing / overfitting trap the project set out to avoid).
+
+| candidate | result | verdict |
+|---|---|---|
+| **v23 trend breakout-pullback** | +115%, PF 1.39, DD ~15%, CPCV OOS +0.107 (not overfit) | ✅ **KEEP** |
+| v24 partial book | DD worse (20.6%), PF down | ❌ |
+| v25 drawdown circuit-breaker | net negative (broke the edge) | ❌ |
+| v26 ADX regime filter | DD worse (18%), profit down | ❌ |
+| v27 regime position sizing | ret/DD 4.3 (worse) | ❌ |
+| v28 loss-hour block | +128% but partly overfit; ~v23 live | ⚠️ marginal |
+| v29 candle-strength filter | +42%, DD 33% (much worse) | ❌ |
+| StdDev mean-reversion | −$1,585 (loses in trend year) | ❌ |
+| POC / Value-Area | −61%, DD 72% | ❌ |
+| ICT / SMC | −$46 edge (loses) | ❌ |
+| Harmonic | 79% "hit" = LOOKAHEAD bias (fake) | ❌ |
+| CK_GFT_BEST_Strategy | −32%, DD 66% (its "$32k" was optimization overfit) | ❌ |
+| CK_GFT v8.10 knee | +10%, DD 42% | ❌ |
+| single AMA | +49%, DD 50% (weak); uncorrelated but too poor to help portfolio | ❌ |
+| dual AMA 39/79 + MACD | −59%, DD 78% | ❌ |
+| v23 + AMA portfolio | raised return but raised DD more (ret/DD worse) | ❌ |
+
+### Why the search stopped here (honest)
+Every momentum/trend variant is correlated with v23; every mean-reversion/reversal variant
+loses in this strongly-trending year; the flashy ones (harmonic, BEST) were overfit/lookahead
+traps. Continuing to test more candidates on the same 12 months increases the chance of a
+FALSE positive by luck (data-dredging), not the chance of real edge. The Deflated Sharpe /
+PBO principle explicitly penalises this. The disciplined conclusion: deploy the one validated
+edge (v23), keep risk controlled, and expand only with genuinely new, independently-validated,
+out-of-sample-tested strategies — never by curve-fitting the same year.
