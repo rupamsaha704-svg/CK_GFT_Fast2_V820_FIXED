@@ -41,9 +41,12 @@ Instrumented run (CK_GFT_v23_capstudy) logged per-trade intended vs actual lot:
 **What this measures (no longer asserted):**
 - At 1.7%, the cap binds on **every** trade; the account's *effective* per-trade risk is ~0.26%
   (≈13.5× smaller than the 1.7% label). The "1.7% risk" setting is largely fictional under 0.09.
-- Because all trades are **already at the 0.09 ceiling at 1.7%**, raising risk to 2.0% cannot increase
-  per-trade size — dollar output stays ≈$8k (only daily-gate-driven trade-count shifts are possible).
-  So a "+200% at 2.0%" outcome is **not supported** by this cap; it would need re-measurement to claim.
+- Per-trade size is identical at 1.7% and 2.0% (both capped at 0.09). BUT — MEASURED — 2.0% still
+  improves via the **daily-gate path**: bigger `g_oneR_money` means the daily 2R-loss / 4R-profit
+  stops fire at larger $ thresholds, so the EA stops out of days less often and takes ~6 more trades on
+  a better path. Measured 2.0% (2025-26): **+200.5%, PF 1.47, closed-DD 16.3%** vs 1.7%'s
+  +161%/1.39/18.6%. (This CORRECTS an earlier draft claim that 2.0% "cannot help" — the cap fixes
+  per-trade size, not the daily-gate interaction, exactly as the reviewer cautioned. Now measured.)
 - Combined with the 0.5% run ($5,760, not fully capped) and the 1.7% run ($8,050, fully capped), the
   single-EA dollar output under 0.09 **plateaus around ~$8k in this trending-year sample**. This is the
   measured economic ceiling of this EA under the 0.09 constraint — not an assertion.
