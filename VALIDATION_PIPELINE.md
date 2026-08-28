@@ -68,3 +68,28 @@ To build (in priority order):
   loss-by-time/session/day/month + Monte Carlo + IS->OOS + deterministic PASS/FAIL; requires OOS to PASS).
   Next: add MFE/MAE-exit, Walk-Forward, parameter-neighbourhood stability, spread/slippage/missed-trade
   stress, locked holdout, CPCV/PBO/Deflated Sharpe. THEN one Forensic Analyst agent (hypotheses only).
+
+
+## Ordered stages (locked) + threshold-integrity rule
+```
+FIX09 FROZEN DEMO ─► evidence accrues
+DEV/VALIDATION DATA ─┘
+        ↓ ORCHESTRATOR
+  ① Evidence Manifest / Hash   (manifest.py)      ← FIRST (provenance)
+  ② Walk-Forward consistency   (walkforward.py)   [frozen params, rolling OOS - NOT re-optimization]
+  ③ Parameter stability        (paramstability.py + run_paramgrid.ps1)
+  ④ MFE / MAE exit analysis     (to build)
+  ⑤ Spread / slippage / missed-trade stress (to build)
+  ⑥ Locked holdout              (to build)
+  ⑦ CPCV / PBO / Deflated Sharpe (Vibe quantlib, where data sufficient)
+        ↓ PASS / FAIL
+```
+- **All PASS/FAIL thresholds are PRE-DECLARED in code/config BEFORE looking at results.** Thresholds are
+  never changed after seeing a result (that would be fitting the test to the answer).
+- **Hard rule:** the LLM / Forensic Agent can NEVER edit validation thresholds, the OOS split, the locked
+  holdout, or any PASS/FAIL. It reads results and proposes hypotheses only.
+- Clarification recorded: classic "walk-forward optimization" (re-optimize each fold) is a parameter-
+  SELECTION tool; since our discipline is frozen params (no optimization), stage ② is rolling OOS
+  consistency of the frozen params. Re-optimization WF would re-introduce the overfit we are avoiding.
+- Built so far: ① manifest.py, ② walkforward.py, ③ paramstability.py (+ run_paramgrid.ps1). Tested on
+  local trade data. ④–⑦ next.
