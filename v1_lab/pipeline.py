@@ -12,6 +12,8 @@ Usage:
 """
 import argparse, random, statistics
 import metrics as M
+import cost_stress as CS
+import benchmark as BM
 
 # ---- PRE-DECLARED THRESHOLDS (Design v1.0) ----
 MIN_OOS_TRADES      = 200
@@ -98,6 +100,9 @@ def main():
     ap.add_argument('--holdout', default=None)
     ap.add_argument('--deposit', type=float, default=M.DEPOSIT_DEFAULT)
     ap.add_argument('--spec-hash', default=None)
+    ap.add_argument('--cost-per-trade', type=float, default=None)   # M4 baseline extra cost ($/trade), pre-declared
+    ap.add_argument('--price-csv', default=None)                    # M7 benchmark price series (same period as OOS)
+    ap.add_argument('--ema', type=int, default=200)                 # M7 trend baseline EMA
     a=ap.parse_args(); dep=a.deposit
     print("="*64); print("DETERMINISTIC VALIDATION PIPELINE — Design v1.0"); print("="*64)
 
@@ -133,13 +138,41 @@ def main():
         if pf_i>0 and exp_i>0 and (pf_o/pf_i<K3_PF_RATIO) and (exp_o/exp_i<K3_EXP_RATIO):
             verdict="REJECT"; reasons.append("K3: severe IS->OOS collapse (overfit)")
         # ---- Mandatory (implemented) ----
+        # ---- M4 cost/slippage stress (if baseline cost pre-declared) ----
+        m4=None
+        if a.cost_per_trade is not None:
+            r15=CS.adj(OOS, 1.5*a.cost_per_trade); m4=(M.net_profit(r15)>0 and M.profit_factor(r15)>=1.0)
+            line("M4 cost stress @1.5x (net>0,PF>=1)", f"net {M.net_profit(r15):.0f} PF {M.profit_factor(r15):.2f} -> {'PASS' if m4 else 'FAIL'}")
+        else: line("M4 cost stress", "PENDING (supply --cost-per-trade, pre-declared)")
+        # ---- M7 benchmark suite (if matched-period price supplied) ----
+        m7=None
+        if a.price_csv:
+            px=BM.load_px(a.price_csv); s_ret=so['return_pct']; s_dd=so['max_dd_closed_pct']
+            bh=BM.buy_hold(px,0.09,dep); trd=BM.trend(px,0.09,dep,a.ema)
+            s_mar=BM.mar(s_ret,s_dd); m7=(s_mar>=BM.mar(*bh) and s_mar>=BM.mar(*trd))
+            line("M7 benchmark MAR (>= baselines)", f"strat {s_mar:.2f} | BH {BM.mar(*bh):.2f} | trend {BM.mar(*trd):.2f} -> {'PASS' if m7 else 'FAIL'}")
+        else: line("M7 benchmark", "PENDING (supply --price-csv for the OOS period)")
+        # ---- K5 locked holdout (if supplied) ----
+        k5_fail=False
+        if a.holdout:
+            HO=M.load_trades(a.holdout); ho_exp=M.expectancy(HO); ho_pf=M.profit_factor(HO)
+            k5_fail=not (ho_exp>0 and ho_pf>=1.0)
+            line("K5 locked holdout (exp>0,PF>=1)", f"n {M.n_trades(HO)} exp {ho_exp:.2f} PF {ho_pf:.2f} -> {'FAIL->REJECT' if k5_fail else 'ok'}")
+        else: line("K5 locked holdout", "PENDING (sealed; supply --holdout once, single unlock)")
+
+        if k5_fail: verdict="REJECT"; reasons.append("K5: locked holdout failed")
         mfail=[]
         if not (pf_o>=M1_MIN_PF and ci[0]>M1_EXP_CI_LB): mfail.append("M1 OOS PF/exp-CI")
         if not (ce>=0 and (cp>=1.0 if M.n_trades(OOS)>=200 else True)): mfail.append("M5 concentration")
         if not (tr>=M6_MIN_POS_FRAC): mfail.append("M6 trade-removal")
         if not (maxshare<=M8_MAX_YEAR_SHARE): mfail.append("M8 year-concentration")
         if not (wf and wf['frac']>=0.60 and wf['med']>=1.10 and wf['used']>=8): mfail.append("M2 walk-forward")
-        pend += ["M3 parameter plateau (MT5 grid)","M4 cost/slippage stress (MT5)","M7 benchmark suite","K5 locked holdout"]
+        if m4 is False: mfail.append("M4 cost stress")
+        if m7 is False: mfail.append("M7 benchmark")
+        if m4 is None: pend.append("M4 cost/slippage stress (supply baseline cost)")
+        if m7 is None: pend.append("M7 benchmark suite (supply OOS price)")
+        if a.holdout is None: pend.append("K5 locked holdout")
+        pend.append("M3 parameter plateau (MT5 grid)")
 
         if verdict!="REJECT":
             if mfail: verdict="FAIL"; reasons += [f"mandatory miss: {x}" for x in mfail]
