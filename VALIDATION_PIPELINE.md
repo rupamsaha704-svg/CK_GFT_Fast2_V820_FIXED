@@ -50,3 +50,21 @@ To build (in priority order):
 - Backtest != live. The final accuracy test is DEMO / forward / paper, not any backtest agent.
 - "Perfect accuracy" is not a goal (markets are non-stationary); the goal is a real edge that survives
   unseen data with tolerable drawdown.
+
+
+## FREEZE & separation discipline (locked rule)
+- **CK_GOLD_PRO_FIX09 is FROZEN** during its demo/forward test. No parameter or logic change while it
+  runs — otherwise the forward test becomes optimization data and is worthless as evidence.
+- **Demo = locked evidence. Development data = separate.** They must never mix. This separation is the
+  single biggest protection against overfitting.
+- If the deterministic pipeline (incl. OOS) proves a real improvement from a Forensic-Agent hypothesis,
+  it becomes a **NEW version (FIX10)** which starts its **own fresh, independent forward test**. You do
+  not "patch" the frozen build mid-test.
+- **No real-money deployment in this phase** — demo/paper forward validation only.
+
+## Parallel plan (chosen: C, with the discipline above)
+- Track 1 (today): start FIX09 demo/forward test, FROZEN (install_fix09_demo.ps1).
+- Track 2 (in parallel): build the Orchestrator. Step 1 done (v1_lab/orchestrator.py: basic stats +
+  loss-by-time/session/day/month + Monte Carlo + IS->OOS + deterministic PASS/FAIL; requires OOS to PASS).
+  Next: add MFE/MAE-exit, Walk-Forward, parameter-neighbourhood stability, spread/slippage/missed-trade
+  stress, locked holdout, CPCV/PBO/Deflated Sharpe. THEN one Forensic Analyst agent (hypotheses only).
