@@ -25,7 +25,7 @@ def main():
     for l in open(sys.argv[1]):
         l=l.strip()
         if not l or l.lower().startswith('label,'): continue
-        parts=l.split(','); rows.append((parts[0], parts[1]=='1', float(parts[2]), float(parts[3])))
+        parts=l.split(','); rows.append((parts[0], parts[1]=='1', float(parts[2].replace(',','')), float(parts[3].replace(',',''))))
     center=[r for r in rows if r[1]]; nb=[r for r in rows if not r[1]]
     print("="*56); print("PARAMETER-NEIGHBOURHOOD STABILITY"); print("="*56)
     for lbl,c,pf,net in rows:

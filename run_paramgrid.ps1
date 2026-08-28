@@ -31,7 +31,7 @@ function RunCombo($label,$isC,$ema,$age,$be){
    $rows=@(Get-Content $csv -ErrorAction SilentlyContinue | Where-Object { $_ -and ($_ -notmatch '^time,') })
    $gw=0.0;$gl=0.0;$net=0.0; foreach($r in $rows){ $q=[double]($r.Split(",")[1]); $net+=$q; if($q -gt 0){$gw+=$q}elseif($q -lt 0){$gl+=[Math]::Abs($q)} }
    $pf=if($gl -gt 0){$gw/$gl}else{0}
-   Add-Content $out ("{0},{1},{2:N2},{3:N0}" -f $label,$isC,$pf,$net)
+   Add-Content $out ("{0},{1},{2},{3}" -f $label,$isC,[math]::Round($pf,2),[math]::Round($net))
    Write-Host ("  {0}: PF {1:N2} net {2:N0}" -f $label,$pf,$net)
 }
 Write-Host "running neighbourhood (7 runs, center=EMA20/Age12/BE0.50)..."
