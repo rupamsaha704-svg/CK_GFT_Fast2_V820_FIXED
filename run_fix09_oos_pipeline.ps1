@@ -27,7 +27,8 @@ if(-not (Test-Path $ex5)){Write-Host "compile FAILED";exit}
 
 function RunBT($from,$to,$saveAs){
    $ini=Join-Path $research "devv.ini"
-   $cfg="[Tester]`nExpert=CK_GOLD_PRO_FIX09.ex5`nSymbol=XAUUSD`nPeriod=M15`nModel=4`nExecutionMode=0`nFromDate=$from`nToDate=$to`nForwardMode=0`nDeposit=5000`nCurrency=USD`nLeverage=10`nOptimization=0`nShutdownTerminal=1`nVisual=0`n[TesterInputs]`nInpFixedLot=0.09`nInpMaxLot=0.09`nInpRiskPercent=2.0`nInpRR=3.0`nInpMaxSL_ATR=2.5`nInpMaxSpreadPrice=0.60`n"
+   # PIN EVERY strategy param explicitly (MT5 tester caches last-GUI inputs; unspecified ones drift!)
+   $cfg="[Tester]`nExpert=CK_GOLD_PRO_FIX09.ex5`nSymbol=XAUUSD`nPeriod=M15`nModel=4`nExecutionMode=0`nFromDate=$from`nToDate=$to`nForwardMode=0`nDeposit=5000`nCurrency=USD`nLeverage=10`nOptimization=0`nShutdownTerminal=1`nVisual=0`n[TesterInputs]`nInpMagic=20260716`nInpFixedLot=0.09`nInpMaxLot=0.09`nInpRiskPercent=2.0`nInpRR=3.0`nInpMaxTradesPerDay=3`nInpDailyLossStopR=2.0`nInpDailyProfitStopR=4.0`nInpMaxSpreadPrice=0.60`nInpTrendEMA=200`nInpBreakoutLookback=20`nInpBreakoutMaxAge=12`nInpEntryEMA=20`nInpSwingLookback=10`nInpMaxSL_ATR=2.5`nInpSLBufferATR=0.2`nInpBEProgress=0.5`n"
    Set-Content -Encoding ascii $ini $cfg
    if(Test-Path $csv){Remove-Item $csv -Force}
    Get-Process terminal64 -ErrorAction SilentlyContinue|Stop-Process -Force; Start-Sleep 2
