@@ -25,7 +25,11 @@
 - A parameter-optimised variant (EntryEMA21/Age9/BE0.44) looked great in-sample (+PF to 1.84) but was shown
   to be **mostly overfit** (OOS gain negligible) and was **rejected**; original non-overfit params kept.
 - ~14 loss-reduction filters and a regime gate were tested and **rejected** (overfit / OOS-fail).
-- **Current honest verdict: RETEST / possibly REGIME-ONLY candidate — NOT a guaranteed edge, NOT a PASS.**
+- **Deterministic dev-verdict (frozen params, all pinned) = FAIL.** In-sample edge is real and NOT
+  overfit-fragile (K3 clear, param-plateau stable), but out-of-sample (2022-25) it does NOT robustly
+  generalise: OOS PF 1.13, expectancy ~$3.26/trade (CI includes negative), profit concentrated in a few
+  winners and one year, and it does not survive realistic cost stress (M4 fail). See `FIX09_DEV_VERDICT.md`.
+  **NOT a deployable validated edge as-is.**
 
 ## 4. On the profit target (documented, evidence-based)
 - With MaxLot 0.09, the single-EA dollar output saturates (~$8–10k in the best tested year); **$20k/yr
@@ -42,9 +46,12 @@ Governing rule: *LLM discovers & explains; deterministic code measures & judges;
 
 ## 6. Current status & recommendation
 - **Running now:** frozen 8-week demo/forward test on XAUUSD M15 (started, hash-logged; min 8 weeks + 40 trades before any verdict).
-- **Recommendation:** continue demo/forward validation; size for a possible 40–60% drawdown; decide on
-  (reduced-size / regime-gated) deployment only after out-of-sample-consistent live evidence. **Demo-first;
-  no real money until forward evidence holds.**
+- **Recommendation:** do NOT deploy FIX09 as-is (deterministic dev-verdict = FAIL out-of-sample). Keep the
+  demo running only as independent forward evidence with LOW expectations. Legitimate forward research
+  (pipeline-gated, pre-registered, on untouched data only): (a) leakage-free regime gate → a narrower
+  REGIME-ONLY system as FIX10; (b) a portfolio of independent edges. No in-sample tuning; no chasing +200%.
+  **No real money.** The real deliverable here is the validation framework that correctly refused to pass a
+  thin/regime-dependent strategy — that rigor is what protects the desk.
 
 ## 7. Evidence / audit trail
 - Repo branch: `kiro/validation-toolkit` (all code, results, and this summary).
