@@ -667,7 +667,8 @@ def selfcheck():
     # (B) each per-variant CSV parses via metrics.load_trades and has the exact header
     for vr in ranked1:
         for p in (vr["is_path"], vr["oos_path"]):
-            first = open(p).readline().strip()
+            with open(p) as _fh:          # explicit close: no unclosed-file ResourceWarning
+                first = _fh.readline().strip()
             assert first == "time,profit", f"B: {p} header must be 'time,profit', got {first!r}"
             loaded = M.load_trades(p)  # must not raise
             assert isinstance(loaded, list), "B: load_trades must return a list"
@@ -698,7 +699,8 @@ def selfcheck():
     assert rep1 == rep2, "D: report must be byte-identical for identical input"
     rcsv1 = os.path.join(tmp, "r1.csv"); rcsv2 = os.path.join(tmp, "r2.csv")
     write_results_csv(ranked1, rcsv1); write_results_csv(ranked2, rcsv2)
-    assert open(rcsv1, "rb").read() == open(rcsv2, "rb").read(), "D: results CSV must be byte-identical"
+    with open(rcsv1, "rb") as _f1, open(rcsv2, "rb") as _f2:   # explicit close: no ResourceWarning
+        assert _f1.read() == _f2.read(), "D: results CSV must be byte-identical"
 
     # (E) switch is wired through: on a scenario where the IDM is NEVER cleared (highs capped below
     #     the IDM level, mirroring the engine selfcheck's negative case), idm_clear_required=True
@@ -740,6 +742,9 @@ def parse_args(argv):
     p.add_argument("--results", default="v1_lab/variant_results.csv", help="machine-readable results CSV")
     p.add_argument("--report", default="v1_lab/VARIANT_REPORT.md", help="human-readable report")
     p.add_argument("--deposit", type=float, default=DEPOSIT_DEFAULT, help="deposit for metrics/MC")
+    p.add_argument("--split", default=None,
+                   help="override IS/OOS boundary as YYYY-MM-DD (a-priori chronological midpoint of "
+                        "the dataset; do NOT tune to results). Default keeps the module constant.")
     return p.parse_args(argv)
 
 
@@ -758,6 +763,15 @@ def main():
 
     if not args.m5:
         raise SystemExit("--m5 is required for a real-data run (M5 execution timeframe)")
+
+    # Optional a-priori split override (chronological midpoint of THIS dataset), applied AFTER the
+    # selfcheck so the selfcheck's fixed-boundary assertions still hold. The module default constant
+    # (2026.02.01) was the midpoint of the original ~12-month data; a longer dataset has a different
+    # midpoint, so it must be set explicitly here rather than tuned to results.
+    if args.split:
+        global SPLIT_BOUNDARY, SPLIT_BOUNDARY_STR
+        SPLIT_BOUNDARY = datetime.datetime.strptime(args.split, "%Y-%m-%d")
+        SPLIT_BOUNDARY_STR = SPLIT_BOUNDARY.strftime("%Y.%m.%d %H:%M")
 
     m15 = QM.load_ohlc(args.data)
     if not m15:
