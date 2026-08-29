@@ -13,13 +13,14 @@ import argparse
 
 def load_px(path):
     rows=[]
-    for l in open(path):
-        l=l.strip()
-        if not l or l.lower().startswith('datetime,') or l.lower().startswith('time,'): continue
-        parts=l.split(',')
-        try: c=float(parts[4]); h=float(parts[2]); lo=float(parts[3])
-        except Exception: continue
-        rows.append((h,lo,c))
+    with open(path) as fh:               # explicit context manager: no unclosed-file ResourceWarning
+        for l in fh:
+            l=l.strip()
+            if not l or l.lower().startswith('datetime,') or l.lower().startswith('time,'): continue
+            parts=l.split(',')
+            try: c=float(parts[4]); h=float(parts[2]); lo=float(parts[3])
+            except Exception: continue
+            rows.append((h,lo,c))
     return rows
 
 def ema(vals, period):

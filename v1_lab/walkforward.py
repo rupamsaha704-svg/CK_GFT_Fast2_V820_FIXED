@@ -20,11 +20,12 @@ WF_MIN_MEDIAN_PF       = 1.10
 
 def load(p):
     rows=[]
-    for l in open(p):
-        l=l.strip()
-        if not l or l.lower().startswith('time,'): continue
-        t,pf=l.rsplit(',',1)
-        rows.append((datetime.datetime.strptime(t,"%Y.%m.%d %H:%M"), float(pf)))
+    with open(p) as fh:                  # explicit context manager: no unclosed-file ResourceWarning
+        for l in fh:
+            l=l.strip()
+            if not l or l.lower().startswith('time,'): continue
+            t,pf=l.rsplit(',',1)
+            rows.append((datetime.datetime.strptime(t,"%Y.%m.%d %H:%M"), float(pf)))
     rows.sort(key=lambda x:x[0]); return rows
 
 def pf_net(seq):

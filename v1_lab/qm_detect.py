@@ -27,9 +27,14 @@ Usage:
     python3 qm_detect.py <ohlc.csv> [--pivot 2] [--disp 0.6] [--out mss_events.csv]
     python3 qm_detect.py --selfcheck        # run built-in synthetic assertions only
 """
+import os
 import sys
 import csv
 import datetime
+
+# Ensure the sibling data_io module (same directory) is importable from the repo root.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from data_io import load_ohlc as _load_ohlc_normalized  # shared canonical+MT5 normalizer
 
 # ---- defaults (tunable parameters, NOT locked truths) -----------------------
 PIVOT_DEFAULT = 2      # left/right pivot count for a confirmed swing
@@ -39,43 +44,17 @@ ATR_PERIOD = 14        # Wilder ATR lookback (standard, part of the locked displ
 
 # ---- IO ---------------------------------------------------------------------
 def load_ohlc(path):
-    """Read OHLC CSV with header 'datetime,open,high,low,close,volume'.
+    """Read OHLC CSV into the canonical internal bar list.
 
     Returns list of bars: (index, datetime|None, open, high, low, close, volume).
-    Tolerant of a couple of datetime formats; volume optional.
+
+    Delegates to the shared data_io normalizer, which auto-detects and parses BOTH supported
+    layouts (the canonical comma header 'datetime,open,high,low,close,volume' AND the MT5
+    "Export Bars" TAB layout '<DATE>\\t<TIME>\\t<OPEN>...') into the SAME internal structure. Kept as
+    a thin wrapper here so every existing importer (`from qm_detect import load_ohlc`) transparently
+    gains MT5-format support with no change to the return contract. Deterministic; no lookahead.
     """
-    bars = []
-    idx = 0
-    for line in open(path):
-        line = line.strip()
-        if not line:
-            continue
-        low = line.lower()
-        if low.startswith(('datetime,', 'time,', 'date,')):
-            continue
-        p = line.split(',')
-        if len(p) < 5:
-            continue
-        dt = None
-        for fmt in ("%Y-%m-%d %H:%M:%S", "%Y.%m.%d %H:%M", "%Y-%m-%d %H:%M"):
-            try:
-                dt = datetime.datetime.strptime(p[0], fmt)
-                break
-            except Exception:
-                continue
-        try:
-            o, h, l, c = float(p[1]), float(p[2]), float(p[3]), float(p[4])
-        except Exception:
-            continue
-        v = 0.0
-        if len(p) >= 6:
-            try:
-                v = float(p[5])
-            except Exception:
-                v = 0.0
-        bars.append((idx, dt, o, h, l, c, v))
-        idx += 1
-    return bars
+    return _load_ohlc_normalized(path)
 
 
 # ---- indicators -------------------------------------------------------------

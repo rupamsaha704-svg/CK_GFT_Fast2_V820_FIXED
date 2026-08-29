@@ -12,13 +12,14 @@ SESSIONS = [("Asia", 0, 8), ("London", 8, 13), ("LDN_NY", 13, 17), ("NY_late", 1
 def load_trades(path):
     """CSV: header 'time,profit'; rows 'YYYY.MM.DD HH:MM,<net_profit>'. Returns [(datetime|None, float)]."""
     rows = []
-    for l in open(path):
-        l = l.strip()
-        if not l or l.lower().startswith('time,'): continue
-        t, pf = l.rsplit(',', 1)
-        try: d = datetime.datetime.strptime(t, "%Y.%m.%d %H:%M")
-        except Exception: d = None
-        rows.append((d, float(pf)))
+    with open(path) as fh:               # explicit context manager: no unclosed-file ResourceWarning
+        for l in fh:
+            l = l.strip()
+            if not l or l.lower().startswith('time,'): continue
+            t, pf = l.rsplit(',', 1)
+            try: d = datetime.datetime.strptime(t, "%Y.%m.%d %H:%M")
+            except Exception: d = None
+            rows.append((d, float(pf)))
     return rows
 
 def gross(rows):

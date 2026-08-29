@@ -14,15 +14,16 @@ K=0.5; N=20; EMA_P=200; ATR_P=14
 
 def load_m15(path):
     rows=[]
-    for l in open(path):
-        l=l.strip()
-        if not l or l.lower().startswith(('datetime,','time,')): continue
-        p=l.split(',')
-        try: dt=datetime.datetime.strptime(p[0],"%Y-%m-%d %H:%M:%S")
-        except Exception:
-            try: dt=datetime.datetime.strptime(p[0],"%Y.%m.%d %H:%M")
-            except Exception: continue
-        rows.append((dt,float(p[1]),float(p[2]),float(p[3]),float(p[4])))
+    with open(path) as fh:               # explicit context manager: no unclosed-file ResourceWarning
+        for l in fh:
+            l=l.strip()
+            if not l or l.lower().startswith(('datetime,','time,')): continue
+            p=l.split(',')
+            try: dt=datetime.datetime.strptime(p[0],"%Y-%m-%d %H:%M:%S")
+            except Exception:
+                try: dt=datetime.datetime.strptime(p[0],"%Y.%m.%d %H:%M")
+                except Exception: continue
+            rows.append((dt,float(p[1]),float(p[2]),float(p[3]),float(p[4])))
     return rows
 
 def resample_h1(m15):
