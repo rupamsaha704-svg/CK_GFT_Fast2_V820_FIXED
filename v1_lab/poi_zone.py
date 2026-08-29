@@ -30,13 +30,22 @@ Objective helpers (not tunable, structurally defined):
   ORDER BLOCK (OB): the last OPPOSING candle immediately before the displacement (break) leg.
       For a bearish QM the break leg is DOWN, so the OB is the last UP (bullish body) candle
       before the break — its band is a supply OB. Mirror for bullish QM (last down candle).
+      The search is BOUNDED to the immediate displacement leg (ob_lookback bars back from the
+      break) so the OB confluence can actually BIND: an unbounded scan to bar 0 almost always
+      finds some opposing candle, so requiring an OB would never discriminate (it would be a
+      near-no-op). The bound is an OPEN PARAMETER (ob_lookback), NOT a pre-picked winner.
   FAIR-VALUE GAP (FVG): a 3-candle imbalance around the break leg. Bearish FVG at candle i (the
       middle candle) exists when bars[i-1].low > bars[i+1].high (a gap the market skipped). The
       body of the middle candle is unfilled by the neighbours. Mirror (bullish) when
       bars[i-1].high < bars[i+1].low.
 
-Tunable parameter (NOT a locked truth):
-  - PIVOT  confirmed-swing pivot L/R count (default 2, consistent with qm_detect).
+Tunable parameters (NOT locked truths):
+  - PIVOT        confirmed-swing pivot L/R count (default 2, consistent with qm_detect).
+  - OB_LOOKBACK  how many bars back from the structure break the order-block search may look for
+                 the last opposing candle (default 5; the "immediate displacement leg" bound).
+                 This is an OPEN parameter to A/B test, NOT a decided best value. A larger value
+                 approaches the old scan-to-zero behaviour; a smaller one demands the OB sit right
+                 on the displacement. It exists so the qm_ob variant can genuinely bind.
 
 Causality (LOCKED discipline): a QM at head-confirmation bar t uses only swings CONFIRMED by t
 (swing index + pivot <= t) and only candles at/at-or-before the structure break. No future bar
@@ -65,22 +74,33 @@ from qm_detect import load_ohlc, detect_swings  # reuse the identical parser + s
 PIVOT_DEFAULT = 2          # confirmed-swing pivot (consistent with qm_detect default)
 POI_TYPE_DEFAULT = "qm"    # POI variant; 'qm' | 'qm_ob' | 'qm_fvg' — NOT a decided winner
 POI_TYPES = ("qm", "qm_ob", "qm_fvg")
+OB_LOOKBACK_DEFAULT = 5    # bars back from the break the OB search may scan (immediate disp leg).
+                           # OPEN parameter, NOT a pre-picked winner; bounds qm_ob so it can bind.
 
 
 # ---- objective helper: order block (OB) -------------------------------------
-def find_order_block(bars, break_index, direction):
+def find_order_block(bars, break_index, direction, lookback=OB_LOOKBACK_DEFAULT):
     """Last OPPOSING candle immediately before the displacement/break leg ending at break_index.
 
     direction 'bear' (break DOWN): OB = the most recent UP candle (close > open) strictly before
         break_index; its band is [low .. high] with body [open .. close] (a supply OB).
     direction 'bull' (break UP):   OB = the most recent DOWN candle (close < open) before it.
 
+    The search is BOUNDED to the immediate displacement leg: only the `lookback` bars strictly
+    before break_index are scanned (i.e. indices [break_index-lookback .. break_index-1]). This is
+    what makes the qm_ob confluence discriminating instead of a near-no-op — an unbounded scan to
+    bar 0 almost always finds SOME opposing candle. `lookback` is an OPEN parameter (default
+    OB_LOOKBACK_DEFAULT), NOT a pre-picked best value. `lookback <= 0` disables the bound (scan to
+    bar 0), preserving the old behaviour for callers that want it. Causal: all scanned bars are
+    strictly before break_index, hence <= break_index.
+
     Returns a dict {"index","low","high","body_low","body_high"} or None if no opposing candle is
-    found in the scan (we scan back to bar 0, which is causal — all bars are <= break_index).
+    found within the bounded scan.
     """
     if break_index is None or break_index <= 0:
         return None
-    for i in range(break_index - 1, -1, -1):
+    lo_bound = 0 if (lookback is None or lookback <= 0) else max(0, break_index - lookback)
+    for i in range(break_index - 1, lo_bound - 1, -1):
         _, _, o, h, l, c, _ = bars[i]
         is_up = c > o
         is_down = c < o
@@ -117,7 +137,7 @@ def find_fvg(bars, mid_index, direction):
 
 
 # ---- QM POI construction ----------------------------------------------------
-def detect_poi(bars, pivot=PIVOT_DEFAULT, poi_type=POI_TYPE_DEFAULT):
+def detect_poi(bars, pivot=PIVOT_DEFAULT, poi_type=POI_TYPE_DEFAULT, ob_lookback=OB_LOOKBACK_DEFAULT):
     """Detect QM POI zones (left-shoulder anchored), causal, from confirmed swings.
 
     Algorithm (bearish QM; bullish is the mirror):
@@ -134,8 +154,13 @@ def detect_poi(bars, pivot=PIVOT_DEFAULT, poi_type=POI_TYPE_DEFAULT):
 
     poi_type variant:
       'qm'     : every structurally-valid QM qualifies.
-      'qm_ob'  : additionally require an order block on the break leg (find_order_block != None).
+      'qm_ob'  : additionally require an order block on the break leg (find_order_block != None),
+                 where the OB search is BOUNDED to the immediate displacement leg via ob_lookback
+                 (default OB_LOOKBACK_DEFAULT) so the requirement can actually bind/discriminate.
       'qm_fvg' : additionally require a fair-value gap around the break (find_fvg != None).
+
+    ob_lookback : how many bars back from the structure break the OB search may scan (open
+                 parameter, not a pre-picked winner). <=0 disables the bound (scan to bar 0).
 
     Returns (pois, highs, lows). Each POI dict:
         {"confirm_index","confirm_datetime","direction","ls_index","head_index","neck_index",
@@ -178,7 +203,7 @@ def detect_poi(bars, pivot=PIVOT_DEFAULT, poi_type=POI_TYPE_DEFAULT):
         _, _, o, h, l, c, _ = bars[ls["index"]]
         zone_low = min(o, c)
         zone_high = h
-        ob = find_order_block(bars, break_index, "bear")
+        ob = find_order_block(bars, break_index, "bear", lookback=ob_lookback)
         fvg = None
         # search a small window around the break leg for a 3-candle imbalance (causal: <= break)
         for mid in range(max(1, break_index - 1), break_index + 1):
@@ -223,7 +248,7 @@ def detect_poi(bars, pivot=PIVOT_DEFAULT, poi_type=POI_TYPE_DEFAULT):
         _, _, o, h, l, c, _ = bars[ls["index"]]
         zone_low = l
         zone_high = max(o, c)
-        ob = find_order_block(bars, break_index, "bull")
+        ob = find_order_block(bars, break_index, "bull", lookback=ob_lookback)
         fvg = None
         for mid in range(max(1, break_index - 1), break_index + 1):
             if mid + 1 <= break_index:
@@ -373,6 +398,28 @@ def selfcheck():
     ob = find_order_block(ob_series, 3, "bear")
     assert ob is not None and ob["index"] == 1, f"C: OB should be idx1 (last up candle), got {ob}"
 
+    # ---- Case C2: ob_lookback BOUNDS the search to the immediate displacement leg ----
+    # A lone opposing (up) candle sits far back at idx1; the displacement leg (idx6->8) has NO up
+    # candle. With a small lookback the OB search must NOT reach back to idx1 (returns None); with
+    # the bound disabled (<=0, scan to bar0) it DOES find idx1. This proves the bound binds and is
+    # the parameter that makes qm_ob discriminating rather than a near-no-op.
+    bounded_series = [
+        _bar(0, 100, 101, 99, 100),
+        _bar(1, 100, 105, 100, 104),   # lone UP candle (the only opposing candle in the series)
+        _bar(2, 104, 104, 100, 101),   # down
+        _bar(3, 101, 102, 98, 99),     # down
+        _bar(4, 99, 100, 96, 97),      # down
+        _bar(5, 97, 98, 94, 95),       # down
+        _bar(6, 95, 96, 92, 93),       # down (displacement leg, no up candle within lookback=3)
+        _bar(7, 93, 94, 90, 91),       # down
+        _bar(8, 91, 92, 88, 89),       # down break_index=8
+    ]
+    ob_far_bounded = find_order_block(bounded_series, 8, "bear", lookback=3)
+    assert ob_far_bounded is None, "C2: bounded OB search (lookback=3) must NOT reach the far idx1 up candle"
+    ob_far_unbounded = find_order_block(bounded_series, 8, "bear", lookback=0)
+    assert ob_far_unbounded is not None and ob_far_unbounded["index"] == 1, \
+        "C2: disabling the bound (lookback<=0) scans to bar0 and finds the lone up candle at idx1"
+
     # ---- Case D: poi-type variant genuinely changes qualification ----
     # Reuse series A (a valid QM). Determine whether its break leg carries OB / FVG, then assert
     # the variant filter behaves as a real discriminator by toggling requirement on/off.
@@ -425,6 +472,7 @@ def selfcheck():
     print("  case A: clean bearish QM => one POI anchored at the left-shoulder band [101..110]")
     print("  case B: 3-candle imbalance => FVG detected; filled sequence => not an FVG (negative)")
     print("  case C: order block = last opposing (up) candle before the down break")
+    print("  case C2: ob_lookback bounds the OB search to the displacement leg (bound binds; <=0 = scan to bar0)")
     print("  case D: poi-type qm|qm_ob|qm_fvg qualifies iff the confluence is present (variant is real)")
     print("  case D2: a QM with OB but no FVG => kept by qm/qm_ob, SUPPRESSED by qm_fvg (toggle proof)")
     return True
@@ -438,6 +486,9 @@ def parse_args(argv):
     p.add_argument("--selfcheck", action="store_true", help="run synthetic assertions only")
     p.add_argument("--pivot", type=int, default=PIVOT_DEFAULT,
                    help=f"confirmed-swing pivot L/R count (default {PIVOT_DEFAULT}; tunable, not baked in)")
+    p.add_argument("--ob-lookback", type=int, default=OB_LOOKBACK_DEFAULT,
+                   help=f"bars back from the break the qm_ob order-block search may scan (default "
+                        f"{OB_LOOKBACK_DEFAULT}; OPEN parameter, not a pre-picked winner; <=0 = scan to bar 0)")
     p.add_argument("--poi-type", default=POI_TYPE_DEFAULT, choices=POI_TYPES,
                    help=f"POI variant: 'qm' (default), 'qm_ob', or 'qm_fvg'. This is an OPEN rule -> "
                         f"a VARIANT to A/B test; no type is pre-selected as best")
@@ -467,7 +518,8 @@ def main():
         raise SystemExit(f"no OHLC rows parsed from {args.path}")
 
     out = args.out if args.out else "poi_zones.csv"
-    pois, highs, lows = detect_poi(bars, pivot=args.pivot, poi_type=args.poi_type)
+    pois, highs, lows = detect_poi(bars, pivot=args.pivot, poi_type=args.poi_type,
+                                   ob_lookback=args.ob_lookback)
     write_poi_csv(pois, out)
     print_summary(bars, pois, highs, lows, args.pivot, args.poi_type, out)
 

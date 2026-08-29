@@ -22,18 +22,23 @@ byte-identical `variant_results.csv` and this report. No LLM is in this measurem
 
 ## Multiple-testing disclosure (researcher degrees of freedom)
 
-- **21 variants** were enumerated in this run. Each variant is a separate trial and
+- **25 variants** were enumerated in this run. Each variant is a separate trial and
   therefore a researcher degree of freedom. With this many comparisons, an apparently good OOS
   result on a single variant can arise by chance; discount accordingly. The grid is a
   BASELINE + one-switch-at-a-time (OFAT) sweep (each row differs from the default by exactly
   one open switch) — deliberately NOT a full cartesian product, to limit over-search.
+- **Effective (distinct) trials: 24.** 1 enumerated row(s) are, BY
+  CONSTRUCTION, identical to another row and are NOT independent trials: `tp_partial` == `tp_fixed_rr`. Reason:
+  `partial_be_trail` is currently modeled as the `fixed_rr` target level (a documented
+  proxy), so it produces the same trades as `tp_fixed_rr` at the same `fixed_rr`. The row is
+  kept for traceability but flagged here so the effective trial count is not inflated.
 - Pipeline minimum OOS-trade bar (pre-declared, unmodified): **>= 200 OOS trades**.
 
 ## Headline outcome
 
-- Variants enumerated: **21**
+- Variants enumerated: **25** (effective distinct trials: **24**)
 - Reached the >= 200-OOS-trade bar (eligible for a verdict): **0**
-- Returned INSUFFICIENT (too few OOS trades to judge): **21**
+- Returned INSUFFICIENT (too few OOS trades to judge): **25**
 - PASS (pending MT5/extra-data stages): **0**
 
 ### Honest verdict: INSUFFICIENT / no robust edge established
@@ -58,23 +63,27 @@ judgement, and it comes from the unmodified pipeline.
 | 2 | session_all | INSUFFICIENT | 177 | 1.37 | 23.10 | 28.51 |  | session scope = ny_london_asia (24h eligible) |
 | 3 | idm_body | INSUFFICIENT | 59 | 1.30 | 18.70 | 17.74 |  | IDM clear precision = body |
 | 4 | tp_fixed_rr | INSUFFICIENT | 77 | 1.33 | 16.73 | 13.33 |  | TP mode = fixed_rr (2R target) |
-| 5 | tp_partial | INSUFFICIENT | 77 | 1.33 | 16.73 | 13.33 |  | TP mode = partial_be_trail (proxy) |
-| 6 | sl_buf_0p25 | INSUFFICIENT | 74 | 1.20 | 14.01 | 19.70 |  | SL buffer = 0.25*ATR (tighter) |
-| 7 | erl_h4 | INSUFFICIENT | 71 | 1.21 | 13.26 | 17.74 |  | ERL source TF = H4 |
-| 8 | minrr_1p5 | INSUFFICIENT | 62 | 1.13 | 9.14 | 19.71 |  | min projected-RR gate = 1.5 |
-| 9 | sl_tight_poi | INSUFFICIENT | 72 | 1.10 | 8.22 | 21.11 |  | SL mode = tight_poi (stop at POI edge) |
-| 10 | baseline | INSUFFICIENT | 72 | 1.11 | 7.47 | 19.71 |  | documented default config (no switch changed) |
-| 11 | poi_qm_ob | INSUFFICIENT | 72 | 1.11 | 7.47 | 19.71 |  | POI type = qm_ob (order-block confluence) |
-| 12 | smt_dxy | INSUFFICIENT | 72 | 1.11 | 7.47 | 19.71 |  | SMT pair = dxy (needs DXY series) |
-| 13 | smt_xag | INSUFFICIENT | 72 | 1.11 | 7.47 | 19.71 |  | SMT pair = xag (needs XAGUSD series) |
-| 14 | max_trades_4 | INSUFFICIENT | 97 | 1.09 | 6.08 | 33.51 |  | max trades/day = 4 (looser cap) |
-| 15 | rr_3 | INSUFFICIENT | 77 | 1.10 | 5.88 | 17.90 |  | fixed_rr target = 3R |
-| 16 | disp_0p8 | INSUFFICIENT | 54 | 1.04 | 2.80 | 21.50 |  | MSS displacement gate = 0.8 (stricter) |
-| 17 | sl_buf_1p0 | INSUFFICIENT | 73 | 0.99 | -0.90 | 21.71 |  | SL buffer = 1.0*ATR (wider) |
-| 18 | erl_m15 | INSUFFICIENT | 51 | 0.90 | -6.29 | 22.47 |  | ERL source TF = M15 |
-| 19 | poi_qm_fvg | INSUFFICIENT | 49 | 0.89 | -7.59 | 30.80 |  | POI type = qm_fvg (FVG confluence) |
-| 20 | idm_optional | INSUFFICIENT | 142 | 0.81 | -13.39 | 48.55 |  | IDM clear optional (experimental) |
-| 21 | pivot_3 | INSUFFICIENT | 64 | 0.28 | -60.87 | 78.54 |  | swing pivot L/R = 3 (stricter swings) |
+| 5 | tp_partial (== tp_fixed_rr) | INSUFFICIENT | 77 | 1.33 | 16.73 | 13.33 |  | TP mode = partial_be_trail (proxy; EQUIVALENT to tp_fixed_rr — not a distinct trial) |
+| 6 | ob_lb_3 | INSUFFICIENT | 75 | 1.24 | 15.45 | 28.39 |  | POI qm_ob + ob_lookback=3 (tighter displacement-leg OB bound) |
+| 7 | sl_buf_0p25 | INSUFFICIENT | 74 | 1.20 | 14.01 | 19.70 |  | SL buffer = 0.25*ATR (tighter) |
+| 8 | erl_h4 | INSUFFICIENT | 71 | 1.21 | 13.26 | 17.74 |  | ERL source TF = H4 |
+| 9 | poi_qm_ob | INSUFFICIENT | 74 | 1.15 | 10.04 | 18.65 |  | POI type = qm_ob (order-block confluence) |
+| 10 | minrr_1p5 | INSUFFICIENT | 62 | 1.13 | 9.14 | 19.71 |  | min projected-RR gate = 1.5 |
+| 11 | erl_lb_8 | INSUFFICIENT | 73 | 1.13 | 8.86 | 19.71 |  | ERL lookback = 8 swings (wider external range) |
+| 12 | sl_tight_poi | INSUFFICIENT | 72 | 1.10 | 8.22 | 21.11 |  | SL mode = tight_poi (stop at POI edge) |
+| 13 | baseline | INSUFFICIENT | 72 | 1.11 | 7.47 | 19.71 |  | documented default config (no switch changed) |
+| 14 | smt_dxy | INSUFFICIENT | 72 | 1.11 | 7.47 | 19.71 |  | SMT pair = dxy (needs DXY series) |
+| 15 | smt_xag | INSUFFICIENT | 72 | 1.11 | 7.47 | 19.71 |  | SMT pair = xag (needs XAGUSD series) |
+| 16 | max_trades_4 | INSUFFICIENT | 97 | 1.09 | 6.08 | 33.51 |  | max trades/day = 4 (looser cap) |
+| 17 | rr_3 | INSUFFICIENT | 77 | 1.10 | 5.88 | 17.90 |  | fixed_rr target = 3R |
+| 18 | erl_lb_3 | INSUFFICIENT | 69 | 1.07 | 4.85 | 19.71 |  | ERL lookback = 3 swings (tighter external range) |
+| 19 | disp_0p8 | INSUFFICIENT | 54 | 1.04 | 2.80 | 21.50 |  | MSS displacement gate = 0.8 (stricter) |
+| 20 | sl_buf_1p0 | INSUFFICIENT | 73 | 0.99 | -0.90 | 21.71 |  | SL buffer = 1.0*ATR (wider) |
+| 21 | erl_m15 | INSUFFICIENT | 51 | 0.90 | -6.29 | 22.47 |  | ERL source TF = M15 |
+| 22 | poi_qm_fvg | INSUFFICIENT | 49 | 0.89 | -7.59 | 30.80 |  | POI type = qm_fvg (FVG confluence) |
+| 23 | idm_optional | INSUFFICIENT | 142 | 0.81 | -13.39 | 48.55 |  | IDM clear optional (experimental) |
+| 24 | reentry_on | INSUFFICIENT | 91 | 0.80 | -14.97 | 37.45 |  | reentry = True (permit one extra same-day entry per stop-out) |
+| 25 | pivot_3 | INSUFFICIENT | 64 | 0.28 | -60.87 | 78.54 |  | swing pivot L/R = 3 (stricter swings) |
 
 ## Per-variant detail
 
@@ -112,11 +121,20 @@ judgement, and it comes from the unmodified pipeline.
 
 ### tp_partial — INSUFFICIENT
 
-- switch: TP mode = partial_be_trail (proxy)
+- switch: TP mode = partial_be_trail (proxy; EQUIVALENT to tp_fixed_rr — not a distinct trial)
+- **equivalence: identical BY CONSTRUCTION to `tp_fixed_rr`** (`partial_be_trail` is modeled as the `fixed_rr` level). Not an independent trial.
 - trades: total 170, IS 93, OOS 77
 - OOS: PF 1.33, expectancy 16.73, net 1288.43, win-rate 45.5%, max-DD 13.33%
 - IS (exploration only): PF 1.36, expectancy 20.20
 - pipeline reasons: OOS trades 77<200
+
+### ob_lb_3 — INSUFFICIENT
+
+- switch: POI qm_ob + ob_lookback=3 (tighter displacement-leg OB bound)
+- trades: total 147, IS 72, OOS 75
+- OOS: PF 1.24, expectancy 15.45, net 1158.54, win-rate 34.7%, max-DD 28.39%
+- IS (exploration only): PF 1.10, expectancy 6.80
+- pipeline reasons: OOS trades 75<200
 
 ### sl_buf_0p25 — INSUFFICIENT
 
@@ -134,6 +152,14 @@ judgement, and it comes from the unmodified pipeline.
 - IS (exploration only): PF 1.71, expectancy 42.32
 - pipeline reasons: OOS trades 71<200
 
+### poi_qm_ob — INSUFFICIENT
+
+- switch: POI type = qm_ob (order-block confluence)
+- trades: total 157, IS 83, OOS 74
+- OOS: PF 1.15, expectancy 10.04, net 743.24, win-rate 33.8%, max-DD 18.65%
+- IS (exploration only): PF 1.38, expectancy 24.19
+- pipeline reasons: OOS trades 74<200
+
 ### minrr_1p5 — INSUFFICIENT
 
 - switch: min projected-RR gate = 1.5
@@ -141,6 +167,14 @@ judgement, and it comes from the unmodified pipeline.
 - OOS: PF 1.13, expectancy 9.14, net 566.44, win-rate 29.0%, max-DD 19.71%
 - IS (exploration only): PF 1.72, expectancy 42.04
 - pipeline reasons: OOS trades 62<200
+
+### erl_lb_8 — INSUFFICIENT
+
+- switch: ERL lookback = 8 swings (wider external range)
+- trades: total 156, IS 83, OOS 73
+- OOS: PF 1.13, expectancy 8.86, net 646.56, win-rate 34.2%, max-DD 19.71%
+- IS (exploration only): PF 1.71, expectancy 42.52
+- pipeline reasons: OOS trades 73<200
 
 ### sl_tight_poi — INSUFFICIENT
 
@@ -153,14 +187,6 @@ judgement, and it comes from the unmodified pipeline.
 ### baseline — INSUFFICIENT
 
 - switch: documented default config (no switch changed)
-- trades: total 155, IS 83, OOS 72
-- OOS: PF 1.11, expectancy 7.47, net 538.04, win-rate 33.3%, max-DD 19.71%
-- IS (exploration only): PF 1.62, expectancy 36.91
-- pipeline reasons: OOS trades 72<200
-
-### poi_qm_ob — INSUFFICIENT
-
-- switch: POI type = qm_ob (order-block confluence)
 - trades: total 155, IS 83, OOS 72
 - OOS: PF 1.11, expectancy 7.47, net 538.04, win-rate 33.3%, max-DD 19.71%
 - IS (exploration only): PF 1.62, expectancy 36.91
@@ -199,6 +225,14 @@ judgement, and it comes from the unmodified pipeline.
 - OOS: PF 1.10, expectancy 5.88, net 453.05, win-rate 37.7%, max-DD 17.90%
 - IS (exploration only): PF 1.83, expectancy 45.77
 - pipeline reasons: OOS trades 77<200
+
+### erl_lb_3 — INSUFFICIENT
+
+- switch: ERL lookback = 3 swings (tighter external range)
+- trades: total 150, IS 81, OOS 69
+- OOS: PF 1.07, expectancy 4.85, net 334.37, win-rate 33.3%, max-DD 19.71%
+- IS (exploration only): PF 1.70, expectancy 42.04
+- pipeline reasons: OOS trades 69<200
 
 ### disp_0p8 — INSUFFICIENT
 
@@ -239,6 +273,14 @@ judgement, and it comes from the unmodified pipeline.
 - OOS: PF 0.81, expectancy -13.39, net -1901.85, win-rate 28.9%, max-DD 48.55%
 - IS (exploration only): PF 1.18, expectancy 11.80
 - pipeline reasons: OOS trades 142<200
+
+### reentry_on — INSUFFICIENT
+
+- switch: reentry = True (permit one extra same-day entry per stop-out)
+- trades: total 199, IS 108, OOS 91
+- OOS: PF 0.80, expectancy -14.97, net -1361.96, win-rate 26.4%, max-DD 37.45%
+- IS (exploration only): PF 1.12, expectancy 7.92
+- pipeline reasons: OOS trades 91<200
 
 ### pivot_3 — INSUFFICIENT
 

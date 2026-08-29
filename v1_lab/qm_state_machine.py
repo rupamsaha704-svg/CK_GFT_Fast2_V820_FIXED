@@ -21,6 +21,9 @@ tunable PARAMETER inside VariantConfig, each with a documented, NON-pre-optimize
 
   smt_pair          'off'(DEFAULT) | 'xag' | 'dxy'    partner series for SMT (repo has none => 'off')
   poi_type          'qm'(DEFAULT) | 'qm_ob' | 'qm_fvg'  POI confluence requirement
+  ob_lookback       5 (DEFAULT)                        bars back from the break the qm_ob order-block
+                                                        search may scan (bounds it to the displacement
+                                                        leg so qm_ob can bind; open param, not a winner)
   sl_mode           'head_smt_high_buffer'(DEFAULT) | 'tight_poi'   stop placement
   sl_buffer_atr     0.5 (DEFAULT)                     ATR-multiple buffer added to the stop
   tp_mode           'full_external'(DEFAULT) | 'fixed_rr' | 'partial_be_trail'  target placement
@@ -33,8 +36,12 @@ tunable PARAMETER inside VariantConfig, each with a documented, NON-pre-optimize
   erl_lookback      5 (DEFAULT)                         swings defining the external range
   erl_tf            'H1'(DEFAULT)                        ERL SOURCE timeframe (H4/H1/M15/... )
   session_scope     'ny_only'(DEFAULT) | 'ny_london_asia'  which sessions may trigger an entry
-  max_trades_per_day 2 (DEFAULT)                        risk cap
-  reentry           False(DEFAULT)                      allow a re-entry after a stop-out same day
+  max_trades_per_day 2 (DEFAULT)                        risk cap (baseline entries allowed per day)
+  reentry           False(DEFAULT)                      if True, permit ONE extra entry per stop-out
+                                                        the same day, beyond max_trades_per_day (each
+                                                        SL-exit "buys back" one re-entry slot). This is
+                                                        itself an unconfirmed rule => a switch with a
+                                                        NON-pre-optimized default, wired into the cap.
   corr_window       20 / corr_min 0.3                   SMT rolling-correlation guard params
   data_tz           'America/New_York'(DEFAULT, must-confirm)  native clock of the CSVs
   spread            0.0 / commission 0.0                pre-declared trading costs (per side)
@@ -90,9 +97,9 @@ from zoneinfo import ZoneInfo
 
 # ---- the variant configuration (explicit, enumerable; NOTHING pre-optimized) ------------------
 _CONFIG_FIELDS = [
-    "smt_pair", "poi_type", "sl_mode", "sl_buffer_atr", "tp_mode", "fixed_rr", "min_projected_rr",
-    "idm_clear_required", "idm_clear_mode", "pivot", "disp", "erl_lookback", "erl_tf",
-    "session_scope", "max_trades_per_day", "reentry", "corr_window", "corr_min",
+    "smt_pair", "poi_type", "ob_lookback", "sl_mode", "sl_buffer_atr", "tp_mode", "fixed_rr",
+    "min_projected_rr", "idm_clear_required", "idm_clear_mode", "pivot", "disp", "erl_lookback",
+    "erl_tf", "session_scope", "max_trades_per_day", "reentry", "corr_window", "corr_min",
     "data_tz", "spread", "commission", "risk_per_trade", "max_hold_bars_m5",
 ]
 VariantConfig = namedtuple("VariantConfig", _CONFIG_FIELDS)
@@ -101,6 +108,7 @@ VariantConfig = namedtuple("VariantConfig", _CONFIG_FIELDS)
 DEFAULT_CONFIG = VariantConfig(
     smt_pair="off",
     poi_type="qm",
+    ob_lookback=5,
     sl_mode="head_smt_high_buffer",
     sl_buffer_atr=0.5,
     tp_mode="full_external",
@@ -368,12 +376,14 @@ def run(m15_bars_or_path, cfg, m5_bars=None, m5_path=None, pair_bars=None, pair_
     atr15 = atr_wilder(m15_bars, period=14)
     highs, lows = detect_swings(m15_bars, pivot=cfg.pivot)
     mss_events, _, _ = detect_mss(m15_bars, pivot=cfg.pivot, disp=cfg.disp)
-    pois, _, _ = detect_poi(m15_bars, pivot=cfg.pivot, poi_type=cfg.poi_type)
+    pois, _, _ = detect_poi(m15_bars, pivot=cfg.pivot, poi_type=cfg.poi_type,
+                            ob_lookback=cfg.ob_lookback)
     smt_by_idx, smt_available, smt_note = _resolve_smt(m15_bars, cfg, pair_bars=pair_bars)
 
     per_state = {s: 0 for s in STATES}
     trades = []
     trades_per_day = {}
+    stops_per_day = {}   # SL-exits per day; each one "buys back" one re-entry slot when cfg.reentry
 
     # Index POIs by their bearish/bullish head so we can pair a POI to an MSS shift.
     pois_by_dir = {"bear": [], "bull": []}
@@ -454,9 +464,14 @@ def run(m15_bars_or_path, cfg, m5_bars=None, m5_path=None, pair_bars=None, pair_
             continue
 
         # --- risk caps (variant max_trades_per_day / reentry) ---
+        # The daily cap is max_trades_per_day. When cfg.reentry is True, each SL-exit already taken
+        # that day grants ONE additional re-entry slot (an unconfirmed rule, parameterized as a
+        # switch, not a pre-picked winner): a stopped-out setup may be re-attempted the same day.
+        # When reentry is False (default) the cap is exactly max_trades_per_day, as before.
         day_key = entry_dt.date() if isinstance(entry_dt, datetime.datetime) else None
         used = trades_per_day.get(day_key, 0)
-        if day_key is not None and used >= cfg.max_trades_per_day:
+        reentry_slots = stops_per_day.get(day_key, 0) if cfg.reentry else 0
+        if day_key is not None and used >= cfg.max_trades_per_day + reentry_slots:
             continue
 
         # --- STATE 8: ENTRY (place SL/TP per variant, size, simulate) ---
@@ -485,6 +500,9 @@ def run(m15_bars_or_path, cfg, m5_bars=None, m5_path=None, pair_bars=None, pair_
         per_state["ENTRY"] += 1
         if day_key is not None:
             trades_per_day[day_key] = used + 1
+            # a stop-out this day grants a re-entry slot (only consulted when cfg.reentry is True)
+            if sim is not None and sim.get("exit_kind") == "sl":
+                stops_per_day[day_key] = stops_per_day.get(day_key, 0) + 1
 
     trades.sort(key=lambda t: (t["entry_index"], t["direction"]))
     stats = {
@@ -799,6 +817,64 @@ def _build_happy_path():
     return m15, m5
 
 
+def _build_two_setup_day():
+    """Construct M15+M5 with TWO bearish QM setups on the SAME calendar day, where the FIRST trade
+    STOPS OUT (a sharp rally through its stop) and the second is a fresh, later setup.
+
+    This isolates the `reentry` switch: with max_trades_per_day=1 the daily cap admits only the
+    first entry; the first entry stops out, and `reentry=True` grants ONE extra same-day slot per
+    stop-out, so the second setup can enter — while `reentry=False` keeps it blocked. Neither trade
+    depends on any future bar (causal). Timestamps start at 00:15 so both setups fit inside one day.
+    """
+    base = datetime.datetime(2025, 8, 4, 0, 15)
+    step = datetime.timedelta(minutes=15)
+    rows = []
+    for i in range(14):
+        rows.append((100 + i * 0.1, 100.5 + i * 0.1, 99.5 + i * 0.1, 100 + i * 0.1))
+    # ---- FIRST QM (band ~100-108); its short STOPS OUT on a sharp rally ----
+    rows += [
+        (101.4, 103.0, 101.0, 102.5),
+        (102.5, 106.0, 102.0, 105.0),   # LS high 106
+        (105.0, 105.5, 103.0, 103.5),
+        (103.5, 104.0, 100.0, 100.5),   # neck low 100
+        (100.5, 102.0, 100.2, 101.5),
+        (101.5, 108.0, 101.0, 107.0),   # head 108
+        (107.0, 107.5, 105.0, 105.5),
+        (105.5, 106.0, 103.0, 103.5),   # confirm head
+        (103.5, 104.0, 99.0, 99.2),     # bearish MSS / break
+        (99.2, 101.0, 99.0, 100.5),
+        (100.5, 108.8, 100.0, 104.5),   # clears IDM + returns to POI
+        (104.5, 105.5, 103.0, 104.0),
+        (104.5, 120.0, 104.0, 119.0),   # SHARP rally UP -> short stops out
+        (119.0, 119.5, 116.0, 117.0),
+    ]
+    # ---- SECOND QM (band ~115-124), same day, later ----
+    rows += [
+        (117.0, 118.0, 116.0, 117.5),
+        (117.5, 122.0, 117.0, 121.0),   # LS high 122
+        (121.0, 121.5, 119.0, 119.5),
+        (119.5, 120.0, 116.0, 116.5),   # neck low 116
+        (116.5, 118.0, 116.2, 117.5),
+        (117.5, 124.0, 117.0, 123.0),   # head 124
+        (123.0, 123.5, 121.0, 121.5),
+        (121.5, 122.0, 119.0, 119.5),   # confirm head
+        (119.5, 120.0, 115.0, 115.2),   # bearish MSS / break
+        (115.2, 117.0, 115.0, 116.5),
+        (116.5, 124.8, 116.0, 120.5),   # clears IDM + returns to POI
+        (120.5, 121.5, 119.0, 120.0),
+        (120.5, 121.0, 116.0, 116.5),   # rejection
+        (116.5, 117.0, 112.0, 112.5),
+        (112.5, 113.0, 109.0, 109.5),
+        (109.5, 110.0, 106.0, 106.5),
+    ]
+    last = rows[-1][3]
+    for i in range(6):
+        last += 0.3
+        rows.append((last, last + 0.5, last - 0.2, last + 0.25))
+    m15 = [_b(i, base + i * step, o, h, l, c) for i, (o, h, l, c) in enumerate(rows)]
+    return m15, _rebuild_m5(m15)
+
+
 def selfcheck():
     """Synthetic assertions proving the full engine:
 
@@ -878,12 +954,30 @@ def selfcheck():
                      round(t["sl"], 5), round(t["tp"], 5), round(t["net"], 2))
     assert [key(x) for x in trades] == [key(x) for x in trades_e], "E: engine must be deterministic"
 
+    # (F) REENTRY is a real, wired switch. On a day with two setups where the FIRST stops out and
+    # max_trades_per_day=1, reentry=False admits only the first entry; reentry=True grants one extra
+    # same-day slot (per stop-out) so the second setup can also enter. Flipping the switch on the
+    # SAME data changes the outcome => reentry is exercised, not inert.
+    m15_re, m5_re = _build_two_setup_day()
+    cfg_cap = make_config(session_scope="ny_london_asia", min_projected_rr=0.0, erl_tf="input",
+                          max_trades_per_day=1)
+    tr_no, st_no = run(m15_re, cfg_cap._replace(reentry=False), m5_bars=m5_re)
+    tr_yes, st_yes = run(m15_re, cfg_cap._replace(reentry=True), m5_bars=m5_re)
+    assert st_no["trades"] == 1, f"F: cap=1, reentry=False => exactly one entry, got {st_no['trades']}"
+    assert tr_no[0]["exit_kind"] == "sl", "F: the first (only) trade must stop out (drives the re-entry)"
+    assert st_yes["trades"] == 2, f"F: cap=1, reentry=True + a stop-out => a second same-day entry, got {st_yes['trades']}"
+    # both re-entry trades occur on the SAME calendar day (re-entry is a same-day rule)
+    assert tr_yes[0]["entry_datetime"].date() == tr_yes[1]["entry_datetime"].date(), \
+        "F: the re-entry must be on the SAME day as the stopped-out trade"
+    assert tr_yes[1]["entry_index"] > tr_no[0]["entry_index"], "F: the re-entry is a later setup"
+
     print("selfcheck: PASS")
     print("  case A: full happy path => exactly one bearish trade; SL above / TP below entry; every state hit once")
     print("  case B: IDM never cleared + idm_clear_required=True => NO trade")
     print("  case C: flipping idm_clear_required=False on the SAME scenario => a trade appears (switch is the gate)")
     print("  case D: truncating at the entry bar leaves the entry decision unchanged (causal / no lookahead)")
     print("  case E: re-running the happy path yields byte-identical trades (deterministic)")
+    print("  case F: reentry switch admits an extra SAME-DAY entry after a stop-out (wired, not inert)")
     return True
 
 
@@ -914,6 +1008,8 @@ def parse_args(argv):
     p.add_argument("--smt-pair", default=DEFAULT_CONFIG.smt_pair, choices=("off", "xag", "dxy"))
     p.add_argument("--pair-csv", default=None, help="SMT partner series (XAGUSD/DXY) for xag/dxy")
     p.add_argument("--poi-type", default=DEFAULT_CONFIG.poi_type, choices=("qm", "qm_ob", "qm_fvg"))
+    p.add_argument("--ob-lookback", type=int, default=DEFAULT_CONFIG.ob_lookback,
+                   help="bars back from the break the qm_ob OB search may scan (open param; <=0 = scan to bar0)")
     p.add_argument("--sl-mode", default=DEFAULT_CONFIG.sl_mode, choices=SL_MODES)
     p.add_argument("--sl-buffer-atr", type=float, default=DEFAULT_CONFIG.sl_buffer_atr)
     p.add_argument("--tp-mode", default=DEFAULT_CONFIG.tp_mode, choices=TP_MODES)
@@ -942,7 +1038,8 @@ def parse_args(argv):
 def config_from_args(args):
     idm_req = DEFAULT_CONFIG.idm_clear_required if args.idm_clear_required is None else args.idm_clear_required
     return VariantConfig(
-        smt_pair=args.smt_pair, poi_type=args.poi_type, sl_mode=args.sl_mode,
+        smt_pair=args.smt_pair, poi_type=args.poi_type, ob_lookback=args.ob_lookback,
+        sl_mode=args.sl_mode,
         sl_buffer_atr=args.sl_buffer_atr, tp_mode=args.tp_mode, fixed_rr=args.fixed_rr,
         min_projected_rr=args.min_projected_rr, idm_clear_required=idm_req,
         idm_clear_mode=args.idm_clear_mode, pivot=args.pivot, disp=args.disp,

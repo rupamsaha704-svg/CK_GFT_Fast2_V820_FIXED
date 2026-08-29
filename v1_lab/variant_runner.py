@@ -97,6 +97,11 @@ def build_grid():
     # POI confluence requirement (qm | qm_ob | qm_fvg)
     grid.append(("poi_qm_ob", d._replace(poi_type="qm_ob"), "POI type = qm_ob (order-block confluence)"))
     grid.append(("poi_qm_fvg", d._replace(poi_type="qm_fvg"), "POI type = qm_fvg (FVG confluence)"))
+    # Order-block search bound (only meaningful with qm_ob): sweep the lookback so the qm_ob
+    # confluence's discriminating power is A/B tested at a tighter bound too. Paired with qm_ob so
+    # the switch actually changes the OB gate (a bare ob_lookback change under 'qm' is a no-op).
+    grid.append(("ob_lb_3", d._replace(poi_type="qm_ob", ob_lookback=3),
+                 "POI qm_ob + ob_lookback=3 (tighter displacement-leg OB bound)"))
 
     # Stop placement mode + ATR buffer size (small documented range)
     grid.append(("sl_tight_poi", d._replace(sl_mode="tight_poi"), "SL mode = tight_poi (stop at POI edge)"))
@@ -105,7 +110,12 @@ def build_grid():
 
     # Target mode + fixed-RR + min projected-RR gate
     grid.append(("tp_fixed_rr", d._replace(tp_mode="fixed_rr"), "TP mode = fixed_rr (2R target)"))
-    grid.append(("tp_partial", d._replace(tp_mode="partial_be_trail"), "TP mode = partial_be_trail (proxy)"))
+    # NOTE: partial_be_trail is currently modeled as the fixed_rr target level (a documented proxy),
+    # so tp_partial is BY CONSTRUCTION identical to tp_fixed_rr at the same fixed_rr. It is kept as a
+    # named row for traceability but is flagged as an equivalent (not an independent) trial in the
+    # report + results CSV so the effective trial count is not inflated (see _partial_equiv_of).
+    grid.append(("tp_partial", d._replace(tp_mode="partial_be_trail"),
+                 "TP mode = partial_be_trail (proxy; EQUIVALENT to tp_fixed_rr — not a distinct trial)"))
     grid.append(("rr_3", d._replace(tp_mode="fixed_rr", fixed_rr=3.0), "fixed_rr target = 3R"))
     grid.append(("minrr_1p5", d._replace(min_projected_rr=1.5), "min projected-RR gate = 1.5"))
 
@@ -120,16 +130,20 @@ def build_grid():
     grid.append(("disp_0p4", d._replace(disp=0.4), "MSS displacement gate = 0.4 (looser)"))
     grid.append(("disp_0p8", d._replace(disp=0.8), "MSS displacement gate = 0.8 (stricter)"))
 
-    # ERL source timeframe
+    # ERL source timeframe + external-range lookback (how many swings define the external range)
     grid.append(("erl_h4", d._replace(erl_tf="H4"), "ERL source TF = H4"))
     grid.append(("erl_m15", d._replace(erl_tf="M15"), "ERL source TF = M15"))
+    grid.append(("erl_lb_3", d._replace(erl_lookback=3), "ERL lookback = 3 swings (tighter external range)"))
+    grid.append(("erl_lb_8", d._replace(erl_lookback=8), "ERL lookback = 8 swings (wider external range)"))
 
     # Session scope (NY-only vs all sessions)
     grid.append(("session_all", d._replace(session_scope="ny_london_asia"),
                  "session scope = ny_london_asia (24h eligible)"))
 
-    # Risk caps
+    # Risk caps + re-entry-after-stop-out rule
     grid.append(("max_trades_4", d._replace(max_trades_per_day=4), "max trades/day = 4 (looser cap)"))
+    grid.append(("reentry_on", d._replace(reentry=True),
+                 "reentry = True (permit one extra same-day entry per stop-out)"))
 
     # SMT variants (enumerated; require a partner series — DATA DEPENDENCY when absent)
     grid.append(("smt_xag", d._replace(smt_pair="xag"), "SMT pair = xag (needs XAGUSD series)"))
@@ -281,7 +295,7 @@ def pipeline_verdict(is_path, oos_path, deposit):
 # ---- ranking + report ------------------------------------------------------------------------
 # Result-CSV columns (machine-readable). Order is fixed for deterministic byte output.
 RESULT_HEADER = [
-    "variant_id", "trial_note", "verdict",
+    "variant_id", "trial_note", "verdict", "equivalent_to",
     "trades_total", "n_is", "n_oos",
     "oos_pf", "oos_exp", "oos_net", "oos_win_rate", "oos_max_dd_pct",
     "oos_mc_dd_p95", "oos_mc_p_losing", "oos_mc_net_p5",
@@ -327,6 +341,7 @@ def rank_key(r):
 
 def write_results_csv(ranked, path):
     """Deterministic machine-readable results CSV (one row per variant, ranking order)."""
+    equiv = _equivalent_variants(ranked)
     with open(path, "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(RESULT_HEADER)
@@ -335,7 +350,7 @@ def write_results_csv(ranked, path):
             pf = o["oos_pf"]
             ispf = o["is_pf"]
             w.writerow([
-                r["variant_id"], r["trial_note"], o["verdict"],
+                r["variant_id"], r["trial_note"], o["verdict"], equiv.get(r["variant_id"], ""),
                 r["trades_total"], r["n_is"], r["n_oos"],
                 ("inf" if pf == float("inf") else _fmt(pf)), _fmt(o["oos_exp"]),
                 _fmt(o["oos_net"]), _fmt(o["oos_win_rate"]), _fmt(o["oos_max_dd"]),
@@ -347,6 +362,32 @@ def write_results_csv(ranked, path):
 
 def _pf_str(pf):
     return "inf" if pf == float("inf") else f"{pf:.2f}"
+
+
+def _equivalent_variants(ranked):
+    """Return a dict {variant_id: equivalent_to_id} for variants that are, BY CONSTRUCTION, identical
+    trials of another variant (so the reader can discount the effective trial count honestly).
+
+    Currently: tp_partial (tp_mode='partial_be_trail') is modeled as the fixed_rr target level, so it
+    is byte-identical to tp_fixed_rr at the same fixed_rr. We detect it structurally (config-level:
+    partial_be_trail with the same fixed_rr as a fixed_rr sibling) rather than by comparing results,
+    so the annotation is honest even if data changes. This is a REPORTING annotation only — it does
+    NOT drop the row (the variant is still run and shown), it just flags the equivalence.
+    """
+    equiv = {}
+    # index fixed_rr variants by their fixed_rr value
+    fixed_by_rr = {}
+    for r in ranked:
+        c = r["cfg"]
+        if c.tp_mode == "fixed_rr":
+            fixed_by_rr.setdefault(round(c.fixed_rr, 6), r["variant_id"])
+    for r in ranked:
+        c = r["cfg"]
+        if c.tp_mode == "partial_be_trail":
+            sib = fixed_by_rr.get(round(c.fixed_rr, 6))
+            if sib is not None:
+                equiv[r["variant_id"]] = sib
+    return equiv
 
 
 def build_report(ranked, meta):
@@ -361,6 +402,8 @@ def build_report(ranked, meta):
     eligible = [r for r in ranked if r["res"]["oos_n"] >= MIN_OOS_TRADES]
     insufficient = [r for r in ranked if r["res"]["oos_n"] < MIN_OOS_TRADES]
     passes = [r for r in eligible if (r["res"]["verdict"] or "").startswith("PASS")]
+    equiv = _equivalent_variants(ranked)               # {vid: equivalent_to_vid} (reporting only)
+    n_distinct = n_variants - len(equiv)               # effective (non-duplicate) trial count
 
     lines = []
     A = lines.append
@@ -394,11 +437,19 @@ def build_report(ranked, meta):
     A("  result on a single variant can arise by chance; discount accordingly. The grid is a")
     A("  BASELINE + one-switch-at-a-time (OFAT) sweep (each row differs from the default by exactly")
     A("  one open switch) — deliberately NOT a full cartesian product, to limit over-search.")
+    if equiv:
+        pairs = "; ".join(f"`{k}` == `{v}`" for k, v in sorted(equiv.items()))
+        A(f"- **Effective (distinct) trials: {n_distinct}.** {len(equiv)} enumerated row(s) are, BY")
+        A(f"  CONSTRUCTION, identical to another row and are NOT independent trials: {pairs}. Reason:")
+        A("  `partial_be_trail` is currently modeled as the `fixed_rr` target level (a documented")
+        A("  proxy), so it produces the same trades as `tp_fixed_rr` at the same `fixed_rr`. The row is")
+        A("  kept for traceability but flagged here so the effective trial count is not inflated.")
     A(f"- Pipeline minimum OOS-trade bar (pre-declared, unmodified): **>= {MIN_OOS_TRADES} OOS trades**.")
     A("")
     A("## Headline outcome")
     A("")
-    A(f"- Variants enumerated: **{n_variants}**")
+    A(f"- Variants enumerated: **{n_variants}**"
+      + (f" (effective distinct trials: **{n_distinct}**)" if equiv else ""))
     A(f"- Reached the >= {MIN_OOS_TRADES}-OOS-trade bar (eligible for a verdict): **{len(eligible)}**")
     A(f"- Returned INSUFFICIENT (too few OOS trades to judge): **{len(insufficient)}**")
     A(f"- PASS (pending MT5/extra-data stages): **{len(passes)}**")
@@ -440,7 +491,9 @@ def build_report(ranked, meta):
     for i, r in enumerate(ranked, 1):
         o = r["res"]
         mc = "" if o["mc_net_p5"] is None else f"{o['mc_net_p5']:.0f}"
-        A(f"| {i} | {r['variant_id']} | {o['verdict']} | {o['oos_n']} | "
+        vid = r["variant_id"]
+        vid_disp = f"{vid} (== {equiv[vid]})" if vid in equiv else vid
+        A(f"| {i} | {vid_disp} | {o['verdict']} | {o['oos_n']} | "
           f"{_pf_str(o['oos_pf'])} | {o['oos_exp']:.2f} | {o['oos_max_dd']:.2f} | {mc} | "
           f"{r['trial_note']} |")
     A("")
@@ -451,6 +504,9 @@ def build_report(ranked, meta):
         A(f"### {r['variant_id']} — {o['verdict']}")
         A("")
         A(f"- switch: {r['trial_note']}")
+        if r["variant_id"] in equiv:
+            A(f"- **equivalence: identical BY CONSTRUCTION to `{equiv[r['variant_id']]}`** "
+              f"(`partial_be_trail` is modeled as the `fixed_rr` level). Not an independent trial.")
         A(f"- trades: total {r['trades_total']}, IS {r['n_is']}, OOS {r['n_oos']}")
         A(f"- OOS: PF {_pf_str(o['oos_pf'])}, expectancy {o['oos_exp']:.2f}, net {o['oos_net']:.2f}, "
           f"win-rate {o['oos_win_rate']:.1f}%, max-DD {o['oos_max_dd']:.2f}%")
@@ -556,19 +612,31 @@ def selfcheck():
     ids = [g[0] for g in grid]
     assert len(ids) == len(set(ids)), "A: variant ids must be unique"
     assert ids[0] == "baseline", "A: first variant must be the documented baseline"
-    EXPECTED_N = 21
+    EXPECTED_N = 25
     assert len(grid) == EXPECTED_N, f"A: expected {EXPECTED_N} variants, got {len(grid)}"
-    # every open switch must be exercised somewhere in the grid
+    # every open switch must be exercised somewhere in the grid. This list is the runner's HONEST
+    # switch-coverage claim: it must include EVERY open (non-locked) VariantConfig switch the grid is
+    # supposed to sweep. reentry, erl_lookback and ob_lookback are now genuinely swept (they were
+    # previously omitted, overstating coverage), so they are asserted here too.
     d = QM.DEFAULT_CONFIG
     switched_fields = set()
     for _id, cfg, _note in grid[1:]:
         for fld in d._fields:
             if getattr(cfg, fld) != getattr(d, fld):
                 switched_fields.add(fld)
-    for must in ("poi_type", "sl_mode", "sl_buffer_atr", "tp_mode", "min_projected_rr",
-                 "idm_clear_required", "idm_clear_mode", "pivot", "disp", "erl_tf",
-                 "session_scope", "max_trades_per_day", "smt_pair"):
+    for must in ("poi_type", "ob_lookback", "sl_mode", "sl_buffer_atr", "tp_mode", "min_projected_rr",
+                 "idm_clear_required", "idm_clear_mode", "pivot", "disp", "erl_lookback", "erl_tf",
+                 "session_scope", "max_trades_per_day", "reentry", "smt_pair"):
         assert must in switched_fields, f"A: open switch '{must}' is not exercised by the grid"
+
+    # (A2) EQUIVALENCE annotation: tp_partial (partial_be_trail) is modeled as the fixed_rr level, so
+    # it must be flagged as identical-by-construction to tp_fixed_rr and NOT counted as a distinct
+    # trial. Build stub result rows from the grid configs and assert the detector catches it.
+    stub = [{"variant_id": vid, "cfg": cfg} for vid, cfg, _n in grid]
+    eq = _equivalent_variants(stub)
+    assert eq.get("tp_partial") == "tp_fixed_rr", \
+        f"A2: tp_partial must be flagged equivalent to tp_fixed_rr, got {eq!r}"
+    assert "baseline" not in eq and "tp_fixed_rr" not in eq, "A2: distinct variants must NOT be flagged equivalent"
 
     # tiny synthetic dataset + reduced grid for the CSV/format/determinism checks
     m15, m5 = _synthetic_m15_m5()
@@ -652,6 +720,7 @@ def selfcheck():
 
     print("selfcheck: PASS")
     print(f"  case A: grid enumerates {EXPECTED_N} unique variants (baseline + OFAT); every open switch exercised")
+    print("  case A2: tp_partial flagged EQUIVALENT to tp_fixed_rr (proxy) => effective trial count not inflated")
     print("  case B: each per-variant IS/OOS CSV parses via metrics.load_trades with exact 'time,profit' header")
     print("  case C: IS/OOS split uses the fixed PRE-DECLARED boundary and is deterministic on re-run")
     print("  case D: report + results CSV are byte-identical for identical input (deterministic)")
