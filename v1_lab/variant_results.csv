@@ -1,0 +1,22 @@
+variant_id,trial_note,verdict,trades_total,n_is,n_oos,oos_pf,oos_exp,oos_net,oos_win_rate,oos_max_dd_pct,oos_mc_dd_p95,oos_mc_p_losing,oos_mc_net_p5,is_pf,is_exp,smt_available,smt_note
+disp_0p4,MSS displacement gate = 0.4 (looser),INSUFFICIENT,186,98,88,1.3701,23.5513,2072.5100,36.3636,23.6510,,,,1.5056,29.8299,no,SMT off (default); no partner series required.
+session_all,session scope = ny_london_asia (24h eligible),INSUFFICIENT,365,188,177,1.3652,23.0971,4088.1900,35.0282,28.5125,,,,1.2060,12.9169,no,SMT off (default); no partner series required.
+idm_body,IDM clear precision = body,INSUFFICIENT,130,71,59,1.2982,18.6976,1103.1600,37.2881,17.7382,,,,1.5392,33.0541,no,SMT off (default); no partner series required.
+tp_fixed_rr,TP mode = fixed_rr (2R target),INSUFFICIENT,170,93,77,1.3262,16.7329,1288.4300,45.4545,13.3333,,,,1.3645,20.1952,no,SMT off (default); no partner series required.
+tp_partial,TP mode = partial_be_trail (proxy),INSUFFICIENT,170,93,77,1.3262,16.7329,1288.4300,45.4545,13.3333,,,,1.3645,20.1952,no,SMT off (default); no partner series required.
+sl_buf_0p25,SL buffer = 0.25*ATR (tighter),INSUFFICIENT,155,81,74,1.1994,14.0142,1037.0500,29.7297,19.6960,,,,1.4034,25.6770,no,SMT off (default); no partner series required.
+erl_h4,ERL source TF = H4,INSUFFICIENT,152,81,71,1.2076,13.2576,941.2900,35.2113,17.7382,,,,1.7064,42.3188,no,SMT off (default); no partner series required.
+minrr_1p5,min projected-RR gate = 1.5,INSUFFICIENT,142,80,62,1.1287,9.1361,566.4400,29.0323,19.7091,,,,1.7229,42.0394,no,SMT off (default); no partner series required.
+sl_tight_poi,SL mode = tight_poi (stop at POI edge),INSUFFICIENT,156,84,72,1.1021,8.2250,592.2000,19.4444,21.1092,,,,1.3948,29.1390,no,SMT off (default); no partner series required.
+baseline,documented default config (no switch changed),INSUFFICIENT,155,83,72,1.1121,7.4728,538.0400,33.3333,19.7091,,,,1.6185,36.9054,no,SMT off (default); no partner series required.
+poi_qm_ob,POI type = qm_ob (order-block confluence),INSUFFICIENT,155,83,72,1.1121,7.4728,538.0400,33.3333,19.7091,,,,1.6185,36.9054,no,SMT off (default); no partner series required.
+smt_dxy,SMT pair = dxy (needs DXY series),INSUFFICIENT,155,83,72,1.1121,7.4728,538.0400,33.3333,19.7091,,,,1.6185,36.9054,no,SMT 'dxy' requested but no --pair-csv supplied: XAGUSD/DXY are NOT in the repo. SMT treated as UNAVAILABLE (0 signals); export the partner series to enable.
+smt_xag,SMT pair = xag (needs XAGUSD series),INSUFFICIENT,155,83,72,1.1121,7.4728,538.0400,33.3333,19.7091,,,,1.6185,36.9054,no,SMT 'xag' requested but no --pair-csv supplied: XAGUSD/DXY are NOT in the repo. SMT treated as UNAVAILABLE (0 signals); export the partner series to enable.
+max_trades_4,max trades/day = 4 (looser cap),INSUFFICIENT,208,111,97,1.0894,6.0824,589.9900,31.9588,33.5055,,,,1.4292,26.2087,no,SMT off (default); no partner series required.
+rr_3,fixed_rr target = 3R,INSUFFICIENT,170,93,77,1.0996,5.8838,453.0500,37.6623,17.9022,,,,1.8262,45.7730,no,SMT off (default); no partner series required.
+disp_0p8,MSS displacement gate = 0.8 (stricter),INSUFFICIENT,122,68,54,1.0409,2.7996,151.1800,31.4815,21.5050,,,,1.4675,27.8581,no,SMT off (default); no partner series required.
+sl_buf_1p0,SL buffer = 1.0*ATR (wider),INSUFFICIENT,156,83,73,0.9861,-0.8974,-65.5100,35.6164,21.7055,,,,1.3099,17.9206,no,SMT off (default); no partner series required.
+erl_m15,ERL source TF = M15,INSUFFICIENT,116,65,51,0.9027,-6.2933,-320.9600,35.2941,22.4685,,,,1.3592,20.7332,no,SMT off (default); no partner series required.
+poi_qm_fvg,POI type = qm_fvg (FVG confluence),INSUFFICIENT,131,82,49,0.8903,-7.5898,-371.9000,24.4898,30.7956,,,,0.6706,-22.4970,no,SMT off (default); no partner series required.
+idm_optional,IDM clear optional (experimental),INSUFFICIENT,307,165,142,0.8117,-13.3933,-1901.8500,28.8732,48.5496,,,,1.1785,11.8042,no,SMT off (default); no partner series required.
+pivot_3,swing pivot L/R = 3 (stricter swings),INSUFFICIENT,138,74,64,0.2768,-60.8678,-3895.5400,14.0625,78.5441,,,,1.2810,18.0100,no,SMT off (default); no partner series required.
