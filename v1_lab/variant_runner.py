@@ -113,7 +113,7 @@ def build_grid():
     # NOTE: partial_be_trail is currently modeled as the fixed_rr target level (a documented proxy),
     # so tp_partial is BY CONSTRUCTION identical to tp_fixed_rr at the same fixed_rr. It is kept as a
     # named row for traceability but is flagged as an equivalent (not an independent) trial in the
-    # report + results CSV so the effective trial count is not inflated (see _partial_equiv_of).
+    # report + results CSV so the effective trial count is not inflated (see _equivalent_variants).
     grid.append(("tp_partial", d._replace(tp_mode="partial_be_trail"),
                  "TP mode = partial_be_trail (proxy; EQUIVALENT to tp_fixed_rr — not a distinct trial)"))
     grid.append(("rr_3", d._replace(tp_mode="fixed_rr", fixed_rr=3.0), "fixed_rr target = 3R"))

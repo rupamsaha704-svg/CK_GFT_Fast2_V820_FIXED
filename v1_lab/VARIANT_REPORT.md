@@ -72,17 +72,17 @@ judgement, and it comes from the unmodified pipeline.
 | 11 | erl_lb_8 | INSUFFICIENT | 73 | 1.13 | 8.86 | 19.71 |  | ERL lookback = 8 swings (wider external range) |
 | 12 | sl_tight_poi | INSUFFICIENT | 72 | 1.10 | 8.22 | 21.11 |  | SL mode = tight_poi (stop at POI edge) |
 | 13 | baseline | INSUFFICIENT | 72 | 1.11 | 7.47 | 19.71 |  | documented default config (no switch changed) |
-| 14 | smt_dxy | INSUFFICIENT | 72 | 1.11 | 7.47 | 19.71 |  | SMT pair = dxy (needs DXY series) |
-| 15 | smt_xag | INSUFFICIENT | 72 | 1.11 | 7.47 | 19.71 |  | SMT pair = xag (needs XAGUSD series) |
-| 16 | max_trades_4 | INSUFFICIENT | 97 | 1.09 | 6.08 | 33.51 |  | max trades/day = 4 (looser cap) |
-| 17 | rr_3 | INSUFFICIENT | 77 | 1.10 | 5.88 | 17.90 |  | fixed_rr target = 3R |
-| 18 | erl_lb_3 | INSUFFICIENT | 69 | 1.07 | 4.85 | 19.71 |  | ERL lookback = 3 swings (tighter external range) |
-| 19 | disp_0p8 | INSUFFICIENT | 54 | 1.04 | 2.80 | 21.50 |  | MSS displacement gate = 0.8 (stricter) |
-| 20 | sl_buf_1p0 | INSUFFICIENT | 73 | 0.99 | -0.90 | 21.71 |  | SL buffer = 1.0*ATR (wider) |
-| 21 | erl_m15 | INSUFFICIENT | 51 | 0.90 | -6.29 | 22.47 |  | ERL source TF = M15 |
-| 22 | poi_qm_fvg | INSUFFICIENT | 49 | 0.89 | -7.59 | 30.80 |  | POI type = qm_fvg (FVG confluence) |
-| 23 | idm_optional | INSUFFICIENT | 142 | 0.81 | -13.39 | 48.55 |  | IDM clear optional (experimental) |
-| 24 | reentry_on | INSUFFICIENT | 91 | 0.80 | -14.97 | 37.45 |  | reentry = True (permit one extra same-day entry per stop-out) |
+| 14 | reentry_on | INSUFFICIENT | 72 | 1.11 | 7.47 | 19.71 |  | reentry = True (permit one extra same-day entry per stop-out) |
+| 15 | smt_dxy | INSUFFICIENT | 72 | 1.11 | 7.47 | 19.71 |  | SMT pair = dxy (needs DXY series) |
+| 16 | smt_xag | INSUFFICIENT | 72 | 1.11 | 7.47 | 19.71 |  | SMT pair = xag (needs XAGUSD series) |
+| 17 | max_trades_4 | INSUFFICIENT | 97 | 1.09 | 6.08 | 33.51 |  | max trades/day = 4 (looser cap) |
+| 18 | rr_3 | INSUFFICIENT | 77 | 1.10 | 5.88 | 17.90 |  | fixed_rr target = 3R |
+| 19 | erl_lb_3 | INSUFFICIENT | 69 | 1.07 | 4.85 | 19.71 |  | ERL lookback = 3 swings (tighter external range) |
+| 20 | disp_0p8 | INSUFFICIENT | 54 | 1.04 | 2.80 | 21.50 |  | MSS displacement gate = 0.8 (stricter) |
+| 21 | sl_buf_1p0 | INSUFFICIENT | 73 | 0.99 | -0.90 | 21.71 |  | SL buffer = 1.0*ATR (wider) |
+| 22 | erl_m15 | INSUFFICIENT | 51 | 0.90 | -6.29 | 22.47 |  | ERL source TF = M15 |
+| 23 | poi_qm_fvg | INSUFFICIENT | 49 | 0.89 | -7.59 | 30.80 |  | POI type = qm_fvg (FVG confluence) |
+| 24 | idm_optional | INSUFFICIENT | 142 | 0.81 | -13.39 | 48.55 |  | IDM clear optional (experimental) |
 | 25 | pivot_3 | INSUFFICIENT | 64 | 0.28 | -60.87 | 78.54 |  | swing pivot L/R = 3 (stricter swings) |
 
 ## Per-variant detail
@@ -192,6 +192,14 @@ judgement, and it comes from the unmodified pipeline.
 - IS (exploration only): PF 1.62, expectancy 36.91
 - pipeline reasons: OOS trades 72<200
 
+### reentry_on — INSUFFICIENT
+
+- switch: reentry = True (permit one extra same-day entry per stop-out)
+- trades: total 157, IS 85, OOS 72
+- OOS: PF 1.11, expectancy 7.47, net 538.04, win-rate 33.3%, max-DD 19.71%
+- IS (exploration only): PF 1.62, expectancy 37.12
+- pipeline reasons: OOS trades 72<200
+
 ### smt_dxy — INSUFFICIENT
 
 - switch: SMT pair = dxy (needs DXY series)
@@ -273,14 +281,6 @@ judgement, and it comes from the unmodified pipeline.
 - OOS: PF 0.81, expectancy -13.39, net -1901.85, win-rate 28.9%, max-DD 48.55%
 - IS (exploration only): PF 1.18, expectancy 11.80
 - pipeline reasons: OOS trades 142<200
-
-### reentry_on — INSUFFICIENT
-
-- switch: reentry = True (permit one extra same-day entry per stop-out)
-- trades: total 199, IS 108, OOS 91
-- OOS: PF 0.80, expectancy -14.97, net -1361.96, win-rate 26.4%, max-DD 37.45%
-- IS (exploration only): PF 1.12, expectancy 7.92
-- pipeline reasons: OOS trades 91<200
 
 ### pivot_3 — INSUFFICIENT
 

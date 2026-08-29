@@ -12,6 +12,7 @@ minrr_1p5,min projected-RR gate = 1.5,INSUFFICIENT,,142,80,62,1.1287,9.1361,566.
 erl_lb_8,ERL lookback = 8 swings (wider external range),INSUFFICIENT,,156,83,73,1.1347,8.8570,646.5600,34.2466,19.7091,,,,1.7127,42.5241,no,SMT off (default); no partner series required.
 sl_tight_poi,SL mode = tight_poi (stop at POI edge),INSUFFICIENT,,156,84,72,1.1021,8.2250,592.2000,19.4444,21.1092,,,,1.3948,29.1390,no,SMT off (default); no partner series required.
 baseline,documented default config (no switch changed),INSUFFICIENT,,155,83,72,1.1121,7.4728,538.0400,33.3333,19.7091,,,,1.6185,36.9054,no,SMT off (default); no partner series required.
+reentry_on,reentry = True (permit one extra same-day entry per stop-out),INSUFFICIENT,,157,85,72,1.1121,7.4728,538.0400,33.3333,19.7091,,,,1.6246,37.1226,no,SMT off (default); no partner series required.
 smt_dxy,SMT pair = dxy (needs DXY series),INSUFFICIENT,,155,83,72,1.1121,7.4728,538.0400,33.3333,19.7091,,,,1.6185,36.9054,no,SMT 'dxy' requested but no --pair-csv supplied: XAGUSD/DXY are NOT in the repo. SMT treated as UNAVAILABLE (0 signals); export the partner series to enable.
 smt_xag,SMT pair = xag (needs XAGUSD series),INSUFFICIENT,,155,83,72,1.1121,7.4728,538.0400,33.3333,19.7091,,,,1.6185,36.9054,no,SMT 'xag' requested but no --pair-csv supplied: XAGUSD/DXY are NOT in the repo. SMT treated as UNAVAILABLE (0 signals); export the partner series to enable.
 max_trades_4,max trades/day = 4 (looser cap),INSUFFICIENT,,208,111,97,1.0894,6.0824,589.9900,31.9588,33.5055,,,,1.4292,26.2087,no,SMT off (default); no partner series required.
@@ -22,5 +23,4 @@ sl_buf_1p0,SL buffer = 1.0*ATR (wider),INSUFFICIENT,,156,83,73,0.9861,-0.8974,-6
 erl_m15,ERL source TF = M15,INSUFFICIENT,,116,65,51,0.9027,-6.2933,-320.9600,35.2941,22.4685,,,,1.3592,20.7332,no,SMT off (default); no partner series required.
 poi_qm_fvg,POI type = qm_fvg (FVG confluence),INSUFFICIENT,,131,82,49,0.8903,-7.5898,-371.9000,24.4898,30.7956,,,,0.6706,-22.4970,no,SMT off (default); no partner series required.
 idm_optional,IDM clear optional (experimental),INSUFFICIENT,,307,165,142,0.8117,-13.3933,-1901.8500,28.8732,48.5496,,,,1.1785,11.8042,no,SMT off (default); no partner series required.
-reentry_on,reentry = True (permit one extra same-day entry per stop-out),INSUFFICIENT,,199,108,91,0.7967,-14.9666,-1361.9600,26.3736,37.4474,,,,1.1163,7.9206,no,SMT off (default); no partner series required.
 pivot_3,swing pivot L/R = 3 (stricter swings),INSUFFICIENT,,138,74,64,0.2768,-60.8678,-3895.5400,14.0625,78.5441,,,,1.2810,18.0100,no,SMT off (default); no partner series required.

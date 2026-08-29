@@ -39,7 +39,10 @@ tunable PARAMETER inside VariantConfig, each with a documented, NON-pre-optimize
   max_trades_per_day 2 (DEFAULT)                        risk cap (baseline entries allowed per day)
   reentry           False(DEFAULT)                      if True, permit ONE extra entry per stop-out
                                                         the same day, beyond max_trades_per_day (each
-                                                        SL-exit "buys back" one re-entry slot). This is
+                                                        SL-exit "buys back" one re-entry slot, but ONLY
+                                                        once that stop-out has RESOLVED — its exit time
+                                                        must strictly precede the candidate's entry, so
+                                                        no not-yet-known stop-out is consumed). This is
                                                         itself an unconfirmed rule => a switch with a
                                                         NON-pre-optimized default, wired into the cap.
   corr_window       20 / corr_min 0.3                   SMT rolling-correlation guard params
@@ -383,7 +386,9 @@ def run(m15_bars_or_path, cfg, m5_bars=None, m5_path=None, pair_bars=None, pair_
     per_state = {s: 0 for s in STATES}
     trades = []
     trades_per_day = {}
-    stops_per_day = {}   # SL-exits per day; each one "buys back" one re-entry slot when cfg.reentry
+    stop_exits_per_day = {}   # per day: list of EXIT datetimes of SL-exits taken so far; each one
+                              # "buys back" one re-entry slot when cfg.reentry AND its exit is
+                              # already KNOWN (exit time strictly precedes the candidate entry).
 
     # Index POIs by their bearish/bullish head so we can pair a POI to an MSS shift.
     pois_by_dir = {"bear": [], "bull": []}
@@ -464,13 +469,22 @@ def run(m15_bars_or_path, cfg, m5_bars=None, m5_path=None, pair_bars=None, pair_
             continue
 
         # --- risk caps (variant max_trades_per_day / reentry) ---
-        # The daily cap is max_trades_per_day. When cfg.reentry is True, each SL-exit already taken
-        # that day grants ONE additional re-entry slot (an unconfirmed rule, parameterized as a
-        # switch, not a pre-picked winner): a stopped-out setup may be re-attempted the same day.
-        # When reentry is False (default) the cap is exactly max_trades_per_day, as before.
+        # The daily cap is max_trades_per_day. When cfg.reentry is True, each SAME-DAY stop-out whose
+        # exit is ALREADY KNOWN at this entry grants ONE additional re-entry slot (an unconfirmed
+        # rule, parameterized as a switch, not a pre-picked winner): a stopped-out setup may be
+        # re-attempted the same day. CAUSALITY (LOCKED): a stop-out only counts toward the extra slot
+        # if its EXIT time strictly PRECEDES this candidate's ENTRY time — otherwise the relaxation
+        # would lean on a stop-out that has not yet resolved at the moment this re-entry is taken (a
+        # portfolio-gating look-ahead). When reentry is False (default) the cap is exactly
+        # max_trades_per_day, as before.
         day_key = entry_dt.date() if isinstance(entry_dt, datetime.datetime) else None
+        reentry_slots = 0
+        if cfg.reentry and day_key is not None:
+            reentry_slots = sum(
+                1 for x_dt in stop_exits_per_day.get(day_key, ())
+                if x_dt is not None and x_dt < entry_dt
+            )
         used = trades_per_day.get(day_key, 0)
-        reentry_slots = stops_per_day.get(day_key, 0) if cfg.reentry else 0
         if day_key is not None and used >= cfg.max_trades_per_day + reentry_slots:
             continue
 
@@ -500,9 +514,10 @@ def run(m15_bars_or_path, cfg, m5_bars=None, m5_path=None, pair_bars=None, pair_
         per_state["ENTRY"] += 1
         if day_key is not None:
             trades_per_day[day_key] = used + 1
-            # a stop-out this day grants a re-entry slot (only consulted when cfg.reentry is True)
+            # record this trade's stop-out (with its EXIT time) so a LATER same-day setup can only
+            # claim the re-entry slot once this stop-out has actually resolved (exit < that entry).
             if sim is not None and sim.get("exit_kind") == "sl":
-                stops_per_day[day_key] = stops_per_day.get(day_key, 0) + 1
+                stop_exits_per_day.setdefault(day_key, []).append(sim.get("exit_datetime"))
 
     trades.sort(key=lambda t: (t["entry_index"], t["direction"]))
     stats = {
@@ -954,10 +969,13 @@ def selfcheck():
                      round(t["sl"], 5), round(t["tp"], 5), round(t["net"], 2))
     assert [key(x) for x in trades] == [key(x) for x in trades_e], "E: engine must be deterministic"
 
-    # (F) REENTRY is a real, wired switch. On a day with two setups where the FIRST stops out and
-    # max_trades_per_day=1, reentry=False admits only the first entry; reentry=True grants one extra
-    # same-day slot (per stop-out) so the second setup can also enter. Flipping the switch on the
-    # SAME data changes the outcome => reentry is exercised, not inert.
+    # (F) REENTRY is a real, wired, CAUSAL switch. On a day with two setups where the FIRST stops
+    # out and max_trades_per_day=1, reentry=False admits only the first entry; reentry=True grants
+    # one extra same-day slot per stop-out so the second setup can also enter. Flipping the switch
+    # on the SAME data changes the outcome => reentry is exercised, not inert. Crucially the slot is
+    # granted CAUSALLY: it counts only because the first trade's stop-out EXIT time strictly precedes
+    # the second setup's ENTRY time (the stop-out is already KNOWN when the re-entry is taken), so
+    # this is not a portfolio-gating look-ahead.
     m15_re, m5_re = _build_two_setup_day()
     cfg_cap = make_config(session_scope="ny_london_asia", min_projected_rr=0.0, erl_tf="input",
                           max_trades_per_day=1)
@@ -970,6 +988,14 @@ def selfcheck():
     assert tr_yes[0]["entry_datetime"].date() == tr_yes[1]["entry_datetime"].date(), \
         "F: the re-entry must be on the SAME day as the stopped-out trade"
     assert tr_yes[1]["entry_index"] > tr_no[0]["entry_index"], "F: the re-entry is a later setup"
+    # CAUSALITY of the slot grant: the stop-out that "buys back" the slot must have RESOLVED before
+    # the re-entry is taken — its exit time strictly precedes the second entry. This proves the
+    # re-entry does not lean on a not-yet-known stop-out (no portfolio-gating look-ahead).
+    assert tr_yes[0]["exit_kind"] == "sl", "F: the first trade must be the stop-out granting the slot"
+    assert tr_yes[0]["exit_datetime"] is not None and tr_yes[1]["entry_datetime"] is not None, \
+        "F: both the stop-out exit and the re-entry entry must be timestamped"
+    assert tr_yes[0]["exit_datetime"] < tr_yes[1]["entry_datetime"], \
+        "F: the stop-out EXIT must strictly precede the re-entry ENTRY (causal slot grant, no look-ahead)"
 
     print("selfcheck: PASS")
     print("  case A: full happy path => exactly one bearish trade; SL above / TP below entry; every state hit once")
@@ -977,7 +1003,7 @@ def selfcheck():
     print("  case C: flipping idm_clear_required=False on the SAME scenario => a trade appears (switch is the gate)")
     print("  case D: truncating at the entry bar leaves the entry decision unchanged (causal / no lookahead)")
     print("  case E: re-running the happy path yields byte-identical trades (deterministic)")
-    print("  case F: reentry switch admits an extra SAME-DAY entry after a stop-out (wired, not inert)")
+    print("  case F: reentry switch admits an extra SAME-DAY entry after a stop-out whose exit is already known (wired, causal, not inert)")
     return True
 
 
