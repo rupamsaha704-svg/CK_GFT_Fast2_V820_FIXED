@@ -103,7 +103,7 @@ _CONFIG_FIELDS = [
     "smt_pair", "poi_type", "ob_lookback", "sl_mode", "sl_buffer_atr", "tp_mode", "fixed_rr",
     "min_projected_rr", "idm_clear_required", "idm_clear_mode", "pivot", "disp", "erl_lookback",
     "erl_tf", "session_scope", "max_trades_per_day", "reentry", "corr_window", "corr_min",
-    "data_tz", "spread", "commission", "risk_per_trade", "max_hold_bars_m5",
+    "data_tz", "spread", "commission", "risk_per_trade", "max_hold_bars_m5", "entry_mode",
 ]
 VariantConfig = namedtuple("VariantConfig", _CONFIG_FIELDS)
 
@@ -133,11 +133,20 @@ DEFAULT_CONFIG = VariantConfig(
     commission=0.0,
     risk_per_trade=100.0,
     max_hold_bars_m5=288,
+    # entry_mode: how the entry price and (for 'rejection') the stop are derived at the POI.
+    #   'confirm_close'(DEFAULT) : enter at the M5 confirmation-bar CLOSE; stop from sl_mode.
+    #   'rejection'              : the setup creator's confirmed rule — the M5 confirmation bar is
+    #                              the REJECTION; enter at its extreme (bear: its LOW, bull: its HIGH)
+    #                              on the subsequent break, and set the stop at the OPPOSITE extreme
+    #                              (bear: rejection HIGH + buffer, bull: rejection LOW - buffer). This
+    #                              is a tighter, structure-based stop; TP still follows tp_mode.
+    entry_mode="confirm_close",
 )
 
 SL_MODES = ("head_smt_high_buffer", "tight_poi")
 TP_MODES = ("full_external", "fixed_rr", "partial_be_trail")
 SESSION_SCOPES = ("ny_only", "ny_london_asia")
+ENTRY_MODES = ("confirm_close", "rejection")
 
 # The state names, in causal order (used for per-state counting + reporting).
 STATES = [
@@ -335,6 +344,34 @@ def _place_sl_tp(direction, poi, entry, head_price, external_target, atr_at_entr
     return sl, tp, projected_rr
 
 
+def _tp_for_entry(direction, entry, sl, external_target, cfg):
+    """Compute (tp, projected_rr) for entry_mode='rejection', where entry and sl are ALREADY fixed
+    from the rejection candle. TP follows tp_mode exactly as in _place_sl_tp (full_external targets
+    the opposite external liquidity; fixed_rr / partial_be_trail target cfg.fixed_rr * risk).
+    Returns (None, 0.0) if the geometry is invalid (non-positive risk/reward)."""
+    if direction == "bear":
+        risk = sl - entry
+        if risk <= 0:
+            return None, 0.0
+        if cfg.tp_mode == "full_external":
+            tp = external_target if external_target is not None else entry - cfg.fixed_rr * risk
+        else:
+            tp = entry - cfg.fixed_rr * risk
+        reward = entry - tp
+    else:
+        risk = entry - sl
+        if risk <= 0:
+            return None, 0.0
+        if cfg.tp_mode == "full_external":
+            tp = external_target if external_target is not None else entry + cfg.fixed_rr * risk
+        else:
+            tp = entry + cfg.fixed_rr * risk
+        reward = tp - entry
+    if reward <= 0:
+        return None, 0.0
+    return tp, (reward / risk if risk > 0 else 0.0)
+
+
 # ---- the state machine -----------------------------------------------------------------------
 def _fmt_dt(dt):
     return dt.strftime("%Y-%m-%d %H:%M:%S") if isinstance(dt, datetime.datetime) else str(dt)
@@ -488,25 +525,57 @@ def run(m15_bars_or_path, cfg, m5_bars=None, m5_path=None, pair_bars=None, pair_
         if day_key is not None and used >= cfg.max_trades_per_day + reentry_slots:
             continue
 
-        # --- STATE 8: ENTRY (place SL/TP per variant, size, simulate) ---
-        entry_price = confirm["price"]
+        # --- STATE 8: ENTRY (place entry/SL/TP per variant, size, simulate) ---
         head_price = m15_bars[poi["head_index"]][3] if direction == "bear" else m15_bars[poi["head_index"]][4]
         external_target = _external_target(erl_by_m15, return_idx, direction)
         atr_at_entry = atr15[return_idx] if return_idx < len(atr15) else None
-        sl, tp, projected_rr = _place_sl_tp(direction, poi, entry_price, head_price,
-                                            external_target, atr_at_entry, cfg)
-        if sl is None or tp is None:
-            continue
-        # min projected-RR gate (variant): reject setups whose target/stop geometry is too shallow.
-        if projected_rr < cfg.min_projected_rr:
-            continue
 
-        # simulate on M5 (causal). If no M5 series, record the entry with a neutral, flagged result.
-        if m5_bars:
-            start = _m5_index_at_or_after(m5_bars, entry_dt)
+        if cfg.entry_mode == "rejection" and m5_bars:
+            # Setup creator's confirmed rule: the M5 confirmation bar IS the rejection at the QM/POI.
+            # Enter at the rejection's extreme on the subsequent BREAK (bear: its LOW; bull: its HIGH),
+            # and place the stop at the OPPOSITE extreme + ATR buffer (bear: rejection HIGH; bull:
+            # rejection LOW). TP still follows tp_mode. This is a tighter, structure-based stop.
+            rej_high = confirm.get("high"); rej_low = confirm.get("low"); rej_idx = confirm.get("index")
+            if rej_high is None or rej_low is None or rej_idx is None:
+                continue
+            buf = (atr_at_entry or 0.0) * cfg.sl_buffer_atr
+            if direction == "bear":
+                entry_price = rej_low
+                sl = rej_high + buf
+            else:
+                entry_price = rej_high
+                sl = rej_low - buf
+            tp, projected_rr = _tp_for_entry(direction, entry_price, sl, external_target, cfg)
+            if tp is None or projected_rr <= 0:
+                continue
+            if projected_rr < cfg.min_projected_rr:
+                continue
+            # Fill only on the CAUSAL break of the rejection extreme after the rejection bar.
+            start, fill_dt = _rejection_fill(m5_bars, rej_idx, direction, entry_price,
+                                             cfg.max_hold_bars_m5)
+            if start is None:
+                continue
+            entry_dt = fill_dt
+            # re-check the session gate on the ACTUAL fill bar (still causal, ~same session)
+            if not _bar_session_ok(entry_dt, data_tz, cfg.session_scope):
+                continue
             sim = simulate_trade(m5_bars, start, direction, entry_price, sl, tp, cfg)
         else:
-            sim = None
+            # default: enter at the confirmation close; stop from sl_mode.
+            entry_price = confirm["price"]
+            sl, tp, projected_rr = _place_sl_tp(direction, poi, entry_price, head_price,
+                                                external_target, atr_at_entry, cfg)
+            if sl is None or tp is None:
+                continue
+            # min projected-RR gate (variant): reject setups whose target/stop geometry is too shallow.
+            if projected_rr < cfg.min_projected_rr:
+                continue
+            # simulate on M5 (causal). If no M5 series, record the entry with a neutral flagged result.
+            if m5_bars:
+                start = _m5_index_at_or_after(m5_bars, entry_dt)
+                sim = simulate_trade(m5_bars, start, direction, entry_price, sl, tp, cfg)
+            else:
+                sim = None
         poi["_return_index"] = return_idx
         trade = _trade_record(ev, poi, direction, entry_dt, entry_price, sl, tp, projected_rr,
                               external_target, cfg, sim)
@@ -682,10 +751,31 @@ def _m5_confirmation(m5_bars, return_dt, direction, cfg):
     for t in range(start, horizon + 1):
         _, dt, o, h, l, c, _ = m5_bars[t]
         if direction == "bear" and c < o:
-            return {"index": t, "datetime": dt, "price": c}
+            return {"index": t, "datetime": dt, "price": c, "open": o, "high": h, "low": l}
         if direction == "bull" and c > o:
-            return {"index": t, "datetime": dt, "price": c}
+            return {"index": t, "datetime": dt, "price": c, "open": o, "high": h, "low": l}
     return None
+
+
+def _rejection_fill(m5_bars, rej_idx, direction, entry_target, horizon_bars):
+    """For entry_mode='rejection': find the first M5 bar AFTER the rejection candle (rej_idx) that
+    trades THROUGH the rejection extreme (the entry_target), i.e. the break that fills the order.
+
+    bear: entry_target = rejection LOW  -> filled when a later bar's low <= entry_target.
+    bull: entry_target = rejection HIGH -> filled when a later bar's high >= entry_target.
+    Causal: scans strictly after the rejection bar, within horizon_bars. Returns (fill_index,
+    fill_datetime) or (None, None) if never filled (=> no trade).
+    """
+    if rej_idx is None:
+        return None, None
+    end = min(len(m5_bars) - 1, rej_idx + horizon_bars)
+    for t in range(rej_idx + 1, end + 1):
+        _, dt, o, h, l, c, _ = m5_bars[t]
+        if direction == "bear" and l <= entry_target:
+            return t, dt
+        if direction == "bull" and h >= entry_target:
+            return t, dt
+    return None, None
 
 
 # ---- output ----------------------------------------------------------------------------------
@@ -997,6 +1087,25 @@ def selfcheck():
     assert tr_yes[0]["exit_datetime"] < tr_yes[1]["entry_datetime"], \
         "F: the stop-out EXIT must strictly precede the re-entry ENTRY (causal slot grant, no look-ahead)"
 
+    # (G) ENTRY_MODE 'rejection' is a real, wired, causal variant. On the happy path it yields a
+    # bearish trade whose stop is the rejection-candle HIGH (a tighter, structure-based stop) and
+    # whose entry is the rejection LOW (at/below the confirmation close), i.e. distinct geometry from
+    # the default confirm_close mode; and it is deterministic. The fill is only taken on the causal
+    # break of the rejection low AFTER the rejection bar (no lookahead).
+    cfg_rej = make_config(session_scope="ny_london_asia", min_projected_rr=0.0, erl_tf="input",
+                          entry_mode="rejection")
+    tr_rej, st_rej = run(m15, cfg_rej, m5_bars=m5)
+    assert st_rej["trades"] == 1, f"G: rejection entry on happy path => one trade, got {st_rej['trades']}"
+    rj = tr_rej[0]
+    assert rj["direction"] == "bear", "G: rejection trade must be bearish here"
+    assert rj["sl"] > rj["entry_price"], "G: bearish rejection SL (rejection high) must be ABOVE entry"
+    assert rj["tp"] < rj["entry_price"], "G: bearish rejection TP must be BELOW entry"
+    assert rj["entry_price"] <= tr["entry_price"] + 1e-9, \
+        "G: rejection entry (the rejection LOW) must be <= the confirm-close entry"
+    tr_rej2, _ = run(m15, cfg_rej, m5_bars=m5)
+    assert [key(x) for x in tr_rej] == [key(x) for x in tr_rej2], \
+        "G: rejection-mode engine must be deterministic"
+
     print("selfcheck: PASS")
     print("  case A: full happy path => exactly one bearish trade; SL above / TP below entry; every state hit once")
     print("  case B: IDM never cleared + idm_clear_required=True => NO trade")
@@ -1004,6 +1113,7 @@ def selfcheck():
     print("  case D: truncating at the entry bar leaves the entry decision unchanged (causal / no lookahead)")
     print("  case E: re-running the happy path yields byte-identical trades (deterministic)")
     print("  case F: reentry switch admits an extra SAME-DAY entry after a stop-out whose exit is already known (wired, causal, not inert)")
+    print("  case G: entry_mode='rejection' (creator's rule) => causal fill on the break of the rejection low; stop=rejection high; deterministic")
     return True
 
 
@@ -1058,6 +1168,7 @@ def parse_args(argv):
     p.add_argument("--commission", type=float, default=DEFAULT_CONFIG.commission)
     p.add_argument("--risk-per-trade", type=float, default=DEFAULT_CONFIG.risk_per_trade)
     p.add_argument("--max-hold-bars-m5", type=int, default=DEFAULT_CONFIG.max_hold_bars_m5)
+    p.add_argument("--entry-mode", default=DEFAULT_CONFIG.entry_mode, choices=ENTRY_MODES)
     return p.parse_args(argv)
 
 
@@ -1073,7 +1184,7 @@ def config_from_args(args):
         max_trades_per_day=args.max_trades_per_day, reentry=args.reentry,
         corr_window=args.corr_window, corr_min=args.corr_min, data_tz=args.data_tz,
         spread=args.spread, commission=args.commission, risk_per_trade=args.risk_per_trade,
-        max_hold_bars_m5=args.max_hold_bars_m5,
+        max_hold_bars_m5=args.max_hold_bars_m5, entry_mode=args.entry_mode,
     )
 
 

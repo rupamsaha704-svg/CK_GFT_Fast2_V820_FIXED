@@ -22,12 +22,12 @@ byte-identical `variant_results.csv` and this report. No LLM is in this measurem
 
 ## Multiple-testing disclosure (researcher degrees of freedom)
 
-- **25 variants** were enumerated in this run. Each variant is a separate trial and
+- **27 variants** were enumerated in this run. Each variant is a separate trial and
   therefore a researcher degree of freedom. With this many comparisons, an apparently good OOS
   result on a single variant can arise by chance; discount accordingly. The grid is a
   BASELINE + one-switch-at-a-time (OFAT) sweep (each row differs from the default by exactly
   one open switch) — deliberately NOT a full cartesian product, to limit over-search.
-- **Effective (distinct) trials: 24.** 1 enumerated row(s) are, BY
+- **Effective (distinct) trials: 26.** 1 enumerated row(s) are, BY
   CONSTRUCTION, identical to another row and are NOT independent trials: `tp_partial` == `tp_fixed_rr`. Reason:
   `partial_be_trail` is currently modeled as the `fixed_rr` target level (a documented
   proxy), so it produces the same trades as `tp_fixed_rr` at the same `fixed_rr`. The row is
@@ -36,9 +36,9 @@ byte-identical `variant_results.csv` and this report. No LLM is in this measurem
 
 ## Headline outcome
 
-- Variants enumerated: **25** (effective distinct trials: **24**)
+- Variants enumerated: **27** (effective distinct trials: **26**)
 - Reached the >= 200-OOS-trade bar (eligible for a verdict): **3**
-- Returned INSUFFICIENT (too few OOS trades to judge): **22**
+- Returned INSUFFICIENT (too few OOS trades to judge): **24**
 - PASS (pending MT5/extra-data stages): **0**
 
 ### Honest verdict: no variant PASSES the out-of-sample gates
@@ -74,12 +74,14 @@ judgement, and it comes from the unmodified pipeline.
 | 17 | disp_0p8 | INSUFFICIENT | 125 | 1.22 | 13.96 | 17.42 |  | MSS displacement gate = 0.8 (stricter) |
 | 18 | poi_qm_ob | INSUFFICIENT | 162 | 1.21 | 13.89 | 27.47 |  | POI type = qm_ob (order-block confluence) |
 | 19 | smt_xag | INSUFFICIENT | 24 | 1.19 | 10.85 | 7.61 |  | SMT pair = xag (needs XAGUSD series) |
-| 20 | ob_lb_3 | INSUFFICIENT | 152 | 1.11 | 7.55 | 41.21 |  | POI qm_ob + ob_lookback=3 (tighter displacement-leg OB bound) |
-| 21 | sl_buf_1p0 | INSUFFICIENT | 159 | 1.11 | 7.06 | 23.38 |  | SL buffer = 1.0*ATR (wider) |
-| 22 | erl_m15 | INSUFFICIENT | 118 | 1.11 | 7.01 | 22.76 |  | ERL source TF = M15 |
-| 23 | smt_dxy | INSUFFICIENT | 47 | 0.95 | -3.47 | 20.93 |  | SMT pair = dxy (needs DXY series) |
-| 24 | poi_qm_fvg | INSUFFICIENT | 134 | 0.73 | -18.78 | 53.59 |  | POI type = qm_fvg (FVG confluence) |
-| 25 | pivot_3 | INSUFFICIENT | 143 | 0.59 | -31.17 | 89.63 |  | swing pivot L/R = 3 (stricter swings) |
+| 20 | creator_confirmed | INSUFFICIENT | 26 | 1.12 | 9.99 | 25.20 |  | creator's FULL confirmed config: SMT=XAGUSD + rejection entry (2-switch hypothesis) |
+| 21 | ob_lb_3 | INSUFFICIENT | 152 | 1.11 | 7.55 | 41.21 |  | POI qm_ob + ob_lookback=3 (tighter displacement-leg OB bound) |
+| 22 | sl_buf_1p0 | INSUFFICIENT | 159 | 1.11 | 7.06 | 23.38 |  | SL buffer = 1.0*ATR (wider) |
+| 23 | erl_m15 | INSUFFICIENT | 118 | 1.11 | 7.01 | 22.76 |  | ERL source TF = M15 |
+| 24 | entry_rejection | INSUFFICIENT | 165 | 1.05 | 3.72 | 59.57 |  | entry mode = rejection (enter at rejection low, SL = rejection high) [creator rule] |
+| 25 | smt_dxy | INSUFFICIENT | 47 | 0.95 | -3.47 | 20.93 |  | SMT pair = dxy (needs DXY series) |
+| 26 | poi_qm_fvg | INSUFFICIENT | 134 | 0.73 | -18.78 | 53.59 |  | POI type = qm_fvg (FVG confluence) |
+| 27 | pivot_3 | INSUFFICIENT | 143 | 0.59 | -31.17 | 89.63 |  | swing pivot L/R = 3 (stricter swings) |
 
 ## Per-variant detail
 
@@ -240,6 +242,15 @@ judgement, and it comes from the unmodified pipeline.
 - SMT: SMT 'xag' active with 2907 signals.
 - pipeline reasons: OOS trades 24<200
 
+### creator_confirmed — INSUFFICIENT
+
+- switch: creator's FULL confirmed config: SMT=XAGUSD + rejection entry (2-switch hypothesis)
+- trades: total 26, IS 0, OOS 26
+- OOS: PF 1.12, expectancy 9.99, net 259.85, win-rate 19.2%, max-DD 25.20%
+- IS (exploration only): PF inf, expectancy 0.00
+- SMT: SMT 'xag' active with 2907 signals.
+- pipeline reasons: OOS trades 26<200
+
 ### ob_lb_3 — INSUFFICIENT
 
 - switch: POI qm_ob + ob_lookback=3 (tighter displacement-leg OB bound)
@@ -263,6 +274,14 @@ judgement, and it comes from the unmodified pipeline.
 - OOS: PF 1.11, expectancy 7.01, net 826.70, win-rate 37.3%, max-DD 22.76%
 - IS (exploration only): PF inf, expectancy 0.00
 - pipeline reasons: OOS trades 118<200
+
+### entry_rejection — INSUFFICIENT
+
+- switch: entry mode = rejection (enter at rejection low, SL = rejection high) [creator rule]
+- trades: total 165, IS 0, OOS 165
+- OOS: PF 1.05, expectancy 3.72, net 613.75, win-rate 20.6%, max-DD 59.57%
+- IS (exploration only): PF inf, expectancy 0.00
+- pipeline reasons: OOS trades 165<200
 
 ### smt_dxy — INSUFFICIENT
 

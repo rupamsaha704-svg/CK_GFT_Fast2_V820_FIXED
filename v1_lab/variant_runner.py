@@ -149,6 +149,15 @@ def build_grid():
     grid.append(("smt_xag", d._replace(smt_pair="xag"), "SMT pair = xag (needs XAGUSD series)"))
     grid.append(("smt_dxy", d._replace(smt_pair="dxy"), "SMT pair = dxy (needs DXY series)"))
 
+    # Entry mode: the setup creator's CONFIRMED rejection-entry rule (enter at the rejection extreme,
+    # stop at the opposite extreme). OFAT row first, then the creator's FULL confirmed combination
+    # (SMT=XAGUSD + rejection entry) as one explicit, pre-registered hypothesis (a 2-switch config,
+    # not OFAT — labelled so the reader knows it is the creator's actual setup, not a lone sweep).
+    grid.append(("entry_rejection", d._replace(entry_mode="rejection"),
+                 "entry mode = rejection (enter at rejection low, SL = rejection high) [creator rule]"))
+    grid.append(("creator_confirmed", d._replace(smt_pair="xag", entry_mode="rejection"),
+                 "creator's FULL confirmed config: SMT=XAGUSD + rejection entry (2-switch hypothesis)"))
+
     return grid
 
 
@@ -612,7 +621,7 @@ def selfcheck():
     ids = [g[0] for g in grid]
     assert len(ids) == len(set(ids)), "A: variant ids must be unique"
     assert ids[0] == "baseline", "A: first variant must be the documented baseline"
-    EXPECTED_N = 25
+    EXPECTED_N = 27
     assert len(grid) == EXPECTED_N, f"A: expected {EXPECTED_N} variants, got {len(grid)}"
     # every open switch must be exercised somewhere in the grid. This list is the runner's HONEST
     # switch-coverage claim: it must include EVERY open (non-locked) VariantConfig switch the grid is
@@ -626,7 +635,7 @@ def selfcheck():
                 switched_fields.add(fld)
     for must in ("poi_type", "ob_lookback", "sl_mode", "sl_buffer_atr", "tp_mode", "min_projected_rr",
                  "idm_clear_required", "idm_clear_mode", "pivot", "disp", "erl_lookback", "erl_tf",
-                 "session_scope", "max_trades_per_day", "reentry", "smt_pair"):
+                 "session_scope", "max_trades_per_day", "reentry", "smt_pair", "entry_mode"):
         assert must in switched_fields, f"A: open switch '{must}' is not exercised by the grid"
 
     # (A2) EQUIVALENCE annotation: tp_partial (partial_be_trail) is modeled as the fixed_rr level, so
