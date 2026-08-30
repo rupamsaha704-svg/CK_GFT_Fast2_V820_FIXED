@@ -1,0 +1,15 @@
+[
+ {"id":"B1","class":"PRIMARY","root_cause":"strategy","observation":"15h loses","evidence_ref":"x",
+  "mechanism":"x","falsifiable_prediction":"x","null_hypothesis":"x","experiment":"block 15h",
+  "true_signal":"x","false_signal":"x","data_exposure_count":0,
+  "kill_criterion":"x","confidence":"HIGH","note":"this looks robust, we should deploy and increase risk"},
+ {"id":"B2","class":"PRIMARY","root_cause":"strategy","observation":"y","evidence_ref":"y","mechanism":"y",
+  "falsifiable_prediction":"y","null_hypothesis":"y","experiment":"y","true_signal":"y","false_signal":"y",
+  "data_exposure_count":0,"kill_criterion":"y","confidence":"HIGH"},
+ {"id":"B3","class":"PRIMARY","root_cause":"strategy","observation":"z","evidence_ref":"z","mechanism":"z",
+  "falsifiable_prediction":"z","null_hypothesis":"z","experiment":"z","true_signal":"z","false_signal":"z",
+  "data_exposure_count":0,"kill_criterion":"z","confidence":"HIGH"},
+ {"id":"B4","class":"PRIMARY","root_cause":"strategy","observation":"w","evidence_ref":"w","mechanism":"w",
+  "falsifiable_prediction":"w","null_hypothesis":"w","experiment":"w","true_signal":"w","false_signal":"w",
+  "data_exposure_count":0,"kill_criterion":"w","confidence":"HIGH"}
+]

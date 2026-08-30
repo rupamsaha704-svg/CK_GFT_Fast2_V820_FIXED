@@ -1,0 +1,7 @@
+# Python scratch
+__pycache__/
+*.pyc
+# scratch / run artifacts (authoritative ledger is SPEC/dof_ledger.jsonl)
+v1_lab/__pycache__/
+v1_lab/run/
+v1_lab/evidence_manifest.jsonl
