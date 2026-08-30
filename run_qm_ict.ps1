@@ -23,7 +23,7 @@ if($py -and -not (Test-Path (Join-Path $research "metrics.py"))){ Invoke-WebRequ
 
 function RunBT($from,$to,$saveAs){
   $ini=Join-Path $research "qmict.ini"
-  $cfg="[Tester]`nExpert=CK_QM_ICT_EA.ex5`nSymbol=XAUUSD`nPeriod=M15`nModel=4`nExecutionMode=0`nFromDate=$from`nToDate=$to`nForwardMode=0`nDeposit=5000`nCurrency=USD`nLeverage=10`nOptimization=0`nShutdownTerminal=1`nVisual=0`n[TesterInputs]`nInpMagic=20260730`nInpFixedLot=0.09`nInpMaxLot=0.09`nInpPivot=2`nInpDispATR=0.6`nInpAtrPeriod=14`nInpUseEmaBias=true`nInpEmaPeriod=200`nInpSLBufferATR=0.5`nInpMinRR=1.0`nInpErlLookback=5`nInpMaxTradesPerDay=2`nInpLookbackBars=500`nInpSetupExpiryBars=40`nInpUseSession=false`nInpSessStartHour=13`nInpSessEndHour=22`nInpMaxSpreadPrice=0.60`n"
+  $cfg="[Tester]`nExpert=CK_QM_ICT_EA.ex5`nSymbol=XAUUSD`nPeriod=M15`nModel=4`nExecutionMode=0`nFromDate=$from`nToDate=$to`nForwardMode=0`nDeposit=5000`nCurrency=USD`nLeverage=10`nOptimization=0`nShutdownTerminal=1`nVisual=0`n[TesterInputs]`nInpMagic=20260730`nInpFixedLot=0.09`nInpMaxLot=0.09`nInpPivot=2`nInpDispATR=0.6`nInpAtrPeriod=14`nInpUseEmaBias=false`nInpEmaPeriod=200`nInpSLBufferATR=0.5`nInpMinRR=1.0`nInpErlLookback=5`nInpMaxTradesPerDay=2`nInpLookbackBars=500`nInpSetupExpiryBars=40`nInpUseSession=true`nInpSessStartHour=9`nInpSessStartMin=30`nInpSessEndHour=16`nInpSessEndMin=0`nInpMaxSpreadPrice=0.60`n"
   Set-Content -Encoding ascii $ini $cfg
   if(Test-Path $csv){Remove-Item $csv -Force}
   Get-Process terminal64 -ErrorAction SilentlyContinue|Stop-Process -Force; Start-Sleep 2

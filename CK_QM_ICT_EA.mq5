@@ -39,8 +39,8 @@ input double InpMaxLot            = 0.09;      // safety ceiling (never exceed)
 input int    InpPivot            = 2;          // swing pivot (L/R bars) — LOCKED structural def
 input double InpDispATR           = 0.6;       // MSS displacement gate (body/ATR14)
 input int    InpAtrPeriod         = 14;        // ATR period (M15)
-input bool   InpUseEmaBias        = true;      // HTF EMA trend-bias filter (validated improvement)
-input int    InpEmaPeriod         = 200;       // EMA period on M15 (plateau 150-300; 200=representative)
+input bool   InpUseEmaBias        = false;     // HTF EMA trend-bias: OFF (only helped OLD regime; current-regime check said drop it)
+input int    InpEmaPeriod         = 200;       // EMA period on M15 (used only if InpUseEmaBias=true)
 input double InpSLBufferATR       = 0.5;       // stop buffer beyond head, in ATR
 input double InpMinRR             = 1.0;        // reject setups with projected RR below this
 input int    InpErlLookback       = 5;          // swings defining the external range (ERL/target)
@@ -48,9 +48,11 @@ input int    InpMaxTradesPerDay   = 2;          // daily entry cap
 input int    InpLookbackBars      = 500;        // M15 bars scanned for structure
 input int    InpSetupExpiryBars   = 40;         // an armed setup expires after this many M15 bars
 
-input bool   InpUseSession        = true;       // restrict entries to a server-time window
-input int    InpSessStartHour     = 13;         // session start (SERVER hour) — set to your broker's NY open
-input int    InpSessEndHour       = 22;         // session end   (SERVER hour) — verify vs your broker/NY
+input bool   InpUseSession        = true;       // restrict entries to the NY-session window (matches engine ny_only)
+input int    InpSessStartHour     = 9;          // session start hour  (engine: 09:30, on the data's native/server clock)
+input int    InpSessStartMin      = 30;         // session start minute
+input int    InpSessEndHour       = 16;         // session end hour    (engine: 16:00, exclusive)
+input int    InpSessEndMin        = 0;          // session end minute
 
 input double InpMaxSpreadPrice    = 0.60;       // skip entries when spread exceeds this (price units)
 
@@ -162,14 +164,18 @@ int LastSwingHigh(const double &h[], int before, int pivot, int n)
 //==================== SESSION FILTER ==============================
 bool SessionOK(datetime t)
 {
+   // FAITHFUL to the Python engine's ny_only filter: it treats the bar's raw timestamp as NY time
+   // (data_tz=America/New_York => identity) and requires 09:30 <= t < 16:00. The exported CSVs the
+   // engine used are in the SAME server clock this EA reads, so we compare the raw server time to
+   // the same 09:30-16:00 window (minute precision) — no timezone conversion, exactly like the engine.
    if(!InpUseSession) return(true);
    MqlDateTime dt;
    TimeToStruct(t, dt);
-   int hr = dt.hour;
-   if(InpSessStartHour <= InpSessEndHour)
-      return(hr >= InpSessStartHour && hr < InpSessEndHour);
-   // wrap-around window
-   return(hr >= InpSessStartHour || hr < InpSessEndHour);
+   int mo = dt.hour * 60 + dt.min;
+   int s  = InpSessStartHour * 60 + InpSessStartMin;
+   int e  = InpSessEndHour   * 60 + InpSessEndMin;
+   if(s <= e) return(mo >= s && mo < e);
+   return(mo >= s || mo < e);   // wrap-around (not used for 09:30-16:00)
 }
 
 //==================== ARM A NEW SETUP =============================
