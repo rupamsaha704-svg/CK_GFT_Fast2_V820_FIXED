@@ -23,7 +23,7 @@ if($py -and -not (Test-Path (Join-Path $research "metrics.py"))){ Invoke-WebRequ
 
 Write-Host "[2/4] backtest OOS 2024-07..2026-08, XAUUSD M15, real ticks, ALL inputs pinned..."
 $ini=Join-Path $research "qmict.ini"
-$cfg="[Tester]`nExpert=CK_QM_ICT_EA.ex5`nSymbol=XAUUSD`nPeriod=M15`nModel=4`nExecutionMode=0`nFromDate=2024.07.01`nToDate=2026.08.01`nForwardMode=0`nDeposit=5000`nCurrency=USD`nLeverage=10`nOptimization=0`nShutdownTerminal=1`nVisual=0`n[TesterInputs]`nInpMagic=20260730`nInpFixedLot=0.09`nInpMaxLot=0.09`nInpPivot=2`nInpDispATR=0.6`nInpAtrPeriod=14`nInpUseEmaBias=true`nInpEmaPeriod=200`nInpSLBufferATR=0.5`nInpMinRR=1.0`nInpErlLookback=5`nInpMaxTradesPerDay=2`nInpLookbackBars=500`nInpSetupExpiryBars=40`nInpUseSession=true`nInpSessStartHour=13`nInpSessEndHour=22`nInpMaxSpreadPrice=0.60`n"
+$cfg="[Tester]`nExpert=CK_QM_ICT_EA.ex5`nSymbol=XAUUSD`nPeriod=M15`nModel=4`nExecutionMode=0`nFromDate=2024.07.01`nToDate=2026.08.01`nForwardMode=0`nDeposit=5000`nCurrency=USD`nLeverage=10`nOptimization=0`nShutdownTerminal=1`nVisual=0`n[TesterInputs]`nInpMagic=20260730`nInpFixedLot=0.09`nInpMaxLot=0.09`nInpPivot=2`nInpDispATR=0.6`nInpAtrPeriod=14`nInpUseEmaBias=true`nInpEmaPeriod=200`nInpSLBufferATR=0.5`nInpMinRR=1.0`nInpErlLookback=5`nInpMaxTradesPerDay=2`nInpLookbackBars=500`nInpSetupExpiryBars=40`nInpUseSession=false`nInpSessStartHour=13`nInpSessEndHour=22`nInpMaxSpreadPrice=0.60`n"
 Set-Content -Encoding ascii $ini $cfg
 if(Test-Path $csv){Remove-Item $csv -Force}
 Get-Process terminal64 -ErrorAction SilentlyContinue|Stop-Process -Force; Start-Sleep 2

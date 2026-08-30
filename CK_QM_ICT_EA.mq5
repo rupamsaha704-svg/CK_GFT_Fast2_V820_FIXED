@@ -203,9 +203,9 @@ void TryArmSetup(const double &o[], const double &h[], const double &l[], const 
          g_poiHigh = h[lsIdx];
          g_poiLow  = MathMin(o[lsIdx], c[lsIdx]);
          g_headPrice = headHi;
-         // IDM = inducement = the most recent swing high AFTER the shift is not yet known; use the
-         // neck-side minor high between LS and head as the inducement that must be cleared on retrace.
-         g_idmLevel = headHi;   // must be raided/cleared on the retrace up toward POI
+         // IDM = inducement = the MSS/break-bar HIGH. It sits BELOW the head, so it is swept during
+         // the retrace up toward the POI WITHOUT contradicting the head-broken invalidation.
+         g_idmLevel = h[i];
          // external target = lowest low over the ERL lookback window before the shift
          double ext = l[i]; int cnt = 0;
          for(int j = i; j >= 0 && cnt < InpErlLookback * (2 * InpPivot + 1); j--, cnt++)
@@ -229,7 +229,7 @@ void TryArmSetup(const double &o[], const double &h[], const double &l[], const 
          g_poiLow  = l[lsIdx];
          g_poiHigh = MathMax(o[lsIdx], c[lsIdx]);
          g_headPrice = headLo;
-         g_idmLevel = headLo;
+         g_idmLevel = l[i];   // inducement = MSS/break-bar LOW (above the head, swept on retrace down)
          double ext = h[i]; int cnt = 0;
          for(int j = i; j >= 0 && cnt < InpErlLookback * (2 * InpPivot + 1); j--, cnt++)
             if(h[j] > ext) ext = h[j];
