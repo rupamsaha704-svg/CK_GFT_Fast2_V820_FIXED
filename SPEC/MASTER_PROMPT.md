@@ -126,3 +126,45 @@ Do not start optimizing any EA. First:
 4. **Present the proposed architecture for approval BEFORE making major changes.**
 Prefer a simple, reliable, reproducible MT5-native lab where Kiro handles coding/orchestration and
 MT5 Strategy Tester performs the authoritative simulations.
+
+
+---
+
+## ADDITIONAL INFRASTRUCTURE TO BUILD & VERIFY FIRST (on the real MT5, before touching any strategy)
+
+These six pieces make the lab faster and remove the errors we kept hitting. BUILD each one against
+the real MT5 and CONFIRM it works (show the output) before moving on. Do NOT ship untested scripts.
+
+1. **Environment doctor — `tools/detect_env.ps1`.**
+   Auto-detect and SAVE to `tools/env.json`: `terminal64.exe`, `metaeditor64.exe`, the MT5 data dir
+   (the one containing `MQL5\Experts`), `Common\Files`, `Tester\logs`, and the Python path. Every
+   other script READS `env.json` — zero hard-coded paths, no path-guessing errors. Print the detected
+   paths for the user to confirm once.
+
+2. **Preset system (enforces GUARD #20).** One JSON/ini per experiment that pins EVERY EA input plus
+   the date windows. A run must fail loudly if any strategy input is missing from the preset (so the
+   tester can never fall back to cached GUI inputs). Store presets under `experiments/<id>/preset.*`.
+
+3. **Unified candidate orchestrator — `tools/run_candidate.ps1 -EA <name> -Preset <file>`.**
+   Reads `env.json` + preset → compiles the EA (see #5) → runs the Strategy Tester headless
+   (`terminal64 /config:<ini>`, real ticks / Model 4, ShutdownTerminal=1) for EACH declared window →
+   collects the MT5 native report AND the `OnTester` trade CSV per window → calls `pipeline.py` →
+   prints the verdict and writes `experiments/<id>/report.md`. Goal: **one command per candidate.**
+
+4. **Full MT5 report capture.** Add `Report=<path>` (+ report format) to the tester `.ini` so MT5's
+   own full statistics (recovery factor, Sharpe, relative drawdown, longest streaks, avg trade
+   duration, etc.) are saved for the human — complementing the CSV-based `pipeline.py`. Parse the key
+   fields into the report; keep the raw report file too.
+
+5. **Compile-log parsing.** Capture MetaEditor's compile log (`/log`); surface errors/warnings
+   explicitly. Auto-fix ONLY unambiguous issues, then recompile; otherwise STOP and show the error
+   (never silently proceed on a failed compile).
+
+6. **Walk-forward + windows as REAL MT5 runs.** The orchestrator loops the declared windows
+   (IS, OOS, current-regime last-~11-months, and N rolling walk-forward folds) as separate Strategy
+   Tester runs — NOT Python-simulated — and aggregates the per-window verdicts. Every run + its
+   preset-hash + result is appended to `SPEC/dof_ledger.py` for full reproducibility.
+
+Deliverable of this phase: run ONE command and get, for a chosen EA, a full multi-window MT5 report +
+deterministic verdict, with all inputs pinned and everything logged — reproducibly, with minimal
+manual steps. Only AFTER this infrastructure is proven do you touch strategy logic.
