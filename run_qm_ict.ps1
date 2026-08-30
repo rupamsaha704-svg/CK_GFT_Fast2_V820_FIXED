@@ -21,23 +21,39 @@ Start-Process -FilePath $me -ArgumentList ('/compile:"{0}"' -f $mq); for($i=0;$i
 if(-not (Test-Path $ex5)){Write-Host "  compile FAILED - open CK_QM_ICT_EA.mq5 in MetaEditor (F7) to see errors";exit}; Write-Host "  compiled OK"
 if($py -and -not (Test-Path (Join-Path $research "metrics.py"))){ Invoke-WebRequest "$base/v1_lab/metrics.py" -OutFile (Join-Path $research "metrics.py") }
 
-Write-Host "[2/4] backtest OOS 2024-07..2026-08, XAUUSD M15, real ticks, ALL inputs pinned..."
-$ini=Join-Path $research "qmict.ini"
-$cfg="[Tester]`nExpert=CK_QM_ICT_EA.ex5`nSymbol=XAUUSD`nPeriod=M15`nModel=4`nExecutionMode=0`nFromDate=2024.07.01`nToDate=2026.08.01`nForwardMode=0`nDeposit=5000`nCurrency=USD`nLeverage=10`nOptimization=0`nShutdownTerminal=1`nVisual=0`n[TesterInputs]`nInpMagic=20260730`nInpFixedLot=0.09`nInpMaxLot=0.09`nInpPivot=2`nInpDispATR=0.6`nInpAtrPeriod=14`nInpUseEmaBias=true`nInpEmaPeriod=200`nInpSLBufferATR=0.5`nInpMinRR=1.0`nInpErlLookback=5`nInpMaxTradesPerDay=2`nInpLookbackBars=500`nInpSetupExpiryBars=40`nInpUseSession=false`nInpSessStartHour=13`nInpSessEndHour=22`nInpMaxSpreadPrice=0.60`n"
-Set-Content -Encoding ascii $ini $cfg
-if(Test-Path $csv){Remove-Item $csv -Force}
-Get-Process terminal64 -ErrorAction SilentlyContinue|Stop-Process -Force; Start-Sleep 2
-$p=Start-Process $term -ArgumentList ('/config:"{0}"' -f $ini) -PassThru
-$p|Wait-Process -Timeout 1500 -ErrorAction SilentlyContinue
-if(-not $p.HasExited){$p|Stop-Process -Force -ErrorAction SilentlyContinue}; Start-Sleep 2
+function RunBT($from,$to,$saveAs){
+  $ini=Join-Path $research "qmict.ini"
+  $cfg="[Tester]`nExpert=CK_QM_ICT_EA.ex5`nSymbol=XAUUSD`nPeriod=M15`nModel=4`nExecutionMode=0`nFromDate=$from`nToDate=$to`nForwardMode=0`nDeposit=5000`nCurrency=USD`nLeverage=10`nOptimization=0`nShutdownTerminal=1`nVisual=0`n[TesterInputs]`nInpMagic=20260730`nInpFixedLot=0.09`nInpMaxLot=0.09`nInpPivot=2`nInpDispATR=0.6`nInpAtrPeriod=14`nInpUseEmaBias=true`nInpEmaPeriod=200`nInpSLBufferATR=0.5`nInpMinRR=1.0`nInpErlLookback=5`nInpMaxTradesPerDay=2`nInpLookbackBars=500`nInpSetupExpiryBars=40`nInpUseSession=false`nInpSessStartHour=13`nInpSessEndHour=22`nInpMaxSpreadPrice=0.60`n"
+  Set-Content -Encoding ascii $ini $cfg
+  if(Test-Path $csv){Remove-Item $csv -Force}
+  Get-Process terminal64 -ErrorAction SilentlyContinue|Stop-Process -Force; Start-Sleep 2
+  $p=Start-Process $term -ArgumentList ('/config:"{0}"' -f $ini) -PassThru
+  $p|Wait-Process -Timeout 1500 -ErrorAction SilentlyContinue
+  if(-not $p.HasExited){$p|Stop-Process -Force -ErrorAction SilentlyContinue}; Start-Sleep 2
+  if(Test-Path $csv){ Copy-Item $csv $saveAs -Force }
+}
+function Report($saveAs){
+  if(Test-Path $saveAs){
+    if($py){ Push-Location $research; & $py "metrics.py" "$saveAs" 5000; Pop-Location }
+    else { $rows=@(Get-Content $saveAs|Where-Object{$_ -and ($_ -notmatch '^time,')}); $n=$rows.Count; $net=0.0; foreach($r in $rows){$net+=[double]($r.Split(",")[1])}; Write-Host ("trades {0}  net {1:N2}" -f $n,$net) }
+  } else { Write-Host "NO CSV - 0 trades in this window." }
+}
 
-Write-Host "[3/4] summary..."
-Write-Host "=====QM_ICT_BT_START====="
-if(Test-Path $csv){
-  if($py){ Push-Location $research; & $py "metrics.py" "$csv" 5000; Pop-Location }
-  else { $rows=@(Get-Content $csv|Where-Object{$_ -and ($_ -notmatch '^time,')}); $n=$rows.Count; $net=0.0; foreach($r in $rows){$net+=[double]($r.Split(",")[1])}; Write-Host ("trades {0}  net {1:N2}" -f $n,$net) }
-} else { Write-Host "NO CSV - 0 trades produced (or compile/session issue). If 0 trades, try InpUseSession=false to check the session window is not blocking everything." }
-Write-Host "=====QM_ICT_BT_END====="
-Write-Host "[4/4] NOTE: this is a faithfulness/sanity check vs the Python engine (~50 EMA-bias trades over this window)."
-Write-Host "If the count is wildly different, tell me and we refine. Session hours are SERVER time - adjust InpSessStartHour/EndHour to your broker's New-York window, or set InpUseSession=false to compare."
-Write-Host "^ Copy the block back to me."
+# PRIMARY = current regime (last ~11 months, since the market shifted ~Oct 2025). 4yr = context only.
+Write-Host "[2/4] backtest CURRENT REGIME 2025.10.01..2026.08.29 (PRIMARY value judge)..."
+RunBT "2025.10.01" "2026.08.29" (Join-Path $research "qm_regime.csv")
+Write-Host "[3/4] backtest 4-YEAR 2022.06.01..2026.08.29 (CONTEXT only, not the value judge)..."
+RunBT "2022.06.01" "2026.08.29" (Join-Path $research "qm_4yr.csv")
+
+Write-Host ""
+Write-Host "=====QM_ICT_CURRENT_REGIME_START=====  (last ~11 months = PRIMARY; this is what decides VALUE)"
+Report (Join-Path $research "qm_regime.csv")
+Write-Host "=====QM_ICT_CURRENT_REGIME_END====="
+Write-Host ""
+Write-Host "=====QM_ICT_4YR_CONTEXT_START=====  (4 years = context ONLY; older regime, not the judge)"
+Report (Join-Path $research "qm_4yr.csv")
+Write-Host "=====QM_ICT_4YR_CONTEXT_END====="
+Write-Host ""
+Write-Host "[4/4] RULE (your regime principle, now in code): VALUE is judged by the CURRENT-REGIME (11-month) block."
+Write-Host "The market algorithm of the last ~11 months differs from older years and holds to ~2030; 4yr is context."
+Write-Host "^ Copy BOTH blocks back to me."
