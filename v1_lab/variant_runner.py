@@ -158,6 +158,18 @@ def build_grid():
     grid.append(("creator_confirmed", d._replace(smt_pair="xag", entry_mode="rejection"),
                  "creator's FULL confirmed config: SMT=XAGUSD + rejection entry (2-switch hypothesis)"))
 
+    # Improvement cycle (ledger pre-reg): ideas sourced from the user's OWN session-export knowledge.
+    # (A) HTF EMA200 trend-bias filter (from XAU_Smart_EA); (B) break-even lock at +1R and +0.5R
+    # (risk-mgmt to cut drawdown); plus a combined 'quality' variant. Each is a researcher DoF.
+    grid.append(("ema_bias", d._replace(htf_ema_bias=True),
+                 "HTF EMA200 M15 trend-bias filter (trade only with the trend) [from user's EA]"))
+    grid.append(("be_lock_1r", d._replace(be_lock_r=1.0),
+                 "break-even lock at +1R (move stop to entry) [risk-mgmt, cut drawdown]"))
+    grid.append(("be_lock_0p5r", d._replace(be_lock_r=0.5),
+                 "break-even lock at +0.5R (earlier BE) [risk-mgmt]"))
+    grid.append(("quality_combo", d._replace(htf_ema_bias=True, be_lock_r=1.0),
+                 "combined: EMA200 trend bias + break-even lock at +1R (2-switch hypothesis)"))
+
     return grid
 
 
@@ -621,7 +633,7 @@ def selfcheck():
     ids = [g[0] for g in grid]
     assert len(ids) == len(set(ids)), "A: variant ids must be unique"
     assert ids[0] == "baseline", "A: first variant must be the documented baseline"
-    EXPECTED_N = 27
+    EXPECTED_N = 31
     assert len(grid) == EXPECTED_N, f"A: expected {EXPECTED_N} variants, got {len(grid)}"
     # every open switch must be exercised somewhere in the grid. This list is the runner's HONEST
     # switch-coverage claim: it must include EVERY open (non-locked) VariantConfig switch the grid is
@@ -635,7 +647,8 @@ def selfcheck():
                 switched_fields.add(fld)
     for must in ("poi_type", "ob_lookback", "sl_mode", "sl_buffer_atr", "tp_mode", "min_projected_rr",
                  "idm_clear_required", "idm_clear_mode", "pivot", "disp", "erl_lookback", "erl_tf",
-                 "session_scope", "max_trades_per_day", "reentry", "smt_pair", "entry_mode"):
+                 "session_scope", "max_trades_per_day", "reentry", "smt_pair", "entry_mode",
+                 "htf_ema_bias", "be_lock_r"):
         assert must in switched_fields, f"A: open switch '{must}' is not exercised by the grid"
 
     # (A2) EQUIVALENCE annotation: tp_partial (partial_be_trail) is modeled as the fixed_rr level, so

@@ -104,6 +104,7 @@ _CONFIG_FIELDS = [
     "min_projected_rr", "idm_clear_required", "idm_clear_mode", "pivot", "disp", "erl_lookback",
     "erl_tf", "session_scope", "max_trades_per_day", "reentry", "corr_window", "corr_min",
     "data_tz", "spread", "commission", "risk_per_trade", "max_hold_bars_m5", "entry_mode",
+    "htf_ema_bias", "ema_period", "be_lock_r",
 ]
 VariantConfig = namedtuple("VariantConfig", _CONFIG_FIELDS)
 
@@ -141,6 +142,15 @@ DEFAULT_CONFIG = VariantConfig(
     #                              (bear: rejection HIGH + buffer, bull: rejection LOW - buffer). This
     #                              is a tighter, structure-based stop; TP still follows tp_mode.
     entry_mode="confirm_close",
+    # htf_ema_bias: if True, only take a setup when it ALIGNS with an EMA(ema_period) trend filter
+    #   on M15 (bear only when the entry-bar close is BELOW the EMA; bull only when ABOVE). Sourced
+    #   from the user's own XAU_Smart_EA export (EMA200 bias). Default OFF (unconfirmed => a switch).
+    htf_ema_bias=False,
+    ema_period=200,
+    # be_lock_r: break-even lock. If > 0, once price has moved be_lock_r * risk in favour, the stop
+    #   is moved to the entry price (a no-loss stop) for the remainder of the trade. Risk-management
+    #   rule aimed at cutting drawdown. Default 0.0 = OFF (an unconfirmed rule => a tunable switch).
+    be_lock_r=0.0,
 )
 
 SL_MODES = ("head_smt_high_buffer", "tight_poi")
@@ -260,23 +270,37 @@ def simulate_trade(m5_bars, start_idx, direction, entry, sl, tp, cfg):
     exit_kind = "timeout"
     exit_idx = end
     exit_price = m5_bars[end][5]
+    # break-even lock (variant be_lock_r): once price has moved be_lock_r*risk in favour, the stop
+    # is trailed to entry (a no-loss stop) for the rest of the trade. eff_sl is the ACTIVE stop.
+    # Conservative ordering: exits are evaluated against the CURRENT eff_sl first; only AFTER a bar
+    # fails to exit is break-even armed (using that bar's favourable extreme) for SUBSEQUENT bars —
+    # so no same-bar look-ahead grants a break-even that then dodges an adverse hit.
+    be_r = (getattr(cfg, "be_lock_r", 0.0) or 0.0)
+    eff_sl = sl
+    be_active = False
     for t in range(start_idx, end + 1):
         _, _, o, h, l, c, _ = m5_bars[t]
         if direction == "bear":
-            hit_sl = h >= sl
+            hit_sl = h >= eff_sl
             hit_tp = l <= tp
         else:
-            hit_sl = l <= sl
+            hit_sl = l <= eff_sl
             hit_tp = h >= tp
+        stop_label = "be" if be_active else "sl"
         if hit_sl and hit_tp:
-            exit_kind, exit_idx, exit_price = "sl", t, sl   # conservative: adverse first
+            exit_kind, exit_idx, exit_price = stop_label, t, eff_sl   # conservative: adverse first
             break
         if hit_sl:
-            exit_kind, exit_idx, exit_price = "sl", t, sl
+            exit_kind, exit_idx, exit_price = stop_label, t, eff_sl
             break
         if hit_tp:
             exit_kind, exit_idx, exit_price = "tp", t, tp
             break
+        if be_r > 0 and not be_active:
+            fav = (entry - l) if direction == "bear" else (h - entry)
+            if fav >= be_r * risk:
+                be_active = True
+                eff_sl = entry   # move stop to break-even for the remaining bars
     # realized R in price terms, converted to money via risk_per_trade sizing
     if direction == "bear":
         price_move = entry - exit_price      # profit when price falls
@@ -342,6 +366,23 @@ def _place_sl_tp(direction, poi, entry, head_price, external_target, atr_at_entr
         reward = tp - entry
     projected_rr = reward / risk if risk > 0 else 0.0
     return sl, tp, projected_rr
+
+
+def _ema(values, period):
+    """Causal EMA of a value series. ema[t] uses only values[0..t]. Seeded with the simple average
+    of the first `period` values; entries before the seed are None. Deterministic."""
+    n = len(values)
+    out = [None] * n
+    if period <= 0 or n < period:
+        return out
+    k = 2.0 / (period + 1.0)
+    seed = sum(values[:period]) / period
+    out[period - 1] = seed
+    prev = seed
+    for t in range(period, n):
+        prev = values[t] * k + prev * (1.0 - k)
+        out[t] = prev
+    return out
 
 
 def _tp_for_entry(direction, entry, sl, external_target, cfg):
@@ -414,6 +455,7 @@ def run(m15_bars_or_path, cfg, m5_bars=None, m5_path=None, pair_bars=None, pair_
     erl_by_m15 = _map_higher_tf_levels(m15_bars, erl_src, erl_lv)
 
     atr15 = atr_wilder(m15_bars, period=14)
+    ema15 = _ema([b[5] for b in m15_bars], cfg.ema_period) if cfg.htf_ema_bias else None
     highs, lows = detect_swings(m15_bars, pivot=cfg.pivot)
     mss_events, _, _ = detect_mss(m15_bars, pivot=cfg.pivot, disp=cfg.disp)
     pois, _, _ = detect_poi(m15_bars, pivot=cfg.pivot, poi_type=cfg.poi_type,
@@ -491,6 +533,20 @@ def run(m15_bars_or_path, cfg, m5_bars=None, m5_path=None, pair_bars=None, pair_
 
         # POI return already located above; count it now that clearing (state 5) has passed.
         per_state["WAIT_POI_RETURN"] += 1
+
+        # --- HTF EMA trend-bias filter (variant htf_ema_bias) ---
+        # Only take a setup that ALIGNS with the EMA(ema_period) trend on M15: a bearish setup
+        # requires the POI-return bar's close BELOW the EMA (down-trend), a bullish setup ABOVE it.
+        # Causal: ema15[return_idx] uses only closes up to that bar. From the user's XAU_Smart_EA.
+        if cfg.htf_ema_bias and ema15 is not None:
+            e = ema15[return_idx] if return_idx < len(ema15) else None
+            if e is None:
+                continue
+            px = m15_bars[return_idx][5]
+            if direction == "bear" and not (px < e):
+                continue
+            if direction == "bull" and not (px > e):
+                continue
 
         # --- STATE 7: WAIT_M5_CONFIRM (a lower-TF confirmation on the execution TF) ---
         return_dt = m15_bars[return_idx][1]
@@ -1106,6 +1162,31 @@ def selfcheck():
     assert [key(x) for x in tr_rej] == [key(x) for x in tr_rej2], \
         "G: rejection-mode engine must be deterministic"
 
+    # (H) BREAK-EVEN LOCK is wired and conservative. A synthetic M5 path moves +1R in favour then
+    # reverses back through the entry: with be_lock_r=0 the trade rides to a loss (timeout below
+    # entry), but with be_lock_r=1.0 the stop is at break-even so the exit is ~0 (net improves).
+    be_m5 = [
+        _b(0, datetime.datetime(2025, 8, 4, 10, 0), 100.0, 100.2, 97.8, 98.0),   # +1R favourable
+        _b(1, datetime.datetime(2025, 8, 4, 10, 5), 98.0, 101.0, 97.5, 100.5),   # reverses through entry
+        _b(2, datetime.datetime(2025, 8, 4, 10, 10), 100.5, 101.5, 100.0, 101.0),
+    ]
+    s0 = simulate_trade(be_m5, 0, "bear", 100.0, 102.0, 94.0, make_config(be_lock_r=0.0))
+    s1 = simulate_trade(be_m5, 0, "bear", 100.0, 102.0, 94.0, make_config(be_lock_r=1.0))
+    assert s1["exit_kind"] == "be", "H: be_lock must exit at break-even once +R is reached then reversed"
+    assert s1["net"] > s0["net"], "H: be_lock must improve the outcome on a favourable-then-reverse path"
+    assert abs(s1["net"]) < 1e-6, "H: a break-even exit nets ~0 (minus pre-declared costs)"
+
+    # (I) HTF EMA TREND-BIAS filter is wired (not inert). On the happy path the short setup sits
+    # ABOVE a short EMA (a local up-move into the POI), so requiring bear-below-EMA REJECTS it:
+    # baseline yields 1 trade, htf_ema_bias=True yields 0. A filter can only remove, never add.
+    cfg_ema = make_config(session_scope="ny_london_asia", min_projected_rr=0.0, erl_tf="input",
+                          htf_ema_bias=True, ema_period=5)
+    _, st_ema = run(m15, cfg_ema, m5_bars=m5)
+    assert st_ema["trades"] <= stats["trades"], "I: a trend-bias FILTER can only remove trades, never add"
+    assert st_ema["trades"] == 0, "I: on this happy path the EMA bias must reject the counter-EMA short (wired)"
+    _, st_ema2 = run(m15, cfg_ema, m5_bars=m5)
+    assert st_ema["trades"] == st_ema2["trades"], "I: EMA-bias filtering must be deterministic"
+
     print("selfcheck: PASS")
     print("  case A: full happy path => exactly one bearish trade; SL above / TP below entry; every state hit once")
     print("  case B: IDM never cleared + idm_clear_required=True => NO trade")
@@ -1114,6 +1195,8 @@ def selfcheck():
     print("  case E: re-running the happy path yields byte-identical trades (deterministic)")
     print("  case F: reentry switch admits an extra SAME-DAY entry after a stop-out whose exit is already known (wired, causal, not inert)")
     print("  case G: entry_mode='rejection' (creator's rule) => causal fill on the break of the rejection low; stop=rejection high; deterministic")
+    print("  case H: break-even lock (be_lock_r) moves stop to entry after +R => cuts the loss on a favourable-then-reverse path (wired, conservative)")
+    print("  case I: HTF EMA trend-bias filter rejects a counter-EMA setup (wired, filter-only, deterministic)")
     return True
 
 
@@ -1169,6 +1252,11 @@ def parse_args(argv):
     p.add_argument("--risk-per-trade", type=float, default=DEFAULT_CONFIG.risk_per_trade)
     p.add_argument("--max-hold-bars-m5", type=int, default=DEFAULT_CONFIG.max_hold_bars_m5)
     p.add_argument("--entry-mode", default=DEFAULT_CONFIG.entry_mode, choices=ENTRY_MODES)
+    p.add_argument("--htf-ema-bias", dest="htf_ema_bias", action="store_true",
+                   default=DEFAULT_CONFIG.htf_ema_bias, help="require EMA(ema_period) M15 trend alignment")
+    p.add_argument("--ema-period", type=int, default=DEFAULT_CONFIG.ema_period)
+    p.add_argument("--be-lock-r", type=float, default=DEFAULT_CONFIG.be_lock_r,
+                   help="move stop to break-even after price moves this many R in favour (0=off)")
     return p.parse_args(argv)
 
 
@@ -1185,6 +1273,7 @@ def config_from_args(args):
         corr_window=args.corr_window, corr_min=args.corr_min, data_tz=args.data_tz,
         spread=args.spread, commission=args.commission, risk_per_trade=args.risk_per_trade,
         max_hold_bars_m5=args.max_hold_bars_m5, entry_mode=args.entry_mode,
+        htf_ema_bias=args.htf_ema_bias, ema_period=args.ema_period, be_lock_r=args.be_lock_r,
     )
 
 
