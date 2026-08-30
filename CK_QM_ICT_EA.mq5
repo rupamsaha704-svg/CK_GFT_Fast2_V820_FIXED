@@ -198,6 +198,10 @@ void TryArmSetup(const double &o[], const double &h[], const double &l[], const 
          // LEFT SHOULDER / POI = the swing high BEFORE the neck low (the QM return zone)
          int lsIdx = LastSwingHigh(h, slIdx, InpPivot, n);
          if(headIdx < 0 || lsIdx < 0) continue;
+         // ERL/RAID gate (QM essence): the head must be a HIGHER HIGH than the left shoulder, i.e.
+         // it raids the left-shoulder buy-side liquidity before reversing. Without this the setup is
+         // not a true Quasimodo and the engine would reject it. (This was the missing precondition.)
+         if(headHi <= h[lsIdx]) continue;
 
          // POI zone around the left shoulder: [ls swing low-ish .. ls high]. Use the LS candle range.
          g_poiHigh = h[lsIdx];
@@ -226,6 +230,8 @@ void TryArmSetup(const double &o[], const double &h[], const double &l[], const 
             if(IsSwingLow(l, j, InpPivot, n) && l[j] < headLo) { headLo = l[j]; headIdx = j; }
          int lsIdx = LastSwingLow(l, shIdx, InpPivot, n);
          if(headIdx < 0 || lsIdx < 0) continue;
+         // RAID gate (mirror): head must be a LOWER LOW than the left shoulder (raids sell-side liq).
+         if(headLo >= l[lsIdx]) continue;
          g_poiLow  = l[lsIdx];
          g_poiHigh = MathMax(o[lsIdx], c[lsIdx]);
          g_headPrice = headLo;
