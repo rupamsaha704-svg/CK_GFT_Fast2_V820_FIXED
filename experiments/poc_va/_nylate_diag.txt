@@ -1,0 +1,32 @@
+== NY_late (17-24) filtered from existing MT5 CSVs ==
+OOS
+  trades 60  net 5003  PF 2.08  exp/trade 83.39  win 36.7%
+  cost 1.0x$5 : net 4703  PF 1.98
+  cost 1.5x$5 : net 4553  PF 1.93
+  cost 2.0x$5 : net 4403  PF 1.88
+cr_h1
+  trades 41  net 5554  PF 3.23  exp/trade 135.46  win 39.0%
+  cost 1.0x$5 : net 5349  PF 3.04
+  cost 1.5x$5 : net 5246  PF 2.96
+  cost 2.0x$5 : net 5144  PF 2.88
+cr_h2
+  trades 37  net 3127  PF 2.02  exp/trade 84.51  win 35.1%
+  cost 1.0x$5 : net 2942  PF 1.92
+  cost 1.5x$5 : net 2849  PF 1.88
+  cost 2.0x$5 : net 2757  PF 1.83
+== US session 13-24 ==
+OOS
+  trades 145  net 6591  PF 1.59  exp/trade 45.46  win 33.1%
+  cost 1.0x$5 : net 5866  PF 1.51
+  cost 1.5x$5 : net 5504  PF 1.47
+  cost 2.0x$5 : net 5141  PF 1.43
+cr_h1
+  trades 91  net 4752  PF 1.74  exp/trade 52.22  win 33.0%
+  cost 1.0x$5 : net 4297  PF 1.64
+  cost 1.5x$5 : net 4070  PF 1.59
+  cost 2.0x$5 : net 3842  PF 1.55
+cr_h2
+  trades 88  net 5330  PF 1.79  exp/trade 60.57  win 33.0%
+  cost 1.0x$5 : net 4890  PF 1.69
+  cost 1.5x$5 : net 4670  PF 1.65
+  cost 2.0x$5 : net 4450  PF 1.61

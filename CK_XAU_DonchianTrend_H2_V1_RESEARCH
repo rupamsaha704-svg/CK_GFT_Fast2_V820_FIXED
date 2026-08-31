@@ -1,0 +1,1594 @@
+//+------------------------------------------------------------------+
+//|              CK_XAU_DonchianTrend_H2_V1_RESEARCH.mq5             |
+//| Independent XAUUSD trend-following research candidate             |
+//|                                                                  |
+//| Strategy:                                                        |
+//| - H2 completed-bar Donchian breakout                              |
+//| - EMA 10/30 trend regime                                          |
+//| - 3-bar fast EMA slope confirmation                               |
+//| - ATR(14) 1.5x initial stop                                       |
+//| - ATR(14) 5.0x trailing stop                                      |
+//| - No take-profit                                                  |
+//| - Next-bar market entry                                           |
+//| - Risk sizing rounded DOWN                                        |
+//| - Hard maximum 0.06 lot                                           |
+//|                                                                  |
+//| Compile and test with MT5 Every Tick Based On Real Ticks.         |
+//| Historical performance does not guarantee future profit.          |
+//+------------------------------------------------------------------+
+#property copyright "CK independent research build"
+#property version   "1.00"
+#property strict
+
+#include <Trade/Trade.mqh>
+CTrade trade;
+
+//====================================================================
+// ACCOUNT / FIRM GUARDS
+//====================================================================
+input long   InpMagic                    = 2026072801;
+input double InpInitialAccountBalance    = 5000.0;
+input double InpFirmDailyDDPct           = 5.0;
+input double InpFirmStaticMaxLossPct     = 10.0;
+input double InpSafetyBufferPctPoints    = 0.20;
+
+input bool   InpStopAtProfitTarget       = false;
+input double InpProfitTargetUSD          = 5000.0;
+
+input bool   InpBlockAnyAccountExposure  = true;
+input int    InpMaxTradesPerDay          = 0;
+
+//====================================================================
+// STRATEGY PARAMETERS
+//====================================================================
+input ENUM_TIMEFRAMES InpTimeframe       = PERIOD_H2;
+input bool   InpEnforceTimeframe         = true;
+
+input int    InpDonchianLookback         = 40;
+input int    InpEMAFast                  = 10;
+input int    InpEMASlow                  = 30;
+input int    InpFastEMASlopeBars         = 3;
+
+input int    InpATRPeriod                = 14;
+input double InpInitialStopATR           = 1.50;
+input double InpTrailingStopATR          = 5.00;
+
+input double InpRiskPercent              = 2.25;
+input double InpMaxLot                   = 0.06;
+
+input bool   InpAllowLong                = true;
+input bool   InpAllowShort               = true;
+
+//====================================================================
+// EXECUTION / SAFETY
+//====================================================================
+input double InpEstimatedCommissionSidePerLot = 3.50;
+input int    InpMaxSpreadPoints          = 0;
+input int    InpDeviationPoints          = 30;
+input double InpMaxMarginUsePct          = 30.0;
+input bool   InpCloseEAOnGuardBreach     = true;
+
+//====================================================================
+// GLOBAL STATE
+//====================================================================
+int      g_atrHandle       = INVALID_HANDLE;
+int      g_fastHandle      = INVALID_HANDLE;
+int      g_slowHandle      = INVALID_HANDLE;
+
+datetime g_lastBarTime     = 0;
+
+int      g_dayKey          = 0;
+double   g_dayStartBalance = 0.0;
+double   g_dayAnchorEquity = 0.0;
+int      g_tradesToday     = 0;
+
+bool     g_dayLocked       = false;
+bool     g_targetLocked    = false;
+
+double   g_extreme         = 0.0;
+ulong    g_extremePosition = 0;
+
+//====================================================================
+// PRICE / VOLUME HELPERS
+//====================================================================
+double TickSize()
+{
+   double tick = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
+
+   if(tick <= 0.0)
+      tick = _Point;
+
+   return tick;
+}
+
+double NormalizePriceDown(const double price)
+{
+   double tick = TickSize();
+   int digits = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
+
+   double result = MathFloor((price + 1e-12) / tick) * tick;
+
+   return NormalizeDouble(result, digits);
+}
+
+double NormalizePriceUp(const double price)
+{
+   double tick = TickSize();
+   int digits = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
+
+   double result = MathCeil((price - 1e-12) / tick) * tick;
+
+   return NormalizeDouble(result, digits);
+}
+
+double NormalizeVolumeDown(const double requested)
+{
+   double minLot = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN);
+   double maxBroker = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MAX);
+   double step = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_STEP);
+
+   if(step <= 0.0)
+      step = 0.01;
+
+   double hardMax = MathMin(InpMaxLot, maxBroker);
+
+   double volume =
+      MathFloor((MathMin(requested, hardMax) + 1e-12) / step) * step;
+
+   // Never increase the intended risk by forcing minimum volume.
+   if(volume < minLot - 1e-12)
+      return 0.0;
+
+   int volumeDigits = 2;
+
+   if(step < 0.01)
+      volumeDigits = 3;
+
+   if(step < 0.001)
+      volumeDigits = 4;
+
+   return NormalizeDouble(volume, volumeDigits);
+}
+
+bool SpreadAllowed()
+{
+   if(InpMaxSpreadPoints <= 0)
+      return true;
+
+   MqlTick tick;
+
+   if(!SymbolInfoTick(_Symbol, tick))
+      return false;
+
+   double spreadPoints = (tick.ask - tick.bid) / _Point;
+
+   return spreadPoints <= InpMaxSpreadPoints;
+}
+
+bool StopsDistanceValid(
+   const int direction,
+   const double entry,
+   const double stopLoss
+)
+{
+   int stops =
+      (int)SymbolInfoInteger(_Symbol, SYMBOL_TRADE_STOPS_LEVEL);
+
+   int freeze =
+      (int)SymbolInfoInteger(_Symbol, SYMBOL_TRADE_FREEZE_LEVEL);
+
+   double minimum =
+      (MathMax(stops, freeze) + 2) * _Point;
+
+   if(direction > 0)
+      return stopLoss < entry - minimum;
+
+   return stopLoss > entry + minimum;
+}
+
+bool MarginAllowed(
+   const int direction,
+   const double lots,
+   const double entry
+)
+{
+   double margin = 0.0;
+
+   ENUM_ORDER_TYPE type =
+      direction > 0 ? ORDER_TYPE_BUY : ORDER_TYPE_SELL;
+
+   if(!OrderCalcMargin(type, _Symbol, lots, entry, margin))
+      return false;
+
+   double equity = AccountInfoDouble(ACCOUNT_EQUITY);
+
+   if(equity <= 0.0)
+      return false;
+
+   double marginUsePct = 100.0 * margin / equity;
+
+   return marginUsePct <= InpMaxMarginUsePct;
+}
+
+//====================================================================
+// NEW YORK 5 PM TRADING-DAY HELPERS
+//====================================================================
+int FirstSunday(
+   const int year,
+   const int month
+)
+{
+   MqlDateTime date;
+   ZeroMemory(date);
+
+   date.year = year;
+   date.mon = month;
+   date.day = 1;
+
+   datetime time = StructToTime(date);
+
+   TimeToStruct(time, date);
+
+   return 1 + ((7 - date.day_of_week) % 7);
+}
+
+bool IsUSDST(const datetime utcTime)
+{
+   MqlDateTime current;
+   TimeToStruct(utcTime, current);
+
+   int secondSundayMarch =
+      FirstSunday(current.year, 3) + 7;
+
+   int firstSundayNovember =
+      FirstSunday(current.year, 11);
+
+   MqlDateTime startDate;
+   MqlDateTime endDate;
+
+   ZeroMemory(startDate);
+   ZeroMemory(endDate);
+
+   startDate.year = current.year;
+   startDate.mon = 3;
+   startDate.day = secondSundayMarch;
+   startDate.hour = 7;
+
+   endDate.year = current.year;
+   endDate.mon = 11;
+   endDate.day = firstSundayNovember;
+   endDate.hour = 6;
+
+   datetime startUTC = StructToTime(startDate);
+   datetime endUTC = StructToTime(endDate);
+
+   return utcTime >= startUTC && utcTime < endUTC;
+}
+
+int EasternOffsetHours(const datetime utcTime)
+{
+   return IsUSDST(utcTime) ? -4 : -5;
+}
+
+datetime EasternPseudoTime(const datetime utcTime)
+{
+   return utcTime + EasternOffsetHours(utcTime) * 3600;
+}
+
+datetime EasternLocalToUTC(MqlDateTime localET)
+{
+   datetime localPseudo = StructToTime(localET);
+
+   datetime candidateEDT =
+      localPseudo + 4 * 3600;
+
+   if(EasternPseudoTime(candidateEDT) == localPseudo)
+      return candidateEDT;
+
+   return localPseudo + 5 * 3600;
+}
+
+datetime CurrentRolloverUTC()
+{
+   datetime nowUTC = TimeGMT();
+
+   datetime easternTime =
+      EasternPseudoTime(nowUTC);
+
+   MqlDateTime easternDate;
+
+   TimeToStruct(easternTime, easternDate);
+
+   if(easternDate.hour < 17)
+   {
+      easternTime -= 86400;
+      TimeToStruct(easternTime, easternDate);
+   }
+
+   easternDate.hour = 17;
+   easternDate.min = 0;
+   easternDate.sec = 0;
+
+   return EasternLocalToUTC(easternDate);
+}
+
+int CurrentTradingDayKey()
+{
+   datetime shifted =
+      EasternPseudoTime(TimeGMT()) - 17 * 3600;
+
+   MqlDateTime date;
+   TimeToStruct(shifted, date);
+
+   return
+      date.year * 10000 +
+      date.mon * 100 +
+      date.day;
+}
+
+int ServerOffsetSeconds()
+{
+   return (int)(TimeCurrent() - TimeGMT());
+}
+
+//====================================================================
+// PERSISTENCE / DAILY STATE
+//====================================================================
+string StatePrefix()
+{
+   return StringFormat(
+      "CKDTH2.%I64d.%I64d.%s.%d",
+      AccountInfoInteger(ACCOUNT_LOGIN),
+      InpMagic,
+      _Symbol,
+      g_dayKey
+   );
+}
+
+string ExtremePrefix()
+{
+   return StringFormat(
+      "CKDTH2X.%I64d.%I64d.%s",
+      AccountInfoInteger(ACCOUNT_LOGIN),
+      InpMagic,
+      _Symbol
+   );
+}
+
+double DealNetValue(const ulong ticket)
+{
+   return
+      HistoryDealGetDouble(ticket, DEAL_PROFIT) +
+      HistoryDealGetDouble(ticket, DEAL_SWAP) +
+      HistoryDealGetDouble(ticket, DEAL_COMMISSION) +
+      HistoryDealGetDouble(ticket, DEAL_FEE);
+}
+
+void SaveDayState()
+{
+   string prefix = StatePrefix();
+
+   GlobalVariableSet(prefix + ".B", g_dayStartBalance);
+   GlobalVariableSet(prefix + ".E", g_dayAnchorEquity);
+   GlobalVariableSet(prefix + ".T", (double)g_tradesToday);
+   GlobalVariableSet(
+      prefix + ".L",
+      g_dayLocked ? 1.0 : 0.0
+   );
+}
+
+void SaveExtreme()
+{
+   string prefix = ExtremePrefix();
+
+   GlobalVariableSet(prefix + ".X", g_extreme);
+   GlobalVariableSet(
+      prefix + ".P",
+      (double)g_extremePosition
+   );
+}
+
+void ClearExtreme()
+{
+   g_extreme = 0.0;
+   g_extremePosition = 0;
+
+   string prefix = ExtremePrefix();
+
+   if(GlobalVariableCheck(prefix + ".X"))
+      GlobalVariableDel(prefix + ".X");
+
+   if(GlobalVariableCheck(prefix + ".P"))
+      GlobalVariableDel(prefix + ".P");
+}
+
+void RebuildDailyState()
+{
+   datetime startServer =
+      CurrentRolloverUTC() + ServerOffsetSeconds();
+
+   datetime nowServer = TimeCurrent();
+
+   double realised = 0.0;
+   int entries = 0;
+
+   if(HistorySelect(startServer, nowServer))
+   {
+      int total = HistoryDealsTotal();
+
+      for(int index = 0; index < total; index++)
+      {
+         ulong deal = HistoryDealGetTicket(index);
+
+         if(deal == 0)
+            continue;
+
+         realised += DealNetValue(deal);
+
+         long magic =
+            HistoryDealGetInteger(deal, DEAL_MAGIC);
+
+         string symbol =
+            HistoryDealGetString(deal, DEAL_SYMBOL);
+
+         long entryType =
+            HistoryDealGetInteger(deal, DEAL_ENTRY);
+
+         if(
+            magic == InpMagic &&
+            symbol == _Symbol &&
+            (
+               entryType == DEAL_ENTRY_IN ||
+               entryType == DEAL_ENTRY_INOUT
+            )
+         )
+         {
+            entries++;
+         }
+      }
+   }
+
+   double balance =
+      AccountInfoDouble(ACCOUNT_BALANCE);
+
+   double equity =
+      AccountInfoDouble(ACCOUNT_EQUITY);
+
+   g_dayStartBalance = balance - realised;
+
+   if(g_dayStartBalance <= 0.0)
+      g_dayStartBalance = balance;
+
+   /*
+      Exact rollover equity may not be available after restart.
+      Using the highest known value keeps the protection stricter.
+   */
+   g_dayAnchorEquity =
+      MathMax(
+         g_dayStartBalance,
+         MathMax(balance, equity)
+      );
+
+   g_tradesToday = entries;
+   g_dayLocked = false;
+
+   SaveDayState();
+}
+
+void LoadOrRebuildDayState()
+{
+   g_dayKey = CurrentTradingDayKey();
+
+   string prefix = StatePrefix();
+
+   if(
+      GlobalVariableCheck(prefix + ".B") &&
+      GlobalVariableCheck(prefix + ".E") &&
+      GlobalVariableCheck(prefix + ".T") &&
+      GlobalVariableCheck(prefix + ".L")
+   )
+   {
+      g_dayStartBalance =
+         GlobalVariableGet(prefix + ".B");
+
+      g_dayAnchorEquity =
+         GlobalVariableGet(prefix + ".E");
+
+      g_tradesToday =
+         (int)GlobalVariableGet(prefix + ".T");
+
+      g_dayLocked =
+         GlobalVariableGet(prefix + ".L") > 0.5;
+   }
+   else
+   {
+      RebuildDailyState();
+   }
+}
+
+void ResetDayState()
+{
+   g_dayKey = CurrentTradingDayKey();
+
+   double balance =
+      AccountInfoDouble(ACCOUNT_BALANCE);
+
+   double equity =
+      AccountInfoDouble(ACCOUNT_EQUITY);
+
+   g_dayStartBalance = balance;
+   g_dayAnchorEquity = MathMax(balance, equity);
+   g_tradesToday = 0;
+   g_dayLocked = false;
+
+   SaveDayState();
+}
+
+double EffectiveDailyLossPct()
+{
+   return MathMax(
+      0.10,
+      InpFirmDailyDDPct -
+      InpSafetyBufferPctPoints
+   );
+}
+
+double EffectiveStaticLossPct()
+{
+   return MathMax(
+      0.10,
+      InpFirmStaticMaxLossPct -
+      InpSafetyBufferPctPoints
+   );
+}
+
+double DailyFloor()
+{
+   return
+      g_dayAnchorEquity *
+      (
+         1.0 -
+         EffectiveDailyLossPct() / 100.0
+      );
+}
+
+double StaticFloor()
+{
+   return
+      InpInitialAccountBalance *
+      (
+         1.0 -
+         EffectiveStaticLossPct() / 100.0
+      );
+}
+
+//====================================================================
+// POSITION / EXPOSURE HELPERS
+//====================================================================
+ulong FindMyPositionTicket()
+{
+   for(int index = PositionsTotal() - 1; index >= 0; index--)
+   {
+      ulong ticket = PositionGetTicket(index);
+
+      if(
+         ticket == 0 ||
+         !PositionSelectByTicket(ticket)
+      )
+      {
+         continue;
+      }
+
+      if(
+         PositionGetString(POSITION_SYMBOL) == _Symbol &&
+         PositionGetInteger(POSITION_MAGIC) == InpMagic
+      )
+      {
+         return ticket;
+      }
+   }
+
+   return 0;
+}
+
+bool HasMyPosition()
+{
+   return FindMyPositionTicket() > 0;
+}
+
+bool AnyAccountExposure()
+{
+   if(!InpBlockAnyAccountExposure)
+      return HasMyPosition();
+
+   return
+      PositionsTotal() > 0 ||
+      OrdersTotal() > 0;
+}
+
+bool CloseMyPosition()
+{
+   ulong ticket = FindMyPositionTicket();
+
+   if(ticket == 0)
+      return true;
+
+   if(!trade.PositionClose(ticket))
+   {
+      Print(
+         "Emergency close failed: ",
+         trade.ResultRetcode(),
+         " ",
+         trade.ResultRetcodeDescription()
+      );
+
+      return false;
+   }
+
+   long resultCode = trade.ResultRetcode();
+
+   bool success =
+      resultCode == TRADE_RETCODE_DONE ||
+      resultCode == TRADE_RETCODE_DONE_PARTIAL;
+
+   if(success)
+      ClearExtreme();
+
+   return success;
+}
+
+bool ProtectAccount()
+{
+   int currentKey = CurrentTradingDayKey();
+
+   if(currentKey != g_dayKey)
+      ResetDayState();
+
+   double balance =
+      AccountInfoDouble(ACCOUNT_BALANCE);
+
+   double equity =
+      AccountInfoDouble(ACCOUNT_EQUITY);
+
+   if(
+      InpStopAtProfitTarget &&
+      balance >=
+      InpInitialAccountBalance +
+      InpProfitTargetUSD
+   )
+   {
+      g_targetLocked = true;
+
+      if(InpCloseEAOnGuardBreach)
+         CloseMyPosition();
+
+      return false;
+   }
+
+   if(
+      equity <= DailyFloor() ||
+      equity <= StaticFloor()
+   )
+   {
+      g_dayLocked = true;
+      SaveDayState();
+
+      if(InpCloseEAOnGuardBreach)
+         CloseMyPosition();
+
+      Print(
+         "Risk guard locked trading. Equity=",
+         DoubleToString(equity, 2),
+         " dailyFloor=",
+         DoubleToString(DailyFloor(), 2),
+         " staticFloor=",
+         DoubleToString(StaticFloor(), 2)
+      );
+
+      return false;
+   }
+
+   if(g_dayLocked || g_targetLocked)
+      return false;
+
+   if(
+      InpMaxTradesPerDay > 0 &&
+      g_tradesToday >= InpMaxTradesPerDay
+   )
+   {
+      return false;
+   }
+
+   return true;
+}
+
+//====================================================================
+// INDICATOR / SIGNAL HELPERS
+//====================================================================
+double BufferValue(
+   const int handle,
+   const int shift
+)
+{
+   double values[];
+   ArraySetAsSeries(values, true);
+
+   if(CopyBuffer(handle, 0, shift, 1, values) != 1)
+      return EMPTY_VALUE;
+
+   return values[0];
+}
+
+double ATRValue(const int shift)
+{
+   return BufferValue(g_atrHandle, shift);
+}
+
+double FastEMA(const int shift)
+{
+   return BufferValue(g_fastHandle, shift);
+}
+
+double SlowEMA(const int shift)
+{
+   return BufferValue(g_slowHandle, shift);
+}
+
+bool IsNewBar()
+{
+   datetime current =
+      iTime(_Symbol, InpTimeframe, 0);
+
+   if(current <= 0)
+      return false;
+
+   if(current == g_lastBarTime)
+      return false;
+
+   g_lastBarTime = current;
+
+   return true;
+}
+
+int SignalDirection()
+{
+   int required =
+      MathMax(
+         InpEMASlow +
+         InpFastEMASlopeBars +
+         5,
+         InpDonchianLookback + 5
+      );
+
+   if(Bars(_Symbol, InpTimeframe) < required)
+      return 0;
+
+   /*
+      Bars 2...lookback+1 form the Donchian channel.
+      Bar 1 is the completed signal candle.
+      This prevents look-ahead.
+   */
+   int highestShift =
+      iHighest(
+         _Symbol,
+         InpTimeframe,
+         MODE_HIGH,
+         InpDonchianLookback,
+         2
+      );
+
+   int lowestShift =
+      iLowest(
+         _Symbol,
+         InpTimeframe,
+         MODE_LOW,
+         InpDonchianLookback,
+         2
+      );
+
+   if(highestShift < 0 || lowestShift < 0)
+      return 0;
+
+   double close1 =
+      iClose(_Symbol, InpTimeframe, 1);
+
+   double highest =
+      iHigh(_Symbol, InpTimeframe, highestShift);
+
+   double lowest =
+      iLow(_Symbol, InpTimeframe, lowestShift);
+
+   double fast1 = FastEMA(1);
+   double slow1 = SlowEMA(1);
+
+   double fastPast =
+      FastEMA(1 + InpFastEMASlopeBars);
+
+   if(
+      close1 == 0.0 ||
+      fast1 == EMPTY_VALUE ||
+      slow1 == EMPTY_VALUE ||
+      fastPast == EMPTY_VALUE
+   )
+   {
+      return 0;
+   }
+
+   bool buySignal =
+      InpAllowLong &&
+      close1 > highest &&
+      fast1 > slow1 &&
+      fast1 > fastPast;
+
+   bool sellSignal =
+      InpAllowShort &&
+      close1 < lowest &&
+      fast1 < slow1 &&
+      fast1 < fastPast;
+
+   if(buySignal && !sellSignal)
+      return 1;
+
+   if(sellSignal && !buySignal)
+      return -1;
+
+   return 0;
+}
+
+//====================================================================
+// RISK SIZING
+//====================================================================
+double RemainingRiskBudget()
+{
+   double equity =
+      AccountInfoDouble(ACCOUNT_EQUITY);
+
+   double floor =
+      MathMax(
+         DailyFloor(),
+         StaticFloor()
+      );
+
+   return MathMax(0.0, equity - floor);
+}
+
+double LotForRisk(
+   const int direction,
+   const double entry,
+   const double stopLoss
+)
+{
+   double balance =
+      AccountInfoDouble(ACCOUNT_BALANCE);
+
+   double requestedRisk =
+      balance * InpRiskPercent / 100.0;
+
+   double riskMoney =
+      MathMin(
+         requestedRisk,
+         RemainingRiskBudget()
+      );
+
+   if(riskMoney <= 0.0)
+      return 0.0;
+
+   double oneLotPnL = 0.0;
+
+   ENUM_ORDER_TYPE type =
+      direction > 0 ?
+      ORDER_TYPE_BUY :
+      ORDER_TYPE_SELL;
+
+   if(
+      !OrderCalcProfit(
+         type,
+         _Symbol,
+         1.0,
+         entry,
+         stopLoss,
+         oneLotPnL
+      )
+   )
+   {
+      return 0.0;
+   }
+
+   double lossPerLot =
+      MathAbs(oneLotPnL) +
+      2.0 *
+      MathMax(
+         0.0,
+         InpEstimatedCommissionSidePerLot
+      );
+
+   if(lossPerLot <= 0.0)
+      return 0.0;
+
+   double rawLots =
+      riskMoney / lossPerLot;
+
+   return NormalizeVolumeDown(rawLots);
+}
+
+//====================================================================
+// EXTREME / TRAILING MANAGEMENT
+//====================================================================
+void RebuildExtremeFromHistory(const ulong ticket)
+{
+   if(
+      ticket == 0 ||
+      !PositionSelectByTicket(ticket)
+   )
+   {
+      ClearExtreme();
+      return;
+   }
+
+   double openPrice =
+      PositionGetDouble(POSITION_PRICE_OPEN);
+
+   datetime openTime =
+      (datetime)PositionGetInteger(POSITION_TIME);
+
+   long positionType =
+      PositionGetInteger(POSITION_TYPE);
+
+   int openShift =
+      iBarShift(
+         _Symbol,
+         InpTimeframe,
+         openTime,
+         false
+      );
+
+   g_extreme = openPrice;
+
+   if(openShift > 0)
+   {
+      if(positionType == POSITION_TYPE_BUY)
+      {
+         int highestShift =
+            iHighest(
+               _Symbol,
+               InpTimeframe,
+               MODE_HIGH,
+               openShift,
+               1
+            );
+
+         if(highestShift >= 0)
+         {
+            g_extreme =
+               MathMax(
+                  g_extreme,
+                  iHigh(
+                     _Symbol,
+                     InpTimeframe,
+                     highestShift
+                  )
+               );
+         }
+      }
+      else if(positionType == POSITION_TYPE_SELL)
+      {
+         int lowestShift =
+            iLowest(
+               _Symbol,
+               InpTimeframe,
+               MODE_LOW,
+               openShift,
+               1
+            );
+
+         if(lowestShift >= 0)
+         {
+            g_extreme =
+               MathMin(
+                  g_extreme,
+                  iLow(
+                     _Symbol,
+                     InpTimeframe,
+                     lowestShift
+                  )
+               );
+         }
+      }
+   }
+
+   g_extremePosition = ticket;
+
+   SaveExtreme();
+}
+
+void LoadOrRebuildExtreme()
+{
+   ulong ticket = FindMyPositionTicket();
+
+   if(ticket == 0)
+   {
+      ClearExtreme();
+      return;
+   }
+
+   string prefix = ExtremePrefix();
+
+   if(
+      GlobalVariableCheck(prefix + ".X") &&
+      GlobalVariableCheck(prefix + ".P")
+   )
+   {
+      ulong savedTicket =
+         (ulong)GlobalVariableGet(prefix + ".P");
+
+      if(savedTicket == ticket)
+      {
+         g_extreme =
+            GlobalVariableGet(prefix + ".X");
+
+         g_extremePosition = ticket;
+
+         return;
+      }
+   }
+
+   RebuildExtremeFromHistory(ticket);
+}
+
+bool ModifyStop(
+   const ulong ticket,
+   const double newStopLoss
+)
+{
+   if(
+      !trade.PositionModify(
+         ticket,
+         newStopLoss,
+         0.0
+      )
+   )
+   {
+      Print(
+         "Trailing modify failed: ",
+         trade.ResultRetcode(),
+         " ",
+         trade.ResultRetcodeDescription()
+      );
+
+      return false;
+   }
+
+   long resultCode = trade.ResultRetcode();
+
+   return
+      resultCode == TRADE_RETCODE_DONE ||
+      resultCode == TRADE_RETCODE_NO_CHANGES;
+}
+
+void ManageTrailingOnCompletedBar()
+{
+   ulong ticket = FindMyPositionTicket();
+
+   if(
+      ticket == 0 ||
+      !PositionSelectByTicket(ticket)
+   )
+   {
+      ClearExtreme();
+      return;
+   }
+
+   if(
+      g_extremePosition != ticket ||
+      g_extreme <= 0.0
+   )
+   {
+      RebuildExtremeFromHistory(ticket);
+   }
+
+   double atr = ATRValue(1);
+
+   if(
+      atr == EMPTY_VALUE ||
+      atr <= 0.0
+   )
+   {
+      return;
+   }
+
+   long positionType =
+      PositionGetInteger(POSITION_TYPE);
+
+   double currentStopLoss =
+      PositionGetDouble(POSITION_SL);
+
+   double bid =
+      SymbolInfoDouble(_Symbol, SYMBOL_BID);
+
+   double ask =
+      SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+
+   int stops =
+      (int)SymbolInfoInteger(
+         _Symbol,
+         SYMBOL_TRADE_STOPS_LEVEL
+      );
+
+   int freeze =
+      (int)SymbolInfoInteger(
+         _Symbol,
+         SYMBOL_TRADE_FREEZE_LEVEL
+      );
+
+   double minimumDistance =
+      (MathMax(stops, freeze) + 2) * _Point;
+
+   double tickSize = TickSize();
+
+   if(positionType == POSITION_TYPE_BUY)
+   {
+      g_extreme =
+         MathMax(
+            g_extreme,
+            iHigh(_Symbol, InpTimeframe, 1)
+         );
+
+      double candidate =
+         NormalizePriceDown(
+            g_extreme -
+            InpTrailingStopATR * atr
+         );
+
+      if(
+         candidate >
+         currentStopLoss + tickSize * 0.5 &&
+         candidate < bid - minimumDistance
+      )
+      {
+         ModifyStop(ticket, candidate);
+      }
+   }
+   else if(positionType == POSITION_TYPE_SELL)
+   {
+      g_extreme =
+         MathMin(
+            g_extreme,
+            iLow(_Symbol, InpTimeframe, 1)
+         );
+
+      double candidate =
+         NormalizePriceUp(
+            g_extreme +
+            InpTrailingStopATR * atr
+         );
+
+      if(
+         (
+            currentStopLoss == 0.0 ||
+            candidate <
+            currentStopLoss - tickSize * 0.5
+         ) &&
+         candidate > ask + minimumDistance
+      )
+      {
+         ModifyStop(ticket, candidate);
+      }
+   }
+
+   SaveExtreme();
+}
+
+//====================================================================
+// ORDER ENTRY
+//====================================================================
+bool TradeRetcodeOK()
+{
+   long resultCode = trade.ResultRetcode();
+
+   return
+      resultCode == TRADE_RETCODE_DONE ||
+      resultCode == TRADE_RETCODE_DONE_PARTIAL ||
+      resultCode == TRADE_RETCODE_PLACED;
+}
+
+bool OpenSignalTrade(const int direction)
+{
+   if(
+      direction == 0 ||
+      !SpreadAllowed() ||
+      AnyAccountExposure()
+   )
+   {
+      return false;
+   }
+
+   MqlTick currentTick;
+
+   if(!SymbolInfoTick(_Symbol, currentTick))
+      return false;
+
+   double atr = ATRValue(1);
+
+   if(
+      atr == EMPTY_VALUE ||
+      atr <= 0.0
+   )
+   {
+      return false;
+   }
+
+   double entry =
+      direction > 0 ?
+      currentTick.ask :
+      currentTick.bid;
+
+   double rawStopLoss =
+      direction > 0 ?
+      entry - InpInitialStopATR * atr :
+      entry + InpInitialStopATR * atr;
+
+   double initialStopLoss =
+      direction > 0 ?
+      NormalizePriceDown(rawStopLoss) :
+      NormalizePriceUp(rawStopLoss);
+
+   if(
+      !StopsDistanceValid(
+         direction,
+         entry,
+         initialStopLoss
+      )
+   )
+   {
+      Print(
+         "Entry skipped: ATR stop violates broker stop/freeze distance."
+      );
+
+      return false;
+   }
+
+   double lots =
+      LotForRisk(
+         direction,
+         entry,
+         initialStopLoss
+      );
+
+   if(lots <= 0.0)
+   {
+      Print(
+         "Entry skipped: volume below broker minimum or risk budget exhausted."
+      );
+
+      return false;
+   }
+
+   if(
+      lots > InpMaxLot + 1e-9 ||
+      !MarginAllowed(direction, lots, entry)
+   )
+   {
+      Print(
+         "Entry skipped: maximum-lot or margin guard."
+      );
+
+      return false;
+   }
+
+   bool sent = false;
+
+   if(direction > 0)
+   {
+      sent =
+         trade.Buy(
+            lots,
+            _Symbol,
+            0.0,
+            initialStopLoss,
+            0.0,
+            "CK_DONCHIAN_H2_BUY"
+         );
+   }
+   else
+   {
+      sent =
+         trade.Sell(
+            lots,
+            _Symbol,
+            0.0,
+            initialStopLoss,
+            0.0,
+            "CK_DONCHIAN_H2_SELL"
+         );
+   }
+
+   if(!sent || !TradeRetcodeOK())
+   {
+      Print(
+         "Order failed: ",
+         trade.ResultRetcode(),
+         " ",
+         trade.ResultRetcodeDescription()
+      );
+
+      return false;
+   }
+
+   ulong ticket = FindMyPositionTicket();
+
+   if(
+      ticket == 0 ||
+      !PositionSelectByTicket(ticket)
+   )
+   {
+      Print(
+         "Order reported success but position could not be selected."
+      );
+
+      return false;
+   }
+
+   /*
+      Rebuild the initial stop from the actual filled price.
+      This preserves the intended ATR risk distance.
+   */
+   double actualOpen =
+      PositionGetDouble(POSITION_PRICE_OPEN);
+
+   double exactRawStop =
+      direction > 0 ?
+      actualOpen - InpInitialStopATR * atr :
+      actualOpen + InpInitialStopATR * atr;
+
+   double exactStopLoss =
+      direction > 0 ?
+      NormalizePriceDown(exactRawStop) :
+      NormalizePriceUp(exactRawStop);
+
+   if(
+      !StopsDistanceValid(
+         direction,
+         actualOpen,
+         exactStopLoss
+      ) ||
+      !ModifyStop(ticket, exactStopLoss)
+   )
+   {
+      Print(
+         "Actual-fill SL repair failed; closing position for safety."
+      );
+
+      CloseMyPosition();
+
+      return false;
+   }
+
+   g_extreme = actualOpen;
+   g_extremePosition = ticket;
+
+   SaveExtreme();
+
+   g_tradesToday++;
+
+   SaveDayState();
+
+   return true;
+}
+
+//====================================================================
+// LIFECYCLE
+//====================================================================
+int OnInit()
+{
+   if(
+      InpInitialAccountBalance <= 0.0 ||
+      InpFirmDailyDDPct <= 0.0 ||
+      InpFirmStaticMaxLossPct <= 0.0 ||
+      InpRiskPercent <= 0.0 ||
+      InpRiskPercent > 5.0 ||
+      InpMaxLot <= 0.0 ||
+      InpMaxLot > 0.06 ||
+      InpDonchianLookback < 2 ||
+      InpEMAFast < 2 ||
+      InpEMASlow <= InpEMAFast ||
+      InpATRPeriod < 2 ||
+      InpInitialStopATR <= 0.0 ||
+      InpTrailingStopATR <= 0.0
+   )
+   {
+      Print(
+         "Invalid input. Hard maximum lot must be <= 0.06."
+      );
+
+      return INIT_PARAMETERS_INCORRECT;
+   }
+
+   if(
+      InpSafetyBufferPctPoints < 0.0 ||
+      InpSafetyBufferPctPoints >= InpFirmDailyDDPct ||
+      InpSafetyBufferPctPoints >= InpFirmStaticMaxLossPct
+   )
+   {
+      Print("Invalid safety buffer.");
+
+      return INIT_PARAMETERS_INCORRECT;
+   }
+
+   if(
+      InpEnforceTimeframe &&
+      _Period != InpTimeframe
+   )
+   {
+      Print(
+         "Attach EA to ",
+         EnumToString(InpTimeframe),
+         " timeframe."
+      );
+
+      return INIT_PARAMETERS_INCORRECT;
+   }
+
+   trade.SetExpertMagicNumber(InpMagic);
+   trade.SetDeviationInPoints(InpDeviationPoints);
+   trade.SetTypeFillingBySymbol(_Symbol);
+
+   g_atrHandle =
+      iATR(
+         _Symbol,
+         InpTimeframe,
+         InpATRPeriod
+      );
+
+   g_fastHandle =
+      iMA(
+         _Symbol,
+         InpTimeframe,
+         InpEMAFast,
+         0,
+         MODE_EMA,
+         PRICE_CLOSE
+      );
+
+   g_slowHandle =
+      iMA(
+         _Symbol,
+         InpTimeframe,
+         InpEMASlow,
+         0,
+         MODE_EMA,
+         PRICE_CLOSE
+      );
+
+   if(
+      g_atrHandle == INVALID_HANDLE ||
+      g_fastHandle == INVALID_HANDLE ||
+      g_slowHandle == INVALID_HANDLE
+   )
+   {
+      Print("Indicator handle creation failed.");
+
+      return INIT_FAILED;
+   }
+
+   g_lastBarTime =
+      iTime(_Symbol, InpTimeframe, 0);
+
+   LoadOrRebuildDayState();
+   LoadOrRebuildExtreme();
+
+   if(
+      InpStopAtProfitTarget &&
+      AccountInfoDouble(ACCOUNT_BALANCE) >=
+      InpInitialAccountBalance +
+      InpProfitTargetUSD
+   )
+   {
+      g_targetLocked = true;
+   }
+
+   Print(
+      "CK Donchian H2 research EA initialized. Daily floor=",
+      DoubleToString(DailyFloor(), 2),
+      " static floor=",
+      DoubleToString(StaticFloor(), 2),
+      " max lot=",
+      DoubleToString(InpMaxLot, 2)
+   );
+
+   return INIT_SUCCEEDED;
+}
+
+void OnDeinit(const int reason)
+{
+   SaveDayState();
+
+   if(HasMyPosition())
+      SaveExtreme();
+
+   if(g_atrHandle != INVALID_HANDLE)
+      IndicatorRelease(g_atrHandle);
+
+   if(g_fastHandle != INVALID_HANDLE)
+      IndicatorRelease(g_fastHandle);
+
+   if(g_slowHandle != INVALID_HANDLE)
+      IndicatorRelease(g_slowHandle);
+}
+
+void OnTick()
+{
+   if(!ProtectAccount())
+      return;
+
+   if(!IsNewBar())
+      return;
+
+   /*
+      Trailing-stop updates are made only after
+      the previous H2 candle has completed.
+   */
+   ManageTrailingOnCompletedBar();
+
+   if(
+      !ProtectAccount() ||
+      AnyAccountExposure()
+   )
+   {
+      return;
+   }
+
+   int direction = SignalDirection();
+
+   if(direction != 0)
+      OpenSignalTrade(direction);
+}
+
+void OnTradeTransaction(
+   const MqlTradeTransaction &transaction,
+   const MqlTradeRequest &request,
+   const MqlTradeResult &result
+)
+{
+   if(
+      transaction.type != TRADE_TRANSACTION_DEAL_ADD ||
+      transaction.deal == 0
+   )
+   {
+      return;
+   }
+
+   if(!HistoryDealSelect(transaction.deal))
+      return;
+
+   string symbol =
+      HistoryDealGetString(
+         transaction.deal,
+         DEAL_SYMBOL
+      );
+
+   long magic =
+      HistoryDealGetInteger(
+         transaction.deal,
+         DEAL_MAGIC
+      );
+
+   long entryType =
+      HistoryDealGetInteger(
+         transaction.deal,
+         DEAL_ENTRY
+      );
+
+   if(
+      symbol == _Symbol &&
+      magic == InpMagic &&
+      (
+         entryType == DEAL_ENTRY_OUT ||
+         entryType == DEAL_ENTRY_OUT_BY
+      )
+   )
+   {
+      if(!HasMyPosition())
+         ClearExtreme();
+   }
+}
+//+------------------------------------------------------------------+

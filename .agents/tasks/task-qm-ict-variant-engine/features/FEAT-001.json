@@ -1,0 +1,30 @@
+{
+  "id": "FEAT-001",
+  "type": "feat",
+  "description": "Block 2: New York session-window module (America/New_York, DST-aware) with the 8:30 and 9:30 manipulation legs, plus IST display. Fully objective (no unconfirmed subjective rule), so it is built first. Independent of the other detector blocks except that later blocks import its session/leg classification.",
+  "status": "completed",
+  "steps": [
+    "Create v1_lab/ny_session.py, pure Python stdlib only (matching v1_lab/qm_detect.py style: module docstring stating scope + LOCKED vs tunable, argparse CLI, load_ohlc reuse, print_summary, --selfcheck).",
+    "Reuse the OHLC loader from qm_detect.py (import load_ohlc from qm_detect, or a shared _io) so bar datetimes are parsed identically. Bar timestamps in the CSVs are naive; treat them as the data's native exchange/server clock. Document the assumption explicitly and expose a --data-tz parameter (default: the timezone the CSV is already in) so the mapping to New York is not silently hard-coded. Do NOT guess the broker offset - make it a parameter with a documented default and note it must be confirmed against the actual MT5 export.",
+    "Implement provable DST math as an explicit function ny_utc_offset(date) returning -4 (EDT) for dates from the 2nd Sunday of March through the day before the 1st Sunday of November, else -5 (EST). Compute the 2nd-Sunday-of-March and 1st-Sunday-of-November boundaries arithmetically (do not hard-code specific years).",
+    "Cross-check ny_utc_offset against Python's zoneinfo ZoneInfo('America/New_York') inside selfcheck() for a range of sample dates spanning both DST transitions and multiple years, asserting they agree. zoneinfo is available in this sandbox (verified).",
+    "Implement session classification for New York: a function that, given a bar's New-York local time, returns whether it falls in the NY session and flags the 8:30 and 9:30 legs. Treat 8:30 and 9:30 as two SEPARATE, EQUALLY-labelled manipulation legs (leg tags like 'ny_0830' and 'ny_0930'); do NOT hard-code one as 'manipulation' and the other as 'expansion'. Expose the NY session window bounds and the leg definition windows as parameters with documented defaults.",
+    "Provide an IST display helper (convert a New-York local or UTC time to Asia/Kolkata for user-facing output) and use it in print_summary so counts are shown with IST timestamps alongside NY, per the display-in-IST requirement.",
+    "Add a --selfcheck with synthetic timestamps proving: (a) DST offset matches zoneinfo across transition dates and years; (b) a known UTC/NY instant maps to the correct IST wall-clock (e.g. NY 08:30 EDT -> the correct IST time), and that the mapping shifts correctly after a DST change; (c) the 8:30 and 9:30 legs are tagged distinctly and neither is labelled manipulation-vs-expansion; (d) a bar just outside the NY window is classified as not-in-session (boundary test).",
+    "Add a real-data run path: `python3 v1_lab/ny_session.py v1_lab/XAUUSD_M15_clean.csv` that tags every bar and prints counts of total bars, in-NY-session bars, 8:30-leg bars, 9:30-leg bars, with the date range shown in both NY and IST. Optionally write a per-bar session-tag CSV via --out."
+  ],
+  "acceptance_criteria": [
+    "`python3 v1_lab/ny_session.py --selfcheck` prints 'selfcheck: PASS' and all four assertion groups (DST-vs-zoneinfo, IST mapping incl. post-DST shift, distinct 8:30/9:30 legs, session boundary) pass.",
+    "ny_utc_offset returns -4/-5 with boundaries computed arithmetically and agrees with zoneinfo for every sampled date across at least two years including both transitions.",
+    "Running on v1_lab/XAUUSD_M15_clean.csv prints deterministic counts (total bars, in-NY-session, 8:30-leg, 9:30-leg) and shows the date range in both NY and IST; running twice yields byte-identical --out CSV.",
+    "No 8:30/9:30 leg is hard-coded as manipulation vs expansion; both are neutral, equally-labelled legs. No unconfirmed subjective rule is baked in; the data->NY tz mapping and window bounds are parameters."
+  ],
+  "verification": [
+    "python3 v1_lab/ny_session.py --selfcheck",
+    "python3 v1_lab/ny_session.py v1_lab/XAUUSD_M15_clean.csv --out v1_lab/ny_tags.csv  (record printed counts)",
+    "Run the previous command twice and confirm md5sum of v1_lab/ny_tags.csv is identical (determinism)",
+    "python3 -c \"import py_compile; py_compile.compile('v1_lab/ny_session.py', doraise=True)\""
+  ],
+  "blocked_reason": null,
+  "findings": "Implemented v1_lab/ny_session.py (pure stdlib: csv, datetime, argparse, zoneinfo). Reuses load_ohlc from qm_detect via sys.path insert so timestamps parse identically and it runs from repo root. DST implemented as explicit arithmetic ny_utc_offset(date): 2nd Sunday of March (via _nth_weekday_of_month) through the day before 1st Sunday of November = EDT -4, else EST -5; no years hard-coded. Self-check: 'selfcheck: PASS' with all four groups - (a) ny_utc_offset agrees with ZoneInfo('America/New_York') at noon over 2023-2026 incl. both transition Sundays +/-1 day; (b) NY 08:30 -> IST 18:00 EDT / 19:00 EST (shifts exactly 1h across DST); (c) legs tagged distinctly ny_0830 / ny_0930, both neutral (no manipulation-vs-expansion labels); (d) session boundary 09:29 out / 09:30 in / 16:00 out (exclusive end). data->NY mapping is a --data-tz parameter (documented default America/New_York, flagged as MUST-confirm against the real MT5 export - many brokers use EET/EEST). Session window (default 09:30-16:00) and both leg windows (08:30-09:30, 09:30-10:30) are parameters. Real-data run on v1_lab/XAUUSD_M15_clean.csv (22849 bars): total=22849, in-NY-session=6581, ny_0830-leg=1016, ny_0930-leg=1015; date range NY 2025-08-01 01:00 -0400 .. 2026-07-27 10:00 -0400, IST 2025-08-01 10:30 +0530 .. 2026-07-27 19:30 +0530. Determinism: md5sum of v1_lab/ny_tags.csv identical across two runs (37d6254a9408d03eca4a875c4c30c8a5). py_compile passes. Public importable functions for later blocks: ny_utc_offset, to_ny, to_ist, classify_ny, tag_bars, load_ohlc (re-exported)."
+}

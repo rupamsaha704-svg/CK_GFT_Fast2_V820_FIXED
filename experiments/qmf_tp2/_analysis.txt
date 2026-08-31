@@ -1,0 +1,79 @@
+=== QMF TP2 (opposite H1 key, nearer TP; SMT on) metrics (deposit 50k) ===
+--- IS_2025H2 ---
+METRIC DICTIONARY v1.0 ù canonical summary
+  trades             20
+  net                -263.25
+  return_pct         -0.53
+  pf                 0.66
+  win_rate           35.00
+  expectancy         -13.16
+  avg_win            72.37
+  avg_loss           -59.22
+  max_dd_closed_pct  1.16
+--- OOS_2026 ---
+METRIC DICTIONARY v1.0 ù canonical summary
+  trades             38
+  net                -1076.85
+  return_pct         -2.15
+  pf                 0.57
+  win_rate           28.95
+  expectancy         -28.34
+  avg_win            128.36
+  avg_loss           -92.18
+  max_dd_closed_pct  2.96
+--- cr_h1 ---
+METRIC DICTIONARY v1.0 ù canonical summary
+  trades             22
+  net                -941.85
+  return_pct         -1.88
+  pf                 0.34
+  win_rate           22.73
+  expectancy         -42.81
+  avg_win            96.26
+  avg_loss           -83.72
+  max_dd_closed_pct  1.94
+--- cr_h2 ---
+METRIC DICTIONARY v1.0 ù canonical summary
+  trades             24
+  net                -451.89
+  return_pct         -0.90
+  pf                 0.70
+  win_rate           33.33
+  expectancy         -18.83
+  avg_win            132.40
+  avg_loss           -94.44
+  max_dd_closed_pct  1.43
+=== PIPELINE IS vs OOS (cost 5) ===
+================================================================
+DETERMINISTIC VALIDATION PIPELINE ù Design v1.0
+================================================================
+
+[IN-SAMPLE]
+  trades                             20
+  net                                -263.25
+  return_pct                         -0.53
+  pf                                 0.66
+  win_rate                           35.0
+  expectancy                         -13.16
+  avg_win                            72.37
+  avg_loss                           -59.22
+  max_dd_closed_pct                  1.16
+
+[OUT-OF-SAMPLE]
+  trades                             38
+  net                                -1076.85
+  return_pct                         -2.15
+  pf                                 0.57
+  win_rate                           28.95
+  expectancy                         -28.34
+  avg_win                            128.36
+  avg_loss                           -92.18
+  max_dd_closed_pct                  2.96
+
+================================================================
+VERDICT: INSUFFICIENT
+================================================================
+  - OOS trades 38<200
+  PENDING stages (need MT5/data): P1 integrity hash not supplied (attach manifest)
+
+  (deterministic: same input => same output; no LLM in this path)

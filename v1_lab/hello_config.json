@@ -1,0 +1,9 @@
+{
+  "codes": ["XAUUSD"],
+  "start_date": "2025-08-01",
+  "end_date": "2026-07-27",
+  "source": "local",
+  "interval": "5m",
+  "engine": "daily",
+  "initial_cash": 5000
+}

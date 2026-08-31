@@ -1,0 +1,39 @@
+{
+  "ea": "CK_QM_ICT_EA",
+  "trades_csv": "ck_qm_ict_trades.csv",
+  "symbol": "XAUUSD",
+  "period": "M15",
+  "model": 4,
+  "execution_mode": 0,
+  "deposit": 50000,
+  "currency": "USD",
+  "leverage": 10,
+  "inputs": {
+    "InpMagic": 20260730,
+    "InpFixedLot": 0.09,
+    "InpMaxLot": 0.09,
+    "InpPivot": 2,
+    "InpDispATR": 0.6,
+    "InpAtrPeriod": 14,
+    "InpUseEmaBias": false,
+    "InpEmaPeriod": 200,
+    "InpSLBufferATR": 0.5,
+    "InpMinRR": 1.0,
+    "InpErlLookback": 5,
+    "InpMaxTradesPerDay": 2,
+    "InpLookbackBars": 500,
+    "InpSetupExpiryBars": 40,
+    "InpUseSession": true,
+    "InpSessStartHour": 9,
+    "InpSessStartMin": 30,
+    "InpSessEndHour": 16,
+    "InpSessEndMin": 0,
+    "InpMaxSpreadPrice": 0.60
+  },
+  "windows": [
+    { "id": "IS_2025H2", "from": "2025.06.01", "to": "2025.12.01" },
+    { "id": "OOS_2026", "from": "2025.12.01", "to": "2026.08.28" },
+    { "id": "cr_h1", "from": "2025.10.01", "to": "2026.03.15" },
+    { "id": "cr_h2", "from": "2026.03.15", "to": "2026.08.29" }
+  ]
+}
