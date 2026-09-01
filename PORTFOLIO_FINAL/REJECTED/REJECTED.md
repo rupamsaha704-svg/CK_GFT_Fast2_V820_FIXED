@@ -10,6 +10,12 @@ durable, out-of-sample edge. Kept here so we never re-test the same dead ends by
   at $5k; not robust. REJECT.
 - **QM/ICT, QT/CRT, MR_StdDev, Trapbox v1/v2/v3, FIX10-regime**: all REJECT on holdout
   (opening-range/mean-reversion/killzone ideas — no independent edge on current XAUUSD).
+- **CK_XAU_ICT_ChoCh_V1/V2/V3** (H1 CHoCH → retrace to POI → M15 BOS → Fib **OTE 0.618–0.786**
+  entry; full prop-firm rules). MT5 real-tick, current regime (2025-10→2026-08), $5k:
+  as-shipped/relaxed = **PF 0.72, −$211, 25 trades (LOSES)**; spec-faithful/strict = **PF 1.00,
+  ~$0, 12 trades (break-even, too few to certify)**. The "more-trades" relaxations *hurt* (they
+  let entries fire up to $1.5 OUTSIDE the OTE zone). The EA is causal / no look-ahead — so the
+  REJECT is the **edge**, not a coding bug. Evidence: `ICT_ChoCh_V3/`, ledger **seq 141**.
 
 ## B) Turtle Soup (generic mean-reversion sweep), M15 real-tick
 - Tested: XAUUSD, EURUSD, GBPUSD, XAGUSD, AUDUSD, NZDUSD, USDCAD/CHF/JPY/CNH/SEK, AMD/INTC/MSFT/NVDA.

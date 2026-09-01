@@ -46,6 +46,7 @@ kept OUT of the book until they prove durable.
 | CK_GFT_Fast_v17 | Gold Asian-session scalp | XAUUSD | edge decayed on sealed holdout — REJECT |
 | CK_GOLD_PRO_FIX09 | Gold trend | XAUUSD | trend-only + margin wall — REJECT |
 | QM/ICT, QT/CRT, MR_StdDev, Trapbox v1/v2/v3, FIX10 | Gold patterns | XAUUSD | all REJECT (holdout) |
+| CK_XAU_ICT_ChoCh_V1/V2/V3 | ICT CHoCH + BOS + Fib OTE | XAUUSD (MT5 real-tick) | REJECT — relaxed PF 0.72 / −$211 / 25tr, strict PF 1.00 / flat / 12tr (seq 141) |
 | CK_TURTLE_SOUP_v1 | Mean-reversion sweep | XAU,EUR,GBP,XAG,AUD,NZD,USDx…,stocks | all REJECT |
 | CK_TREND_ATR_v1 | Donchian/ATR trend | EUR,GBP,XAG + broker sweep | all REJECT |
 | Crypto basket (12 coins) | TSMOM | crypto | REJECT (coins too correlated, dilutes) |
@@ -61,7 +62,10 @@ kept OUT of the book until they prove durable.
 - ❌ **NOT done — full strategy×instrument grid** (every strategy on every instrument):
   deliberately avoided — it is a multiple-testing / overfitting trap. We instead ran ONE
   robust, economically-grounded method (TSMOM) across everything.
-- ❌ **NOT coded — discretionary PDF patterns** (MMXM/STDV/Fib/QML): un-backtestable / overfit-prone.
+- ⚠️ **Discretionary ICT patterns**: the **CHoCH + Fib OTE** family WAS fully coded from a Kiro
+  spec and **MT5-tested on real ticks** (see `REJECTED/ICT_ChoCh_V3/`) → REJECT (relaxed loses,
+  strict break-even). Remaining discretionary PDF patterns (MMXM/STDV/QML) are still un-coded
+  (un-backtestable / overfit-prone).
 
 If we ever want more coverage, the disciplined way is: add ONE more economically-motivated
 method, run it uniformly across all instruments, keep only what survives OOS + is uncorrelated.
