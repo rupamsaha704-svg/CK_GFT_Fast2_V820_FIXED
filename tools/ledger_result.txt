@@ -1,0 +1,38 @@
+﻿C:\Python314\python.exe : C:\Users\prita\CK_GFT_
+Repo\SPEC\dof_ledger.py:31: DeprecationWarning: 
+datetime.datetime.utcnow() is deprecated and 
+scheduled for removal in a future version. Use 
+timezone-aware objects to represent datetimes 
+in UTC: datetime.datetime.now(datetime.UTC).
+At line:1 char:1
++ C:\Python314\python.exe SPEC\dof_ledger.py 
+--file SPEC\dof_ledger.jso ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C: 
+   \Users\prita\...(datetime.UTC).:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+  
+"ts":datetime.datetime.utcnow().isoformat()+"Z",
+=====LEDGER_APPEND=====
+{
+  "seq": 124,
+  "ts": "2026-08-31T19:18:43.275201Z",
+  "type": "RESULT",
+  "desc": "Trend_test_EUR_GBP_XAG_ALL_REJECT_sealed_holdout",
+  "ref_hash": "",
+  "meta": {
+    "ref": "seq123",
+    "EURUSD": "IS-19.73/OOS-57.48/HOLD-281.52_PF0.32",
+    "GBPUSD": "IS+113/OOS-293.88/HOLD-85.87_PF0.74",
+    "XAGUSD": "IS+9356_PF1.59/OOS-1150/HOLD-1699_PF0.47",
+    "verdict": "ALL_REJECT",
+    "note": "XAG_IS_overfit_reversed_OOS+holdout"
+  },
+  "prev_hash": "57a637cb914c631423df80a3b000c276bc950689c0020134ec7de976a95dbd84",
+  "_hash": "6461222b5d8bb79945f5c5123a251e7698c3f7c2cd082a25d51d26ac03a124d9"
+}
+=====END=====

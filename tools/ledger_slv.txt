@@ -1,0 +1,39 @@
+﻿C:\Python314\python.exe : C:\Users\prita\CK_GFT_
+Repo\SPEC\dof_ledger.py:31: DeprecationWarning: 
+datetime.datetime.utcnow() is deprecated and 
+scheduled for removal in a future version. Use 
+timezone-aware objects to represent datetimes 
+in UTC: datetime.datetime.now(datetime.UTC).
+At line:1 char:1
++ C:\Python314\python.exe SPEC\dof_ledger.py 
+--file SPEC\dof_ledger.jso ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C: 
+   \Users\prita\...(datetime.UTC).:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+  
+"ts":datetime.datetime.utcnow().isoformat()+"Z",
+=====LEDGER_APPEND=====
+{
+  "seq": 134,
+  "ts": "2026-09-01T06:45:51.765558Z",
+  "type": "RESULT",
+  "desc": "sleeve_screen_ALL_tried_only_crypto+NQ_qualify_FINALIZE",
+  "ref_hash": "",
+  "meta": {
+    "tried": "crypto_trend,nq,intl_equity,commodity,bond,fx,crypto_meanrev",
+    "rule": "OOS_Sh_gt0.25_AND_absCorr_lt0.5",
+    "qualified": "crypto_trend+nq_trend",
+    "rejected": "equity/commod/bond/fx/cryptoMR_no_OOS_edge",
+    "kitchensink_all": "OOS-1.29_DD24_DISASTER",
+    "final_book": "crypto_BTCETH+filter70+NQ30_OOS0.63_DD8.9_P95",
+    "decision": "STOP_exploration_finalize"
+  },
+  "prev_hash": "a137840fe767b2021425525fbbe95da068442a5d0a2bf99127ecd50fea1f34f0",
+  "_hash": "d4dd868966d096975e30e239951a2af07e8d95b4a49505582987cac5ab45abd7"
+}
+=====END=====

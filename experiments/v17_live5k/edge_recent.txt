@@ -1,0 +1,32 @@
+============================================================
+EDGE DIAGNOSTIC: v17 RECENT
+overall: trades 416  net 2175  PF 1.39  exp/trade 5.23  win 66.8%
+cost reference: $5/trade => edge must be WELL above $5 to survive
+============================================================
+
+== By session ==
+bucket     trades        net     PF  exp/trade   win%
+Asia          400       2011   1.37       5.03   66.5
+London         16        164   1.89      10.27   75.0
+
+== By hour (server time) ==
+bucket     trades        net     PF  exp/trade   win%
+00             13        487   8.23      37.47   76.9
+01            142         96   1.05       0.68   64.8
+02            111        624   1.58       5.62   69.4
+03             50        853   2.78      17.06   74.0
+04             53       -559   0.55     -10.55   56.6
+05             23        524   2.62      22.78   69.6
+06              5         53   1.54      10.61   60.0
+07              3        -68   0.03     -22.67   33.3
+08              6         15   1.15       2.44   66.7
+09              4        -77   0.09     -19.17   50.0
+10              6        226    inf      37.72  100.0
+
+== By weekday ==
+bucket     trades        net     PF  exp/trade   win%
+Mon            77        -39   0.98      -0.51   62.3
+Tue            99        976   2.05       9.86   73.7
+Wed            90        789   1.75       8.76   70.0
+Thu            84        698   1.67       8.31   67.9
+Fri            66       -248   0.74      -3.76   56.1

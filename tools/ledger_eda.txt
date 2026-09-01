@@ -1,0 +1,40 @@
+﻿C:\Python314\python.exe : C:\Users\prita\CK_GFT_
+Repo\SPEC\dof_ledger.py:31: DeprecationWarning: 
+datetime.datetime.utcnow() is deprecated and 
+scheduled for removal in a future version. Use 
+timezone-aware objects to represent datetimes 
+in UTC: datetime.datetime.now(datetime.UTC).
+At line:1 char:1
++ C:\Python314\python.exe SPEC\dof_ledger.py 
+--file SPEC\dof_ledger.jso ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C: 
+   \Users\prita\...(datetime.UTC).:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+  
+"ts":datetime.datetime.utcnow().isoformat()+"Z",
+=====LEDGER_APPEND=====
+{
+  "seq": 131,
+  "ts": "2026-09-01T05:48:18.734283Z",
+  "type": "EDA",
+  "desc": "edge_landscape_map_WHERE_crypto+NQ_WHEN_lowvol_regime",
+  "ref_hash": "",
+  "meta": {
+    "where": "durable_IS+OOS_mostly_crypto_BTC/SOL/ADA/AVAX/BNB/ETH/DOGE+NQ_only_noncrypto",
+    "fx_bonds": "OOS_negative",
+    "mirages": "LINK/LTC/CL_IS_good_OOS_dead",
+    "when_vol": "crypto_LOWvol_OOS0.99_vs_HIGHvol_OOS0.02_holds_IS+OOS",
+    "when_trendalign": "aligned0.82_vs_mixed0.52",
+    "weekday": "NOISE_dismissed",
+    "status": "HYPOTHESIS_not_validated",
+    "next": "prereg_volatility_filter_v2"
+  },
+  "prev_hash": "2049a0ce3292a01c56268020bfa4f9bfd50fd14aa36442a5fa76075d20f02d29",
+  "_hash": "ea0e1c5aab3fe3c7b1c479d7d934529a5a1860ee3b03e79320fd633fb4964538"
+}
+=====END=====

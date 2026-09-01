@@ -1,0 +1,30 @@
+{
+  "ea": "CK_CRYPTO_TSMOM_v1",
+  "trades_csv": "ck_crypto_tsmom_trades.csv",
+  "symbol": "BTCUSDx",
+  "period": "D1",
+  "model": 2,
+  "execution_mode": 0,
+  "deposit": 5000,
+  "currency": "USD",
+  "leverage": 10,
+  "inputs": {
+    "InpMagic": 20260907,
+    "InpL1": 20,
+    "InpL2": 60,
+    "InpL3": 120,
+    "InpL4": 250,
+    "InpVolWindow": 60,
+    "InpTargetVolAnnual": 0.10,
+    "InpMaxLeverage": 3.0,
+    "InpMaxLot": 100.0,
+    "InpAllowLong": true,
+    "InpAllowShort": true,
+    "InpDeadBandLots": 0.0
+  },
+  "windows": [
+    { "id": "full", "from": "2017.01.01", "to": "2026.08.31" },
+    { "id": "IS_build", "from": "2017.01.01", "to": "2023.01.01" },
+    { "id": "holdout", "from": "2023.01.01", "to": "2026.08.31" }
+  ]
+}

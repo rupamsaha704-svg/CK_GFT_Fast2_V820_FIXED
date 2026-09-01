@@ -1,0 +1,29 @@
+{
+  "ea": "CK_TURTLE_SOUP_v1",
+  "trades_csv": "ck_turtle_trades.csv",
+  "symbol": "XAUUSD",
+  "period": "M15",
+  "model": 4,
+  "execution_mode": 0,
+  "deposit": 5000,
+  "currency": "USD",
+  "leverage": 10,
+  "inputs": {
+    "InpMagic": 20260905,
+    "InpRiskPercent": 0.5,
+    "InpMaxLot": 0.09,
+    "InpMaxTradesPerDay": 3,
+    "InpDailyLossStopR": 2.0,
+    "InpDailyProfitStopR": 4.0,
+    "InpMaxSpreadPoints": 60,
+    "InpLookback": 20,
+    "InpBufferATR": 0.10,
+    "InpRR": 2.0,
+    "InpMaxSL_ATR": 3.0,
+    "InpAllowBuy": true,
+    "InpAllowSell": true
+  },
+  "windows": [
+    { "id": "holdout", "from": "2026.07.01", "to": "2026.08.28" }
+  ]
+}

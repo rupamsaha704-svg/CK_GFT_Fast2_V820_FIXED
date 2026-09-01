@@ -1,0 +1,10 @@
+[google 204]      status=204 bytes=0
+[binance klines]  status=200 bytes=508
+    sample: [1788200280000, '79030.00000000', '79077.66000000', '79030.00000000', '79070.05000000']
+[binance.vision]  status=200 bytes=2169570
+[yahoo ^NDX]      status=200 bytes=1554
+[stooq ndq]       status=200 bytes=796
+    head: <!DOCTYPE html><html><head><meta charset="utf-8"><meta name="robots" content="no
+[dukascopy www]   status=200 bytes=351415
+[duka datafeed]   status=200 bytes=48358
+=== DONE-NET ===

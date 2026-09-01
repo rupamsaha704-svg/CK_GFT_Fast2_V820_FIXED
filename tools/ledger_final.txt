@@ -1,0 +1,37 @@
+﻿C:\Python314\python.exe : C:\Users\prita\CK_GFT_
+Repo\SPEC\dof_ledger.py:31: DeprecationWarning: 
+datetime.datetime.utcnow() is deprecated and 
+scheduled for removal in a future version. Use 
+timezone-aware objects to represent datetimes 
+in UTC: datetime.datetime.now(datetime.UTC).
+At line:1 char:1
++ C:\Python314\python.exe SPEC\dof_ledger.py 
+--file SPEC\dof_ledger.jso ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C: 
+   \Users\prita\...(datetime.UTC).:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+  
+"ts":datetime.datetime.utcnow().isoformat()+"Z",
+=====LEDGER_APPEND=====
+{
+  "seq": 138,
+  "ts": "2026-09-01T09:05:44.385061Z",
+  "type": "DELIVER",
+  "desc": "PORTFOLIO_FINAL_organized_works_rejected_results_honest_coverage",
+  "ref_hash": "",
+  "meta": {
+    "folder": "PORTFOLIO_FINAL",
+    "works": "CK_CRYPTO_TSMOM_v2_BTC+ETH+NQ",
+    "rejected_log": "full_graveyard",
+    "results": "10_result_files",
+    "coverage_honesty": "TSMOM_uniform_all_instruments_other_strategies_partial_gold_EAs_goldonly_no_full_grid_by_design_antioverfit"
+  },
+  "prev_hash": "a6da062c40fe2f6362d41d5c14fe10ea3fd78e3c815bb03ae58df574b12b2763",
+  "_hash": "8c61d54e7bc1f7088c508b6859236563954c4eccc21011d1ba6ba1a9a872ecab"
+}
+=====END=====

@@ -1,0 +1,4 @@
+_NDX 2026-09-01  spot=29457.0  net_GEX=$+3.40bn/1%  regime=POSITIVE(dampen)  call_wall=29500.0  put_wall=29450.0  contracts=15478
+snapshot: data_gex/snapshots/_NDX_2026-09-01.csv
+summary: data_gex/_NDX_gex.csv
+DONE-GEX

@@ -1,0 +1,6 @@
+﻿BTCUSD           ERROR: HTTP Error 503: Service Unavailable
+USA100IDXUSD     ERROR: HTTP Error 503: Service Unavailable
+US100USD         ERROR: HTTP Error 503: Service Unavailable
+NAS100USD        ERROR: HTTP Error 503: Service Unavailable
+USATECHIDXUSD    ERROR: HTTP Error 503: Service Unavailable
+USATEC.IDXUSD    ERROR: HTTP Error 503: Service Unavailable

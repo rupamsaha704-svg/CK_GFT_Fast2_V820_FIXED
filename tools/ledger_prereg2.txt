@@ -1,0 +1,42 @@
+﻿C:\Python314\python.exe : C:\Users\prita\CK_GFT_
+Repo\SPEC\dof_ledger.py:31: DeprecationWarning: 
+datetime.datetime.utcnow() is deprecated and 
+scheduled for removal in a future version. Use 
+timezone-aware objects to represent datetimes 
+in UTC: datetime.datetime.now(datetime.UTC).
+At line:1 char:1
++ C:\Python314\python.exe SPEC\dof_ledger.py 
+--file SPEC\dof_ledger.jso ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C: 
+   \Users\prita\...(datetime.UTC).:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+  
+"ts":datetime.datetime.utcnow().isoformat()+"Z",
+=====LEDGER_APPEND=====
+{
+  "seq": 123,
+  "ts": "2026-08-31T19:12:12.103246Z",
+  "type": "PREREG",
+  "desc": "Trend_edge_test_EURUSD_GBPUSD_XAGUSD_genericATRtrend_realticks_brokerdemo",
+  "ref_hash": "",
+  "meta": {
+    "strategy": "CK_TREND_ATR_v1",
+    "kind": "Donchian_breakout+ATR_trail",
+    "tf": "H1",
+    "model": "4_realticks",
+    "symbols": "EURUSD,GBPUSD,XAGUSD",
+    "deposit": "5000",
+    "lev": "10",
+    "windows": "IS_OOS_HOLDOUT_prereg_seq117",
+    "tuning": "none",
+    "complement": "Turtle_meanrev_already_REJECT_on_these"
+  },
+  "prev_hash": "cf2bf53363b55652a0234058a6e0a531bb445cc1ece55d086797123dc8071f3d",
+  "_hash": "57a637cb914c631423df80a3b000c276bc950689c0020134ec7de976a95dbd84"
+}
+=====END=====

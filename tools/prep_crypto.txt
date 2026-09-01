@@ -1,0 +1,3 @@
+﻿BTCUSDx: 3652 daily bars -> C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\Common\Files\BTCUSD_d1.csv
+ETHUSDx: 3218 daily bars -> C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\Common\Files\ETHUSD_d1.csv
+DONE-PREP

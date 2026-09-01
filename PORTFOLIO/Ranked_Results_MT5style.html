@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<title>Ranked Results - MT5 style</title><style>
+ body{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;max-width:900px;margin:0 auto;
+   padding:26px;color:#16202b} h1{font-size:22px;margin:0 0 4px} .sub{color:#5b6b7b;font-size:13px}
+ .rank{border:1px solid #dbe4ec;border-radius:12px;padding:16px 18px;margin:16px 0;background:#fbfdff}
+ .rank h2{margin:0 0 4px;font-size:17px} .badge{display:inline-block;border-radius:12px;padding:2px 10px;
+   font-size:12px;font-weight:700;margin-left:8px;vertical-align:middle}
+ .win{background:#e5f5e9;color:#1a7a3a;border:1px solid #b7e0c2} .warn{background:#fdeceb;color:#c0362c;border:1px solid #f2c4c0}
+ .num{font-size:30px;font-weight:800;margin:2px 0} .pos{color:#1a9850} .neg{color:#d73027}
+ .two{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px} .mt5{flex:1;min-width:340px;border:1px solid #cdd8e3;
+   border-radius:8px;overflow:hidden} .mt5h{background:#eef3f8;padding:6px 10px;font-weight:700;font-size:13px;
+   border-bottom:1px solid #cdd8e3} .mt5t{width:100%;border-collapse:collapse;font-size:12px;font-family:Consolas,monospace}
+ .mt5t td{border-bottom:1px solid #eef2f6;padding:4px 8px} .mt5t .l{color:#5b6b7b} .mt5t .v{text-align:right;font-weight:600}
+ .why{font-size:13px;margin-top:8px} table.rej{border-collapse:collapse;width:100%;font-size:13px;margin-top:6px}
+ table.rej td,table.rej th{border:1px solid #dbe4ec;padding:6px 8px;text-align:right} table.rej td:first-child,table.rej th:first-child{text-align:left}
+ .foot{color:#5b6b7b;font-size:12px;margin-top:22px;border-top:1px solid #dbe4ec;padding-top:10px}
+</style></head><body>
+<h1>XAUUSD strategies - ranked results (MT5 Strategy Tester)</h1>
+<div class="sub">Same live spec ($5,000, 1:10, 0.09 cap, real ticks) &middot; ranked by CURRENT-regime result &middot; 2026-08-31</div>
+
+<div class="rank">
+ <h2>#1 &nbsp; CK_GFT_Fast v17 <span class="badge win">WORKS IN CURRENT MARKET</span></h2>
+ <div class="sub">Current 6 months net</div>
+ <div class="num pos">+$2,175</div>
+ <div class="two"><div class='mt5'><div class='mt5h'>Current regime (Mar-Aug 2026)</div><table class='mt5t'><tr><td class='l'>Initial Deposit</td><td class='v'>5,000.00</td><td class='l'>Profit Factor</td><td class='v'>1.39</td></tr><tr><td class='l'>Total Net Profit</td><td class='v'><b class='pos'>2,175.02</b></td><td class='l'>Expected Payoff</td><td class='v'>5.23</td></tr><tr><td class='l'>Gross Profit</td><td class='v'>7,796.20</td><td class='l'>Recovery Factor</td><td class='v'>2.40</td></tr><tr><td class='l'>Gross Loss</td><td class='v'>-5,621.18</td><td class='l'>Balance DD Maximal</td><td class='v'>907.14 (11.43%)</td></tr><tr><td class='l'>Total Trades</td><td class='v'>416</td><td class='l'>Profit Trades %</td><td class='v'>66.83%</td></tr><tr><td class='l'>Largest profit trade</td><td class='v'>309.50</td><td class='l'>Largest loss trade</td><td class='v'>-184.32</td></tr><tr><td class='l'>Average profit trade</td><td class='v'>28.04</td><td class='l'>Average loss trade</td><td class='v'>-41.33</td></tr></table></div><div class='mt5'><div class='mt5h'>Last 12 months</div><table class='mt5t'><tr><td class='l'>Initial Deposit</td><td class='v'>5,000.00</td><td class='l'>Profit Factor</td><td class='v'>1.49</td></tr><tr><td class='l'>Total Net Profit</td><td class='v'><b class='pos'>5,807.73</b></td><td class='l'>Expected Payoff</td><td class='v'>6.11</td></tr><tr><td class='l'>Gross Profit</td><td class='v'>17,654.98</td><td class='l'>Recovery Factor</td><td class='v'>7.30</td></tr><tr><td class='l'>Gross Loss</td><td class='v'>-11,847.25</td><td class='l'>Balance DD Maximal</td><td class='v'>795.84 (9.21%)</td></tr><tr><td class='l'>Total Trades</td><td class='v'>951</td><td class='l'>Profit Trades %</td><td class='v'>66.25%</td></tr><tr><td class='l'>Largest profit trade</td><td class='v'>427.65</td><td class='l'>Largest loss trade</td><td class='v'>-215.04</td></tr><tr><td class='l'>Average profit trade</td><td class='v'>28.02</td><td class='l'>Average loss trade</td><td class='v'>-37.97</td></tr></table></div></div>
+ <div class="why"><b>Why #1:</b> the only strategy still profitable in the current market; passes cost-stress + forward tests. Small risk-based lots, so $5k is fine. <b>Status: demo-forward (no real money yet).</b></div>
+</div>
+
+<div class="rank">
+ <h2>#2 &nbsp; FIX09 (CK_GOLD_PRO) <span class="badge warn">TREND-ONLY - loses now</span></h2>
+ <div class="sub">Current 6 months net (fresh $5k)</div>
+ <div class="num neg">$-1,661</div>
+ <div class="two"><div class='mt5'><div class='mt5h'>Current regime (Mar-Aug 2026)</div><table class='mt5t'><tr><td class='l'>Initial Deposit</td><td class='v'>5,000.00</td><td class='l'>Profit Factor</td><td class='v'>0.29</td></tr><tr><td class='l'>Total Net Profit</td><td class='v'><b class='neg'>-1,661.23</b></td><td class='l'>Expected Payoff</td><td class='v'>-207.65</td></tr><tr><td class='l'>Gross Profit</td><td class='v'>683.82</td><td class='l'>Recovery Factor</td><td class='v'>-0.93</td></tr><tr><td class='l'>Gross Loss</td><td class='v'>-2,345.05</td><td class='l'>Balance DD Maximal</td><td class='v'>1,787.49 (34.87%)</td></tr><tr><td class='l'>Total Trades</td><td class='v'>8</td><td class='l'>Profit Trades %</td><td class='v'>25.00%</td></tr><tr><td class='l'>Largest profit trade</td><td class='v'>370.89</td><td class='l'>Largest loss trade</td><td class='v'>-840.42</td></tr><tr><td class='l'>Average profit trade</td><td class='v'>341.91</td><td class='l'>Average loss trade</td><td class='v'>-390.84</td></tr></table></div><div class='mt5'><div class='mt5h'>Last 12 months</div><table class='mt5t'><tr><td class='l'>Initial Deposit</td><td class='v'>5,000.00</td><td class='l'>Profit Factor</td><td class='v'>1.37</td></tr><tr><td class='l'>Total Net Profit</td><td class='v'><b class='pos'>8,740.25</b></td><td class='l'>Expected Payoff</td><td class='v'>30.04</td></tr><tr><td class='l'>Gross Profit</td><td class='v'>32,549.88</td><td class='l'>Recovery Factor</td><td class='v'>2.10</td></tr><tr><td class='l'>Gross Loss</td><td class='v'>-23,809.63</td><td class='l'>Balance DD Maximal</td><td class='v'>4,155.69 (23.24%)</td></tr><tr><td class='l'>Total Trades</td><td class='v'>291</td><td class='l'>Profit Trades %</td><td class='v'>24.74%</td></tr><tr><td class='l'>Largest profit trade</td><td class='v'>2,505.87</td><td class='l'>Largest loss trade</td><td class='v'>-840.42</td></tr><tr><td class='l'>Average profit trade</td><td class='v'>452.08</td><td class='l'>Average loss trade</td><td class='v'>-109.72</td></tr></table></div></div>
+ <div class="why"><b>Why #2:</b> huge in a trending market (last 12m +$8,740), but in the current regime it loses and, on $5k with a fixed 0.09 lot, the account margin-locks after a few losses (only 8 trades). Use only in a confirmed trend, on a bigger account.</div>
+</div>
+
+<h2 style="font-size:16px">Rejected (positive only in a past regime or over-optimized backtest)</h2>
+<table class="rej">
+<tr><th>Strategy</th><th>Out-of-sample net (50k)</th><th>Profit factor</th><th>Verdict</th></tr>
+<tr><td>v23 (trend)</td><td>+2,512</td><td>1.12</td><td>REJECT - thin / regime-dependent</td></tr>
+<tr><td>POC_VA (volume)</td><td>+2,433</td><td>1.06</td><td>REJECT - edge below cost</td></tr>
+<tr><td>QT/CRT</td><td>-3,180</td><td>0.76</td><td>REJECT - no edge</td></tr>
+<tr><td>QM/ICT</td><td>-3,325</td><td>0.50</td><td>REJECT - no edge</td></tr>
+</table>
+
+<div class="foot">Historical MT5 real-tick simulation, not a promise of future results. Trade counts include partial-take-profit
+closes. No real money was traded; v17 proceeds to demo-forward validation. All runs recorded in a hash-chained ledger.</div>
+</body></html>

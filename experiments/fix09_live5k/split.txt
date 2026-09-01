@@ -1,0 +1,13 @@
+================================================================
+SPLIT @ 2026-03-01   (exclude losing block 13:00-17:00 server)
+NOTE: post-hoc estimate; a real MT5 re-run is the truth.
+================================================================
+[OLDER (trend period)]
+   ALL hours          : trades  147  net    11571  PF  2.19  win 29.9%
+   EXCLUDE 13:00-17:00 : trades  110  net    12382  PF  2.93  win 33.6%
+[RECENT (current regime)]
+   ALL hours          : trades  144  net    -2831  PF  0.80  win 19.4%
+   EXCLUDE 13:00-17:00 : trades  101  net     -950  PF  0.90  win 20.8%
+[WHOLE last year]
+   ALL hours          : trades  291  net     8740  PF  1.37  win 24.7%
+   EXCLUDE 13:00-17:00 : trades  211  net    11432  PF  1.71  win 27.5%

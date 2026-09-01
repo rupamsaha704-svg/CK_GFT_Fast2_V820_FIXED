@@ -1,0 +1,12 @@
+=== TODAY'S BOOK — CK_CRYPTO_TSMOM_v2 (what to hold now) ===
+instr date        dir    signal  annVol volFilt  target_%equity
+BTC   2026-09-01  LONG    +0.50     31%    1.00           +8.1%
+ETH   2026-09-01  LONG    +0.50     48%    1.00           +4.1%
+NQ    2026-08-31  LONG    +0.50     25%    1.00           +9.8%
+
+Notes:
+ - target_%equity = position notional as % of account equity (sign = long/short).
+ - crypto sleeve ~70% risk, NQ ~30% (per .set vol targets). Rebalance on daily close.
+ - volFilt<1 => high-vol regime, crypto exposure trimmed.
+ - GEX context (free, live): run tools/gex_calc.py _NDX  (POSITIVE=dampen/range, NEGATIVE=amplify/trend).
+DONE-LIVE

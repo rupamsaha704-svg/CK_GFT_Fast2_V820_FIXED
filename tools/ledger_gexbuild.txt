@@ -1,0 +1,39 @@
+﻿C:\Python314\python.exe : C:\Users\prita\CK_GFT_
+Repo\SPEC\dof_ledger.py:31: DeprecationWarning: 
+datetime.datetime.utcnow() is deprecated and 
+scheduled for removal in a future version. Use 
+timezone-aware objects to represent datetimes 
+in UTC: datetime.datetime.now(datetime.UTC).
+At line:1 char:1
++ C:\Python314\python.exe SPEC\dof_ledger.py 
+--file SPEC\dof_ledger.jso ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C: 
+   \Users\prita\...(datetime.UTC).:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+  
+"ts":datetime.datetime.utcnow().isoformat()+"Z",
+=====LEDGER_APPEND=====
+{
+  "seq": 137,
+  "ts": "2026-09-01T08:27:46.209453Z",
+  "type": "BUILD",
+  "desc": "free_GEX_engine_CBOE_cdn_live+collector",
+  "ref_hash": "",
+  "meta": {
+    "source": "CBOE_delayed_quotes_cdn_FREE_gamma+OI",
+    "symbols": "_NDX,QQQ,_SPX",
+    "live_NDX": "spot29457_netGEX+3.4bn_POSITIVE_dampen",
+    "status": "live_context+forward_collector_NOT_yet_validated",
+    "hypothesis": "GEX_neg_amplify_full_NQ_trend_vs_pos_dampen_reduce",
+    "validate_when": "own_daily_history_accumulates_or_paid_hist",
+    "files": "tools/gex_calc.py+run_gex_daily.bat+data_gex"
+  },
+  "prev_hash": "0a3d901bc3ae721115f3c38df2e95fa743a87314b52b99f2e3e18ffe122052ed",
+  "_hash": "a6da062c40fe2f6362d41d5c14fe10ea3fd78e3c815bb03ae58df574b12b2763"
+}
+=====END=====

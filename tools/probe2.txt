@@ -1,0 +1,13 @@
+﻿=== BTCUSD across dates (find latest available) ===
+  2026-08-20 13h  HTTP 503
+  2025-08-20 13h  HTTP 503
+  2025-05-15 13h  HTTP 503
+  2024-06-20 13h  HTTP 503
+  2023-01-10 13h  ERR TimeoutError: The read operation timed out
+=== NAS100 code candidates on a safe old date 2024-05-20 15h ===
+USA100IDXUSD     2024-05-20 15h  HTTP 503
+US100USD         2024-05-20 15h  HTTP 503
+NAS100USD        2024-05-20 15h  HTTP 503
+USATECHIDXUSD    2024-05-20 15h  HTTP 503
+USATEC.IDXUSD    2024-05-20 15h  HTTP 503
+USA30IDXUSD      2024-05-20 15h  HTTP 503

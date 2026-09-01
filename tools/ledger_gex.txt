@@ -1,0 +1,39 @@
+﻿C:\Python314\python.exe : C:\Users\prita\CK_GFT_
+Repo\SPEC\dof_ledger.py:31: DeprecationWarning: 
+datetime.datetime.utcnow() is deprecated and 
+scheduled for removal in a future version. Use 
+timezone-aware objects to represent datetimes 
+in UTC: datetime.datetime.now(datetime.UTC).
+At line:1 char:1
++ C:\Python314\python.exe SPEC\dof_ledger.py 
+--file SPEC\dof_ledger.jso ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C: 
+   \Users\prita\...(datetime.UTC).:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+  
+"ts":datetime.datetime.utcnow().isoformat()+"Z",
+=====LEDGER_APPEND=====
+{
+  "seq": 136,
+  "ts": "2026-09-01T08:10:38.034762Z",
+  "type": "REJECT",
+  "desc": "GEX_on_NQ_data_blocked_cannot_validate",
+  "ref_hash": "",
+  "meta": {
+    "yahoo_options": "HTTP401_locked",
+    "free_historical_NQ_options_OI": "unavailable",
+    "free_GEX": "mostly_SPX_website_EOD_not_clean_NQ_history",
+    "verdict": "REJECT_for_now_data_not_performance",
+    "rule": "no_validate_no_deploy",
+    "realistic": "park_or_paid_options_API_or_forward_collect",
+    "keep": "crypto+NQ_trend_book_already_validated"
+  },
+  "prev_hash": "cee5847d8a03ec05ee4cd733d461b81d071882ad6e2aa068f6222f3c33d2b290",
+  "_hash": "0a3d901bc3ae721115f3c38df2e95fa743a87314b52b99f2e3e18ffe122052ed"
+}
+=====END=====

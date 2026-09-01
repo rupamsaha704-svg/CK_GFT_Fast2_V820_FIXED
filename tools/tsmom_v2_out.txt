@@ -1,0 +1,11 @@
+CK_CRYPTO_TSMOM v2 study  basket=['ADA', 'ATOM', 'BNB', 'BTC', 'DOGE', 'ETH', 'LINK', 'LTC', 'SOL', 'TRX', 'XLM', 'XRP']  (2016-09-01..2026-09-01)  IS<2023/OOS>=2023
+variant                 FULL Sh   IS Sh  OOS Sh  OOS CAGR  OOS DD
+v1 BTC+ETH                 1.05    1.35    0.59      5.4%   14.5%
+v1 BTC+ETH +filter         1.07    1.35    0.62      5.7%   13.0%
+v2a basket                 0.81    1.02    0.49      4.5%   12.9%
+v2b basket+volfilter       0.81    0.99    0.53      4.9%   12.3%
+
+v2b per-year NET:
+  2017:+16%  2018:+13%  2019:+11%  2020:+46%  2021:+20%  2022:+12%  2023:+9%  2024:+10%  2025:+5%  2026:+8%
+v2b OOS bootstrap Sharpe: mean 0.64  5th pct -0.03  P(>0) 94.0%
+DONE-V2

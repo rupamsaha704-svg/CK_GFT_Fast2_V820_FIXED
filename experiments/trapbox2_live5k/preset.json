@@ -1,0 +1,40 @@
+{
+  "ea": "CK_TRAPBOX_DKT_v2",
+  "trades_csv": "ck_trapbox2_trades.csv",
+  "symbol": "XAUUSD",
+  "period": "M15",
+  "model": 4,
+  "execution_mode": 0,
+  "deposit": 5000,
+  "currency": "USD",
+  "leverage": 10,
+  "inputs": {
+    "InpMagic": 20260902,
+    "InpRiskPercent": 0.5,
+    "InpMaxLot": 0.09,
+    "InpMaxTradesPerDay": 3,
+    "InpDailyLossStopR": 2.0,
+    "InpDailyProfitStopR": 4.0,
+    "InpMaxSpreadPoints": 60,
+    "InpBoxTF": 15,
+    "InpAsiaStart": 4,
+    "InpLondonStart": 10,
+    "InpNYStart": 15,
+    "InpWatchBars": 20,
+    "InpTradeAsia": true,
+    "InpTradeLondon": true,
+    "InpTradeNY": true,
+    "InpAllowBuy": true,
+    "InpAllowSell": true,
+    "InpSLpips": 40.0,
+    "InpTPpips": 60.0,
+    "InpMaxRiskPips": 200.0,
+    "InpUseBE": true,
+    "InpBEtriggerPips": 40.0
+  },
+  "windows": [
+    { "id": "last1yr", "from": "2025.08.28", "to": "2026.08.28" },
+    { "id": "older_trend", "from": "2025.08.28", "to": "2026.03.01" },
+    { "id": "recent_regime", "from": "2026.03.01", "to": "2026.08.28" }
+  ]
+}

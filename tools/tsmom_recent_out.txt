@@ -1,0 +1,14 @@
+CRYPTO (2017-05-11..2026-09-01)
+  BTC+ETH    FULL: Sh 1.08 ret+298.9% dd14.5% | 2Y: Sh 0.51 ret  +9.6% dd10.1% | 1Y: Sh 0.62 ret  +6.6% dd 6.8% | 6M: Sh 0.78 ret  +3.7% dd 6.5% | 3M: Sh-3.04 ret  -5.4% dd 6.5%
+  BTC        FULL: Sh 1.14 ret+335.8% dd11.1% | 2Y: Sh 0.43 ret  +7.4% dd 9.5% | 1Y: Sh 0.68 ret  +6.8% dd 5.9% | 6M: Sh 0.64 ret  +2.5% dd 5.6% | 3M: Sh-2.56 ret  -4.6% dd 5.6%
+  ETH        FULL: Sh 0.73 ret+150.3% dd18.8% | 2Y: Sh 0.50 ret  +9.5% dd 8.9% | 1Y: Sh 0.49 ret  +4.7% dd 6.5% | 6M: Sh 0.84 ret  +4.2% dd 6.5% | 3M: Sh-3.35 ret  -4.9% dd 6.0%
+
+MULTI-ASSET (2017-05-09..2026-08-31)
+  ALL      FULL: Sh-1.10 ret -79.2% dd79.7% | 2Y: Sh-1.12 ret -19.9% dd22.4% | 1Y: Sh-1.09 ret -10.5% dd16.5% | 6M: Sh-1.87 ret  -6.8% dd 9.3% | 3M: Sh-2.89 ret  -5.3% dd 7.9%
+  ex-FX    FULL: Sh-0.76 ret -66.8% dd68.0% | 2Y: Sh-0.46 ret  -9.1% dd12.1% | 1Y: Sh-0.40 ret  -4.2% dd10.5% | 6M: Sh-0.50 ret  -1.9% dd 6.6% | 3M: Sh-1.45 ret  -2.6% dd 5.7%
+  bond     FULL: Sh-1.37 ret -86.4% dd86.8% | 2Y: Sh-2.32 ret -34.1% dd36.6% | 1Y: Sh-1.34 ret -13.5% dd16.0% | 6M: Sh 0.54 ret  +2.9% dd 6.5% | 3M: Sh 1.14 ret  +3.2% dd 4.7%
+  commod   FULL: Sh-0.49 ret -51.5% dd59.0% | 2Y: Sh 0.25 ret  +4.3% dd11.7% | 1Y: Sh 0.39 ret  +3.9% dd11.7% | 6M: Sh-1.16 ret  -5.5% dd11.7% | 3M: Sh-0.74 ret  -1.6% dd 6.6%
+  crypto   FULL: Sh 1.08 ret+300.0% dd14.5% | 2Y: Sh 0.51 ret  +9.6% dd10.1% | 1Y: Sh 0.62 ret  +6.6% dd 6.8% | 6M: Sh 0.78 ret  +3.7% dd 6.5% | 3M: Sh-3.03 ret  -5.4% dd 6.5%
+  equity   FULL: Sh-0.29 ret -36.9% dd51.7% | 2Y: Sh 0.11 ret  +1.1% dd11.3% | 1Y: Sh-0.51 ret  -5.3% dd11.3% | 6M: Sh-0.20 ret  -1.1% dd 4.8% | 3M: Sh-1.73 ret  -3.7% dd 4.8%
+  fx       FULL: Sh-1.21 ret -81.9% dd82.0% | 2Y: Sh-2.09 ret -31.6% dd33.1% | 1Y: Sh-1.95 ret -18.3% dd23.6% | 6M: Sh-3.55 ret -13.6% dd13.1% | 3M: Sh-3.98 ret  -8.2% dd 8.7%
+DONE-RECENT

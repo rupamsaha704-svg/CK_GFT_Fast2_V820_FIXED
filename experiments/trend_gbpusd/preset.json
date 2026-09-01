@@ -1,0 +1,29 @@
+{
+  "ea": "CK_TREND_ATR_v1",
+  "trades_csv": "ck_trend_trades.csv",
+  "symbol": "GBPUSD",
+  "period": "H1",
+  "model": 4,
+  "execution_mode": 0,
+  "deposit": 5000,
+  "currency": "USD",
+  "leverage": 10,
+  "inputs": {
+    "InpMagic": 20260906,
+    "InpRiskPercent": 0.5,
+    "InpMaxLot": 0.09,
+    "InpMaxSpreadPoints": 60,
+    "InpDonchian": 20,
+    "InpExitDonchian": 10,
+    "InpATRperiod": 14,
+    "InpSLatr": 2.0,
+    "InpTrailATR": 3.0,
+    "InpAllowBuy": true,
+    "InpAllowSell": true
+  },
+  "windows": [
+    { "id": "IS_build", "from": "2025.08.28", "to": "2026.03.01" },
+    { "id": "OOS_build", "from": "2026.03.01", "to": "2026.07.01" },
+    { "id": "holdout", "from": "2026.07.01", "to": "2026.08.28" }
+  ]
+}

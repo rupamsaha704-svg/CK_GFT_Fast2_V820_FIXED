@@ -1,0 +1,11 @@
+instrument     window     trades       net$     PF   win%     maxDD$
+----------------------------------------------------------------------
+EURUSD         IS_build       99     -19.73   0.98   38.4     251.05
+EURUSD         OOS_build      75     -57.48   0.93   29.3     283.91
+EURUSD         holdout        41    -281.52   0.32   19.5     373.55
+GBPUSD         IS_build      105     113.26   1.09   38.1     301.05
+GBPUSD         OOS_build      83    -293.88   0.71   27.7     439.87
+GBPUSD         holdout        34     -85.87   0.74   32.4     129.09
+XAGUSD         IS_build      102    9355.91   1.59   37.3    2675.95
+XAGUSD         OOS_build      64   -1150.23   0.83   31.2    2053.66
+XAGUSD         holdout        35   -1699.41   0.47   37.1    1699.41

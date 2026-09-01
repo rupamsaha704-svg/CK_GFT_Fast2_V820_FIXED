@@ -1,0 +1,43 @@
+﻿C:\Python314\python.exe : C:\Users\prita\CK_GFT_
+Repo\SPEC\dof_ledger.py:31: DeprecationWarning: 
+datetime.datetime.utcnow() is deprecated and 
+scheduled for removal in a future version. Use 
+timezone-aware objects to represent datetimes 
+in UTC: datetime.datetime.now(datetime.UTC).
+At line:1 char:1
++ C:\Python314\python.exe SPEC\dof_ledger.py 
+--file SPEC\dof_ledger.jso ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C: 
+   \Users\prita\...(datetime.UTC).:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+  
+"ts":datetime.datetime.utcnow().isoformat()+"Z",
+=====LEDGER_APPEND=====
+{
+  "seq": 129,
+  "ts": "2026-09-01T04:39:02.765849Z",
+  "type": "RESULT",
+  "desc": "BTC+ETH_daily_TSMOM_ROBUST_durable_edge_FOUND",
+  "ref_hash": "",
+  "meta": {
+    "ref": "seq128",
+    "rule": "multilookback_signreturn+invvol_voltarget10",
+    "positive_every_year": "2018-2026",
+    "y2022_crash": "+9.8pct",
+    "FULL_Sharpe": "1.00",
+    "OOS_Sharpe": "0.59",
+    "maxDD": "13.9pct",
+    "robust_to_lookback": "yes",
+    "robust_to_cost_to_40bps": "OOS0.32",
+    "rationale": "crypto_behavioral_momentum_less_efficient",
+    "next": "build_executable_EA_live_validation"
+  },
+  "prev_hash": "da32a337e8d53e20e03a65613c9d0620349158f3fbaf9db2afedfe117bd43ad6",
+  "_hash": "7c7581e36dc5a07f00e000191399cd2fdce6b15f9d2889b2edc96f618b705b5e"
+}
+=====END=====

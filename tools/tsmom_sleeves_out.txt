@@ -1,0 +1,18 @@
+=== SLEEVE SCREEN (objective rule: OOS Sh>0.25 AND |corr to crypto|<0.5) ===
+sleeve            IS Sh  OOS Sh  corr_cry  include?
+crypto_trend       1.30    0.59      1.00       YES
+nq_trend           0.29    0.32      0.16       YES
+intl_equity       -0.68   -0.05      0.02        no
+commodity          0.14   -0.43      0.03        no
+bond              -1.14   -1.80      0.05        no
+fx                -0.96   -1.71      0.11        no
+crypto_meanrev    -0.70   -0.69     -0.32        no
+
+INCLUDED (rule): ['crypto_trend', 'nq_trend']
+  BOOK(included) : FULL Sh 0.85 | IS 1.05 | OOS 0.59 | OOS DD 8.9%
+  KITCHEN-SINK(all): FULL Sh -0.89 | IS -0.62 | OOS -1.29 | OOS DD 23.9%
+  CURRENT crypto+NQ 70/30: OOS Sh 0.63 | OOS DD 8.9%
+
+BOOK(included) per-year: 2018:+4%  2019:+8%  2020:+25%  2021:+14%  2022:+5%  2023:+9%  2024:+7%  2025:+3%  2026:+3%
+BOOK(included) OOS bootstrap Sharpe: mean 0.64  5th pct 0.00  P(>0) 95.1%
+DONE-SLEEVES

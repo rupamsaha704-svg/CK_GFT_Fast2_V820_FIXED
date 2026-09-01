@@ -1,0 +1,13 @@
+=== UNIFIED TSMOM DASHBOARD (every instrument, same rule, one level) ===
+instrument    IS Sh  OOS Sh    verdict        today   dir    sig   pos%
+XAU(gold)     -0.34    1.07     EDGE ✓   2026-08-31  LONG  +0.50   +10%
+BTC            1.35    0.77     EDGE ✓   2026-09-01  LONG  +0.50    +8%
+NQ(Nasdaq)     0.28    0.40     EDGE ✓   2026-08-31  LONG  +0.50   +10%
+XAG(silver)   -0.28    0.35     EDGE ✓   2026-08-31  FLAT  +0.00    +0%
+ETH            1.16    0.27     EDGE ✓   2026-09-01  LONG  +0.50    +5%
+EURUSD        -0.37   -0.91    NO EDGE   2026-08-31  LONG  +0.50   +56%
+GBPUSD        -0.02   -1.57    NO EDGE   2026-08-31  LONG  +1.00   +90%
+
+Rule: OOS Sharpe (2023-2026) > 0.25 = durable edge -> in the book. Same test for all.
+today = latest bar; dir/sig/pos = what the rule signals now (pos at 5% vol target).
+DONE-DASH

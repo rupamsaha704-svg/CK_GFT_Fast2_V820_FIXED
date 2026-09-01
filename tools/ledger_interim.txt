@@ -1,0 +1,39 @@
+﻿C:\Python314\python.exe : C:\Users\prita\CK_GFT_
+Repo\SPEC\dof_ledger.py:31: DeprecationWarning: 
+datetime.datetime.utcnow() is deprecated and 
+scheduled for removal in a future version. Use 
+timezone-aware objects to represent datetimes 
+in UTC: datetime.datetime.now(datetime.UTC).
+At line:1 char:1
++ C:\Python314\python.exe SPEC\dof_ledger.py 
+--file SPEC\dof_ledger.jso ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C: 
+   \Users\prita\...(datetime.UTC).:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+  
+"ts":datetime.datetime.utcnow().isoformat()+"Z",
+=====LEDGER_APPEND=====
+{
+  "seq": 126,
+  "ts": "2026-08-31T19:39:07.147814Z",
+  "type": "RESULT",
+  "desc": "Broker_sweep_INTERIM_no_holdout_survivor",
+  "ref_hash": "",
+  "meta": {
+    "ref": "seq125",
+    "trend_FX": "AUD/NZD/USDCAD/USDCHF/USDCNH/USDJPY_all_REJECT_no_window_consistency",
+    "stocks": "AMD/INTC/MSFT/NVDA_0trades_untestable",
+    "turtle_AUD": "REJECT",
+    "flukes": "USDCAD_OOS+211only,USDJPY_IS+HOLD+only_OOS-_noise",
+    "survivors": "NONE",
+    "status": "turtle_chain_still_running"
+  },
+  "prev_hash": "39514e36a2ddf60c2e1f1b4ee6e68c203673bad39ff8526d0af061a2d1233ca6",
+  "_hash": "b225c3582fc927655fda610391007759c50a223cb9c5a6b4e12f0b6ded87d9bc"
+}
+=====END=====

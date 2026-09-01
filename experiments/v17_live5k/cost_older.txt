@@ -1,0 +1,9 @@
+== COST STRESS: v17 OLDER trend ==
+ $/fill     net $     PF  exp/fill
+      0      3097   1.67      7.20
+      1      2667   1.56      6.20
+      2      2237   1.46      5.20
+      3      1807   1.35      4.20
+      4      1377   1.26      3.20
+      5       947   1.17      2.20
+fills = 430   (partial-TP closes count as separate fills => real positions are fewer)

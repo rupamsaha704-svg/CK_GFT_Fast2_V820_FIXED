@@ -1,0 +1,46 @@
+================================================================
+DETERMINISTIC VALIDATION PIPELINE ? Design v1.0
+================================================================
+
+[IN-SAMPLE]
+  trades                             430
+  net                                3097.44
+  return_pct                         61.95
+  pf                                 1.67
+  win_rate                           67.21
+  expectancy                         7.2
+  avg_win                            26.63
+  avg_loss                           -33.81
+  max_dd_closed_pct                  9.21
+
+[OUT-OF-SAMPLE]
+  trades                             416
+  net                                2175.02
+  return_pct                         43.5
+  pf                                 1.39
+  win_rate                           66.83
+  expectancy                         5.23
+  avg_win                            28.04
+  avg_loss                           -41.33
+  max_dd_closed_pct                  11.43
+
+[STAGES on OOS]
+  K2 OOS PF>1.0 & exp>0              PF 1.39 exp 5.23
+  K3 IS->OOS collapse                PFratio 0.83 EXPratio 0.73
+  M1 OOS PF>=1.20 & exp-CI-LB>0      PF 1.39  exp95CI [0.20,10.29]
+  M5 concentration (drop top10)      exp 0.42  PF 1.03
+  M6 trade-removal 10% (>=95%net+)   100.0% runs net+
+  M8 year concentration (<80%)       max-year share 100%  years [2026]
+  MC (advisory)                      DD p95 19%  P(losing) 2%  net p5 416
+  WF (>=60%, med>=1.10, >=8win)      5/8 pos, med 1.84, worst 0.68, small-win 0
+  M4 cost stress @1.5x (net>0,PF>=1) net 927 PF 1.15 -> PASS
+  M7 benchmark                       PENDING (supply --price-csv for the OOS period)
+  K5 locked holdout                  PENDING (sealed; supply --holdout once, single unlock)
+
+================================================================
+VERDICT: FAIL
+================================================================
+  - mandatory miss: M8 year-concentration
+  PENDING stages (need MT5/data): P1 integrity hash not supplied (attach manifest); M7 benchmark suite (supply OOS price); K5 locked holdout; M3 parameter plateau (MT5 grid)
+
+  (deterministic: same input => same output; no LLM in this path)

@@ -1,0 +1,42 @@
+﻿C:\Python314\python.exe : C:\Users\prita\CK_GFT_
+Repo\SPEC\dof_ledger.py:31: DeprecationWarning: 
+datetime.datetime.utcnow() is deprecated and 
+scheduled for removal in a future version. Use 
+timezone-aware objects to represent datetimes 
+in UTC: datetime.datetime.now(datetime.UTC).
+At line:1 char:1
++ C:\Python314\python.exe SPEC\dof_ledger.py 
+--file SPEC\dof_ledger.jso ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C: 
+   \Users\prita\...(datetime.UTC).:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+  
+"ts":datetime.datetime.utcnow().isoformat()+"Z",
+=====LEDGER_APPEND=====
+{
+  "seq": 128,
+  "ts": "2026-09-01T04:36:23.416149Z",
+  "type": "RESULT",
+  "desc": "TSMOM_multiasset_39mkt_10yr_only_crypto_durable_OOS",
+  "ref_hash": "",
+  "meta": {
+    "ref": "seq127",
+    "ALL": "IS0.31/OOS-0.32",
+    "exFX": "IS0.42/OOS0.00",
+    "bond": "IS0.65/OOS-0.52",
+    "commod": "flat",
+    "equity": "IS-0.09/OOS0.34",
+    "fx": "NEG",
+    "crypto": "IS1.42/OOS0.67_DURABLE",
+    "data": "Yahoo_daily_2016-2026",
+    "next": "validate_crypto_across_many_coins"
+  },
+  "prev_hash": "3e87c5f38dcd81a8d6064c4b509c9b9fac13a7d5b2a1573c0915d3ef5b53c20b",
+  "_hash": "da32a337e8d53e20e03a65613c9d0620349158f3fbaf9db2afedfe117bd43ad6"
+}
+=====END=====

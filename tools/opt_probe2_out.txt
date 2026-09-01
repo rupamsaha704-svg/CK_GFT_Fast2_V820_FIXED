@@ -1,0 +1,14 @@
+[CBOE QQQ.json] status=200 bytes=5124643
+    underlying=716.76 n_options=11520
+    sample keys: ['option', 'bid', 'bid_size', 'ask', 'ask_size', 'iv', 'open_interest', 'volume', 'delta', 'gamma', 'vega', 'theta', 'rho', 'theo', 'change', 'open', 'high', 'low', 'tick', 'last_trade_price', 'last_trade_time', 'percent_change', 'prev_day_close']
+    sample: opt=QQQ261016C00570000 OI=73.0 gamma=0.0007 iv=0.3471
+[CBOE _NDX.json] status=200 bytes=6746150
+    underlying=29456.9727 n_options=15478
+    sample keys: ['option', 'bid', 'bid_size', 'ask', 'ask_size', 'iv', 'open_interest', 'volume', 'delta', 'gamma', 'vega', 'theta', 'rho', 'theo', 'change', 'open', 'high', 'low', 'tick', 'last_trade_price', 'last_trade_time', 'percent_change', 'prev_day_close']
+    sample: opt=NDXP260904P28960000 OI=0.0 gamma=0.0005 iv=0.1873
+[CBOE _SPX.json] status=200 bytes=13086380
+    underlying=7686.14 n_options=29432
+    sample keys: ['option', 'bid', 'bid_size', 'ask', 'ask_size', 'iv', 'open_interest', 'volume', 'delta', 'gamma', 'vega', 'theta', 'rho', 'theo', 'change', 'open', 'high', 'low', 'tick', 'last_trade_price', 'last_trade_time', 'percent_change', 'prev_day_close']
+    sample: opt=SPXW260915C08325000 OI=2.0 gamma=0.0 iv=0.1415
+[nasdaq QQQ] status=200 bytes=6366
+DONE-OPT2

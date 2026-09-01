@@ -1,0 +1,23 @@
+strategy / window                trades      net $     PF   win%  maxDD%
+------------------------------------------------------------------------
+fix09_baseline / baseline_realtick    359       8214   1.32   23.1     6.7
+fix09_current_regime / cr_h1        129      12323   2.16   29.5     3.2
+fix09_dep50k / baseline_dep50k      369       8863   1.32   23.3     7.7
+fix09_is_oos / OOS_2026             215       2913   1.13   20.5     8.5
+fix09_lev100 / baseline_lev100      359       8214   1.32   23.1     6.7
+fix09_live5k / last1yr              291       8740   1.37   24.7     6.6
+fix09_proof / oos_2026H1              8      -1661   0.29   25.0     3.6
+fix09hrs_50k_off / older_trend      154      13044   2.22   30.5     3.1
+fix09hrs_50k_on / older_trend       132      11919   2.33   29.5     3.3
+fix09hrs_off / last1yr              291       8740   1.37   24.7     6.6
+poc_sess_ny / OOS_2026              235      -6834   0.74   23.0    16.1
+poc_sess_us / OOS_2026              341      -4142   0.88   21.7    13.9
+poc_va / OOS_2026                   462       2433   1.06   22.7    10.3
+qm_ict / OOS_2026                    35      -3325   0.50   37.1     8.2
+qmf_poi3 / OOS_2026                  60       -747   0.83   11.7     4.0
+qmf_smt / OOS_2026                   60       -747   0.83   11.7     4.0
+qmf_tp2 / OOS_2026                   38      -1077   0.57   28.9     3.0
+qmf_v1 / OOS_2026                   149      -6407   0.53    8.7    15.9
+qtcrt_consol / OOS_2026             106      -1428   0.83   36.8     4.4
+qtcrt_v1 / OOS_2026                 155      -3180   0.76   34.2     7.6
+v23_robust / OOS_2026               212       2512   1.12   20.3     7.3

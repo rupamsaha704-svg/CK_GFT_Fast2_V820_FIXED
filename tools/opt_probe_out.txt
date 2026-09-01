@@ -1,0 +1,4 @@
+[QQQ] status=401 bytes=0
+[^NDX] status=401 bytes=0
+[SPY] status=401 bytes=0
+DONE-OPT

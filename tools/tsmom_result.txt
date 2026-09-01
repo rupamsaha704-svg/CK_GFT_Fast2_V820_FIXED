@@ -1,0 +1,14 @@
+universe (20) over 3652 union days 2016-09-01..2026-09-01
+  crypto : BTC, ETH
+  other  : AAVE, ADA, ALGO, ATOM, AVAX, BCH, BNB, DOGE, DOT, ETC, LINK, LTC, MATIC, SOL, TRX, UNI, XLM, XRP
+
+days traded: 3400  (2017-05-11..2026-09-01)  IS<2023 / OOS>=2023
+=== PORTFOLIO variants (vol-target 10%, 2bps cost) ===
+  ALL              (20m)  FULL Sh -0.27 CAGR  -3.3% DD 36.8% | IS Sh -0.35 | OOS Sh  0.45
+  ex-FX            (20m)  FULL Sh -0.27 CAGR  -3.3% DD 36.8% | IS Sh -0.35 | OOS Sh  0.45
+  crypto+bond      ( 2m)  FULL Sh  1.13 CAGR  11.4% DD 13.9% | IS Sh  1.41 | OOS Sh  0.67
+
+  each class (FULL / IS / OOS Sharpe):
+  crypto           ( 2m)  FULL Sh  1.13 CAGR  11.4% DD 13.9% | IS Sh  1.41 | OOS Sh  0.67
+  other            (18m)  FULL Sh -0.27 CAGR  -3.3% DD 36.8% | IS Sh -0.35 | OOS Sh  0.40
+DONE-TSMOM

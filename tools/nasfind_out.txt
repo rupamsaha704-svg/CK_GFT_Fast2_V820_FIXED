@@ -1,0 +1,8 @@
+start
+[DEUIDXEUR] VALID 6499B -> 1286 ticks  askRaw=18761712 (/1000=18761.712)
+[USATECHIDXUSD] ERR URLError: <urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>
+[NDXUSD] HTTP 503
+[US100USD] HTTP 404
+[USATEC.IDXUSD] HTTP 503
+[USSC2000IDXUSD] HTTP 503
+DONE-NASFIND

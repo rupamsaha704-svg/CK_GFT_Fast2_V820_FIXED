@@ -1,0 +1,708 @@
+﻿[turtle] 12 presets to run
+=== RUN sweep_turtle_AMD ===
+=== run_candidate: sweep_turtle_AMD (EA=CK_TURTLE_SOUP_v1) ===
+[1] Compiling CK_TURTLE_SOUP_v1 ...
+[compile] source : C:\Users\prita\CK_GFT_Repo\CK_TURTLE_SOUP_v1.mq5
+[compile] deploy : C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+----- compile log -----
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: compiling C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\StdLibErr.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\OrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\HistoryOrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\PositionInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\DealInfo.mqh
+ : information: generating code
+ : information: generating code 3%
+ : information: generating code 6%
+ : information: generating code 9%
+ : information: generating code 12%
+ : information: generating code 15%
+ : information: generating code 18%
+ : information: generating code 21%
+ : information: generating code 24%
+ : information: generating code 27%
+ : information: generating code 30%
+ : information: generating code 33%
+ : information: generating code 36%
+ : information: generating code 39%
+ : information: generating code 42%
+ : information: generating code 45%
+ : information: generating code 48%
+ : information: generating code 51%
+ : information: generating code 54%
+ : information: generating code 57%
+ : information: generating code 60%
+ : information: generating code 63%
+ : information: generating code 66%
+ : information: generating code 69%
+ : information: generating code 72%
+ : information: generating code 75%
+ : information: generating code 78%
+ : information: generating code 81%
+ : information: generating code 84%
+ : information: generating code 87%
+ : information: generating code 90%
+ : information: generating code 93%
+ : information: generating code 95%
+ : information: generating code 100%
+ : information: code generated
+Result: 0 errors, 0 warnings, 545 ms elapsed, cpu='X64 Regular'
+-----------------------
+[compile] OK (warnings=0) -> C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.ex5
+[2] Window 'IS_build' (2025.08.28 to 2026.03.01)
+[make_ini] window 'IS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_AMD\windows\IS_build\IS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'IS_build'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'IS_build': csv=False trades=0 report=False
+[2] Window 'OOS_build' (2026.03.01 to 2026.07.01)
+[make_ini] window 'OOS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_AMD\windows\OOS_build\OOS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'OOS_build'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'OOS_build': csv=False trades=0 report=False
+[2] Window 'holdout' (2026.07.01 to 2026.08.28)
+[make_ini] window 'holdout' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_AMD\windows\holdout\holdout.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'holdout'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'holdout': csv=False trades=0 report=False
+
+[done] report -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_AMD\report.md
+=== RUN sweep_turtle_AUDUSD ===
+=== run_candidate: sweep_turtle_AUDUSD (EA=CK_TURTLE_SOUP_v1) ===
+[1] Compiling CK_TURTLE_SOUP_v1 ...
+[compile] source : C:\Users\prita\CK_GFT_Repo\CK_TURTLE_SOUP_v1.mq5
+[compile] deploy : C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+----- compile log -----
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: compiling C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\StdLibErr.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\OrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\HistoryOrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\PositionInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\DealInfo.mqh
+ : information: generating code
+ : information: generating code 3%
+ : information: generating code 6%
+ : information: generating code 9%
+ : information: generating code 12%
+ : information: generating code 15%
+ : information: generating code 18%
+ : information: generating code 21%
+ : information: generating code 24%
+ : information: generating code 27%
+ : information: generating code 30%
+ : information: generating code 33%
+ : information: generating code 36%
+ : information: generating code 39%
+ : information: generating code 42%
+ : information: generating code 45%
+ : information: generating code 48%
+ : information: generating code 51%
+ : information: generating code 54%
+ : information: generating code 57%
+ : information: generating code 60%
+ : information: generating code 63%
+ : information: generating code 66%
+ : information: generating code 69%
+ : information: generating code 72%
+ : information: generating code 75%
+ : information: generating code 78%
+ : information: generating code 81%
+ : information: generating code 84%
+ : information: generating code 87%
+ : information: generating code 90%
+ : information: generating code 93%
+ : information: generating code 95%
+ : information: generating code 100%
+ : information: code generated
+Result: 0 errors, 0 warnings, 557 ms elapsed, cpu='X64 Regular'
+-----------------------
+[compile] OK (warnings=0) -> C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.ex5
+[2] Window 'IS_build' (2025.08.28 to 2026.03.01)
+[make_ini] window 'IS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_AUDUSD\windows\IS_build\IS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'IS_build'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'IS_build': csv=False trades=0 report=False
+[2] Window 'OOS_build' (2026.03.01 to 2026.07.01)
+[make_ini] window 'OOS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_AUDUSD\windows\OOS_build\OOS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'OOS_build'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'OOS_build': csv=False trades=0 report=False
+[2] Window 'holdout' (2026.07.01 to 2026.08.28)
+[make_ini] window 'holdout' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_AUDUSD\windows\holdout\holdout.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'holdout'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'holdout': csv=False trades=0 report=False
+
+[done] report -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_AUDUSD\report.md
+=== RUN sweep_turtle_INTC ===
+=== run_candidate: sweep_turtle_INTC (EA=CK_TURTLE_SOUP_v1) ===
+[1] Compiling CK_TURTLE_SOUP_v1 ...
+[compile] source : C:\Users\prita\CK_GFT_Repo\CK_TURTLE_SOUP_v1.mq5
+[compile] deploy : C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+----- compile log -----
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: compiling C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\StdLibErr.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\OrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\HistoryOrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\PositionInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\DealInfo.mqh
+ : information: generating code
+ : information: generating code 3%
+ : information: generating code 6%
+ : information: generating code 9%
+ : information: generating code 12%
+ : information: generating code 15%
+ : information: generating code 18%
+ : information: generating code 21%
+ : information: generating code 24%
+ : information: generating code 27%
+ : information: generating code 30%
+ : information: generating code 33%
+ : information: generating code 36%
+ : information: generating code 39%
+ : information: generating code 42%
+ : information: generating code 45%
+ : information: generating code 48%
+ : information: generating code 51%
+ : information: generating code 54%
+ : information: generating code 57%
+ : information: generating code 60%
+ : information: generating code 63%
+ : information: generating code 66%
+ : information: generating code 69%
+ : information: generating code 72%
+ : information: generating code 75%
+ : information: generating code 78%
+ : information: generating code 81%
+ : information: generating code 84%
+ : information: generating code 87%
+ : information: generating code 90%
+ : information: generating code 93%
+ : information: generating code 95%
+ : information: generating code 100%
+ : information: code generated
+Result: 0 errors, 0 warnings, 539 ms elapsed, cpu='X64 Regular'
+-----------------------
+[compile] OK (warnings=0) -> C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.ex5
+[2] Window 'IS_build' (2025.08.28 to 2026.03.01)
+[make_ini] window 'IS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_INTC\windows\IS_build\IS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'IS_build'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'IS_build': csv=False trades=0 report=False
+[2] Window 'OOS_build' (2026.03.01 to 2026.07.01)
+[make_ini] window 'OOS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_INTC\windows\OOS_build\OOS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'OOS_build'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'OOS_build': csv=False trades=0 report=False
+[2] Window 'holdout' (2026.07.01 to 2026.08.28)
+[make_ini] window 'holdout' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_INTC\windows\holdout\holdout.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'holdout'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'holdout': csv=False trades=0 report=False
+
+[done] report -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_INTC\report.md
+=== RUN sweep_turtle_MSFT ===
+=== run_candidate: sweep_turtle_MSFT (EA=CK_TURTLE_SOUP_v1) ===
+[1] Compiling CK_TURTLE_SOUP_v1 ...
+[compile] source : C:\Users\prita\CK_GFT_Repo\CK_TURTLE_SOUP_v1.mq5
+[compile] deploy : C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+----- compile log -----
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: compiling C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\StdLibErr.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\OrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\HistoryOrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\PositionInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\DealInfo.mqh
+ : information: generating code
+ : information: generating code 3%
+ : information: generating code 6%
+ : information: generating code 9%
+ : information: generating code 12%
+ : information: generating code 15%
+ : information: generating code 18%
+ : information: generating code 21%
+ : information: generating code 24%
+ : information: generating code 27%
+ : information: generating code 30%
+ : information: generating code 33%
+ : information: generating code 36%
+ : information: generating code 39%
+ : information: generating code 42%
+ : information: generating code 45%
+ : information: generating code 48%
+ : information: generating code 51%
+ : information: generating code 54%
+ : information: generating code 57%
+ : information: generating code 60%
+ : information: generating code 63%
+ : information: generating code 66%
+ : information: generating code 69%
+ : information: generating code 72%
+ : information: generating code 75%
+ : information: generating code 78%
+ : information: generating code 81%
+ : information: generating code 84%
+ : information: generating code 87%
+ : information: generating code 90%
+ : information: generating code 93%
+ : information: generating code 95%
+ : information: generating code 100%
+ : information: code generated
+Result: 0 errors, 0 warnings, 529 ms elapsed, cpu='X64 Regular'
+-----------------------
+[compile] OK (warnings=0) -> C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.ex5
+[2] Window 'IS_build' (2025.08.28 to 2026.03.01)
+[make_ini] window 'IS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_MSFT\windows\IS_build\IS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'IS_build'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'IS_build': csv=False trades=0 report=False
+[2] Window 'OOS_build' (2026.03.01 to 2026.07.01)
+[make_ini] window 'OOS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_MSFT\windows\OOS_build\OOS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'OOS_build'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'OOS_build': csv=False trades=0 report=False
+[2] Window 'holdout' (2026.07.01 to 2026.08.28)
+[make_ini] window 'holdout' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_MSFT\windows\holdout\holdout.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'holdout'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'holdout': csv=False trades=0 report=False
+
+[done] report -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_MSFT\report.md
+=== RUN sweep_turtle_NVDA ===
+=== run_candidate: sweep_turtle_NVDA (EA=CK_TURTLE_SOUP_v1) ===
+[1] Compiling CK_TURTLE_SOUP_v1 ...
+[compile] source : C:\Users\prita\CK_GFT_Repo\CK_TURTLE_SOUP_v1.mq5
+[compile] deploy : C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+----- compile log -----
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: compiling C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\StdLibErr.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\OrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\HistoryOrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\PositionInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\DealInfo.mqh
+ : information: generating code
+ : information: generating code 3%
+ : information: generating code 6%
+ : information: generating code 9%
+ : information: generating code 12%
+ : information: generating code 15%
+ : information: generating code 18%
+ : information: generating code 21%
+ : information: generating code 24%
+ : information: generating code 27%
+ : information: generating code 30%
+ : information: generating code 33%
+ : information: generating code 36%
+ : information: generating code 39%
+ : information: generating code 42%
+ : information: generating code 45%
+ : information: generating code 48%
+ : information: generating code 51%
+ : information: generating code 54%
+ : information: generating code 57%
+ : information: generating code 60%
+ : information: generating code 63%
+ : information: generating code 66%
+ : information: generating code 69%
+ : information: generating code 72%
+ : information: generating code 75%
+ : information: generating code 78%
+ : information: generating code 81%
+ : information: generating code 84%
+ : information: generating code 87%
+ : information: generating code 90%
+ : information: generating code 93%
+ : information: generating code 95%
+ : information: generating code 100%
+ : information: code generated
+Result: 0 errors, 0 warnings, 523 ms elapsed, cpu='X64 Regular'
+-----------------------
+[compile] OK (warnings=0) -> C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.ex5
+[2] Window 'IS_build' (2025.08.28 to 2026.03.01)
+[make_ini] window 'IS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_NVDA\windows\IS_build\IS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'IS_build'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'IS_build': csv=False trades=0 report=False
+[2] Window 'OOS_build' (2026.03.01 to 2026.07.01)
+[make_ini] window 'OOS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_NVDA\windows\OOS_build\OOS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'OOS_build'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'OOS_build': csv=False trades=0 report=False
+[2] Window 'holdout' (2026.07.01 to 2026.08.28)
+[make_ini] window 'holdout' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_NVDA\windows\holdout\holdout.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'holdout'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'holdout': csv=False trades=0 report=False
+
+[done] report -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_NVDA\report.md
+=== RUN sweep_turtle_NZDUSD ===
+=== run_candidate: sweep_turtle_NZDUSD (EA=CK_TURTLE_SOUP_v1) ===
+[1] Compiling CK_TURTLE_SOUP_v1 ...
+[compile] source : C:\Users\prita\CK_GFT_Repo\CK_TURTLE_SOUP_v1.mq5
+[compile] deploy : C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+----- compile log -----
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: compiling C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\StdLibErr.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\OrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\HistoryOrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\PositionInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\DealInfo.mqh
+ : information: generating code
+ : information: generating code 3%
+ : information: generating code 6%
+ : information: generating code 9%
+ : information: generating code 12%
+ : information: generating code 15%
+ : information: generating code 18%
+ : information: generating code 21%
+ : information: generating code 24%
+ : information: generating code 27%
+ : information: generating code 30%
+ : information: generating code 33%
+ : information: generating code 36%
+ : information: generating code 39%
+ : information: generating code 42%
+ : information: generating code 45%
+ : information: generating code 48%
+ : information: generating code 51%
+ : information: generating code 54%
+ : information: generating code 57%
+ : information: generating code 60%
+ : information: generating code 63%
+ : information: generating code 66%
+ : information: generating code 69%
+ : information: generating code 72%
+ : information: generating code 75%
+ : information: generating code 78%
+ : information: generating code 81%
+ : information: generating code 84%
+ : information: generating code 87%
+ : information: generating code 90%
+ : information: generating code 93%
+ : information: generating code 95%
+ : information: generating code 100%
+ : information: code generated
+Result: 0 errors, 0 warnings, 528 ms elapsed, cpu='X64 Regular'
+-----------------------
+[compile] OK (warnings=0) -> C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.ex5
+[2] Window 'IS_build' (2025.08.28 to 2026.03.01)
+[make_ini] window 'IS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_NZDUSD\windows\IS_build\IS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'IS_build'
+    window 'IS_build': csv=False trades=0 report=False
+[2] Window 'OOS_build' (2026.03.01 to 2026.07.01)
+[make_ini] window 'OOS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_NZDUSD\windows\OOS_build\OOS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'OOS_build'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'OOS_build': csv=False trades=0 report=False
+[2] Window 'holdout' (2026.07.01 to 2026.08.28)
+[make_ini] window 'holdout' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_NZDUSD\windows\holdout\holdout.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'holdout'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'holdout': csv=False trades=0 report=False
+
+[done] report -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_NZDUSD\report.md
+=== RUN sweep_turtle_USDCAD ===
+=== run_candidate: sweep_turtle_USDCAD (EA=CK_TURTLE_SOUP_v1) ===
+[1] Compiling CK_TURTLE_SOUP_v1 ...
+[compile] source : C:\Users\prita\CK_GFT_Repo\CK_TURTLE_SOUP_v1.mq5
+[compile] deploy : C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+----- compile log -----
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: compiling C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\StdLibErr.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\OrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\HistoryOrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\PositionInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\DealInfo.mqh
+ : information: generating code
+ : information: generating code 3%
+ : information: generating code 6%
+ : information: generating code 9%
+ : information: generating code 12%
+ : information: generating code 15%
+ : information: generating code 18%
+ : information: generating code 21%
+ : information: generating code 24%
+ : information: generating code 27%
+ : information: generating code 30%
+ : information: generating code 33%
+ : information: generating code 36%
+ : information: generating code 39%
+ : information: generating code 42%
+ : information: generating code 45%
+ : information: generating code 48%
+ : information: generating code 51%
+ : information: generating code 54%
+ : information: generating code 57%
+ : information: generating code 60%
+ : information: generating code 63%
+ : information: generating code 66%
+ : information: generating code 69%
+ : information: generating code 72%
+ : information: generating code 75%
+ : information: generating code 78%
+ : information: generating code 81%
+ : information: generating code 84%
+ : information: generating code 87%
+ : information: generating code 90%
+ : information: generating code 93%
+ : information: generating code 95%
+ : information: generating code 100%
+ : information: code generated
+Result: 0 errors, 0 warnings, 547 ms elapsed, cpu='X64 Regular'
+-----------------------
+[compile] OK (warnings=0) -> C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.ex5
+[2] Window 'IS_build' (2025.08.28 to 2026.03.01)
+[make_ini] window 'IS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_USDCAD\windows\IS_build\IS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'IS_build'
+    window 'IS_build': csv=False trades=0 report=False
+[2] Window 'OOS_build' (2026.03.01 to 2026.07.01)
+[make_ini] window 'OOS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_USDCAD\windows\OOS_build\OOS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'OOS_build'
+    window 'OOS_build': csv=False trades=0 report=False
+[2] Window 'holdout' (2026.07.01 to 2026.08.28)
+[make_ini] window 'holdout' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_USDCAD\windows\holdout\holdout.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'holdout'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'holdout': csv=False trades=0 report=False
+
+[done] report -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_USDCAD\report.md
+=== RUN sweep_turtle_USDCHF ===
+=== run_candidate: sweep_turtle_USDCHF (EA=CK_TURTLE_SOUP_v1) ===
+[1] Compiling CK_TURTLE_SOUP_v1 ...
+[compile] source : C:\Users\prita\CK_GFT_Repo\CK_TURTLE_SOUP_v1.mq5
+[compile] deploy : C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+----- compile log -----
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: compiling C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\StdLibErr.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\OrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\HistoryOrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\PositionInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\DealInfo.mqh
+ : information: generating code
+ : information: generating code 3%
+ : information: generating code 6%
+ : information: generating code 9%
+ : information: generating code 12%
+ : information: generating code 15%
+ : information: generating code 18%
+ : information: generating code 21%
+ : information: generating code 24%
+ : information: generating code 27%
+ : information: generating code 30%
+ : information: generating code 33%
+ : information: generating code 36%
+ : information: generating code 39%
+ : information: generating code 42%
+ : information: generating code 45%
+ : information: generating code 48%
+ : information: generating code 51%
+ : information: generating code 54%
+ : information: generating code 57%
+ : information: generating code 60%
+ : information: generating code 63%
+ : information: generating code 66%
+ : information: generating code 69%
+ : information: generating code 72%
+ : information: generating code 75%
+ : information: generating code 78%
+ : information: generating code 81%
+ : information: generating code 84%
+ : information: generating code 87%
+ : information: generating code 90%
+ : information: generating code 93%
+ : information: generating code 95%
+ : information: generating code 100%
+ : information: code generated
+Result: 0 errors, 0 warnings, 531 ms elapsed, cpu='X64 Regular'
+-----------------------
+[compile] OK (warnings=0) -> C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.ex5
+[2] Window 'IS_build' (2025.08.28 to 2026.03.01)
+[make_ini] window 'IS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_USDCHF\windows\IS_build\IS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'IS_build'
+    window 'IS_build': csv=False trades=0 report=False
+[2] Window 'OOS_build' (2026.03.01 to 2026.07.01)
+[make_ini] window 'OOS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_USDCHF\windows\OOS_build\OOS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'OOS_build'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'OOS_build': csv=False trades=0 report=False
+[2] Window 'holdout' (2026.07.01 to 2026.08.28)
+[make_ini] window 'holdout' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_USDCHF\windows\holdout\holdout.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'holdout'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'holdout': csv=False trades=0 report=False
+
+[done] report -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_USDCHF\report.md
+=== RUN sweep_turtle_USDCNH ===
+=== run_candidate: sweep_turtle_USDCNH (EA=CK_TURTLE_SOUP_v1) ===
+[1] Compiling CK_TURTLE_SOUP_v1 ...
+[compile] source : C:\Users\prita\CK_GFT_Repo\CK_TURTLE_SOUP_v1.mq5
+[compile] deploy : C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+----- compile log -----
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: compiling C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\StdLibErr.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\OrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\HistoryOrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\PositionInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\DealInfo.mqh
+ : information: generating code
+ : information: generating code 3%
+ : information: generating code 6%
+ : information: generating code 9%
+ : information: generating code 12%
+ : information: generating code 15%
+ : information: generating code 18%
+ : information: generating code 21%
+ : information: generating code 24%
+ : information: generating code 27%
+ : information: generating code 30%
+ : information: generating code 33%
+ : information: generating code 36%
+ : information: generating code 39%
+ : information: generating code 42%
+ : information: generating code 45%
+ : information: generating code 48%
+ : information: generating code 51%
+ : information: generating code 54%
+ : information: generating code 57%
+ : information: generating code 60%
+ : information: generating code 63%
+ : information: generating code 66%
+ : information: generating code 69%
+ : information: generating code 72%
+ : information: generating code 75%
+ : information: generating code 78%
+ : information: generating code 81%
+ : information: generating code 84%
+ : information: generating code 87%
+ : information: generating code 90%
+ : information: generating code 93%
+ : information: generating code 95%
+ : information: generating code 100%
+ : information: code generated
+Result: 0 errors, 0 warnings, 529 ms elapsed, cpu='X64 Regular'
+-----------------------
+[compile] OK (warnings=0) -> C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.ex5
+[2] Window 'IS_build' (2025.08.28 to 2026.03.01)
+[make_ini] window 'IS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_USDCNH\windows\IS_build\IS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'IS_build'
+    window 'IS_build': csv=False trades=0 report=False
+[2] Window 'OOS_build' (2026.03.01 to 2026.07.01)
+[make_ini] window 'OOS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_USDCNH\windows\OOS_build\OOS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'OOS_build'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'OOS_build': csv=False trades=0 report=False
+[2] Window 'holdout' (2026.07.01 to 2026.08.28)
+[make_ini] window 'holdout' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_USDCNH\windows\holdout\holdout.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'holdout'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'holdout': csv=False trades=0 report=False
+
+[done] report -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_USDCNH\report.md
+=== RUN sweep_turtle_USDJPY ===
+=== run_candidate: sweep_turtle_USDJPY (EA=CK_TURTLE_SOUP_v1) ===
+[1] Compiling CK_TURTLE_SOUP_v1 ...
+[compile] source : C:\Users\prita\CK_GFT_Repo\CK_TURTLE_SOUP_v1.mq5
+[compile] deploy : C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+----- compile log -----
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: compiling C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.mq5 : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Object.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\StdLibErr.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\OrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\HistoryOrderInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\PositionInfo.mqh
+C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\Trade.mqh : information: including C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Include\Trade\DealInfo.mqh
+ : information: generating code
+ : information: generating code 3%
+ : information: generating code 6%
+ : information: generating code 9%
+ : information: generating code 12%
+ : information: generating code 15%
+ : information: generating code 18%
+ : information: generating code 21%
+ : information: generating code 24%
+ : information: generating code 27%
+ : information: generating code 30%
+ : information: generating code 33%
+ : information: generating code 36%
+ : information: generating code 39%
+ : information: generating code 42%
+ : information: generating code 45%
+ : information: generating code 48%
+ : information: generating code 51%
+ : information: generating code 54%
+ : information: generating code 57%
+ : information: generating code 60%
+ : information: generating code 63%
+ : information: generating code 66%
+ : information: generating code 69%
+ : information: generating code 72%
+ : information: generating code 75%
+ : information: generating code 78%
+ : information: generating code 81%
+ : information: generating code 84%
+ : information: generating code 87%
+ : information: generating code 90%
+ : information: generating code 93%
+ : information: generating code 95%
+ : information: generating code 100%
+ : information: code generated
+Result: 0 errors, 0 warnings, 551 ms elapsed, cpu='X64 Regular'
+-----------------------
+[compile] OK (warnings=0) -> C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\CK_TURTLE_SOUP_v1.ex5
+[2] Window 'IS_build' (2025.08.28 to 2026.03.01)
+[make_ini] window 'IS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_USDJPY\windows\IS_build\IS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'IS_build'
+    window 'IS_build': csv=False trades=0 report=False
+[2] Window 'OOS_build' (2026.03.01 to 2026.07.01)
+[make_ini] window 'OOS_build' -> C:\Users\prita\CK_GFT_Repo\experiments\sweep_turtle_USDJPY\windows\OOS_build\OOS_build.ini (pinned 13 inputs)
+    launching MT5 tester (real ticks; first run may download ticks)...
+    WARNING: OnTester CSV not produced for 'OOS_build'
+    note: no fresh tester log found for this run (stale logs skipped)
+    window 'OOS_build': csv=False trades=0 report=False
+[2] Window 'holdout' (2026.07.01 to 2026.08.28)

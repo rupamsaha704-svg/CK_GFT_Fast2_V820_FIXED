@@ -1,0 +1,11 @@
+COMBO crypto(BTC+ETH+filter) + NQ  (2018-07-19..2026-09-01)  IS<2023/OOS>=2023
+sleeve correlation (OOS): +0.15   (low = good diversification)
+book                    FULLSh   ISSh  OOSSh  OOScagr  OOSdd
+crypto alone              1.04   1.34   0.62     5.5%  12.4%
+NQ alone                  0.30   0.29   0.32     2.7%  17.5%
+combo 50/50               0.87   1.08   0.61     4.3%   8.4%
+combo 70/30               1.01   1.27   0.66     4.8%   7.7%
+
+combo 50/50 per-year: 2018:+5%  2019:+8%  2020:+26%  2021:+13%  2022:+5%  2023:+9%  2024:+7%  2025:+3%  2026:+3%
+combo 50/50 OOS bootstrap Sharpe: mean 0.65  5th pct 0.02  P(>0) 95.8%
+DONE-COMBO

@@ -1,10 +1,7 @@
-# Huge, regenerable MT5 tester/compile logs (17-20 MB each; ~384 MB total).
-# The essential evidence (trades.csv, report.htm, report.md, presets, ledger) is kept.
-*.log
-
-# MetaTrader compiled binaries (rebuilt by MetaEditor from the .mq5 sources)
-*.ex5
-
-# OS / editor cruft
-Thumbs.db
-.DS_Store
+# Python scratch
+__pycache__/
+*.pyc
+# scratch / run artifacts (authoritative ledger is SPEC/dof_ledger.jsonl)
+v1_lab/__pycache__/
+v1_lab/run/
+v1_lab/evidence_manifest.jsonl

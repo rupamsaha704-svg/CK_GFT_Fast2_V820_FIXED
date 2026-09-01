@@ -1,0 +1,16 @@
+; CK_CRYPTO_TSMOM_v2  -  ETH sleeve (crypto, vol-filter ON, slightly lower risk)
+InpMagic=20260908
+InpL1=20
+InpL2=60
+InpL3=120
+InpL4=250
+InpVolWindow=60
+InpTargetVolAnnual=0.04
+InpMaxLeverage=3.0
+InpMaxLot=100.0
+InpAllowLong=true
+InpAllowShort=true
+InpVolFilter=true
+InpVolRefWindow=252
+InpVolFilterFloor=0.5
+InpDeadBandLots=0.0

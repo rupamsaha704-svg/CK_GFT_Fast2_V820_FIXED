@@ -1,0 +1,8 @@
+[BTCUSD 2024-05-20 13h] status=200 bytes=34605
+   DECODE OK via AUTO: 188480B -> 9424 ticks
+   ms=635 askRaw=669696 bidRaw=668952 /1000 ask=669.696 bid=668.952 avol=0.00
+   ms=695 askRaw=669707 bidRaw=668952 /1000 ask=669.707 bid=668.952 avol=0.00
+   ms=1606 askRaw=669707 bidRaw=668958 /1000 ask=669.707 bid=668.958 avol=0.00
+[USA100IDXUSD 2024-05-20 15h] status=None bytes=EXC:URLError:<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>
+[USATECHIDXUSD 2024-05-20 15h] status=None bytes=EXC:URLError:<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>
+=== DONE-NAS ===

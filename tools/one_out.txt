@@ -1,0 +1,6 @@
+status OK bytes=34605
+DECODE OK via AUTO: 188480B -> 9424 ticks
+  ms=635 ask=669.696 bid=668.952
+  ms=695 ask=669.707 bid=668.952
+  ms=1606 ask=669.707 bid=668.958
+DONE-ONE

@@ -1,0 +1,46 @@
+﻿C:\Python314\python.exe : C:\Users\prita\CK_GFT_
+Repo\SPEC\dof_ledger.py:31: DeprecationWarning: 
+datetime.datetime.utcnow() is deprecated and 
+scheduled for removal in a future version. Use 
+timezone-aware objects to represent datetimes 
+in UTC: datetime.datetime.now(datetime.UTC).
+At line:1 char:1
++ C:\Python314\python.exe SPEC\dof_ledger.py 
+--file SPEC\dof_ledger.jso ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C: 
+   \Users\prita\...(datetime.UTC).:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+  
+"ts":datetime.datetime.utcnow().isoformat()+"Z",
+=====LEDGER_APPEND=====
+{
+  "seq": 130,
+  "ts": "2026-09-01T04:46:46.957756Z",
+  "type": "RESULT",
+  "desc": "BTC+ETH_TSMOM_rigorous_validation_PASSED_bug_caught",
+  "ref_hash": "",
+  "meta": {
+    "ref": "seq129",
+    "base_OOS_Sharpe": "0.89",
+    "nextopen_exec": "0.89",
+    "worstcase_open+50bps+fund20": "0.34",
+    "caught_lookahead_bug_in_openexec": "fixed_was_fake_2.79",
+    "long_only": "FAIL_OOS-0.27",
+    "short_only": "+0.41",
+    "BTConly_OOS": "0.94",
+    "ETHonly_OOS": "0.38",
+    "bootstrap_P_sharpe_gt0": "97.7pct",
+    "5thpct": "0.18",
+    "years_pos": "9of9",
+    "robust_grid": "mostly_positive_prefer_daily_rebal",
+    "verdict": "VALIDATED_build_EA"
+  },
+  "prev_hash": "7c7581e36dc5a07f00e000191399cd2fdce6b15f9d2889b2edc96f618b705b5e",
+  "_hash": "2049a0ce3292a01c56268020bfa4f9bfd50fd14aa36442a5fa76075d20f02d29"
+}
+=====END=====

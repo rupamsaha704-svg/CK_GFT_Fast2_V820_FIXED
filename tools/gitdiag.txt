@@ -1,0 +1,17 @@
+﻿isrepo=true
+---REMOTE---
+origin	https://github.com/rupamsaha704-svg/CK_GFT_Fast2_V820_FIXED (fetch)
+origin	https://github.com/rupamsaha704-svg/CK_GFT_Fast2_V820_FIXED (push)
+---BRANCH---
+* kiro/mt5-validation-backup
+---COUNT=244
+---HEAD---
+93e700e MT5-native validation lab: tools, faithful EAs, experiments, reports, hash-chained ledger (honest result: no robust edge found)
+---GITIGNORE---
+# Python scratch
+__pycache__/
+*.pyc
+# scratch / run artifacts (authoritative ledger is SPEC/dof_ledger.jsonl)
+v1_lab/__pycache__/
+v1_lab/run/
+v1_lab/evidence_manifest.jsonl

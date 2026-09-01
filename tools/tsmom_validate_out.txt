@@ -1,0 +1,39 @@
+BTC+ETH TSMOM rigorous validation  (2017-11-09..2026-09-01, 3218 days)  IS<2023 / OOS>=2023
+all causal: 1-bar lag, rolling vol-target 10%, default 10bps cost
+
+=== 1. BASE (causal) ===
+  FULL Sharpe 1.17  CAGR 14.6%  maxDD 16.2%
+  IS   Sharpe 1.39   |   OOS Sharpe 0.89
+  per-year: 2018:+19%  2019:+14%  2020:+47%  2021:+26%  2022:+16%  2023:+14%  2024:+12%  2025:+10%  2026:+22%
+
+=== 2. EXECUTION / COST STRESS (OOS Sharpe) ===
+  close-exec 10bps         OOS  0.89  FULL  1.17
+  NEXT-OPEN exec 10bps     OOS  0.89  FULL  1.16
+  cost 25bps               OOS  0.74  FULL  1.04
+  cost 50bps               OOS  0.48  FULL  0.83
+  short-funding 20%/yr     OOS  0.75  FULL  1.03
+  open+50bps+fund20%       OOS  0.34  FULL  0.68
+
+=== 3. ROBUSTNESS GRID (OOS Sharpe) ===
+  rebalance every 1d:
+    [20, 60, 120, 250] vw20: 0.6  vw60: 0.9  vw120: 0.8
+    [30, 90, 180]      vw20: 0.3  vw60: 0.5  vw120: 0.4
+    [10, 30, 60]       vw20: 0.9  vw60: 0.9  vw120: 0.8
+    [50, 200]          vw20: 0.5  vw60: 0.7  vw120: 0.5
+  rebalance every 5d:
+    [20, 60, 120, 250] vw20: 0.4  vw60: 0.5  vw120: 0.4
+    [30, 90, 180]      vw20:-0.0  vw60: 0.2  vw120: 0.2
+    [10, 30, 60]       vw20: 0.7  vw60: 0.7  vw120: 0.6
+    [50, 200]          vw20: 0.5  vw60: 0.6  vw120: 0.4
+
+=== 4. ATTRIBUTION (FULL / OOS Sharpe) ===
+  BTC only           FULL  1.01   OOS  0.94
+  ETH only           FULL  0.86   OOS  0.38
+  both long+short    FULL  1.17   OOS  0.89
+  both LONG-only     FULL  0.04   OOS -0.27
+  both SHORT-only    FULL  0.23   OOS  0.41
+
+=== 5. STATISTICAL SIGNIFICANCE ===
+  years positive: 9/9  (binomial P under no-edge ~ 0.20%, heuristic)
+  OOS block-bootstrap Sharpe: mean 0.90  5th pct 0.18  P(Sharpe>0) 97.7%
+DONE-VALIDATE
