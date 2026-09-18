@@ -710,3 +710,30 @@ multiple self-owned accounts, exact EA fee for $5k.
   2. **Max risk/trade (FUNDED only) = 2%** (stricter than FundedNext's 3%). On $10k that is $200 combined SL+floating -> funded config must cap under it.
   3. Daily-loss basis (initial vs day-start) + floating-included: NOT explicit on the site -> confirm with support (reset is 00:00 GMT+3).
 - Account sizes incl $10k (user saw ~$10k cheap). $10k @ our validated rate ~= 2x the $6k income ~= ~Tk 35,000/mo (clears the goal) IF we adapt the config (weekend-flat + 2% funded) and re-validate.
+
+
+---
+
+## Other-firm screening — EA-autonomy + weekend holding (researched 2026-09-19)
+
+**Why this matters:** our system is a FULLY AUTONOMOUS EA that HOLDS trades over weekends. A firm is only
+usable if it allows BOTH (a) autonomous EA on MT5 in challenge AND funded, and (b) weekend holding. Many
+firms fail one of these. Web sources CONFLICT on EA rules (e.g. one list calls FTMO/FundingPips "best for
+EA", another says autonomous EAs are "banned" there) — the nuance is *custom-EA-autonomous* vs *third-party
+/ risk-manager-only*. **Do NOT trust any firm below until its EA-autonomous + weekend-funded rules are
+confirmed in writing by its own support (the way FundedNext's "Annie" confirmed ours).**
+
+| Firm | Drawdown | Weekend hold | Autonomous EA | Notes |
+|---|---|---|---|---|
+| **FundedNext (Stellar 2-Step)** | 10% STATIC | ✅ unconditional | ✅ confirmed (+$5 fee, <$50k) | **Our target — all 3 verified directly.** |
+| Goat Funded Trader | 10% STATIC | ✅ | ✅ confirmed | Goat Guard (2% floating) caps funded return. Fallback. |
+| FundingPips | 10% STATIC (never moves) | ⚠️ allowed "in evaluation"; funded unclear | ⚠️ help page: third-party EAs only as "trade/risk manager" | Cheap, $254M+ paid, split to 95%. Per-trade 3% risk cap (<$50k). MUST verify autonomous-EA + funded-weekend before trust. Sizes $5k–$200k. |
+| FTMO | 10% max / 5% daily (static-ish) | ⚠️ only on **Swing** account type | ✅ EA allowed (own it) | Longest payout record; pricier. Weekend needs the Swing product. |
+| The5ers / E8 / FXIFY / FundYourFX / Blueberry | mixed | mixed | ⚠️ one source flags EA restrictions/bans | Each needs full per-firm verification; several restrict exactly what we need. |
+| IXU Capital | 10% STATIC | ❌ banned | plausible on MT5 | **REJECTED** — no weekends guts our edge (see PROP_RULES/IXU_Capital.md). |
+
+**Conclusion:** FundedNext is genuinely one of the FEW firms that cleanly allows our exact setup
+(autonomous EA + weekend holds + static DD), not just a default pick. There is no obvious cheaper/bigger
+"switch" that is confirmed safe — every alternative restricts autonomous EAs and/or weekend holding, or is
+unverified. **The income lever therefore stays: account SIZE on FundedNext** (~$6k → ~৳16k/mo; ~$15k →
+~৳40k/mo, which clears the ৳30k goal), or (later) a few DIFFERENTIATED sub-$50k accounts.
