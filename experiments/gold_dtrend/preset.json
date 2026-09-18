@@ -1,0 +1,36 @@
+{
+  "ea": "CK_GOLD_DTREND",
+  "trades_csv": "ck_gold_dtrend_trades.csv",
+  "symbol": "XAUUSD",
+  "period": "H1",
+  "model": 1,
+  "execution_mode": 0,
+  "deposit": 5000,
+  "currency": "USD",
+  "leverage": 100,
+  "windows": [
+    { "id": "full", "from": "2025.09.01", "to": "2026.08.27" },
+    { "id": "chop", "from": "2026.03.01", "to": "2026.08.27" }
+  ],
+  "inputs": {
+    "InpMagic": 20260930,
+    "InpSigTF": 16408,
+    "InpEngine": 0,
+    "InpFastEMA": 20,
+    "InpSlowEMA": 100,
+    "InpKAMA_ER": 10,
+    "InpKAMA_Fast": 2,
+    "InpKAMA_Slow": 30,
+    "InpATRPeriod": 14,
+    "InpSL_ATR": 3.0,
+    "InpUseTrailATR": true,
+    "InpTrailATR": 3.0,
+    "InpRiskPercent": 1.0,
+    "InpMaxLot": 0.50,
+    "InpMaxSpreadPrice": 1.00,
+    "InpUseDailyLoss": true,
+    "InpDailyLossPct": 5.0,
+    "InpUseStaticDD": true,
+    "InpStaticDDStopPct": 8.0
+  }
+}

@@ -1,0 +1,15 @@
+==================================================================
+  GOLD (GC) - REJECTION candle at MAJOR S/R, 1:1  (honest, event-driven)
+==================================================================
+  LONG/SHORT
+    FULL n  59 wr 41% net-0.216R pf0.69
+    IS   n  41 wr 49% net-0.054R pf0.95
+    OOS  n  18 wr 22% net-0.586R pf0.29
+    rec15m n   7 wr 14% net-0.744R pf0.17
+  LONG-ONLY
+    FULL n  22 wr 59% net+0.152R pf1.44
+    IS   n  16 wr 69% net+0.345R pf2.20
+    OOS  n   6 wr 33% net-0.363R pf0.50
+    rec15m n   3 wr  0% net-1.030R pf0.00
+==================================================================
+DONE-REJ

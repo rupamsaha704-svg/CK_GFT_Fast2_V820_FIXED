@@ -1,0 +1,42 @@
+{
+  "ea": "CK_GOLD_MR",
+  "trades_csv": "ck_gold_mr_trades.csv",
+  "symbol": "XAUUSD",
+  "period": "M15",
+  "model": 1,
+  "execution_mode": 0,
+  "deposit": 5000,
+  "currency": "USD",
+  "leverage": 100,
+  "windows": [
+    { "id": "may",   "from": "2026.05.01", "to": "2026.06.01" },
+    { "id": "chop",  "from": "2026.03.01", "to": "2026.08.27" },
+    { "id": "trend", "from": "2025.09.01", "to": "2026.03.01" }
+  ],
+  "inputs": {
+    "InpMagic": 20260931,
+    "InpTF": 15,
+    "InpBBPeriod": 20,
+    "InpBBDev": 2.0,
+    "InpRSIPeriod": 2,
+    "InpRSIBuy": 10.0,
+    "InpRSISell": 90.0,
+    "InpUseRSI": true,
+    "InpADXPeriod": 14,
+    "InpADXMax": 25.0,
+    "InpAllowShort": true,
+    "InpATRPeriod": 14,
+    "InpSL_ATR": 1.5,
+    "InpTPmode": 0,
+    "InpMaxTradesPerDay": 6,
+    "InpRiskPercent": 1.0,
+    "InpMaxLot": 0.50,
+    "InpMaxRiskPerTradePct": 3.0,
+    "InpCapStopToRisk": true,
+    "InpMaxSpreadPrice": 1.00,
+    "InpUseDailyLoss": true,
+    "InpDailyLossPct": 5.0,
+    "InpUseStaticDD": true,
+    "InpStaticDDStopPct": 8.0
+  }
+}

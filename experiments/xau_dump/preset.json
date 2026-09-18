@@ -1,0 +1,17 @@
+{
+  "ea": "CK_DUMP",
+  "trades_csv": "ck_dump_trades.csv",
+  "symbol": "XAUUSD",
+  "period": "M15",
+  "model": 1,
+  "execution_mode": 0,
+  "deposit": 5000,
+  "currency": "USD",
+  "leverage": 100,
+  "windows": [
+    { "id": "chop", "from": "2026.03.01", "to": "2026.08.27" }
+  ],
+  "inputs": {
+    "InpBars": 60000
+  }
+}

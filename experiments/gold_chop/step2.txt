@@ -1,0 +1,29 @@
+
+================= FULL 10yr =================
+days=2483  CHOP=1437(58%)  TREND=1046(42%)
+strategy         ALLsh    ann%   maxDD |   CHOPsh CHOPann% |   TRNDsh
+TF-LO(base)       0.86     8.3  -0.154 |     0.80      6.9 |     0.93
+KAMA-LO           0.67     6.0  -0.220 |     0.60      4.8 |     0.77
+DIPBUY(uptr)      0.01     0.0  -0.072 |     0.20      0.4 |    -0.23
+TF+DIP combo      0.86     8.3  -0.154 |     0.80      6.9 |     0.93
+RANGEFADE         0.40     1.7  -0.137 |     0.52      3.0 |     0.00
+
+================= LAST 3Y =================
+days=756  CHOP=369(49%)  TREND=387(51%)
+strategy         ALLsh    ann%   maxDD |   CHOPsh CHOPann% |   TRNDsh
+TF-LO(base)       1.79    19.1  -0.105 |     2.51     22.8 |     1.30
+KAMA-LO           1.21    11.7  -0.104 |     1.85     14.3 |     0.83
+DIPBUY(uptr)      0.22     0.4  -0.024 |    -0.26     -0.6 |     1.05
+TF+DIP combo      1.79    19.1  -0.105 |     2.51     22.8 |     1.30
+RANGEFADE         0.67     2.7  -0.049 |     0.96      5.6 |     0.00
+
+================= LAST 1Y =================
+days=252  CHOP=99(39%)  TREND=153(61%)
+strategy         ALLsh    ann%   maxDD |   CHOPsh CHOPann% |   TRNDsh
+TF-LO(base)       1.38    15.6  -0.105 |     0.18      1.7 |     1.98
+KAMA-LO           1.35    13.9  -0.104 |     1.30      8.5 |     1.43
+DIPBUY(uptr)     -1.01    -2.4  -0.024 |    -1.61     -6.0 |     0.00
+TF+DIP combo      1.38    15.6  -0.105 |     0.18      1.7 |     1.98
+RANGEFADE        -1.19    -4.4  -0.044 |    -1.91    -11.2 |     0.00
+
+Goal: beat TF-LO baseline CHOPsh (10yr+0.80/3y+2.51/1y+0.18) WITHOUT hurting ALLsh or maxDD.

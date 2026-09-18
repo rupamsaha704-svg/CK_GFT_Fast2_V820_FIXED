@@ -1,0 +1,43 @@
+{
+  "ea": "CK_GOLD_CHOP",
+  "trades_csv": "ck_gold_chop_trades.csv",
+  "symbol": "XAUUSD",
+  "period": "M15",
+  "model": 1,
+  "execution_mode": 0,
+  "deposit": 5000,
+  "currency": "USD",
+  "leverage": 100,
+  "windows": [
+    { "id": "may_sep",  "from": "2026.05.01", "to": "2026.09.02" },
+    { "id": "aprsep",   "from": "2026.04.20", "to": "2026.09.02" },
+    { "id": "chop2025", "from": "2025.05.01", "to": "2025.09.01" }
+  ],
+  "inputs": {
+    "InpMagic": 20260934,
+    "InpTF": 15,
+    "InpRegimeTF": 16388,
+    "InpADXPeriod": 14,
+    "InpADXMaxChop": 25.0,
+    "InpSwingLookback": 12,
+    "InpSweepMinATR": 0.10,
+    "InpRevBodyATR": 0.30,
+    "InpAllowShort": true,
+    "InpATRPeriod": 14,
+    "InpSLbufATR": 0.20,
+    "InpTP_R": 1.5,
+    "InpBE_R": 1.0,
+    "InpUsePartial": true,
+    "InpPartialFrac": 0.5,
+    "InpMaxTradesPerDay": 6,
+    "InpRiskPercent": 0.5,
+    "InpMaxLot": 0.50,
+    "InpMaxRiskPerTradePct": 1.0,
+    "InpCapStopToRisk": true,
+    "InpMaxSpreadPrice": 1.00,
+    "InpUseDailyLoss": false,
+    "InpDailyLossPct": 5.0,
+    "InpUseStaticDD": false,
+    "InpStaticDDStopPct": 8.0
+  }
+}

@@ -1,0 +1,3 @@
+BTCUSDT: 7307 funding pts 2020-01-01..2026-09-01  avg=0.0108%/8h (~11.8%/yr)
+ETHUSDT: 7307 funding pts 2020-01-01..2026-09-01  avg=0.0127%/8h (~13.9%/yr)
+DONE-FUND

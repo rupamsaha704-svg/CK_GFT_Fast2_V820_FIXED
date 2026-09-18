@@ -1,0 +1,11 @@
+universe 39m 2016-08-30..2026-08-31  book=['BTC', 'ETH', 'NQ']
+BASE book         FULL Sh 1.16 DD 12.8% | IS 1.41 | OOS 0.76 DD  9.9%
+
+=== VOL-MANAGED overlay (causal; re-vol-targeted to 10%) ===
+VOL-MGD W=20       FULL Sh 1.10 DD 13.7% | IS 1.34 | OOS 0.78 DD 13.2%
+VOL-MGD W=60       FULL Sh 1.31 DD 12.2% | IS 1.55 | OOS 1.00 DD 12.2%
+
+BASE OOS: Sh 0.76 DD 9.9%
+gate -> OOS Sharpe up in BOTH windows: False ; DD down in BOTH: False
+VERDICT: REJECT (no robust improvement)
+DONE-OVL

@@ -1,0 +1,20 @@
+; CK_CRYPTO_BOOK_v3 - unified BTC+ETH+NQ daily time-series-momentum book (ONE EA, ONE chart).
+; Attach on ANY chart; it manages all 3 instruments by symbol. Rename InpSymbols to your
+; broker's exact names (e.g. NAS100 / US100 / USTEC). Weights 1.0/1.0/0.85 ~= 70/30 crypto/NQ.
+InpMagic=20260913
+InpSymbols=BTCUSD,ETHUSD,NAS100
+InpWeights=1.0,1.0,0.85
+InpL1=20
+InpL2=60
+InpL3=120
+InpL4=250
+InpVolWindow=60
+InpTargetVolAnnual=0.05
+InpMaxLeverage=3.0
+InpMaxLot=100.0
+InpAllowLong=true
+InpAllowShort=true
+InpVolFilter=true
+InpVolRefWindow=252
+InpVolFilterFloor=0.5
+InpDeadBandLots=0.0

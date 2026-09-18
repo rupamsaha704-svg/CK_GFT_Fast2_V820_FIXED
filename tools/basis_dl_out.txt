@@ -1,0 +1,3 @@
+BTCUSDT: 2436 days 2020-01-01..2026-09-01  first_basis=-0.05%
+ETHUSDT: 2436 days 2020-01-01..2026-09-01  first_basis=-0.11%
+DONE-BASIS

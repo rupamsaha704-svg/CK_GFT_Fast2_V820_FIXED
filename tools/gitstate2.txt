@@ -1,0 +1,4 @@
+﻿LOG:
+646befb Crypto+NQ TSMOM portfolio: validated book (BTC/ETH+NQ), honest scorecard, rejects log, results, free GEX collector
+93e700e MT5-native validation lab: tools, faithful EAs, experiments, reports, hash-chained ledger (honest result: no robust edge found)
+STATUS_COUNT=1

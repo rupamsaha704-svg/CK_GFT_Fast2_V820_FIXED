@@ -1,0 +1,3 @@
+﻿REMOTE_HAS_BRANCH:
+646befb0d63e4835bec13cbef463285510d14aa5	refs/heads/kiro/mt5-validation-backup
+GITPROC=0

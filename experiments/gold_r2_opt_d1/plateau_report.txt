@@ -1,0 +1,33 @@
+====================================================================
+MT5 OPTIMIZATION - PLATEAU / ROBUSTNESS DIAGNOSIS (not a peak-picker)
+====================================================================
+passes parsed          : 21
+profitable passes      : 21/21 = 100%   (broad % => robust plateau)
+PF>=1.0 passes         : 21/21 = 100%
+profit  median / min / max : 2991 / 1705 / 3966
+
+[InpBiasEMA] median-profit by value (plateau = contiguous >0 band):
+            50 : median       2991  (n=7)  <== plateau
+           125 : median       2991  (n=7)  <== plateau
+           200 : median       2991  (n=7)  <== plateau
+    -> plateau width 3/3 values; robust centre = 125
+
+[InpADXMin] median-profit by value (plateau = contiguous >0 band):
+            12 : median       3087  (n=3)  <== plateau
+            15 : median       2572  (n=3)  <== plateau
+            18 : median       3966  (n=3)  <== plateau
+            21 : median       3257  (n=3)  <== plateau
+            24 : median       2991  (n=3)  <== plateau
+            27 : median       2114  (n=3)  <== plateau
+            30 : median       1705  (n=3)  <== plateau
+    -> plateau width 7/7 values; robust centre = 21
+
+PEAK pass (DO NOT cherry-pick - shown for reference only):
+    profit 3966  PF 1.645129  trades 102.0  params {'InpBiasEMA': 200.0, 'InpADXMin': 18.0}
+ROBUST plateau-centre parameters (marginal): {'InpBiasEMA': 125.0, 'InpADXMin': 21.0}
+
+FORWARD cross-check    : 1/21 in-sample-profitable combos stay profitable forward = 5%
+--------------------------------------------------------------------
+PLATEAU VERDICT: FRAGILE / OVERFIT (spike-only or forward collapses) -> REJECT
+NOTE: this is a robustness diagnosis only. Real-tick (Model 4) + the deterministic
+      pipeline still own the final PASS/FAIL. Never deploy the peak pass.

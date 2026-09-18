@@ -1,0 +1,47 @@
+
+===================== FULL (10yr) =====================
+days=2483   CHOP(ADX<25)=1437 (58%)   TREND(ADX>=25)=1046 (42%)
+           CHOP(ER<0.30)=1646 (66%)   [secondary detector]
+
+strategy          ALLshrp  ALLann% | CHOPshrp CHOPann%    CHOP$ | TRNDshrp TRNDann%    TRND$
+TF long-only         0.86      8.3 |     0.80      6.9    0.396 |     0.93     10.2    0.424
+TF long/short        0.59      6.7 |     0.51      5.6    0.317 |     0.68      8.4    0.347
+MR long-only         0.34      1.4 |     0.35      1.5    0.084 |     0.33      1.4    0.059
+MR long/short       -0.33     -2.5 |    -0.20     -1.4   -0.078 |    -0.48     -4.1   -0.172
+SWITCH(tf/mr)        0.65      5.1 |     0.34      1.4    0.081 |     0.92     10.1    0.419
+
+>> TF long-only profit split:  TREND days = 51.7% of total,  CHOP days = 48.3% of total
+>> TF long-only maxDD(equity units): ALL=-0.154  (chop-only stream=-0.101)
+
+===================== LAST ~3Y =====================
+days=756   CHOP(ADX<25)=369 (49%)   TREND(ADX>=25)=387 (51%)
+           CHOP(ER<0.30)=511 (68%)   [secondary detector]
+
+strategy          ALLshrp  ALLann% | CHOPshrp CHOPann%    CHOP$ | TRNDshrp TRNDann%    TRND$
+TF long-only         1.79     19.1 |     2.51     22.8    0.334 |     1.30     15.6    0.240
+TF long/short        1.59     18.5 |     2.61     26.2    0.383 |     0.86     11.1    0.171
+MR long-only         0.82      3.1 |    -0.24     -1.0   -0.014 |     2.04      7.0    0.107
+MR long/short       -0.72     -5.8 |    -1.90    -12.7   -0.186 |     0.08      0.7    0.011
+SWITCH(tf/mr)        0.82      7.4 |    -0.25     -1.0   -0.015 |     1.29     15.5    0.238
+
+>> TF long-only profit split:  TREND days = 41.7% of total,  CHOP days = 58.3% of total
+>> TF long-only maxDD(equity units): ALL=-0.105  (chop-only stream=-0.091)
+
+===================== LAST ~1Y =====================
+days=252   CHOP(ADX<25)=99 (39%)   TREND(ADX>=25)=153 (61%)
+           CHOP(ER<0.30)=149 (59%)   [secondary detector]
+
+strategy          ALLshrp  ALLann% | CHOPshrp CHOPann%    CHOP$ | TRNDshrp TRNDann%    TRND$
+TF long-only         1.38     15.6 |     0.18      1.7    0.007 |     1.98     24.6    0.150
+TF long/short        1.17     14.8 |    -0.08     -0.8   -0.003 |     1.80     24.9    0.151
+MR long-only        -0.43     -2.0 |    -1.89    -10.8   -0.042 |     0.94      3.7    0.022
+MR long/short       -1.53    -14.8 |    -3.61    -26.6   -0.104 |    -0.66     -7.1   -0.043
+SWITCH(tf/mr)        1.03     10.7 |    -1.90    -10.8   -0.043 |     1.98     24.6    0.149
+
+>> TF long-only profit split:  TREND days = 95.7% of total,  CHOP days = 4.3% of total
+>> TF long-only maxDD(equity units): ALL=-0.105  (chop-only stream=-0.091)
+
+----- note -----
+Positive CHOPshrp/CHOP$ for a strategy = that strategy MAKES money in chop.
+TF is expected >0 in TREND, <=0 in CHOP. MR is the chop candidate.
+SWITCH uses TF in trend + MR in chop; compare its ALLshrp to TF-only ALLshrp.

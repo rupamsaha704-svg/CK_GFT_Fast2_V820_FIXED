@@ -1,0 +1,47 @@
+; CK_GOLD_DTREND - GFT 5K 2-step, XAUUSD CFD, min lot 0.01, STATIC-DD firm.
+; GOAL = generate the MOST profit while respecting the rules (10% static from initial, 5% daily).
+; H4 long-only gold trend + D1 trend-confirm + ADX regime stand-down. Never shorts. Auto sits out chop.
+; Attach on XAUUSD H1 chart. Deposit 5000 USD.
+;
+; DEFAULT = BALANCED sizing (risk 2.5% / cap 5% = a single trade can't break the 5% daily rule):
+;   Backtest (Model-1, MetaQuotes-Demo XAUUSD ~1yr, gold ~3300->5000):
+;   FULL yr +55% PF2.16 (39 tr); trend leg +82% PF5.19; MAY-SEP chop -1.1%; STATIC DD from initial ~0.4% (balance-abs 0).
+;   NOTE: Model-4 real-tick is ~30% lower (expect ~+38% real). High returns lean on a trend arriving to build a buffer.
+;
+; RISK SPECTRUM (change InpRiskPercent + InpMaxRiskPerTradePct):
+;   SAFE     : 1.0 / 3.0  -> ~+16-25% (M1), per-trade <=3%, smoothest.
+;   BALANCED : 2.5 / 5.0  -> ~+55% (M1), per-trade <=5% (daily-rule safe).   <-- default
+;   AGGRESSIVE: 3.0 / 8.0 -> ~+74% (M1) BUT per-trade up to 8% can breach the 5% DAILY rule on a bad trade.
+; Other tweaks: InpUseHTFtrend=false -> more profit in trend but chop bleeds; InpSigTF=16385 -> H1 (~109 tr/yr, more active).
+InpMagic=20260930
+InpSigTF=16388
+InpEngine=0
+InpFastEMA=20
+InpSlowEMA=100
+InpKAMA_ER=10
+InpKAMA_Fast=2
+InpKAMA_Slow=30
+InpUseRegime=true
+InpRegimeTF=16388
+InpRegimeADXPeriod=14
+InpADXTrendMin=20.0
+InpUseHTFtrend=true
+InpHTFtrendTF=16408
+InpHTFtrendEMA=50
+InpUseChop=false
+InpChopTF=16388
+InpChopPeriod=14
+InpChopMax=61.8
+InpATRPeriod=14
+InpSL_ATR=2.0
+InpUseTrailATR=true
+InpTrailATR=3.0
+InpRiskPercent=2.5
+InpMaxLot=0.50
+InpMaxRiskPerTradePct=5.0
+InpCapStopToRisk=true
+InpMaxSpreadPrice=1.00
+InpUseDailyLoss=true
+InpDailyLossPct=5.0
+InpUseStaticDD=true
+InpStaticDDStopPct=9.0

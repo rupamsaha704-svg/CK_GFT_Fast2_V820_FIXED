@@ -1,0 +1,40 @@
+﻿C:\Python314\python.exe : C:\Users\prita\CK_GFT_
+Repo\SPEC\dof_ledger.py:31: DeprecationWarning: 
+datetime.datetime.utcnow() is deprecated and 
+scheduled for removal in a future version. Use 
+timezone-aware objects to represent datetimes 
+in UTC: datetime.datetime.now(datetime.UTC).
+At line:1 char:1
++ C:\Python314\python.exe SPEC\dof_ledger.py 
+--file SPEC\dof_ledger.jso ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C: 
+   \Users\prita\...(datetime.UTC).:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+  
+"ts":datetime.datetime.utcnow().isoformat()+"Z",
+=====LEDGER_APPEND=====
+{
+  "seq": 139,
+  "ts": "2026-09-01T09:26:39.598072Z",
+  "type": "RESULT",
+  "desc": "funding_carry_uncorrelated_promising_BUT_backtest_inflated",
+  "ref_hash": "",
+  "meta": {
+    "data": "Binance_funding_2020-2026_7307pts_free",
+    "avg_yield": "BTC11.8+ETH13.9pct_yr",
+    "corr_to_trend": "+0.06_OOS_GREAT_diversifier",
+    "backtest_Sharpe": "5-10_UNREALISTIC",
+    "reason": "funding_only_ignores_basis+liquidation+exchange_dePeg_tailrisk",
+    "truth": "pennies_before_steamroller_real_Sharpe_1-3",
+    "verdict": "PROMISING_needs_realistic_risk_model+exchange_API",
+    "next": "basis_data+tail_stress_before_trust"
+  },
+  "prev_hash": "8c61d54e7bc1f7088c508b6859236563954c4eccc21011d1ba6ba1a9a872ecab",
+  "_hash": "79f496a734440e80d95c20596b17a9ddd776ff870e6fe84ad76ae2ce0ab2dfc5"
+}
+=====END=====

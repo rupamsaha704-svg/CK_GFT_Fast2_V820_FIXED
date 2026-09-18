@@ -1,0 +1,19 @@
+﻿git : To https://github.com/rupamsaha704-svg/CK_
+GFT_Fast2_V820_FIXED
+At line:1 char:1
++ git push -u origin kiro/mt5-validation-backup 
+2>&1 | Out-File tools\_ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~
+    + CategoryInfo          : NotSpecified: (To 
+    https://gith...ast2_V820_FIXED:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+   646befb..8a85a17  kiro/mt5-validation-backup 
+-> kiro/mt5-validation-backup
+branch 'kiro/mt5-validation-backup' set up to track 'origin/kiro/mt5-validation-backup'.
+EXIT=0
+8a85a17 Honest portfolio: REJECT ICT ChoCh V3 (MT5) + crypto book deploy guide
+646befb Crypto+NQ TSMOM portfolio: validated book (BTC/ETH+NQ), honest scorecard, rejects log, results, free GEX collector

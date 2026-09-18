@@ -1,0 +1,34 @@
+GFT 5K 2-step prop sim  book=['BTC', 'ETH', 'NQ']  2017-05-10..2026-08-31
+rules: Step1 +8% Step2 +5% | daily loss 5% | STATIC DD 10% from $5000 | no time limit
+
+=== vol target 6%  (per-$5000) ===
+  FULL   ann   7.0%  maxDD(peak)  7.8%  worstday -2.5%
+  last3y ann   4.7%  maxDD(peak)  6.0%  worstday -2.5%
+  challenge (over 1131 historical starts):
+    Step1 pass 90.2% (median 212d) | BOTH steps pass 78.2% (step2 median 178d)
+    fail static-DD  0.0% | fail daily-loss  0.0%
+
+=== vol target 8%  (per-$5000) ===
+  FULL   ann   9.4%  maxDD(peak) 10.3%  worstday -3.3%
+  last3y ann   6.2%  maxDD(peak)  8.0%  worstday -3.3%
+  challenge (over 1131 historical starts):
+    Step1 pass 95.6% (median 156d) | BOTH steps pass 86.1% (step2 median 174d)
+    fail static-DD  0.1% | fail daily-loss  0.0%
+
+=== vol target 10%  (per-$5000) ===
+  FULL   ann  11.7%  maxDD(peak) 12.8%  worstday -4.1%
+  last3y ann   7.7%  maxDD(peak)  9.9%  worstday -4.1%
+  challenge (over 1131 historical starts):
+    Step1 pass 96.8% (median 123d) | BOTH steps pass 86.9% (step2 median 41d)
+    fail static-DD  0.4% | fail daily-loss  0.0%
+
+=== vol target 12%  (per-$5000) ===
+  FULL   ann  14.1%  maxDD(peak) 15.2%  worstday -5.0%
+  last3y ann   9.2%  maxDD(peak) 11.8%  worstday -5.0%
+  challenge (over 1131 historical starts):
+    Step1 pass 96.0% (median 93d) | BOTH steps pass 88.0% (step2 median 36d)
+    fail static-DD  1.4% | fail daily-loss  0.0%
+
+note: daily-rebalanced daily book -> intraday not modeled; daily P&L used for the 5% daily check.
+      'static DD from initial' is the binding GFT constraint; lower vol = safer DD, slower target.
+DONE-PROP

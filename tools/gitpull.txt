@@ -1,0 +1,118 @@
+﻿git : From https://github.com/rupamsaha704-svg/C
+K_GFT_Fast2_V820_FIXED
+At line:1 char:1
++ git fetch --all 2>&1 | Out-File 
+tools\gitpull.txt -Encoding utf8; git ...
++ ~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Fr 
+   om https://gi...ast2_V820_FIXED:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+ * [new branch]      feature/ict-choch-fib-v1 
+-> origin/feature/ict-choch-fib-v1
+ * [new branch]      
+feature/ict-choch-v3-frequency -> 
+origin/feature/ict-choch-v3-frequency
+ * [new branch]      
+feature/xau-hybrid-knee-v21 -> 
+origin/feature/xau-hybrid-knee-v21
+ * [new branch]      
+feature/xau-hybrid-knee-v22 -> 
+origin/feature/xau-hybrid-knee-v22
+ * [new branch]      
+feature/xau-hybrid-knee-v23 -> 
+origin/feature/xau-hybrid-knee-v23
+ * [new branch]      goat1-v812-fixed-sl-tp  -> 
+origin/goat1-v812-fixed-sl-tp
+ * [new branch]      
+kiro/best-maxloss83-timefilter -> 
+origin/kiro/best-maxloss83-timefilter
+ * [new branch]      
+kiro/best-maxloss85-book002 -> 
+origin/kiro/best-maxloss85-book002
+ * [new branch]      kiro/v13-final-fixes    -> 
+origin/kiro/v13-final-fixes
+ * [new branch]      kiro/v14-partial-tp     -> 
+origin/kiro/v14-partial-tp
+ * [new branch]      kiro/v15-be-at-65       -> 
+origin/kiro/v15-be-at-65
+ * [new branch]      kiro/v16-clean-base     -> 
+origin/kiro/v16-clean-base
+ * [new branch]      kiro/v17-sell-and-rr3   -> 
+origin/kiro/v17-sell-and-rr3
+ * [new branch]      kiro/v18-final          -> 
+origin/kiro/v18-final
+ * [new branch]      kiro/v18-rr-133         -> 
+origin/kiro/v18-rr-133
+ * [new branch]      kiro/v18-rr133-profitlock 
+-> origin/kiro/v18-rr133-profitlock
+ * [new branch]      kiro/v19-tp1-removed    -> 
+origin/kiro/v19-tp1-removed
+ * [new branch]      kiro/v20-no-partial-tp  -> 
+origin/kiro/v20-no-partial-tp
+ * [new branch]      kiro/v22-fixed-lot-002  -> 
+origin/kiro/v22-fixed-lot-002
+ * [new branch]      
+kiro/v22-optimized-defaults -> 
+origin/kiro/v22-optimized-defaults
+ * [new branch]      kiro/v22-regime-adx-filter 
+-> origin/kiro/v22-regime-adx-filter
+ * [new branch]      kiro/v23-tp1-40-no-tp2  -> 
+origin/kiro/v23-tp1-40-no-tp2
+ * [new branch]      kiro/v24-tp1-at-25      -> 
+origin/kiro/v24-tp1-at-25
+ * [new branch]      kiro/v25-final-optimized 
+-> origin/kiro/v25-final-optimized
+ * [new branch]      kiro/v26-maxloss-230    -> 
+origin/kiro/v26-maxloss-230
+ * [new branch]      
+kiro/v27-stopday-after-maxloss -> 
+origin/kiro/v27-stopday-after-maxloss
+ * [new branch]      kiro/v28-gft-compliance -> 
+origin/kiro/v28-gft-compliance
+ * [new branch]      kiro/v29-final-management 
+-> origin/kiro/v29-final-management
+ * [new branch]      
+kiro/v30-fixed-lot-no-partial-timefilter -> 
+origin/kiro/v30-fixed-lot-no-partial-timefilter
+ * [new branch]      kiro/validation-toolkit -> 
+origin/kiro/validation-toolkit
+ * [new branch]      main                    -> 
+origin/main
+On branch kiro/mt5-validation-backup
+Your branch is up to date with 'origin/kiro/mt5-validation-backup'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   SPEC/dof_ledger.jsonl
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	data_funding/
+	tools/basis_dl.py
+	tools/basis_dl_out.txt
+	tools/funding_bt.py
+	tools/funding_bt2.py
+	tools/funding_bt2_out.txt
+	tools/funding_bt_out.txt
+	tools/funding_dl.py
+	tools/funding_dl_out.txt
+	tools/gitchk.txt
+	tools/gitchk2.txt
+	tools/gitcommit.txt
+	tools/gitpull.txt
+	tools/gitpush.txt
+	tools/gitpush2.txt
+	tools/gitstate2.txt
+	tools/ledger_fund.txt
+	tools/ledger_fund2.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+=====PULL=====
+Already up to date.
+=====LOG=====
+646befb Crypto+NQ TSMOM portfolio: validated book (BTC/ETH+NQ), honest scorecard, rejects log, results, free GEX collector
+93e700e MT5-native validation lab: tools, faithful EAs, experiments, reports, hash-chained ledger (honest result: no robust edge found)

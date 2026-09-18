@@ -1,0 +1,101 @@
+﻿git : warning: in the working copy of 
+'PORTFOLIO_FINAL/README.md', LF will be 
+replaced by CRLF the next time Git touches it
+At line:1 char:1
++ git add CK_XAU_ICT_ChoCh_V3.mq5 
+PORTFOLIO_FINAL/README.md PORTFOLIO_F ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (wa 
+   rning: in the... Git touches it:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+warning: in the working copy of 
+'PORTFOLIO_FINAL/REJECTED/REJECTED.md', LF will 
+be replaced by CRLF the next time Git touches it
+warning: in the working copy of 
+'SPEC/dof_ledger.jsonl', LF will be replaced by 
+CRLF the next time Git touches it
+warning: in the working copy of 'PORTFOLIO_FINAL
+/REJECTED/ICT_ChoCh_V3/README.md', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 'PORTFOLIO_FINAL
+/REJECTED/ICT_ChoCh_V3/relaxed_preset.json', LF 
+will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'PORTFOLIO_FINAL
+/REJECTED/ICT_ChoCh_V3/strict_preset.json', LF 
+will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 
+'PORTFOLIO_FINAL/WORKS/DEPLOY_GUIDE.md', LF 
+will be replaced by CRLF the next time Git 
+touches it
+=====STATUS=====
+A  CK_XAU_ICT_ChoCh_V3.mq5
+M  PORTFOLIO_FINAL/README.md
+A  PORTFOLIO_FINAL/REJECTED/ICT_ChoCh_V3/CK_XAU_ICT_ChoCh_V3.mq5
+A  PORTFOLIO_FINAL/REJECTED/ICT_ChoCh_V3/README.md
+A  PORTFOLIO_FINAL/REJECTED/ICT_ChoCh_V3/relaxed_preset.json
+A  PORTFOLIO_FINAL/REJECTED/ICT_ChoCh_V3/relaxed_report.md
+A  PORTFOLIO_FINAL/REJECTED/ICT_ChoCh_V3/strict_preset.json
+A  PORTFOLIO_FINAL/REJECTED/ICT_ChoCh_V3/strict_report.md
+M  PORTFOLIO_FINAL/REJECTED/REJECTED.md
+A  PORTFOLIO_FINAL/WORKS/DEPLOY_GUIDE.md
+M  SPEC/dof_ledger.jsonl
+ M tools/_compile/CK_CRYPTO_TSMOM_v2.compile.log
+?? data_funding/
+?? experiments/ictchoch_relaxed/
+?? experiments/ictchoch_strict/
+?? tools/_compile/CK_XAU_ICT_ChoCh_V3.compile.log
+?? tools/_copyv3.txt
+?? tools/_gitadd.txt
+?? tools/_ict_choch_v3.mq5
+?? tools/_ict_design.md
+?? tools/_ict_extract_done.txt
+?? tools/_ict_req.md
+?? tools/_ledger141.txt
+?? tools/_reject_copy.txt
+?? tools/_runA.txt
+?? tools/_runA_done.txt
+?? tools/_runB.txt
+?? tools/_runB_done.txt
+?? tools/_v2recompile.txt
+?? tools/_v2recompile_done.txt
+?? tools/_v3_compile.txt
+?? tools/_v3_compile_done.txt
+?? tools/basis_dl.py
+?? tools/basis_dl_out.txt
+?? tools/branches.txt
+?? tools/funding_bt.py
+?? tools/funding_bt2.py
+?? tools/funding_bt2_out.txt
+?? tools/funding_bt_out.txt
+?? tools/funding_dl.py
+?? tools/funding_dl_out.txt
+?? tools/gitchk.txt
+?? tools/gitchk2.txt
+?? tools/gitcommit.txt
+?? tools/gitpull.txt
+?? tools/gitpush.txt
+?? tools/gitpush2.txt
+?? tools/gitstate2.txt
+?? tools/ledger_fund.txt
+?? tools/ledger_fund2.txt
+=====COMMIT=====
+[kiro/mt5-validation-backup 8a85a17] Honest portfolio: REJECT ICT ChoCh V3 (MT5) + crypto book deploy guide
+ 11 files changed, 4816 insertions(+), 1 deletion(-)
+ create mode 100644 CK_XAU_ICT_ChoCh_V3.mq5
+ create mode 100644 PORTFOLIO_FINAL/REJECTED/ICT_ChoCh_V3/CK_XAU_ICT_ChoCh_V3.mq5
+ create mode 100644 PORTFOLIO_FINAL/REJECTED/ICT_ChoCh_V3/README.md
+ create mode 100644 PORTFOLIO_FINAL/REJECTED/ICT_ChoCh_V3/relaxed_preset.json
+ create mode 100644 PORTFOLIO_FINAL/REJECTED/ICT_ChoCh_V3/relaxed_report.md
+ create mode 100644 PORTFOLIO_FINAL/REJECTED/ICT_ChoCh_V3/strict_preset.json
+ create mode 100644 PORTFOLIO_FINAL/REJECTED/ICT_ChoCh_V3/strict_report.md
+ create mode 100644 PORTFOLIO_FINAL/WORKS/DEPLOY_GUIDE.md
+=====LOG=====
+8a85a17 Honest portfolio: REJECT ICT ChoCh V3 (MT5) + crypto book deploy guide
+646befb Crypto+NQ TSMOM portfolio: validated book (BTC/ETH+NQ), honest scorecard, rejects log, results, free GEX collector
+93e700e MT5-native validation lab: tools, faithful EAs, experiments, reports, hash-chained ledger (honest result: no robust edge found)

@@ -1,0 +1,3 @@
+﻿SB=## kiro/mt5-validation-backup
+GITPROC=4
+REMOTE_BRANCH:

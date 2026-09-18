@@ -1,0 +1,87 @@
+universe 39 markets  S/R BOUNCE 1:1  (SL beyond level +0.5ATR, TP=1R, timeout 20d, cost 0.03R)
+
+===== N=10 (robustness) =====
+  ALL              FULL n17757 wr  43% exp-0.134R net-0.164R pf0.76
+                    IS  n11193 wr  43% exp-0.131R net-0.161R pf0.77
+                    OOS n6564 wr  43% exp-0.140R net-0.170R pf0.75
+  bond             FULL n1748 wr  43% exp-0.136R net-0.166R pf0.76
+                    IS  n1112 wr  43% exp-0.140R net-0.170R pf0.75
+                    OOS n 636 wr  44% exp-0.129R net-0.159R pf0.77
+  commod           FULL n7342 wr  46% exp-0.087R net-0.117R pf0.84
+                    IS  n4591 wr  46% exp-0.079R net-0.109R pf0.85
+                    OOS n2751 wr  45% exp-0.101R net-0.131R pf0.82
+  crypto           FULL n1044 wr  41% exp-0.175R net-0.205R pf0.70
+                    IS  n 650 wr  42% exp-0.156R net-0.186R pf0.73
+                    OOS n 394 wr  39% exp-0.207R net-0.237R pf0.65
+  equity           FULL n4184 wr  45% exp-0.110R net-0.140R pf0.80
+                    IS  n2643 wr  45% exp-0.102R net-0.132R pf0.81
+                    OOS n1541 wr  44% exp-0.123R net-0.153R pf0.78
+  fx               FULL n3439 wr  37% exp-0.251R net-0.281R pf0.60
+                    IS  n2197 wr  37% exp-0.264R net-0.294R pf0.58
+                    OOS n1242 wr  38% exp-0.230R net-0.260R pf0.63
+
+===== N=20 (PRIMARY) =====
+  ALL              FULL n13225 wr  42% exp-0.161R net-0.191R pf0.72
+                    IS  n8417 wr  42% exp-0.167R net-0.197R pf0.71
+                    OOS n4808 wr  43% exp-0.149R net-0.179R pf0.74
+  bond             FULL n1323 wr  43% exp-0.148R net-0.178R pf0.74
+                    IS  n 854 wr  41% exp-0.182R net-0.212R pf0.69
+                    OOS n 469 wr  46% exp-0.087R net-0.117R pf0.84
+  commod           FULL n5356 wr  44% exp-0.116R net-0.146R pf0.79
+                    IS  n3407 wr  44% exp-0.110R net-0.140R pf0.80
+                    OOS n1949 wr  44% exp-0.126R net-0.156R pf0.78
+  crypto           FULL n 768 wr  39% exp-0.220R net-0.250R pf0.63
+                    IS  n 476 wr  39% exp-0.218R net-0.248R pf0.63
+                    OOS n 292 wr  38% exp-0.222R net-0.252R pf0.63
+  equity           FULL n3221 wr  44% exp-0.129R net-0.159R pf0.77
+                    IS  n2059 wr  43% exp-0.136R net-0.166R pf0.76
+                    OOS n1162 wr  44% exp-0.115R net-0.145R pf0.79
+  fx               FULL n2557 wr  36% exp-0.284R net-0.314R pf0.56
+                    IS  n1621 wr  35% exp-0.305R net-0.335R pf0.53
+                    OOS n 936 wr  38% exp-0.248R net-0.278R pf0.60
+  -- key single markets --
+  GC               FULL n 321 wr  41% exp-0.184R net-0.214R pf0.69
+                    IS  n 204 wr  44% exp-0.118R net-0.148R pf0.79
+                    OOS n 117 wr  35% exp-0.299R net-0.329R pf0.54
+  EURUSD           FULL n 364 wr  39% exp-0.214R net-0.244R pf0.65
+                    IS  n 232 wr  42% exp-0.164R net-0.194R pf0.72
+                    OOS n 132 wr  35% exp-0.303R net-0.333R pf0.53
+  GBPUSD           FULL n 363 wr  33% exp-0.333R net-0.363R pf0.50
+                    IS  n 230 wr  33% exp-0.348R net-0.378R pf0.48
+                    OOS n 133 wr  35% exp-0.308R net-0.338R pf0.53
+  USDJPY           FULL n 372 wr  36% exp-0.283R net-0.313R pf0.56
+                    IS  n 233 wr  35% exp-0.306R net-0.336R pf0.53
+                    OOS n 139 wr  37% exp-0.245R net-0.275R pf0.60
+  NQ               FULL n 424 wr  39% exp-0.221R net-0.251R pf0.64
+                    IS  n 279 wr  38% exp-0.246R net-0.276R pf0.60
+                    OOS n 145 wr  41% exp-0.172R net-0.202R pf0.71
+  ES               FULL n 413 wr  41% exp-0.186R net-0.216R pf0.69
+                    IS  n 259 wr  39% exp-0.227R net-0.257R pf0.63
+                    OOS n 154 wr  44% exp-0.117R net-0.147R pf0.79
+  BTC              FULL n 412 wr  39% exp-0.212R net-0.242R pf0.65
+                    IS  n 267 wr  40% exp-0.194R net-0.224R pf0.67
+                    OOS n 145 wr  37% exp-0.245R net-0.275R pf0.60
+  ETH              FULL n 356 wr  38% exp-0.228R net-0.258R pf0.62
+                    IS  n 209 wr  37% exp-0.249R net-0.279R pf0.59
+                    OOS n 147 wr  39% exp-0.199R net-0.229R pf0.66
+
+===== N=50 (robustness) =====
+  ALL              FULL n8300 wr  41% exp-0.174R net-0.204R pf0.70
+                    IS  n5259 wr  40% exp-0.191R net-0.221R pf0.68
+                    OOS n3041 wr  43% exp-0.146R net-0.176R pf0.74
+  bond             FULL n 846 wr  42% exp-0.165R net-0.195R pf0.72
+                    IS  n 559 wr  38% exp-0.235R net-0.265R pf0.62
+                    OOS n 287 wr  49% exp-0.030R net-0.060R pf0.94
+  commod           FULL n3284 wr  43% exp-0.131R net-0.161R pf0.77
+                    IS  n2099 wr  43% exp-0.133R net-0.163R pf0.76
+                    OOS n1185 wr  44% exp-0.129R net-0.159R pf0.77
+  crypto           FULL n 481 wr  40% exp-0.195R net-0.225R pf0.67
+                    IS  n 294 wr  39% exp-0.209R net-0.239R pf0.65
+                    OOS n 187 wr  41% exp-0.174R net-0.204R pf0.70
+  equity           FULL n2158 wr  43% exp-0.148R net-0.178R pf0.74
+                    IS  n1351 wr  42% exp-0.150R net-0.180R pf0.74
+                    OOS n 807 wr  43% exp-0.144R net-0.174R pf0.75
+  fx               FULL n1531 wr  35% exp-0.303R net-0.333R pf0.53
+                    IS  n 956 wr  33% exp-0.343R net-0.373R pf0.49
+                    OOS n 575 wr  38% exp-0.236R net-0.266R pf0.62
+DONE-SR

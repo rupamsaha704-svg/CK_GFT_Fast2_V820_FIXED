@@ -1,0 +1,27 @@
+universe 39m, 3654 days 2016-08-30..2026-08-31  IS<2023/OOS>=2023
+TREND book ['BTC', 'ETH', 'NQ']  FULL Sh 1.16 | IS 1.41 | OOS 0.76 DD 9.9%
+
+=== REVERSAL primary (win=5) — per class ===
+  REV5  ALL   FULL -1.09 OOS -0.56 DD 31.7%  corr(book)OOS -0.08
+  REV5  ex-FX FULL -1.10 OOS -0.58 DD 36.5%  corr(book)OOS -0.10
+      bond    FULL -1.27 OOS -0.46
+      commod  FULL -0.57 OOS -0.29
+      crypto  FULL -0.61 OOS -0.46
+      equity  FULL -0.38 OOS -0.24
+      fx      FULL -0.33 OOS -0.10
+
+=== robustness (NOT for cherry-picking) ===
+  REV3  ALL   FULL -1.42 OOS -0.67 DD 32.6%  corr(book)OOS -0.04
+  REV3  ex-FX FULL -1.34 OOS -0.61 DD 31.0%  corr(book)OOS -0.05
+  REV10 ALL   FULL -0.63 OOS -0.55 DD 29.1%  corr(book)OOS -0.15
+  REV10 ex-FX FULL -0.68 OOS -0.60 DD 30.4%  corr(book)OOS -0.16
+
+=== COMBO book + REV(primary) : does adding it help? ===
+  (book alone: OOS Sh 0.76 DD 9.9%)
+  book+REV_ALL  a=0.80  FULL Sh 0.88 | OOS Sh 0.62 DD 11.4%
+  book+REV_ALL  a=0.70  FULL Sh 0.66 | OOS Sh 0.51 DD 12.1%
+  book+REV_ALL  a=0.60  FULL Sh 0.38 | OOS Sh 0.36 DD 12.9%
+  book+REV_exFX a=0.80  FULL Sh 0.88 | OOS Sh 0.62 DD 10.7%
+  book+REV_exFX a=0.70  FULL Sh 0.66 | OOS Sh 0.51 DD 11.7%
+  book+REV_exFX a=0.60  FULL Sh 0.38 | OOS Sh 0.35 DD 13.1%
+DONE-REV

@@ -1,0 +1,62 @@
+S/R IMPROVE test  N=20 MA=200  cost 0.03R  (net = after cost)
+
+===== base =====
+  ALL     FULL n12263 wr 42% net-0.194R pf0.72   OOS n4808 wr 43% net-0.179R pf0.74
+  bond    OOS n 469 wr 46% net-0.117R pf0.84
+  commod  OOS n1949 wr 44% net-0.156R pf0.78
+  crypto  OOS n 292 wr 38% net-0.252R pf0.63
+  equity  OOS n1162 wr 44% net-0.145R pf0.79
+  fx      OOS n 936 wr 38% net-0.278R pf0.60
+    GC      OOS n 117 wr 35% net-0.329R pf0.54
+    EURUSD  OOS n 132 wr 35% net-0.333R pf0.53
+    BTC     OOS n 145 wr 37% net-0.275R pf0.60
+    NQ      OOS n 145 wr 41% net-0.202R pf0.71
+
+===== +confirm =====
+  ALL     FULL n5574 wr 47% net-0.096R pf0.88   OOS n2042 wr 46% net-0.106R pf0.86
+  bond    OOS n 244 wr 45% net-0.138R pf0.80
+  commod  OOS n 908 wr 48% net-0.072R pf0.92
+  crypto  OOS n 130 wr 42% net-0.157R pf0.76
+  equity  OOS n 553 wr 48% net-0.077R pf0.91
+  fx      OOS n 207 wr 38% net-0.265R pf0.62
+    GC      OOS n  50 wr 40% net-0.230R pf0.67
+    EURUSD  OOS n  13 wr 23% net-0.568R pf0.30
+    BTC     OOS n  67 wr 39% net-0.217R pf0.67
+    NQ      OOS n  78 wr 45% net-0.145R pf0.79
+
+===== +trend =====
+  ALL     FULL n3451 wr 44% net-0.153R pf0.78   OOS n1328 wr 43% net-0.175R pf0.74
+  bond    OOS n 132 wr 46% net-0.099R pf0.87
+  commod  OOS n 539 wr 46% net-0.107R pf0.86
+  crypto  OOS n 106 wr 42% net-0.184R pf0.73
+  equity  OOS n 258 wr 48% net-0.061R pf0.94
+  fx      OOS n 293 wr 30% net-0.434R pf0.42
+    GC      OOS n  25 wr 24% net-0.550R pf0.32
+    EURUSD  OOS n  44 wr 27% net-0.485R pf0.38
+    BTC     OOS n  52 wr 42% net-0.169R pf0.75
+    NQ      OOS n  30 wr 50% net-0.030R pf1.00
+
+===== +both =====
+  ALL     FULL n1637 wr 49% net-0.055R pf0.95   OOS n 573 wr 47% net-0.081R pf0.90
+  bond    OOS n  77 wr 43% net-0.183R pf0.73
+  commod  OOS n 261 wr 51% net-0.019R pf1.02
+  crypto  OOS n  46 wr 50% net-0.010R pf1.04
+  equity  OOS n 119 wr 51% net-0.013R pf1.03
+  fx      OOS n  70 wr 33% net-0.363R pf0.49
+    GC      OOS n  12 wr 42% net-0.197R pf0.71
+    EURUSD  OOS n   4 wr  0% net-1.030R pf0.00
+    BTC     OOS n  25 wr 52% net+0.041R pf1.16
+    NQ      OOS n  13 wr 54% net-0.029R pf1.00
+
+===== +both@2R =====
+  ALL     FULL n1570 wr 36% net-0.040R pf0.98   OOS n 550 wr 35% net-0.035R pf0.99
+  bond    OOS n  75 wr 27% net-0.260R pf0.66
+  commod  OOS n 251 wr 40% net+0.083R pf1.19
+  crypto  OOS n  44 wr 34% net-0.079R pf0.92
+  equity  OOS n 113 wr 39% net+0.079R pf1.18
+  fx      OOS n  67 wr 22% net-0.390R pf0.53
+    GC      OOS n  11 wr 27% net-0.212R pf0.75
+    EURUSD  OOS n   4 wr  0% net-1.030R pf0.00
+    BTC     OOS n  25 wr 40% net+0.155R pf1.33
+    NQ      OOS n  12 wr 33% net-0.276R pf0.63
+DONE-SR2

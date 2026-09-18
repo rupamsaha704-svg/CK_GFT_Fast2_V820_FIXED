@@ -1,0 +1,29 @@
+==============================================================
+  RECENT-WINDOW report  ($5000, vol 6%/yr, costs in)  through 2026-08-31
+  simulated on validated daily data (not MT5 ticks). GOLD shown first.
+==============================================================
+GOLD (XAU / GC) - trend rule, STANDALONE  [your priority]
+  gold-trend
+    window      return%    P&L $  maxDD% worstday  win%
+    last 3m       -2.9%     -144    2.9%    -1.1%   30%
+    last 6m       -0.5%      -24    3.2%    -1.1%   27%
+    last 12m       2.5%      124    4.8%    -4.1%   28%
+    last 15m       2.4%      120    4.8%    -4.1%   30%
+  honest note: gold trend is RECENT-ONLY (was negative 2016-2022) -> riding the
+  current gold bull, NOT proven durable across regimes. Trade small / watch.
+--------------------------------------------------------------
+CRYPTO+NQ BOOK (the validated durable edge)
+  book
+    window      return%    P&L $  maxDD% worstday  win%
+    last 3m       -3.3%     -163    4.1%    -1.0%   44%
+    last 6m        2.6%      131    4.1%    -1.1%   52%
+    last 12m       4.2%      210    4.6%    -2.1%   50%
+    last 15m       3.3%      167    4.6%    -2.1%   50%
+--------------------------------------------------------------
+per-instrument (last 12m, standalone trend, vol 6%):
+    GC    12m ret   +2.5%  maxDD  4.8%  worst -4.1%
+    BTC   12m ret   +4.6%  maxDD  3.5%  worst -2.1%
+    ETH   12m ret   +3.3%  maxDD  3.8%  worst -1.8%
+    NQ    12m ret   +0.9%  maxDD  4.5%  worst -2.6%
+==============================================================
+DONE-RECENT

@@ -1,0 +1,32 @@
+==============================================================================
+  GOLD (GC) DEEP TREND STUDY  - Sharpe FULL/OOS/rec15m + rec15m ret% + FULL maxDD
+  each variant in LONG/SHORT (LS) and LONG-ONLY (LO). honest, no cherry-pick.
+==============================================================================
+  variant         mode  FULLsh  OOSsh  recSh  recRet  FULLdd
+  MAcross 10/50   LS      0.39   0.85   1.04   20.9%   18.6%
+  MAcross 10/50   LO      0.75   1.24   1.25   26.5%   15.5%
+  MAcross 20/100  LS      0.60   1.10   0.89   17.5%   17.5%
+  MAcross 20/100  LO      0.83   1.31   1.09   22.6%   13.8%
+  MAcross 20/50   LS      0.40   1.01   0.96   19.0%   20.6%
+  MAcross 20/50   LO      0.75   1.31   1.18   24.8%   15.7%
+  MAcross 50/200  LS      0.25   0.67   0.16    1.7%   34.0%
+  MAcross 50/200  LO      0.60   1.03   0.65   12.4%   20.9%
+  Donchian 10     LS     -0.06   0.25   1.07   21.6%   35.9%
+  Donchian 10     LO      0.53   0.99   1.31   29.2%   20.0%
+  Donchian 20     LS      0.10   0.58   0.78   14.9%   28.2%
+  Donchian 20     LO      0.60   1.11   1.09   23.4%   17.2%
+  Donchian 40     LS      0.59   1.12   0.95   18.7%   15.5%
+  Donchian 40     LO      0.86   1.32   1.09   24.5%   13.7%
+  Donchian 55     LS      0.24   0.90   0.30    4.5%   23.1%
+  Donchian 55     LO      0.65   1.19   0.75   15.1%   18.1%
+  TSMOM fast      LS      0.38   1.05   1.78   39.9%   26.4%
+  TSMOM fast      LO      0.77   1.39   1.75   39.0%   19.3%
+  TSMOM std       LS      0.45   0.97   0.89   18.0%   24.7%
+  TSMOM std       LO      0.61   1.10   1.01   21.4%   21.8%
+  TSMOM slow      LS      0.43   1.02   0.69   13.0%   27.1%
+  TSMOM slow      LO      0.72   1.25   0.96   19.7%   18.5%
+------------------------------------------------------------------------------
+  robustness: 22/22 variant-modes have POSITIVE OOS Sharpe
+  (broad positive = real trend edge on gold; only if most are +, not a lone spike)
+==============================================================================
+DONE-GOLDDEEP

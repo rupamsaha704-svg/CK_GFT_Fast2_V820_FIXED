@@ -1,0 +1,12 @@
+﻿QS	0	18:38:19.032	Network	'5052345932': authorized on MetaQuotes-Demo through Access Point IN 2 (ping: 218.65 ms, build 6151)
+HL	0	18:38:19.032	Network	'5052345932': previous successful authorization performed from 49.37.10.64 on 2026.09.01 15:29:49
+KN	0	18:38:19.330	Network	'5052345932': terminal synchronized with MetaQuotes Ltd.: 0 positions, 0 orders, 12455 symbols, 0 spreads
+RQ	0	18:38:19.330	Network	'5052345932': trading has been enabled, demo account - hedging mode
+FD	0	18:38:19.330	Network	'5052345932': balance management has been disabled - demo account
+KD	1	18:55:13.763	Network	'5052345932': connection to MetaQuotes-Demo lost
+FM	0	19:09:21.797	Network	'5052345932': authorized on MetaQuotes-Demo through Access Point IN 2 (ping: 223.19 ms, build 6151)
+FM	0	19:09:21.797	Network	'5052345932': previous successful authorization performed from 49.37.10.64 on 2026.09.01 16:08:18
+PO	0	19:09:22.101	Network	'5052345932': terminal synchronized with MetaQuotes Ltd.: 0 positions, 0 orders, 12455 symbols, 0 spreads
+IN	0	19:09:22.101	Network	'5052345932': trading has been enabled, demo account - hedging mode
+IR	0	19:09:22.101	Network	'5052345932': balance management has been disabled - demo account
+KF	0	19:09:22.632	Network	'5052345932': scanning network for access points

@@ -1,0 +1,11 @@
+REALISTIC carry (basis + funding)  (2020-09-10..2026-09-01, 2435 days)  cost 3%/yr
+  funding-ONLY       FULL Sh  10.13 ret  12.4% DD  0.8% worstday  -0.3% | IS  10.90 | OOS  16.43
+  REAL(basis+fund)   FULL Sh   9.17 ret  12.3% DD  0.8% worstday  -0.3% | IS   9.91 | OOS  13.29
+  REAL net           FULL Sh   6.80 ret   9.0% DD  1.5% worstday  -0.3% | IS   8.30 | OOS   7.84
+  corr(carry_real, trend): FULL +0.02  OOS -0.05
+  TREND only       FULL Sh  1.29 DD 11.4% | OOS Sh  0.82 DD 11.4%
+  CARRY only       FULL Sh  6.80 DD 11.1% | OOS Sh  7.84 DD  9.9%
+  COMBO 50/50      FULL Sh  5.66 DD  8.0% | OOS Sh  4.09 DD  7.4%
+  COMBO 60/40 tr/ca FULL Sh  4.80 DD  7.7% | OOS Sh  3.12 DD  7.0%
+  REAL-carry net per-year: 2020:+5%  2021:+36%  2022:-1%  2023:+5%  2024:+10%  2025:+2%  2026:-1%
+DONE-FB2

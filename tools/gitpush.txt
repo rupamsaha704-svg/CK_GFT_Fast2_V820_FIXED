@@ -1,0 +1,23 @@
+﻿git : remote: 
+At line:1 char:1
++ git push -u origin kiro/mt5-validation-backup 
+2>&1 | Out-File -Encodi ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~
+    + CategoryInfo          : NotSpecified: (re 
+   mote: :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+remote: Create a pull request for 
+'kiro/mt5-validation-backup' on GitHub by 
+visiting:        
+remote:      https://github.com/rupamsaha704-svg
+/CK_GFT_Fast2_V820_FIXED/pull/new/kiro/mt5-valid
+ation-backup        
+remote: 
+To https://github.com/rupamsaha704-svg/CK_GFT_Fa
+st2_V820_FIXED
+ * [new branch]      kiro/mt5-validation-backup 
+-> kiro/mt5-validation-backup
+branch 'kiro/mt5-validation-backup' set up to track 'origin/kiro/mt5-validation-backup'.

@@ -1,0 +1,2747 @@
+﻿=====ICT-CHOCH-FIB=====
+99911db Merge pull request #3 from rupamsaha704-svg/feature/ict-choch-v3-frequency
+251686c Add CK_XAU_ICT_ChoCh_V3.mq5 - trade frequency optimization
+8ffa54c Add CK_XAU_ICT_ChoCh_V2 - relaxed confirmation for more trades
+f5e7633 Add CK_XAU_ICT_ChoCh_V1 EA - ICT CHoCH + Fibonacci OTE strategy
+523dbbb Add CK_XAU_HybridKnee_V23 - revert to MT5-verified V20 baseline
+1258f06 Add CK_XAU_HybridKnee_V22 EA (backtest-driven fixes)
+78deebd Add CK_XAU_HybridKnee_V21 EA and spec
+e7c2151 Merge pull request #1 from rupamsaha704-svg/kiro/v13-final-fixes
+ .../2026-08-29-091252-review.md                    |     82 -
+ .../2026-08-29-092611-review.md                    |     67 -
+ .../tasks/task-qm-ict-variant-engine/context.json  |     30 -
+ .../features/FEAT-001.json                         |     30 -
+ .../features/FEAT-002.json                         |     30 -
+ .../features/FEAT-003.json                         |     30 -
+ .../features/FEAT-004.json                         |     28 -
+ .../features/FEAT-005.json                         |     30 -
+ .agents/tasks/task-qm-ict-variant-engine/task.json |     20 -
+ .gitignore                                         |      7 -
+ .kiro/agents/auditor.md                            |     40 -
+ .kiro/agents/forensic-journal.md                   |     39 -
+ .kiro/agents/setup-decoder.md                      |     40 -
+ .kiro/agents/validator.md                          |     45 -
+ .kiro/specs/ict-choch-fib-ea/.config.kiro          |      1 +
+ .kiro/specs/ict-choch-fib-ea/design.md             |   1157 +
+ .kiro/specs/ict-choch-fib-ea/requirements.md       |    248 +
+ AUDIT_BUNDLE.md                                    |    100 -
+ A_B_REGRESSION_RESULT.md                           |     46 -
+ CAPITAL_RETURN_SPEC.md                             |     89 -
+ CK_AMA2_v1.mq5                                     |    128 -
+ CK_AMA_v1.mq5                                      |    130 -
+ CK_BEST_diag.mq5                                   |     88 -
+ CK_CRYPTO_TSMOM_v1.mq5                             |    170 -
+ CK_CRYPTO_TSMOM_v2.mq5                             |    124 -
+ CK_ExportOHLC.mq5                                  |     84 -
+ CK_GFT_Fast_v14.mq5                                |    489 -
+ CK_GFT_Fast_v15.mq5                                |    458 -
+ CK_GFT_Fast_v16.mq5                                |    369 -
+ CK_GFT_Fast_v17.mq5                                |    463 -
+ CK_GFT_Fast_v17_T.mq5                              |    501 -
+ CK_GFT_Fast_v18.mq5                                |    375 -
+ CK_GFT_Fast_v19.mq5                                |    381 -
+ CK_GFT_Fast_v20.mq5                                |    376 -
+ CK_GFT_Fast_v23_ROBUST.mq5                         |    329 -
+ CK_GFT_Fast_v24_ROBUST.mq5                         |    148 -
+ CK_GFT_Fast_v25_ROBUST.mq5                         |    183 -
+ CK_GFT_Fast_v26_ROBUST.mq5                         |    136 -
+ CK_GFT_Fast_v27_ROBUST.mq5                         |    123 -
+ CK_GFT_Fast_v28_ROBUST.mq5                         |    122 -
+ CK_GFT_Fast_v29_ROBUST.mq5                         |    117 -
+ CK_GFT_Fast_v333333.mq5                            |    460 -
+ CK_GFT_v23_capstudy.mq5                            |    175 -
+ CK_GFT_v23_diag.mq5                                |    136 -
+ CK_GFT_v23_live.mq5                                |    223 -
+ CK_GFT_v23_regime.mq5                              |    158 -
+ CK_GFT_v23_tfilter.mq5                             |    151 -
+ CK_GFT_v23_ts.mq5                                  |     99 -
+ CK_GFT_v810_diag.mq5                               |    208 -
+ CK_GOLD_FINAL_v1.mq5                               |    115 -
+ CK_GOLD_PRO.mq5                                    |    166 -
+ CK_GOLD_PRO_FIX09.mq5                              |    191 -
+ CK_GOLD_PRO_FIX09_HRS.mq5                          |    210 -
+ CK_GOLD_PRO_FIX10_regime.mq5                       |    131 -
+ CK_GOLD_PRO_OFFSET.mq5                             |    135 -
+ CK_ICT_OTE_v1.mq5                                  |    196 -
+ CK_MR_StdDev_v1.mq5                                |    117 -
+ CK_MR_StdDev_v1_T.mq5                              |    131 -
+ CK_POC_VA_SESS.mq5                                 |    149 -
+ CK_POC_VA_v1.mq5                                   |    141 -
+ CK_QM_ICT_EA.mq5                                   |    409 -
+ CK_QM_ICT_FAITHFUL_v1.mq5                          |    395 -
+ CK_QT_CRT_v1.mq5                                   |    194 -
+ CK_TRAPBOX_DKT_v1.mq5                              |    184 -
+ CK_TRAPBOX_DKT_v2.mq5                              |    203 -
+ CK_TRAPBOX_DKT_v3.mq5                              |    147 -
+ CK_TREND_ATR_v1.mq5                                |    158 -
+ CK_TURTLE_SOUP_v1.mq5                              |    142 -
+ CK_VDELTA_EMA_v1.mq5                               |    147 -
+ CK_XAU_HybridKnee_V22.mq5                          |   2207 +
+ CK_XAU_HybridKnee_V23.mq5                          |   2436 +
+ CK_XAU_ICT_ChoCh_V1.mq5                            |   2117 +
+ CK_XAU_ICT_ChoCh_V2.mq5                            |   2238 +
+ CK_XAU_ICT_ChoCh_V3.mq5                            |   2237 +
+ DEFENSIBLE_SUMMARY.md                              |     50 -
+ DEMO_FORWARD_TEST.md                               |     51 -
+ DEPLOY_GUIDE.md                                    |     43 -
+ FINAL_REPORT_HONEST.md                             |    108 -
+ FINAL_SUMMARY_BANGLA.md                            |     90 -
+ FIX09_DEV_VERDICT.md                               |     39 -
+ FIX09_VALIDATION_REPORT.md                         |    118 -
+ KIRO_RESUME_PROMPT.md                              |     91 -
+ MONTE_CARLO_STRESS.md                              |     27 -
+ MULTI_EA_VALIDATION_REPORT.md                      |     54 -
+ OFFSET_TEST_RESULT.md                              |     57 -
+ OVERFIT_CHECK_RESULT.md                            |     29 -
+ POCVA_DIAGNOSIS_REPORT.md                          |     57 -
+ PORTFOLIO/CK_XAUUSD_BOSS_PACKAGE.zip               |    Bin 532797 -> 0 bytes
+ PORTFOLIO/CK_XAUUSD_Strategies.zip                 |    Bin 93840 -> 0 bytes
+ PORTFOLIO/CK_XAUUSD_Validation_Report.html         |    147 -
+ PORTFOLIO/CK_XAUUSD_Validation_Report.pdf          |    Bin 537976 -> 0 bytes
+ PORTFOLIO/Ranked_Results_MT5style.html             |     48 -
+ PORTFOLIO/Ranked_Results_MT5style.pdf              |    Bin 120145 -> 0 bytes
+ PORTFOLIO/STRATEGIES/1_CK_GFT_Fast_v17.mq5         |    463 -
+ PORTFOLIO/STRATEGIES/2_CK_GOLD_PRO_FIX09.mq5       |    191 -
+ PORTFOLIO/STRATEGIES/CK_GFT_Fast_v17.ex5           |    Bin 39720 -> 0 bytes
+ PORTFOLIO/STRATEGIES/CK_GFT_Fast_v17.set           |     47 -
+ PORTFOLIO/STRATEGIES/CK_GOLD_PRO_FIX09.ex5         |    Bin 43972 -> 0 bytes
+ PORTFOLIO/STRATEGIES/CK_GOLD_PRO_FIX09.set         |     39 -
+ PORTFOLIO/STRATEGIES/README.txt                    |    118 -
+ PORTFOLIO/_BOSS/READ_ME_FIRST.txt                  |     35 -
+ PORTFOLIO/_BOSS/Reports/1_Validation_Report.pdf    |    Bin 537976 -> 0 bytes
+ PORTFOLIO/_BOSS/Reports/2_Ranked_Results.pdf       |    Bin 120145 -> 0 bytes
+ PORTFOLIO/_BOSS/Strategies/1_CK_GFT_Fast_v17.mq5   |    463 -
+ PORTFOLIO/_BOSS/Strategies/2_CK_GOLD_PRO_FIX09.mq5 |    191 -
+ PORTFOLIO/_BOSS/Strategies/README.txt              |     87 -
+ PORTFOLIO/scoreboard.png                           |    Bin 43542 -> 0 bytes
+ PORTFOLIO_FINAL/README.md                          |     85 -
+ PORTFOLIO_FINAL/REJECTED/REJECTED.md               |     46 -
+ PORTFOLIO_FINAL/RESULTS/00_unified_dashboard.txt   |     13 -
+ PORTFOLIO_FINAL/RESULTS/01_edge_map_where_when.txt |     82 -
+ PORTFOLIO_FINAL/RESULTS/02_crypto_validation.txt   |     39 -
+ PORTFOLIO_FINAL/RESULTS/03_crypto_NQ_combo.txt     |     11 -
+ PORTFOLIO_FINAL/RESULTS/04_v2_basket_test.txt      |     11 -
+ PORTFOLIO_FINAL/RESULTS/05_sleeve_screen_all.txt   |     18 -
+ PORTFOLIO_FINAL/RESULTS/06_recent_1yr_regime.txt   |     14 -
+ PORTFOLIO_FINAL/RESULTS/07_broker_sweep.txt        |    101 -
+ PORTFOLIO_FINAL/RESULTS/08_todays_signals.txt      |     12 -
+ PORTFOLIO_FINAL/RESULTS/09_live_gex.txt            |      4 -
+ PORTFOLIO_FINAL/WORKS/BTCUSD.set                   |     16 -
+ PORTFOLIO_FINAL/WORKS/CK_CRYPTO_TSMOM_PACKAGE.zip  |    Bin 38917 -> 0 bytes
+ PORTFOLIO_FINAL/WORKS/CK_CRYPTO_TSMOM_v2.ex5       |    Bin 33686 -> 0 bytes
+ PORTFOLIO_FINAL/WORKS/CK_CRYPTO_TSMOM_v2.mq5       |    124 -
+ PORTFOLIO_FINAL/WORKS/ETHUSD.set                   |     16 -
+ PORTFOLIO_FINAL/WORKS/NQ.set                       |     16 -
+ PORTFOLIO_FINAL/WORKS/README.md                    |     58 -
+ PROJECT_SUMMARY.md                                 |     44 -
+ QMF_DIAGNOSIS_TP_BANGLA.md                         |     54 -
+ QMF_FAITHFUL_REPORT_BANGLA.md                      |     76 -
+ QM_ICT_STATUS.md                                   |     92 -
+ QTCRT_REPORT_BANGLA.md                             |     45 -
+ README_SUBMISSION.md                               |     52 -
+ REGIME_GATE_CONSISTENCY.md                         |     30 -
+ REGIME_TEST_RESULT.md                              |     26 -
+ ReportTester-109861033333.html                     |    Bin 919708 -> 0 bytes
+ ReportTester-109861045.html                        |    Bin 252154 -> 0 bytes
+ SESSION_EXPORT_PROMPT.md                           |     49 -
+ SPEC/AGENT_SYSTEM_v1.md                            |    129 -
+ SPEC/DESIGN_v1.0.md                                |    131 -
+ SPEC/DESIGN_v1.1_amendment.md                      |     39 -
+ SPEC/MASTER_PROMPT.md                              |    170 -
+ SPEC/QM_ICT_BUILD_PLAN_v1.md                       |     55 -
+ SPEC/QM_ICT_STRATEGY_SPEC.md                       |    131 -
+ SPEC/dof_ledger.jsonl                              |    138 -
+ SPEC/dof_ledger.py                                 |     67 -
+ SPEC/knowledge_gate.py                             |    102 -
+ SPEC/knowledge_ledger.jsonl                        |      1 -
+ SPEC/metric_dictionary.md                          |     35 -
+ SPEC/offset_entry_prereg.md                        |     28 -
+ SPEC/regime_classifier_v1.md                       |     39 -
+ STRATEGIES_CRYPTO/BTCUSD.set                       |     16 -
+ STRATEGIES_CRYPTO/CK_CRYPTO_TSMOM_PACKAGE.zip      |    Bin 38917 -> 0 bytes
+ STRATEGIES_CRYPTO/CK_CRYPTO_TSMOM_v2.ex5           |    Bin 33686 -> 0 bytes
+ STRATEGIES_CRYPTO/CK_CRYPTO_TSMOM_v2.mq5           |    124 -
+ STRATEGIES_CRYPTO/ETHUSD.set                       |     16 -
+ STRATEGIES_CRYPTO/NQ.set                           |     16 -
+ STRATEGIES_CRYPTO/README.md                        |     58 -
+ SUBMISSION.md                                      |     60 -
+ SYSTEM_DESIGN_PRINCIPLES.md                        |     55 -
+ TECH_REVIEW_RESPONSE.md                            |     55 -
+ TFILTER_TEST_RESULT.md                             |     35 -
+ VALIDATION_PIPELINE.md                             |     95 -
+ XAGUSD_M15_2022.csv                                | 100001 -------------
+ XAGUSD_M5_202504071050_202608282255.csv            | 100001 -------------
+ XAUUSD_M15_export.csv                              | 100001 -------------
+ XAUUSD_M5_202508010105_202607271000.csv            | 136838 +++++++++---------
+ analyze_best.ps1                                   |     33 -
+ baseline_v23ts_trades.csv                          |    204 -
+ data_crypto/AAVE.csv                               |   2160 -
+ data_crypto/ADA.csv                                |   3218 -
+ data_crypto/ALGO.csv                               |   2630 -
+ data_crypto/ATOM.csv                               |   2729 -
+ data_crypto/AVAX.csv                               |   2173 -
+ data_crypto/BCH.csv                                |   3219 -
+ data_crypto/BNB.csv                                |   3219 -
+ data_crypto/BTC.csv                                |   3653 -
+ data_crypto/DOGE.csv                               |   3219 -
+ data_crypto/DOT.csv                                |   2204 -
+ data_crypto/ETC.csv                                |   3219 -
+ data_crypto/ETH.csv                                |   3219 -
+ data_crypto/LINK.csv                               |   3219 -
+ data_crypto/LTC.csv                                |   3653 -
+ data_crypto/MATIC.csv                              |   2159 -
+ data_crypto/SOL.csv                                |   2336 -
+ data_crypto/TRX.csv                                |   3219 -
+ data_crypto/UNI.csv                                |   2007 -
+ data_crypto/XLM.csv                                |   3219 -
+ data_crypto/XRP.csv                                |   3219 -
+ data_daily/AUDUSD.csv                              |   2602 -
+ data_daily/BTC.csv                                 |   3654 -
+ data_daily/BZ.csv                                  |   2515 -
+ data_daily/CC.csv                                  |   2514 -
+ data_daily/CL.csv                                  |   2514 -
+ data_daily/CT.csv                                  |   2515 -
+ data_daily/DAX.csv                                 |   2537 -
+ data_daily/ES.csv                                  |   2515 -
+ data_daily/ETH.csv                                 |   3219 -
+ data_daily/EURUSD.csv                              |   2602 -
+ data_daily/FTSE.csv                                |   2526 -
+ data_daily/GBPUSD.csv                              |   2602 -
+ data_daily/GC.csv                                  |   2513 -
+ data_daily/HE.csv                                  |   2513 -
+ data_daily/HG.csv                                  |   2514 -
+ data_daily/HSI.csv                                 |   2458 -
+ data_daily/KC.csv                                  |   2515 -
+ data_daily/LE.csv                                  |   2513 -
+ data_daily/NG.csv                                  |   2515 -
+ data_daily/NIKKEI.csv                              |   2441 -
+ data_daily/NQ.csv                                  |   2515 -
+ data_daily/NZDUSD.csv                              |   2602 -
+ data_daily/PA.csv                                  |   2512 -
+ data_daily/PL.csv                                  |   2513 -
+ data_daily/RTY.csv                                 |   2303 -
+ data_daily/SB.csv                                  |   2515 -
+ data_daily/SI.csv                                  |   2513 -
+ data_daily/STOXX.csv                               |   2512 -
+ data_daily/USDCAD.csv                              |   2602 -
+ data_daily/USDCHF.csv                              |   2603 -
+ data_daily/USDJPY.csv                              |   2603 -
+ data_daily/YM.csv                                  |   2515 -
+ data_daily/ZB.csv                                  |   2514 -
+ data_daily/ZC.csv                                  |   2511 -
+ data_daily/ZF.csv                                  |   2515 -
+ data_daily/ZN.csv                                  |   2514 -
+ data_daily/ZS.csv                                  |   2513 -
+ data_daily/ZT.csv                                  |   2515 -
+ data_daily/ZW.csv                                  |   2513 -
+ data_gex/_NDX_gex.csv                              |      2 -
+ data_gex/snapshots/_NDX_2026-09-01.csv             |  15479 --
+ docs/session_exports/README.md                     |      4 -
+ .../SESSION_ai_hedge_fund_mt5_deepseek.md          |    880 -
+ .../SESSION_ck_gft_ea_and_validation_toolkit.md    |    357 -
+ .../SESSION_ck_gft_fast_optimization.md            |    237 -
+ .../SESSION_csv_upload_size_limit_fix.md           |    564 -
+ .../SESSION_gft_backtest_degradation_review.md     |    314 -
+ .../SESSION_gft_gold_ea_risk_mgmt.md               |    686 -
+ docs/session_exports/SESSION_gold_goat1_ea_v819.md |    608 -
+ ...ESSION_institutional_propfirm_ea_v3_backtest.md |    349 -
+ .../SESSION_python_mt5_backtester_xauusd.md        |    327 -
+ .../SESSION_xau_smart_ea_breakout_retest.md        |    306 -
+ .../SESSION_xauusd_validation_and_combine.md       |     96 -
+ .../Institutional_Gold_Trader_ProX_V2.mq5          |   1190 -
+ .../Institutional_Gold_Trader_ProX_V3.mq5          |    586 -
+ .../Institutional_PropFirm_EA_V3.mq5               |    931 -
+ .../backtest_analyzer.py                           |    323 -
+ .../XAUUSD_realdata_backtest_report.txt            |    485 -
+ .../python_mt5_backtester_files/backtest_engine.py |    454 -
+ .../python_mt5_backtester_files/data_loader.py     |    372 -
+ .../report_generator.py                            |    447 -
+ .../python_mt5_backtester_files/requirements.txt   |      4 -
+ .../python_mt5_backtester_files/run_backtest.py    |    246 -
+ .../python_mt5_backtester_files/strategy_ck_gft.py |    513 -
+ .../python_mt5_backtester_files/symbol_info.py     |    216 -
+ .../xau_smart_ea_files/EA_FINAL.mq5                |    777 -
+ .../xau_smart_ea_files/GFT_2Step_5K_EA.mq5         |    732 -
+ .../Institutional_Gold_Trader_Pro.mq5              |    575 -
+ .../Institutional_Gold_Trader_Pro_v2.mq5           |    760 -
+ .../xau_smart_ea_files/XAU_Smart_EA_V2.mq5         |   1171 -
+ .../xau_smart_ea_files/XAU_Smart_EA_V3_Final.mq5   |    811 -
+ experiments/_ALL_SUMMARY.txt                       |     23 -
+ experiments/_BATCH_LOG.txt                         |    Bin 24395 -> 0 bytes
+ experiments/_COMBO_BUILD.txt                       |     24 -
+ experiments/_WARM_LOG.txt                          |    Bin 432 -> 0 bytes
+ experiments/crypto_btc/preset.json                 |     30 -
+ experiments/fix09_baseline/preset.json             |     35 -
+ experiments/fix09_baseline/report.md               |     47 -
+ .../baseline_realtick/baseline_realtick.ini        |     38 -
+ .../windows/baseline_realtick/report.htm           |    Bin 726232 -> 0 bytes
+ .../windows/baseline_realtick/tester.log           |    Bin 4416346 -> 0 bytes
+ .../windows/baseline_realtick/trades.csv           |    360 -
+ .../fix09_current_regime/full_regime_trades.csv    |    265 -
+ experiments/fix09_current_regime/preset.json       |     36 -
+ experiments/fix09_current_regime/report.md         |     73 -
+ .../fix09_current_regime/windows/cr_h1/cr_h1.ini   |     38 -
+ .../fix09_current_regime/windows/cr_h1/report.htm  |    Bin 279068 -> 0 bytes
+ .../fix09_current_regime/windows/cr_h1/tester.log  |    Bin 6851386 -> 0 bytes
+ .../fix09_current_regime/windows/cr_h1/trades.csv  |    130 -
+ .../fix09_current_regime/windows/cr_h2/cr_h2.ini   |     38 -
+ .../fix09_current_regime/windows/cr_h2/report.htm  |    Bin 290722 -> 0 bytes
+ .../fix09_current_regime/windows/cr_h2/tester.log  |    Bin 7122582 -> 0 bytes
+ .../fix09_current_regime/windows/cr_h2/trades.csv  |    136 -
+ experiments/fix09_dep50k/preset.json               |     35 -
+ experiments/fix09_dep50k/report.md                 |     47 -
+ .../windows/baseline_dep50k/baseline_dep50k.ini    |     38 -
+ .../windows/baseline_dep50k/report.htm             |    Bin 746222 -> 0 bytes
+ .../windows/baseline_dep50k/tester.log             |    Bin 5853084 -> 0 bytes
+ .../windows/baseline_dep50k/trades.csv             |    370 -
+ experiments/fix09_is_oos/preset.json               |     36 -
+ experiments/fix09_is_oos/report.md                 |     86 -
+ .../fix09_is_oos/windows/IS_2025H2/IS_2025H2.ini   |     38 -
+ .../fix09_is_oos/windows/IS_2025H2/report.htm      |    Bin 327550 -> 0 bytes
+ .../fix09_is_oos/windows/IS_2025H2/tester.log      |    Bin 6163200 -> 0 bytes
+ .../fix09_is_oos/windows/IS_2025H2/trades.csv      |    155 -
+ .../fix09_is_oos/windows/OOS_2026/OOS_2026.ini     |     38 -
+ .../fix09_is_oos/windows/OOS_2026/report.htm       |    Bin 446462 -> 0 bytes
+ .../fix09_is_oos/windows/OOS_2026/tester.log       |    Bin 6589888 -> 0 bytes
+ .../fix09_is_oos/windows/OOS_2026/trades.csv       |    216 -
+ experiments/fix09_lev100/preset.json               |     35 -
+ experiments/fix09_lev100/report.md                 |     47 -
+ .../windows/baseline_lev100/baseline_lev100.ini    |     38 -
+ .../windows/baseline_lev100/report.htm             |    Bin 726200 -> 0 bytes
+ .../windows/baseline_lev100/tester.log             |    Bin 5124992 -> 0 bytes
+ .../windows/baseline_lev100/trades.csv             |    360 -
+ experiments/fix09_live5k/edge_diag.txt             |     45 -
+ experiments/fix09_live5k/equity_last1yr.png        |    Bin 117587 -> 0 bytes
+ experiments/fix09_live5k/monthly.txt               |     17 -
+ experiments/fix09_live5k/preset.json               |     35 -
+ experiments/fix09_live5k/report.md                 |     47 -
+ experiments/fix09_live5k/run.log                   |    Bin 10432 -> 0 bytes
+ experiments/fix09_live5k/split.txt                 |     13 -
+ .../fix09_live5k/windows/last1yr/last1yr.ini       |     38 -
+ .../fix09_live5k/windows/last1yr/report.htm        |    Bin 594140 -> 0 bytes
+ .../fix09_live5k/windows/last1yr/tester.log        |    Bin 6496024 -> 0 bytes
+ .../fix09_live5k/windows/last1yr/trades.csv        |    292 -
+ experiments/fix09_proof/preset.json                |     36 -
+ experiments/fix09_proof/preset.sha256              |      1 -
+ experiments/fix09_proof/report.md                  |     73 -
+ .../fix09_proof/windows/is_2025H2/is_2025H2.ini    |     38 -
+ .../fix09_proof/windows/is_2025H2/report.htm       |    Bin 24078 -> 0 bytes
+ .../fix09_proof/windows/is_2025H2/tester.log       |    Bin 3449404 -> 0 bytes
+ .../fix09_proof/windows/is_2025H2/trades.csv       |    166 -
+ .../fix09_proof/windows/oos_2026H1/oos_2026H1.ini  |     38 -
+ .../fix09_proof/windows/oos_2026H1/report.htm      |    Bin 43882 -> 0 bytes
+ .../fix09_proof/windows/oos_2026H1/tester.log      |    Bin 3758438 -> 0 bytes
+ .../fix09_proof/windows/oos_2026H1/trades.csv      |      9 -
+ .../fix09hrs_50k_off/equity_recent_regime.png      |    Bin 106170 -> 0 bytes
+ experiments/fix09hrs_50k_off/preset.json           |     39 -
+ experiments/fix09hrs_50k_off/report.md             |     73 -
+ .../windows/older_trend/older_trend.ini            |     41 -
+ .../windows/older_trend/report.htm                 |    Bin 328612 -> 0 bytes
+ .../windows/older_trend/tester.log                 |    Bin 8066582 -> 0 bytes
+ .../windows/older_trend/trades.csv                 |    155 -
+ .../windows/recent_regime/recent_regime.ini        |     41 -
+ .../windows/recent_regime/report.htm               |    Bin 309162 -> 0 bytes
+ .../windows/recent_regime/tester.log               |    Bin 8355622 -> 0 bytes
+ .../windows/recent_regime/trades.csv               |    145 -
+ experiments/fix09hrs_50k_on/preset.json            |     39 -
+ experiments/fix09hrs_50k_on/report.md              |     73 -
+ .../windows/older_trend/older_trend.ini            |     41 -
+ .../fix09hrs_50k_on/windows/older_trend/report.htm |    Bin 285776 -> 0 bytes
+ .../fix09hrs_50k_on/windows/older_trend/tester.log |    Bin 8623358 -> 0 bytes
+ .../fix09hrs_50k_on/windows/older_trend/trades.csv |    133 -
+ .../windows/recent_regime/recent_regime.ini        |     41 -
+ .../windows/recent_regime/report.htm               |    Bin 250772 -> 0 bytes
+ .../windows/recent_regime/tester.log               |    Bin 8853350 -> 0 bytes
+ .../windows/recent_regime/trades.csv               |    115 -
+ experiments/fix09hrs_off/preset.json               |     40 -
+ experiments/fix09hrs_off/report.md                 |     88 -
+ experiments/fix09hrs_off/run.log                   |    Bin 12658 -> 0 bytes
+ .../fix09hrs_off/windows/last1yr/last1yr.ini       |     41 -
+ .../fix09hrs_off/windows/last1yr/report.htm        |    Bin 595024 -> 0 bytes
+ .../fix09hrs_off/windows/last1yr/tester.log        |    Bin 7073252 -> 0 bytes
+ .../fix09hrs_off/windows/last1yr/trades.csv        |    292 -
+ .../windows/older_trend/older_trend.ini            |     41 -
+ .../fix09hrs_off/windows/older_trend/report.htm    |    Bin 316656 -> 0 bytes
+ .../fix09hrs_off/windows/older_trend/tester.log    |    Bin 7372228 -> 0 bytes
+ .../fix09hrs_off/windows/older_trend/trades.csv    |    149 -
+ .../windows/recent_regime/recent_regime.ini        |     41 -
+ .../fix09hrs_off/windows/recent_regime/report.htm  |    Bin 44800 -> 0 bytes
+ .../fix09hrs_off/windows/recent_regime/tester.log  |    Bin 7755788 -> 0 bytes
+ .../fix09hrs_off/windows/recent_regime/trades.csv  |      9 -
+ experiments/fix10_holdout/preset.json              |     38 -
+ experiments/fix10_holdout/report.md                |     10 -
+ experiments/fix10_holdout/run.log                  |    Bin 8948 -> 0 bytes
+ .../fix10_holdout/windows/holdout/holdout.ini      |     41 -
+ experiments/fix10_trendmod/preset.json             |     38 -
+ experiments/fix10_trendmod/report.md               |     47 -
+ experiments/fix10_trendmod/run.log                 |    Bin 10534 -> 0 bytes
+ experiments/fix10_trendmod/windows/build/build.ini |     41 -
+ .../fix10_trendmod/windows/build/report.htm        |    Bin 345400 -> 0 bytes
+ .../fix10_trendmod/windows/build/tester.log        |    Bin 16898526 -> 0 bytes
+ .../fix10_trendmod/windows/build/trades.csv        |    164 -
+ experiments/mr_live5k/preset.json                  |     30 -
+ experiments/mr_live5k/report.md                    |     88 -
+ experiments/mr_live5k/run.log                      |    Bin 12570 -> 0 bytes
+ experiments/mr_live5k/windows/last1yr/last1yr.ini  |     31 -
+ experiments/mr_live5k/windows/last1yr/report.htm   |    Bin 282290 -> 0 bytes
+ experiments/mr_live5k/windows/last1yr/tester.log   |    Bin 12602096 -> 0 bytes
+ experiments/mr_live5k/windows/last1yr/trades.csv   |    133 -
+ .../mr_live5k/windows/older_trend/older_trend.ini  |     31 -
+ .../mr_live5k/windows/older_trend/report.htm       |    Bin 189028 -> 0 bytes
+ .../mr_live5k/windows/older_trend/tester.log       |    Bin 12799478 -> 0 bytes
+ .../mr_live5k/windows/older_trend/trades.csv       |     85 -
+ .../windows/recent_regime/recent_regime.ini        |     31 -
+ .../mr_live5k/windows/recent_regime/report.htm     |    Bin 154160 -> 0 bytes
+ .../mr_live5k/windows/recent_regime/tester.log     |    Bin 12967578 -> 0 bytes
+ .../mr_live5k/windows/recent_regime/trades.csv     |     67 -
+ experiments/poc_sess_ny/preset.json                |     35 -
+ experiments/poc_sess_ny/report.md                  |    116 -
+ .../poc_sess_ny/windows/IS_2025H2/IS_2025H2.ini    |     35 -
+ .../poc_sess_ny/windows/IS_2025H2/report.htm       |    Bin 365742 -> 0 bytes
+ .../poc_sess_ny/windows/IS_2025H2/tester.log       |    Bin 19500396 -> 0 bytes
+ .../poc_sess_ny/windows/IS_2025H2/trades.csv       |    175 -
+ .../poc_sess_ny/windows/OOS_2026/OOS_2026.ini      |     35 -
+ .../poc_sess_ny/windows/OOS_2026/report.htm        |    Bin 484706 -> 0 bytes
+ .../poc_sess_ny/windows/OOS_2026/tester.log        |    Bin 20021696 -> 0 bytes
+ .../poc_sess_ny/windows/OOS_2026/trades.csv        |    236 -
+ experiments/poc_sess_ny/windows/cr_h1/cr_h1.ini    |     35 -
+ experiments/poc_sess_ny/windows/cr_h1/report.htm   |    Bin 289874 -> 0 bytes
+ experiments/poc_sess_ny/windows/cr_h1/tester.log   |    Bin 20327582 -> 0 bytes
+ experiments/poc_sess_ny/windows/cr_h1/trades.csv   |    136 -
+ experiments/poc_sess_ny/windows/cr_h2/cr_h2.ini    |     35 -
+ experiments/poc_sess_ny/windows/cr_h2/report.htm   |    Bin 336658 -> 0 bytes
+ experiments/poc_sess_ny/windows/cr_h2/tester.log   |    Bin 20677480 -> 0 bytes
+ experiments/poc_sess_ny/windows/cr_h2/trades.csv   |    160 -
+ experiments/poc_sess_us/preset.json                |     35 -
+ experiments/poc_sess_us/report.md                  |    116 -
+ .../poc_sess_us/windows/IS_2025H2/IS_2025H2.ini    |     35 -
+ .../poc_sess_us/windows/IS_2025H2/report.htm       |    Bin 521388 -> 0 bytes
+ .../poc_sess_us/windows/IS_2025H2/tester.log       |    Bin 17429646 -> 0 bytes
+ .../poc_sess_us/windows/IS_2025H2/trades.csv       |    255 -
+ .../poc_sess_us/windows/OOS_2026/OOS_2026.ini      |     35 -
+ .../poc_sess_us/windows/OOS_2026/report.htm        |    Bin 691014 -> 0 bytes
+ .../poc_sess_us/windows/OOS_2026/tester.log        |    Bin 18176150 -> 0 bytes
+ .../poc_sess_us/windows/OOS_2026/trades.csv        |    342 -
+ experiments/poc_sess_us/windows/cr_h1/cr_h1.ini    |     35 -
+ experiments/poc_sess_us/windows/cr_h1/report.htm   |    Bin 416356 -> 0 bytes
+ experiments/poc_sess_us/windows/cr_h1/tester.log   |    Bin 18618916 -> 0 bytes
+ experiments/poc_sess_us/windows/cr_h1/trades.csv   |    201 -
+ experiments/poc_sess_us/windows/cr_h2/cr_h2.ini    |     35 -
+ experiments/poc_sess_us/windows/cr_h2/report.htm   |    Bin 463164 -> 0 bytes
+ experiments/poc_sess_us/windows/cr_h2/tester.log   |    Bin 19108854 -> 0 bytes
+ experiments/poc_sess_us/windows/cr_h2/trades.csv   |    225 -
+ experiments/poc_va/_nylate_diag.txt                |     32 -
+ experiments/poc_va/preset.json                     |     32 -
+ experiments/poc_va/report.md                       |    119 -
+ experiments/poc_va/windows/IS_2025H2/IS_2025H2.ini |     32 -
+ experiments/poc_va/windows/IS_2025H2/report.htm    |    Bin 689764 -> 0 bytes
+ experiments/poc_va/windows/IS_2025H2/tester.log    |    Bin 14363042 -> 0 bytes
+ experiments/poc_va/windows/IS_2025H2/trades.csv    |    342 -
+ experiments/poc_va/windows/OOS_2026/OOS_2026.ini   |     32 -
+ experiments/poc_va/windows/OOS_2026/report.htm     |    Bin 925530 -> 0 bytes
+ experiments/poc_va/windows/OOS_2026/tester.log     |    Bin 15366012 -> 0 bytes
+ experiments/poc_va/windows/OOS_2026/trades.csv     |    463 -
+ experiments/poc_va/windows/cr_h1/cr_h1.ini         |     32 -
+ experiments/poc_va/windows/cr_h1/report.htm        |    Bin 594496 -> 0 bytes
+ experiments/poc_va/windows/cr_h1/tester.log        |    Bin 16003404 -> 0 bytes
+ experiments/poc_va/windows/cr_h1/trades.csv        |    293 -
+ experiments/poc_va/windows/cr_h2/cr_h2.ini         |     32 -
+ experiments/poc_va/windows/cr_h2/report.htm        |    Bin 592590 -> 0 bytes
+ experiments/poc_va/windows/cr_h2/tester.log        |    Bin 16636304 -> 0 bytes
+ experiments/poc_va/windows/cr_h2/trades.csv        |    292 -
+ experiments/qm_ict/preset.json                     |     39 -
+ experiments/qm_ict/report.md                       |    103 -
+ experiments/qm_ict/windows/IS_2025H2/IS_2025H2.ini |     39 -
+ experiments/qm_ict/windows/IS_2025H2/report.htm    |    Bin 84662 -> 0 bytes
+ experiments/qm_ict/windows/IS_2025H2/tester.log    |    Bin 16698514 -> 0 bytes
+ experiments/qm_ict/windows/IS_2025H2/trades.csv    |     30 -
+ experiments/qm_ict/windows/OOS_2026/OOS_2026.ini   |     39 -
+ experiments/qm_ict/windows/OOS_2026/report.htm     |    Bin 96378 -> 0 bytes
+ experiments/qm_ict/windows/OOS_2026/tester.log     |    Bin 16771678 -> 0 bytes
+ experiments/qm_ict/windows/OOS_2026/trades.csv     |     36 -
+ experiments/qm_ict/windows/cr_h1/cr_h1.ini         |     39 -
+ experiments/qm_ict/windows/cr_h1/report.htm        |    Bin 69252 -> 0 bytes
+ experiments/qm_ict/windows/cr_h1/tester.log        |    Bin 16819246 -> 0 bytes
+ experiments/qm_ict/windows/cr_h1/trades.csv        |     22 -
+ experiments/qm_ict/windows/cr_h2/cr_h2.ini         |     39 -
+ experiments/qm_ict/windows/cr_h2/report.htm        |    Bin 69240 -> 0 bytes
+ experiments/qm_ict/windows/cr_h2/tester.log        |    Bin 16866796 -> 0 bytes
+ experiments/qm_ict/windows/cr_h2/trades.csv        |     22 -
+ experiments/qmf_poi3/_analysis.txt                 |     79 -
+ experiments/qmf_poi3/preset.json                   |     46 -
+ experiments/qmf_poi3/report.md                     |    103 -
+ .../qmf_poi3/windows/IS_2025H2/IS_2025H2.ini       |     46 -
+ experiments/qmf_poi3/windows/IS_2025H2/report.htm  |    Bin 90608 -> 0 bytes
+ experiments/qmf_poi3/windows/IS_2025H2/tester.log  |    Bin 1547392 -> 0 bytes
+ experiments/qmf_poi3/windows/IS_2025H2/trades.csv  |     32 -
+ experiments/qmf_poi3/windows/OOS_2026/OOS_2026.ini |     46 -
+ experiments/qmf_poi3/windows/OOS_2026/report.htm   |    Bin 146876 -> 0 bytes
+ experiments/qmf_poi3/windows/OOS_2026/tester.log   |    Bin 1761638 -> 0 bytes
+ experiments/qmf_poi3/windows/OOS_2026/trades.csv   |     61 -
+ experiments/qmf_poi3/windows/cr_h1/cr_h1.ini       |     46 -
+ experiments/qmf_poi3/windows/cr_h1/report.htm      |    Bin 109938 -> 0 bytes
+ experiments/qmf_poi3/windows/cr_h1/tester.log      |    Bin 1908020 -> 0 bytes
+ experiments/qmf_poi3/windows/cr_h1/trades.csv      |     42 -
+ experiments/qmf_poi3/windows/cr_h2/cr_h2.ini       |     46 -
+ experiments/qmf_poi3/windows/cr_h2/report.htm      |    Bin 96382 -> 0 bytes
+ experiments/qmf_poi3/windows/cr_h2/tester.log      |    Bin 2038264 -> 0 bytes
+ experiments/qmf_poi3/windows/cr_h2/trades.csv      |     35 -
+ experiments/qmf_smt/_analysis.txt                  |     79 -
+ experiments/qmf_smt/preset.json                    |     46 -
+ experiments/qmf_smt/report.md                      |    103 -
+ .../qmf_smt/windows/IS_2025H2/IS_2025H2.ini        |     46 -
+ experiments/qmf_smt/windows/IS_2025H2/report.htm   |    Bin 90600 -> 0 bytes
+ experiments/qmf_smt/windows/IS_2025H2/tester.log   |    Bin 912290 -> 0 bytes
+ experiments/qmf_smt/windows/IS_2025H2/trades.csv   |     32 -
+ experiments/qmf_smt/windows/OOS_2026/OOS_2026.ini  |     46 -
+ experiments/qmf_smt/windows/OOS_2026/report.htm    |    Bin 146868 -> 0 bytes
+ experiments/qmf_smt/windows/OOS_2026/tester.log    |    Bin 1126518 -> 0 bytes
+ experiments/qmf_smt/windows/OOS_2026/trades.csv    |     61 -
+ experiments/qmf_smt/windows/cr_h1/cr_h1.ini        |     46 -
+ experiments/qmf_smt/windows/cr_h1/report.htm       |    Bin 109930 -> 0 bytes
+ experiments/qmf_smt/windows/cr_h1/tester.log       |    Bin 1272882 -> 0 bytes
+ experiments/qmf_smt/windows/cr_h1/trades.csv       |     42 -
+ experiments/qmf_smt/windows/cr_h2/cr_h2.ini        |     46 -
+ experiments/qmf_smt/windows/cr_h2/report.htm       |    Bin 96374 -> 0 bytes
+ experiments/qmf_smt/windows/cr_h2/tester.log       |    Bin 1403104 -> 0 bytes
+ experiments/qmf_smt/windows/cr_h2/trades.csv       |     35 -
+ experiments/qmf_tp2/_analysis.txt                  |     79 -
+ experiments/qmf_tp2/preset.json                    |     46 -
+ experiments/qmf_tp2/report.md                      |    103 -
+ .../qmf_tp2/windows/IS_2025H2/IS_2025H2.ini        |     46 -
+ experiments/qmf_tp2/windows/IS_2025H2/report.htm   |    Bin 69260 -> 0 bytes
+ experiments/qmf_tp2/windows/IS_2025H2/tester.log   |    Bin 2163078 -> 0 bytes
+ experiments/qmf_tp2/windows/IS_2025H2/trades.csv   |     21 -
+ experiments/qmf_tp2/windows/OOS_2026/OOS_2026.ini  |     46 -
+ experiments/qmf_tp2/windows/OOS_2026/report.htm    |    Bin 104140 -> 0 bytes
+ experiments/qmf_tp2/windows/OOS_2026/tester.log    |    Bin 2337562 -> 0 bytes
+ experiments/qmf_tp2/windows/OOS_2026/trades.csv    |     39 -
+ experiments/qmf_tp2/windows/cr_h1/cr_h1.ini        |     46 -
+ experiments/qmf_tp2/windows/cr_h1/report.htm       |    Bin 73112 -> 0 bytes
+ experiments/qmf_tp2/windows/cr_h1/tester.log       |    Bin 2449856 -> 0 bytes
+ experiments/qmf_tp2/windows/cr_h1/trades.csv       |     23 -
+ experiments/qmf_tp2/windows/cr_h2/cr_h2.ini        |     46 -
+ experiments/qmf_tp2/windows/cr_h2/report.htm       |    Bin 76990 -> 0 bytes
+ experiments/qmf_tp2/windows/cr_h2/tester.log       |    Bin 2562474 -> 0 bytes
+ experiments/qmf_tp2/windows/cr_h2/trades.csv       |     25 -
+ experiments/qmf_v1/_analysis.txt                   |     79 -
+ experiments/qmf_v1/_diagnosis.txt                  |     83 -
+ experiments/qmf_v1/preset.json                     |     46 -
+ experiments/qmf_v1/report.md                       |    103 -
+ experiments/qmf_v1/windows/IS_2025H2/IS_2025H2.ini |     46 -
+ experiments/qmf_v1/windows/IS_2025H2/report.htm    |    Bin 166310 -> 0 bytes
+ experiments/qmf_v1/windows/IS_2025H2/tester.log    |    Bin 178198 -> 0 bytes
+ experiments/qmf_v1/windows/IS_2025H2/trades.csv    |     70 -
+ experiments/qmf_v1/windows/OOS_2026/OOS_2026.ini   |     46 -
+ experiments/qmf_v1/windows/OOS_2026/report.htm     |    Bin 320174 -> 0 bytes
+ experiments/qmf_v1/windows/OOS_2026/tester.log     |    Bin 462872 -> 0 bytes
+ experiments/qmf_v1/windows/OOS_2026/trades.csv     |    150 -
+ experiments/qmf_v1/windows/cr_h1/cr_h1.ini         |     46 -
+ experiments/qmf_v1/windows/cr_h1/report.htm        |    Bin 148796 -> 0 bytes
+ experiments/qmf_v1/windows/cr_h1/tester.log        |    Bin 584960 -> 0 bytes
+ experiments/qmf_v1/windows/cr_h1/trades.csv        |     62 -
+ experiments/qmf_v1/windows/cr_h2/cr_h2.ini         |     46 -
+ experiments/qmf_v1/windows/cr_h2/report.htm        |    Bin 213032 -> 0 bytes
+ experiments/qmf_v1/windows/cr_h2/tester.log        |    Bin 768022 -> 0 bytes
+ experiments/qmf_v1/windows/cr_h2/trades.csv        |     95 -
+ experiments/qtcrt_consol/_analysis.txt             |     79 -
+ experiments/qtcrt_consol/preset.json               |     40 -
+ experiments/qtcrt_consol/report.md                 |    103 -
+ .../qtcrt_consol/windows/IS_2025H2/IS_2025H2.ini   |     40 -
+ .../qtcrt_consol/windows/IS_2025H2/report.htm      |    Bin 184052 -> 0 bytes
+ .../qtcrt_consol/windows/IS_2025H2/tester.log      |    Bin 3557546 -> 0 bytes
+ .../qtcrt_consol/windows/IS_2025H2/trades.csv      |     81 -
+ .../qtcrt_consol/windows/OOS_2026/OOS_2026.ini     |     40 -
+ .../qtcrt_consol/windows/OOS_2026/report.htm       |    Bin 236702 -> 0 bytes
+ .../qtcrt_consol/windows/OOS_2026/tester.log       |    Bin 3763722 -> 0 bytes
+ .../qtcrt_consol/windows/OOS_2026/trades.csv       |    107 -
+ experiments/qtcrt_consol/windows/cr_h1/cr_h1.ini   |     40 -
+ experiments/qtcrt_consol/windows/cr_h1/report.htm  |    Bin 154896 -> 0 bytes
+ experiments/qtcrt_consol/windows/cr_h1/tester.log  |    Bin 3892278 -> 0 bytes
+ experiments/qtcrt_consol/windows/cr_h1/trades.csv  |     66 -
+ experiments/qtcrt_consol/windows/cr_h2/cr_h2.ini   |     40 -
+ experiments/qtcrt_consol/windows/cr_h2/report.htm  |    Bin 160740 -> 0 bytes
+ experiments/qtcrt_consol/windows/cr_h2/tester.log  |    Bin 4026124 -> 0 bytes
+ experiments/qtcrt_consol/windows/cr_h2/trades.csv  |     69 -
+ experiments/qtcrt_v1/_analysis.txt                 |     79 -
+ experiments/qtcrt_v1/preset.json                   |     40 -
+ experiments/qtcrt_v1/report.md                     |    103 -
+ .../qtcrt_v1/windows/IS_2025H2/IS_2025H2.ini       |     40 -
+ experiments/qtcrt_v1/windows/IS_2025H2/report.htm  |    Bin 215170 -> 0 bytes
+ experiments/qtcrt_v1/windows/IS_2025H2/tester.log  |    Bin 2748098 -> 0 bytes
+ experiments/qtcrt_v1/windows/IS_2025H2/trades.csv  |     97 -
+ experiments/qtcrt_v1/windows/OOS_2026/OOS_2026.ini |     40 -
+ experiments/qtcrt_v1/windows/OOS_2026/report.htm   |    Bin 332092 -> 0 bytes
+ experiments/qtcrt_v1/windows/OOS_2026/tester.log   |    Bin 3044832 -> 0 bytes
+ experiments/qtcrt_v1/windows/OOS_2026/trades.csv   |    156 -
+ experiments/qtcrt_v1/windows/cr_h1/cr_h1.ini       |     40 -
+ experiments/qtcrt_v1/windows/cr_h1/report.htm      |    Bin 193814 -> 0 bytes
+ experiments/qtcrt_v1/windows/cr_h1/tester.log      |    Bin 3210362 -> 0 bytes
+ experiments/qtcrt_v1/windows/cr_h1/trades.csv      |     86 -
+ experiments/qtcrt_v1/windows/cr_h2/cr_h2.ini       |     40 -
+ experiments/qtcrt_v1/windows/cr_h2/report.htm      |    Bin 221090 -> 0 bytes
+ experiments/qtcrt_v1/windows/cr_h2/tester.log      |    Bin 3401500 -> 0 bytes
+ experiments/qtcrt_v1/windows/cr_h2/trades.csv      |    100 -
+ experiments/sweep_trend_AMD/preset.json            |     41 -
+ experiments/sweep_trend_AMD/report.md              |     19 -
+ .../sweep_trend_AMD/windows/IS_build/IS_build.ini  |     30 -
+ .../sweep_trend_AMD/windows/IS_build/report.htm    |    Bin 25930 -> 0 bytes
+ .../sweep_trend_AMD/windows/IS_build/tester.log    |    Bin 1822014 -> 0 bytes
+ .../sweep_trend_AMD/windows/IS_build/trades.csv    |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../sweep_trend_AMD/windows/OOS_build/report.htm   |    Bin 25936 -> 0 bytes
+ .../sweep_trend_AMD/windows/OOS_build/tester.log   |    Bin 1850726 -> 0 bytes
+ .../sweep_trend_AMD/windows/OOS_build/trades.csv   |      1 -
+ .../sweep_trend_AMD/windows/holdout/holdout.ini    |     30 -
+ .../sweep_trend_AMD/windows/holdout/report.htm     |    Bin 25920 -> 0 bytes
+ .../sweep_trend_AMD/windows/holdout/tester.log     |    Bin 1865628 -> 0 bytes
+ .../sweep_trend_AMD/windows/holdout/trades.csv     |      1 -
+ experiments/sweep_trend_AUDUSD/preset.json         |     41 -
+ experiments/sweep_trend_AUDUSD/report.md           |     88 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_AUDUSD/windows/IS_build/report.htm |    Bin 218344 -> 0 bytes
+ .../sweep_trend_AUDUSD/windows/IS_build/tester.log |    Bin 2129148 -> 0 bytes
+ .../sweep_trend_AUDUSD/windows/IS_build/trades.csv |    101 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 168286 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 2320434 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     75 -
+ .../sweep_trend_AUDUSD/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_AUDUSD/windows/holdout/report.htm  |    Bin 91086 -> 0 bytes
+ .../sweep_trend_AUDUSD/windows/holdout/tester.log  |    Bin 2412726 -> 0 bytes
+ .../sweep_trend_AUDUSD/windows/holdout/trades.csv  |     35 -
+ experiments/sweep_trend_INTC/preset.json           |     41 -
+ experiments/sweep_trend_INTC/report.md             |     19 -
+ .../sweep_trend_INTC/windows/IS_build/IS_build.ini |     30 -
+ .../sweep_trend_INTC/windows/IS_build/report.htm   |    Bin 25940 -> 0 bytes
+ .../sweep_trend_INTC/windows/IS_build/tester.log   |    Bin 2444754 -> 0 bytes
+ .../sweep_trend_INTC/windows/IS_build/trades.csv   |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../sweep_trend_INTC/windows/OOS_build/report.htm  |    Bin 25948 -> 0 bytes
+ .../sweep_trend_INTC/windows/OOS_build/tester.log  |    Bin 3496 -> 0 bytes
+ .../sweep_trend_INTC/windows/OOS_build/trades.csv  |      1 -
+ .../sweep_trend_INTC/windows/holdout/holdout.ini   |     30 -
+ .../sweep_trend_INTC/windows/holdout/report.htm    |    Bin 25930 -> 0 bytes
+ .../sweep_trend_INTC/windows/holdout/tester.log    |    Bin 4231806 -> 0 bytes
+ .../sweep_trend_INTC/windows/holdout/trades.csv    |      1 -
+ experiments/sweep_trend_MSFT/preset.json           |     41 -
+ experiments/sweep_trend_MSFT/report.md             |     19 -
+ .../sweep_trend_MSFT/windows/IS_build/IS_build.ini |     30 -
+ .../sweep_trend_MSFT/windows/IS_build/report.htm   |    Bin 25940 -> 0 bytes
+ .../sweep_trend_MSFT/windows/IS_build/tester.log   |    Bin 2518150 -> 0 bytes
+ .../sweep_trend_MSFT/windows/IS_build/trades.csv   |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../sweep_trend_MSFT/windows/OOS_build/report.htm  |    Bin 25948 -> 0 bytes
+ .../sweep_trend_MSFT/windows/OOS_build/tester.log  |    Bin 2545750 -> 0 bytes
+ .../sweep_trend_MSFT/windows/OOS_build/trades.csv  |      1 -
+ .../sweep_trend_MSFT/windows/holdout/holdout.ini   |     30 -
+ .../sweep_trend_MSFT/windows/holdout/report.htm    |    Bin 25930 -> 0 bytes
+ .../sweep_trend_MSFT/windows/holdout/tester.log    |    Bin 2561188 -> 0 bytes
+ .../sweep_trend_MSFT/windows/holdout/trades.csv    |      1 -
+ experiments/sweep_trend_NVDA/preset.json           |     41 -
+ experiments/sweep_trend_NVDA/report.md             |     19 -
+ .../sweep_trend_NVDA/windows/IS_build/IS_build.ini |     30 -
+ .../sweep_trend_NVDA/windows/IS_build/report.htm   |    Bin 25940 -> 0 bytes
+ .../sweep_trend_NVDA/windows/IS_build/tester.log   |    Bin 2592274 -> 0 bytes
+ .../sweep_trend_NVDA/windows/IS_build/trades.csv   |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../sweep_trend_NVDA/windows/OOS_build/report.htm  |    Bin 25948 -> 0 bytes
+ .../sweep_trend_NVDA/windows/OOS_build/tester.log  |    Bin 2619610 -> 0 bytes
+ .../sweep_trend_NVDA/windows/OOS_build/trades.csv  |      1 -
+ .../sweep_trend_NVDA/windows/holdout/holdout.ini   |     30 -
+ .../sweep_trend_NVDA/windows/holdout/report.htm    |    Bin 25930 -> 0 bytes
+ .../sweep_trend_NVDA/windows/holdout/tester.log    |    Bin 2636218 -> 0 bytes
+ .../sweep_trend_NVDA/windows/holdout/trades.csv    |      1 -
+ experiments/sweep_trend_NZDUSD/preset.json         |     41 -
+ experiments/sweep_trend_NZDUSD/report.md           |     88 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_NZDUSD/windows/IS_build/report.htm |    Bin 235978 -> 0 bytes
+ .../sweep_trend_NZDUSD/windows/IS_build/tester.log |    Bin 2905684 -> 0 bytes
+ .../sweep_trend_NZDUSD/windows/IS_build/trades.csv |    110 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 174174 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 3102976 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     78 -
+ .../sweep_trend_NZDUSD/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_NZDUSD/windows/holdout/report.htm  |    Bin 89456 -> 0 bytes
+ .../sweep_trend_NZDUSD/windows/holdout/tester.log  |    Bin 3195014 -> 0 bytes
+ .../sweep_trend_NZDUSD/windows/holdout/trades.csv  |     34 -
+ experiments/sweep_trend_USDCAD/preset.json         |     41 -
+ experiments/sweep_trend_USDCAD/report.md           |     88 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_USDCAD/windows/IS_build/report.htm |    Bin 257152 -> 0 bytes
+ .../sweep_trend_USDCAD/windows/IS_build/tester.log |    Bin 3499840 -> 0 bytes
+ .../sweep_trend_USDCAD/windows/IS_build/trades.csv |    121 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 141206 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 3679264 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     61 -
+ .../sweep_trend_USDCAD/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_USDCAD/windows/holdout/report.htm  |    Bin 93160 -> 0 bytes
+ .../sweep_trend_USDCAD/windows/holdout/tester.log  |    Bin 3771718 -> 0 bytes
+ .../sweep_trend_USDCAD/windows/holdout/trades.csv  |     36 -
+ experiments/sweep_trend_USDCHF/preset.json         |     41 -
+ experiments/sweep_trend_USDCHF/report.md           |     88 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_USDCHF/windows/IS_build/report.htm |    Bin 240004 -> 0 bytes
+ .../sweep_trend_USDCHF/windows/IS_build/tester.log |    Bin 4049018 -> 0 bytes
+ .../sweep_trend_USDCHF/windows/IS_build/trades.csv |    112 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 178034 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 4247776 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     80 -
+ .../sweep_trend_USDCHF/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_USDCHF/windows/holdout/report.htm  |    Bin 98788 -> 0 bytes
+ .../sweep_trend_USDCHF/windows/holdout/tester.log  |    Bin 4344936 -> 0 bytes
+ .../sweep_trend_USDCHF/windows/holdout/trades.csv  |     39 -
+ experiments/sweep_trend_USDCNH/preset.json         |     41 -
+ experiments/sweep_trend_USDCNH/report.md           |     88 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_USDCNH/windows/IS_build/report.htm |    Bin 199110 -> 0 bytes
+ .../sweep_trend_USDCNH/windows/IS_build/tester.log |    Bin 4573880 -> 0 bytes
+ .../sweep_trend_USDCNH/windows/IS_build/trades.csv |     91 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 66390 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 4627808 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     22 -
+ .../sweep_trend_USDCNH/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_USDCNH/windows/holdout/report.htm  |    Bin 101010 -> 0 bytes
+ .../sweep_trend_USDCNH/windows/holdout/tester.log  |    Bin 4725210 -> 0 bytes
+ .../sweep_trend_USDCNH/windows/holdout/trades.csv  |     40 -
+ experiments/sweep_trend_USDJPY/preset.json         |     41 -
+ experiments/sweep_trend_USDJPY/report.md           |     88 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_USDJPY/windows/IS_build/report.htm |    Bin 223398 -> 0 bytes
+ .../sweep_trend_USDJPY/windows/IS_build/tester.log |    Bin 5003468 -> 0 bytes
+ .../sweep_trend_USDJPY/windows/IS_build/trades.csv |    104 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 167844 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 5191040 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     75 -
+ .../sweep_trend_USDJPY/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_USDJPY/windows/holdout/report.htm  |    Bin 94788 -> 0 bytes
+ .../sweep_trend_USDJPY/windows/holdout/tester.log  |    Bin 5283606 -> 0 bytes
+ .../sweep_trend_USDJPY/windows/holdout/trades.csv  |     37 -
+ experiments/sweep_trend_USDSEK/preset.json         |     41 -
+ experiments/sweep_trend_USDSEK/report.md           |     77 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_USDSEK/windows/IS_build/report.htm |    Bin 25984 -> 0 bytes
+ .../sweep_trend_USDSEK/windows/IS_build/tester.log |    Bin 5291080 -> 0 bytes
+ .../sweep_trend_USDSEK/windows/IS_build/trades.csv |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 37472 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 5316354 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |      7 -
+ .../sweep_trend_USDSEK/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_USDSEK/windows/holdout/report.htm  |    Bin 31802 -> 0 bytes
+ .../sweep_trend_USDSEK/windows/holdout/tester.log  |    Bin 5329086 -> 0 bytes
+ .../sweep_trend_USDSEK/windows/holdout/trades.csv  |      4 -
+ experiments/sweep_trend_XAUUSD/preset.json         |     41 -
+ experiments/sweep_trend_XAUUSD/report.md           |     88 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_XAUUSD/windows/IS_build/report.htm |    Bin 198698 -> 0 bytes
+ .../sweep_trend_XAUUSD/windows/IS_build/tester.log |    Bin 5587108 -> 0 bytes
+ .../sweep_trend_XAUUSD/windows/IS_build/trades.csv |     91 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 140774 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 5749520 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     61 -
+ .../sweep_trend_XAUUSD/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_XAUUSD/windows/holdout/report.htm  |    Bin 83392 -> 0 bytes
+ .../sweep_trend_XAUUSD/windows/holdout/tester.log  |    Bin 5828800 -> 0 bytes
+ .../sweep_trend_XAUUSD/windows/holdout/trades.csv  |     31 -
+ experiments/sweep_turtle_AMD/preset.json           |     43 -
+ experiments/sweep_turtle_AMD/report.md             |     19 -
+ .../sweep_turtle_AMD/windows/IS_build/IS_build.ini |     32 -
+ .../sweep_turtle_AMD/windows/IS_build/report.htm   |    Bin 26540 -> 0 bytes
+ .../sweep_turtle_AMD/windows/IS_build/tester.log   |    Bin 5911892 -> 0 bytes
+ .../sweep_turtle_AMD/windows/IS_build/trades.csv   |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../sweep_turtle_AMD/windows/OOS_build/report.htm  |    Bin 26546 -> 0 bytes
+ .../sweep_turtle_AMD/windows/OOS_build/tester.log  |    Bin 5979602 -> 0 bytes
+ .../sweep_turtle_AMD/windows/OOS_build/trades.csv  |      1 -
+ .../sweep_turtle_AMD/windows/holdout/holdout.ini   |     32 -
+ .../sweep_turtle_AMD/windows/holdout/report.htm    |    Bin 26530 -> 0 bytes
+ .../sweep_turtle_AMD/windows/holdout/tester.log    |    Bin 6012076 -> 0 bytes
+ .../sweep_turtle_AMD/windows/holdout/trades.csv    |      1 -
+ experiments/sweep_turtle_AUDUSD/preset.json        |     43 -
+ experiments/sweep_turtle_AUDUSD/report.md          |    101 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 785334 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 731122 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |    390 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 533544 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 1219646 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |    261 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_AUDUSD/windows/holdout/report.htm |    Bin 270004 -> 0 bytes
+ .../sweep_turtle_AUDUSD/windows/holdout/tester.log |    Bin 1458020 -> 0 bytes
+ .../sweep_turtle_AUDUSD/windows/holdout/trades.csv |    126 -
+ experiments/sweep_turtle_INTC/preset.json          |     43 -
+ experiments/sweep_turtle_INTC/report.md            |     19 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../sweep_turtle_INTC/windows/IS_build/report.htm  |    Bin 26550 -> 0 bytes
+ .../sweep_turtle_INTC/windows/IS_build/tester.log  |    Bin 6095234 -> 0 bytes
+ .../sweep_turtle_INTC/windows/IS_build/trades.csv  |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../sweep_turtle_INTC/windows/OOS_build/report.htm |    Bin 26558 -> 0 bytes
+ .../sweep_turtle_INTC/windows/OOS_build/tester.log |    Bin 6151356 -> 0 bytes
+ .../sweep_turtle_INTC/windows/OOS_build/trades.csv |      1 -
+ .../sweep_turtle_INTC/windows/holdout/holdout.ini  |     32 -
+ .../sweep_turtle_INTC/windows/holdout/report.htm   |    Bin 26540 -> 0 bytes
+ .../sweep_turtle_INTC/windows/holdout/tester.log   |    Bin 6184336 -> 0 bytes
+ .../sweep_turtle_INTC/windows/holdout/trades.csv   |      1 -
+ experiments/sweep_turtle_MSFT/preset.json          |     43 -
+ experiments/sweep_turtle_MSFT/report.md            |     19 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../sweep_turtle_MSFT/windows/IS_build/report.htm  |    Bin 26550 -> 0 bytes
+ .../sweep_turtle_MSFT/windows/IS_build/tester.log  |    Bin 6273678 -> 0 bytes
+ .../sweep_turtle_MSFT/windows/IS_build/trades.csv  |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../sweep_turtle_MSFT/windows/OOS_build/report.htm |    Bin 26558 -> 0 bytes
+ .../sweep_turtle_MSFT/windows/OOS_build/tester.log |    Bin 6336484 -> 0 bytes
+ .../sweep_turtle_MSFT/windows/OOS_build/trades.csv |      1 -
+ .../sweep_turtle_MSFT/windows/holdout/holdout.ini  |     32 -
+ .../sweep_turtle_MSFT/windows/holdout/report.htm   |    Bin 26540 -> 0 bytes
+ .../sweep_turtle_MSFT/windows/holdout/tester.log   |    Bin 6371284 -> 0 bytes
+ .../sweep_turtle_MSFT/windows/holdout/trades.csv   |      1 -
+ experiments/sweep_turtle_NVDA/preset.json          |     43 -
+ experiments/sweep_turtle_NVDA/report.md            |     19 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../sweep_turtle_NVDA/windows/IS_build/report.htm  |    Bin 26550 -> 0 bytes
+ .../sweep_turtle_NVDA/windows/IS_build/tester.log  |    Bin 6453968 -> 0 bytes
+ .../sweep_turtle_NVDA/windows/IS_build/trades.csv  |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../sweep_turtle_NVDA/windows/OOS_build/report.htm |    Bin 26558 -> 0 bytes
+ .../sweep_turtle_NVDA/windows/OOS_build/tester.log |    Bin 6519068 -> 0 bytes
+ .../sweep_turtle_NVDA/windows/OOS_build/trades.csv |      1 -
+ .../sweep_turtle_NVDA/windows/holdout/holdout.ini  |     32 -
+ .../sweep_turtle_NVDA/windows/holdout/report.htm   |    Bin 26540 -> 0 bytes
+ .../sweep_turtle_NVDA/windows/holdout/tester.log   |    Bin 6556880 -> 0 bytes
+ .../sweep_turtle_NVDA/windows/holdout/trades.csv   |      1 -
+ experiments/sweep_turtle_NZDUSD/preset.json        |     43 -
+ experiments/sweep_turtle_NZDUSD/report.md          |    101 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 777522 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 7279698 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |    386 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 533532 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 7768936 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |    261 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_NZDUSD/windows/holdout/report.htm |    Bin 262180 -> 0 bytes
+ .../sweep_turtle_NZDUSD/windows/holdout/tester.log |    Bin 7999706 -> 0 bytes
+ .../sweep_turtle_NZDUSD/windows/holdout/trades.csv |    122 -
+ experiments/sweep_turtle_USDCAD/preset.json        |     43 -
+ experiments/sweep_turtle_USDCAD/report.md          |    102 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 767632 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 8711748 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |    381 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 535444 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 9201970 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |    262 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_USDCAD/windows/holdout/report.htm |    Bin 271968 -> 0 bytes
+ .../sweep_turtle_USDCAD/windows/holdout/tester.log |    Bin 9442134 -> 0 bytes
+ .../sweep_turtle_USDCAD/windows/holdout/trades.csv |    127 -
+ experiments/sweep_turtle_USDCHF/preset.json        |     43 -
+ experiments/sweep_turtle_USDCHF/report.md          |    101 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 783426 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 10176244 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |    389 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 535486 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 10666920 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |    262 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_USDCHF/windows/holdout/report.htm |    Bin 264164 -> 0 bytes
+ .../sweep_turtle_USDCHF/windows/holdout/tester.log |    Bin 10899710 -> 0 bytes
+ .../sweep_turtle_USDCHF/windows/holdout/trades.csv |    123 -
+ experiments/sweep_turtle_USDCNH/preset.json        |     43 -
+ experiments/sweep_turtle_USDCNH/report.md          |     88 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 748192 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 11601124 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |    371 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 164604 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 11739444 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     72 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_USDCNH/windows/holdout/report.htm |    Bin 266096 -> 0 bytes
+ .../sweep_turtle_USDCNH/windows/holdout/tester.log |    Bin 11974070 -> 0 bytes
+ .../sweep_turtle_USDCNH/windows/holdout/trades.csv |    124 -
+ experiments/sweep_turtle_USDJPY/preset.json        |     43 -
+ experiments/sweep_turtle_USDJPY/report.md          |    101 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 782228 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 12700596 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |    390 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 523642 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 13180936 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |    257 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_USDJPY/windows/holdout/report.htm |    Bin 255408 -> 0 bytes
+ .../sweep_turtle_USDJPY/windows/holdout/tester.log |    Bin 13406110 -> 0 bytes
+ .../sweep_turtle_USDJPY/windows/holdout/trades.csv |    119 -
+ experiments/sweep_turtle_USDSEK/preset.json        |     43 -
+ experiments/sweep_turtle_USDSEK/report.md          |     77 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 26594 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 13414252 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 67368 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 13460714 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     22 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_USDSEK/windows/holdout/report.htm |    Bin 36308 -> 0 bytes
+ .../sweep_turtle_USDSEK/windows/holdout/tester.log |    Bin 13477916 -> 0 bytes
+ .../sweep_turtle_USDSEK/windows/holdout/trades.csv |      6 -
+ experiments/sweep_turtle_XAUUSD/preset.json        |     43 -
+ experiments/sweep_turtle_XAUUSD/report.md          |     88 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 480536 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 13929702 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |    235 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 274734 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 14179504 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |    129 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_XAUUSD/windows/holdout/report.htm |    Bin 102016 -> 0 bytes
+ .../sweep_turtle_XAUUSD/windows/holdout/tester.log |    Bin 14415804 -> 0 bytes
+ .../sweep_turtle_XAUUSD/windows/holdout/trades.csv |     40 -
+ experiments/trapbox2_live5k/preset.json            |     40 -
+ experiments/trapbox2_live5k/report.md              |    101 -
+ experiments/trapbox2_live5k/run.log                |    Bin 14478 -> 0 bytes
+ .../trapbox2_live5k/windows/last1yr/last1yr.ini    |     41 -
+ .../trapbox2_live5k/windows/last1yr/report.htm     |    Bin 723416 -> 0 bytes
+ .../trapbox2_live5k/windows/last1yr/tester.log     |    Bin 15277608 -> 0 bytes
+ .../trapbox2_live5k/windows/last1yr/trades.csv     |    359 -
+ .../windows/older_trend/older_trend.ini            |     41 -
+ .../trapbox2_live5k/windows/older_trend/report.htm |    Bin 490524 -> 0 bytes
+ .../trapbox2_live5k/windows/older_trend/tester.log |    Bin 15750472 -> 0 bytes
+ .../trapbox2_live5k/windows/older_trend/trades.csv |    239 -
+ .../windows/recent_regime/recent_regime.ini        |     41 -
+ .../windows/recent_regime/report.htm               |    Bin 240260 -> 0 bytes
+ .../windows/recent_regime/tester.log               |    Bin 16089382 -> 0 bytes
+ .../windows/recent_regime/trades.csv               |    110 -
+ experiments/trapbox3_build/preset.json             |     36 -
+ experiments/trapbox3_build/report.md               |     73 -
+ experiments/trapbox3_build/run.log                 |    Bin 11924 -> 0 bytes
+ .../trapbox3_build/windows/IS_build/IS_build.ini   |     38 -
+ .../trapbox3_build/windows/IS_build/report.htm     |    Bin 282290 -> 0 bytes
+ .../trapbox3_build/windows/IS_build/tester.log     |    Bin 16345242 -> 0 bytes
+ .../trapbox3_build/windows/IS_build/trades.csv     |    132 -
+ .../trapbox3_build/windows/OOS_build/OOS_build.ini |     38 -
+ .../trapbox3_build/windows/OOS_build/report.htm    |    Bin 125202 -> 0 bytes
+ .../trapbox3_build/windows/OOS_build/tester.log    |    Bin 16570882 -> 0 bytes
+ .../trapbox3_build/windows/OOS_build/trades.csv    |     51 -
+ experiments/trapbox_live5k/preset.json             |     38 -
+ experiments/trapbox_live5k/report.md               |    101 -
+ experiments/trapbox_live5k/run.log                 |    Bin 14474 -> 0 bytes
+ .../trapbox_live5k/windows/last1yr/last1yr.ini     |     39 -
+ .../trapbox_live5k/windows/last1yr/report.htm      |    Bin 592862 -> 0 bytes
+ .../trapbox_live5k/windows/last1yr/tester.log      |    Bin 13698894 -> 0 bytes
+ .../trapbox_live5k/windows/last1yr/trades.csv      |    292 -
+ .../windows/older_trend/older_trend.ini            |     39 -
+ .../trapbox_live5k/windows/older_trend/report.htm  |    Bin 445374 -> 0 bytes
+ .../trapbox_live5k/windows/older_trend/tester.log  |    Bin 14129058 -> 0 bytes
+ .../trapbox_live5k/windows/older_trend/trades.csv  |    216 -
+ .../windows/recent_regime/recent_regime.ini        |     39 -
+ .../windows/recent_regime/report.htm               |    Bin 278508 -> 0 bytes
+ .../windows/recent_regime/tester.log               |    Bin 14465044 -> 0 bytes
+ .../windows/recent_regime/trades.csv               |    130 -
+ experiments/trend_eurusd/preset.json               |     29 -
+ experiments/trend_eurusd/report.md                 |     88 -
+ .../trend_eurusd/windows/IS_build/IS_build.ini     |     30 -
+ .../trend_eurusd/windows/IS_build/report.htm       |    Bin 216128 -> 0 bytes
+ .../trend_eurusd/windows/IS_build/tester.log       |    Bin 256792 -> 0 bytes
+ .../trend_eurusd/windows/IS_build/trades.csv       |    100 -
+ .../trend_eurusd/windows/OOS_build/OOS_build.ini   |     30 -
+ .../trend_eurusd/windows/OOS_build/report.htm      |    Bin 170270 -> 0 bytes
+ .../trend_eurusd/windows/OOS_build/tester.log      |    Bin 449036 -> 0 bytes
+ .../trend_eurusd/windows/OOS_build/trades.csv      |     76 -
+ .../trend_eurusd/windows/holdout/holdout.ini       |     30 -
+ .../trend_eurusd/windows/holdout/report.htm        |    Bin 104470 -> 0 bytes
+ .../trend_eurusd/windows/holdout/tester.log        |    Bin 546750 -> 0 bytes
+ .../trend_eurusd/windows/holdout/trades.csv        |     42 -
+ experiments/trend_gbpusd/preset.json               |     29 -
+ experiments/trend_gbpusd/report.md                 |     88 -
+ .../trend_gbpusd/windows/IS_build/IS_build.ini     |     30 -
+ .../trend_gbpusd/windows/IS_build/report.htm       |    Bin 227830 -> 0 bytes
+ .../trend_gbpusd/windows/IS_build/tester.log       |    Bin 824480 -> 0 bytes
+ .../trend_gbpusd/windows/IS_build/trades.csv       |    106 -
+ .../trend_gbpusd/windows/OOS_build/OOS_build.ini   |     30 -
+ .../trend_gbpusd/windows/OOS_build/report.htm      |    Bin 185668 -> 0 bytes
+ .../trend_gbpusd/windows/OOS_build/tester.log      |    Bin 1030768 -> 0 bytes
+ .../trend_gbpusd/windows/OOS_build/trades.csv      |     84 -
+ .../trend_gbpusd/windows/holdout/holdout.ini       |     30 -
+ .../trend_gbpusd/windows/holdout/report.htm        |    Bin 91318 -> 0 bytes
+ .../trend_gbpusd/windows/holdout/tester.log        |    Bin 1125628 -> 0 bytes
+ .../trend_gbpusd/windows/holdout/trades.csv        |     35 -
+ experiments/trend_xagusd/preset.json               |     29 -
+ experiments/trend_xagusd/report.md                 |     88 -
+ .../trend_xagusd/windows/IS_build/IS_build.ini     |     30 -
+ .../trend_xagusd/windows/IS_build/report.htm       |    Bin 221050 -> 0 bytes
+ .../trend_xagusd/windows/IS_build/tester.log       |    Bin 1476654 -> 0 bytes
+ .../trend_xagusd/windows/IS_build/trades.csv       |    103 -
+ .../trend_xagusd/windows/OOS_build/OOS_build.ini   |     30 -
+ .../trend_xagusd/windows/OOS_build/report.htm      |    Bin 148082 -> 0 bytes
+ .../trend_xagusd/windows/OOS_build/tester.log      |    Bin 1704040 -> 0 bytes
+ .../trend_xagusd/windows/OOS_build/trades.csv      |     65 -
+ .../trend_xagusd/windows/holdout/holdout.ini       |     30 -
+ .../trend_xagusd/windows/holdout/report.htm        |    Bin 92460 -> 0 bytes
+ .../trend_xagusd/windows/holdout/tester.log        |    Bin 1793150 -> 0 bytes
+ .../trend_xagusd/windows/holdout/trades.csv        |     36 -
+ experiments/turtle_EURUSD/preset.json              |     31 -
+ experiments/turtle_EURUSD/report.md                |    101 -
+ .../turtle_EURUSD/windows/IS_build/IS_build.ini    |     32 -
+ .../turtle_EURUSD/windows/IS_build/report.htm      |    Bin 785274 -> 0 bytes
+ .../turtle_EURUSD/windows/IS_build/tester.log      |    Bin 18849332 -> 0 bytes
+ .../turtle_EURUSD/windows/IS_build/trades.csv      |    390 -
+ .../turtle_EURUSD/windows/OOS_build/OOS_build.ini  |     32 -
+ .../turtle_EURUSD/windows/OOS_build/report.htm     |    Bin 533486 -> 0 bytes
+ .../turtle_EURUSD/windows/OOS_build/tester.log     |    Bin 19337394 -> 0 bytes
+ .../turtle_EURUSD/windows/OOS_build/trades.csv     |    261 -
+ .../turtle_EURUSD/windows/holdout/holdout.ini      |     32 -
+ .../turtle_EURUSD/windows/holdout/report.htm       |    Bin 271860 -> 0 bytes
+ .../turtle_EURUSD/windows/holdout/tester.log       |    Bin 19577386 -> 0 bytes
+ .../turtle_EURUSD/windows/holdout/trades.csv       |    127 -
+ experiments/turtle_GBPUSD/preset.json              |     31 -
+ experiments/turtle_GBPUSD/report.md                |    101 -
+ .../turtle_GBPUSD/windows/IS_build/IS_build.ini    |     32 -
+ .../turtle_GBPUSD/windows/IS_build/report.htm      |    Bin 785316 -> 0 bytes
+ .../turtle_GBPUSD/windows/IS_build/tester.log      |    Bin 20305294 -> 0 bytes
+ .../turtle_GBPUSD/windows/IS_build/trades.csv      |    390 -
+ .../turtle_GBPUSD/windows/OOS_build/OOS_build.ini  |     32 -
+ .../turtle_GBPUSD/windows/OOS_build/report.htm     |    Bin 533472 -> 0 bytes
+ .../turtle_GBPUSD/windows/OOS_build/tester.log     |    Bin 20793896 -> 0 bytes
+ .../turtle_GBPUSD/windows/OOS_build/trades.csv     |    261 -
+ .../turtle_GBPUSD/windows/holdout/holdout.ini      |     32 -
+ .../turtle_GBPUSD/windows/holdout/report.htm       |    Bin 271890 -> 0 bytes
+ .../turtle_GBPUSD/windows/holdout/tester.log       |    Bin 21033884 -> 0 bytes
+ .../turtle_GBPUSD/windows/holdout/trades.csv       |    127 -
+ experiments/turtle_XAGUSD/preset.json              |     31 -
+ experiments/turtle_XAGUSD/report.md                |     88 -
+ .../turtle_XAGUSD/windows/IS_build/IS_build.ini    |     32 -
+ .../turtle_XAGUSD/windows/IS_build/report.htm      |    Bin 376284 -> 0 bytes
+ .../turtle_XAGUSD/windows/IS_build/tester.log      |    Bin 21493738 -> 0 bytes
+ .../turtle_XAGUSD/windows/IS_build/trades.csv      |    182 -
+ .../turtle_XAGUSD/windows/OOS_build/OOS_build.ini  |     32 -
+ .../turtle_XAGUSD/windows/OOS_build/report.htm     |    Bin 229260 -> 0 bytes
+ .../turtle_XAGUSD/windows/OOS_build/tester.log     |    Bin 21753062 -> 0 bytes
+ .../turtle_XAGUSD/windows/OOS_build/trades.csv     |    106 -
+ .../turtle_XAGUSD/windows/holdout/holdout.ini      |     32 -
+ .../turtle_XAGUSD/windows/holdout/report.htm       |    Bin 117068 -> 0 bytes
+ .../turtle_XAGUSD/windows/holdout/tester.log       |    Bin 21857788 -> 0 bytes
+ .../turtle_XAGUSD/windows/holdout/trades.csv       |     48 -
+ experiments/turtle_btc/preset.json                 |     31 -
+ experiments/turtle_build/preset.json               |     30 -
+ experiments/turtle_build/report.md                 |     73 -
+ experiments/turtle_build/run.log                   |    Bin 11902 -> 0 bytes
+ .../turtle_build/windows/IS_build/IS_build.ini     |     32 -
+ .../turtle_build/windows/IS_build/report.htm       |    Bin 480482 -> 0 bytes
+ .../turtle_build/windows/IS_build/tester.log       |    Bin 17636324 -> 0 bytes
+ .../turtle_build/windows/IS_build/trades.csv       |    235 -
+ .../turtle_build/windows/OOS_build/OOS_build.ini   |     32 -
+ .../turtle_build/windows/OOS_build/report.htm      |    Bin 274680 -> 0 bytes
+ .../turtle_build/windows/OOS_build/tester.log      |    Bin 17886128 -> 0 bytes
+ .../turtle_build/windows/OOS_build/trades.csv      |    129 -
+ experiments/turtle_holdout/preset.json             |     29 -
+ experiments/turtle_holdout/report.md               |     47 -
+ experiments/turtle_holdout/run.log                 |    Bin 10436 -> 0 bytes
+ .../turtle_holdout/windows/holdout/holdout.ini     |     32 -
+ .../turtle_holdout/windows/holdout/report.htm      |    Bin 101978 -> 0 bytes
+ .../turtle_holdout/windows/holdout/tester.log      |    Bin 18122430 -> 0 bytes
+ .../turtle_holdout/windows/holdout/trades.csv      |     40 -
+ experiments/v17_holdout/preset.json                |     39 -
+ experiments/v17_holdout/report.md                  |     47 -
+ experiments/v17_holdout/run.log                    |    Bin 10418 -> 0 bytes
+ .../v17_holdout/windows/holdout/holdout.ini        |     42 -
+ experiments/v17_holdout/windows/holdout/report.htm |    Bin 188162 -> 0 bytes
+ experiments/v17_holdout/windows/holdout/tester.log |    Bin 17184536 -> 0 bytes
+ experiments/v17_holdout/windows/holdout/trades.csv |    112 -
+ experiments/v17_live5k/cost_older.txt              |      9 -
+ experiments/v17_live5k/cost_recent.txt             |      9 -
+ experiments/v17_live5k/edge_recent.txt             |     32 -
+ experiments/v17_live5k/equity_last1yr.png          |    Bin 113266 -> 0 bytes
+ experiments/v17_live5k/equity_recent.png           |    Bin 99458 -> 0 bytes
+ experiments/v17_live5k/monthly.txt                 |     17 -
+ experiments/v17_live5k/pipeline_clean.txt          |     46 -
+ experiments/v17_live5k/preset.json                 |     41 -
+ experiments/v17_live5k/report.md                   |    101 -
+ experiments/v17_live5k/run.log                     |    Bin 14496 -> 0 bytes
+ experiments/v17_live5k/windows/last1yr/last1yr.ini |     42 -
+ experiments/v17_live5k/windows/last1yr/report.htm  |    Bin 1368624 -> 0 bytes
+ experiments/v17_live5k/windows/last1yr/tester.log  |    Bin 10642762 -> 0 bytes
+ experiments/v17_live5k/windows/last1yr/trades.csv  |    952 -
+ .../v17_live5k/windows/older_trend/older_trend.ini |     42 -
+ .../v17_live5k/windows/older_trend/report.htm      |    Bin 631758 -> 0 bytes
+ .../v17_live5k/windows/older_trend/tester.log      |    Bin 11455580 -> 0 bytes
+ .../v17_live5k/windows/older_trend/trades.csv      |    431 -
+ .../windows/recent_regime/recent_regime.ini        |     42 -
+ .../v17_live5k/windows/recent_regime/report.htm    |    Bin 610554 -> 0 bytes
+ .../v17_live5k/windows/recent_regime/tester.log    |    Bin 12238188 -> 0 bytes
+ .../v17_live5k/windows/recent_regime/trades.csv    |    417 -
+ experiments/v23_opt/opt.json                       |     39 -
+ experiments/v23_opt/opt_results.xml                |    403 -
+ experiments/v23_opt/opt_results_forward.xml        |    429 -
+ experiments/v23_opt/opt_v23_opt.ini                |     38 -
+ experiments/v23_opt/plateau_report.txt             |     33 -
+ experiments/v23_opt/run_opt.log                    |    Bin 12400 -> 0 bytes
+ experiments/v23_robust/preset.json                 |     37 -
+ .../v23_robust/windows/IS_2025H2/IS_2025H2.ini     |     37 -
+ .../v23_robust/windows/IS_2025H2/report.htm        |    Bin 327258 -> 0 bytes
+ .../v23_robust/windows/IS_2025H2/tester.log        |    Bin 8323960 -> 0 bytes
+ .../v23_robust/windows/IS_2025H2/trades.csv        |    155 -
+ .../v23_robust/windows/IS_2025H2/trades_t.csv      |    155 -
+ .../v23_robust/windows/OOS_2026/OOS_2026.ini       |     37 -
+ experiments/v23_robust/windows/OOS_2026/report.htm |    Bin 440314 -> 0 bytes
+ experiments/v23_robust/windows/OOS_2026/tester.log |    Bin 10906424 -> 0 bytes
+ experiments/v23_robust/windows/OOS_2026/trades.csv |    213 -
+ .../v23_robust/windows/OOS_2026/trades_t.csv       |    213 -
+ experiments/v23_robust/windows/cr_h1/cr_h1.ini     |     37 -
+ experiments/v23_robust/windows/cr_h1/report.htm    |    Bin 274808 -> 0 bytes
+ experiments/v23_robust/windows/cr_h1/tester.log    |    Bin 13290392 -> 0 bytes
+ experiments/v23_robust/windows/cr_h1/trades.csv    |    128 -
+ experiments/v23_robust/windows/cr_h1/trades_t.csv  |    128 -
+ experiments/v23_robust/windows/cr_h2/cr_h2.ini     |     37 -
+ experiments/v23_robust/windows/cr_h2/report.htm    |    Bin 288416 -> 0 bytes
+ experiments/v23_robust/windows/cr_h2/tester.log    |    Bin 13619326 -> 0 bytes
+ experiments/v23_robust/windows/cr_h2/trades.csv    |    135 -
+ experiments/v23_robust/windows/cr_h2/trades_t.csv  |    135 -
+ export_xag_dxy.ps1                                 |     48 -
+ final_report.ps1                                   |     87 -
+ install_ck_gold_pro.ps1                            |     19 -
+ install_export_script.ps1                          |     34 -
+ install_fix09_demo.ps1                             |     31 -
+ install_gold_diag.ps1                              |     41 -
+ install_gold_final.ps1                             |     28 -
+ install_v23live_demo.ps1                           |     33 -
+ opt_v23.ps1                                        |     43 -
+ report 17                                          |   1749 -
+ risk_scan.ps1                                      |     39 -
+ run_abdiff.ps1                                     |     32 -
+ run_ama2_dump.ps1                                  |     35 -
+ run_ama_dump.ps1                                   |     35 -
+ run_best_dump.ps1                                  |     35 -
+ run_capstudy.ps1                                   |     47 -
+ run_compare.ps1                                    |     38 -
+ run_csvdiag.ps1                                    |     24 -
+ run_diag.ps1                                       |     35 -
+ run_dump_both.ps1                                  |     12 -
+ run_export_data.ps1                                |     65 -
+ run_export_push.ps1                                |     77 -
+ run_fix09.ps1                                      |     43 -
+ run_fix09_all.ps1                                  |     55 -
+ run_fix09_all2.ps1                                 |     56 -
+ run_fix09_oos_pipeline.ps1                         |     53 -
+ run_fix10_regime_is.ps1                            |     45 -
+ run_fix10_regime_oos.ps1                           |     45 -
+ run_ict.ps1                                        |     43 -
+ run_install_final.ps1                              |     28 -
+ run_journal.ps1                                    |     19 -
+ run_mr_dump.ps1                                    |     35 -
+ run_offset_explore.ps1                             |     39 -
+ run_offset_is.ps1                                  |     39 -
+ run_offset_oos_pipeline.ps1                        |     53 -
+ run_overfit_check.ps1                              |     56 -
+ run_paramgrid.ps1                                  |     49 -
+ run_poc_dump.ps1                                   |     35 -
+ run_qm_ict.ps1                                     |     59 -
+ run_regime.ps1                                     |     55 -
+ run_risk_ladder.ps1                                |     40 -
+ run_risk_ladder2.ps1                               |     37 -
+ run_s1_final.ps1                                   |     45 -
+ run_tfilter.ps1                                    |     44 -
+ run_tfilter_oos.ps1                                |     50 -
+ run_timeframes.ps1                                 |     49 -
+ run_v23_10yr.ps1                                   |     50 -
+ run_v23_1yr.ps1                                    |     46 -
+ run_v23_ab.ps1                                     |     70 -
+ run_v23_dump.ps1                                   |     35 -
+ run_v23_final.ps1                                  |     52 -
+ run_v23_r2_dump.ps1                                |     36 -
+ run_v23live_17.ps1                                 |     51 -
+ run_v23live_20.ps1                                 |     44 -
+ run_v23live_dump.ps1                               |     61 -
+ run_v23ts_dump.ps1                                 |     35 -
+ run_v24_final.ps1                                  |     40 -
+ run_v25.ps1                                        |     44 -
+ run_v26_dump.ps1                                   |     35 -
+ run_v27_dump.ps1                                   |     35 -
+ run_v28_dump.ps1                                   |     35 -
+ run_v29_dump.ps1                                   |     35 -
+ run_v810_dump.ps1                                  |     35 -
+ tools/ENGINE.md                                    |     39 -
+ tools/_compile/CK_CRYPTO_TSMOM_v1.compile.log      |    Bin 6808 -> 0 bytes
+ tools/_compile/CK_CRYPTO_TSMOM_v2.compile.log      |    Bin 6808 -> 0 bytes
+ tools/_compile/CK_GFT_Fast_v17.compile.log         |    Bin 6790 -> 0 bytes
+ tools/_compile/CK_GFT_Fast_v17_T.compile.log       |    Bin 6802 -> 0 bytes
+ tools/_compile/CK_GFT_Fast_v23_ROBUST.compile.log  |    Bin 6832 -> 0 bytes
+ tools/_compile/CK_GOLD_PRO_FIX09.compile.log       |    Bin 6802 -> 0 bytes
+ tools/_compile/CK_GOLD_PRO_FIX09_HRS.compile.log   |    Bin 6826 -> 0 bytes
+ .../_compile/CK_GOLD_PRO_FIX10_regime.compile.log  |    Bin 6844 -> 0 bytes
+ tools/_compile/CK_MR_StdDev_v1_T.compile.log       |    Bin 6802 -> 0 bytes
+ tools/_compile/CK_POC_VA_SESS.compile.log          |    Bin 6784 -> 0 bytes
+ tools/_compile/CK_POC_VA_v1.compile.log            |    Bin 6772 -> 0 bytes
+ tools/_compile/CK_QM_ICT_EA.compile.log            |    Bin 6772 -> 0 bytes
+ tools/_compile/CK_QM_ICT_FAITHFUL_v1.compile.log   |    Bin 6826 -> 0 bytes
+ tools/_compile/CK_QT_CRT_v1.compile.log            |    Bin 6772 -> 0 bytes
+ tools/_compile/CK_TRAPBOX_DKT_v1.compile.log       |    Bin 6802 -> 0 bytes
+ tools/_compile/CK_TRAPBOX_DKT_v2.compile.log       |    Bin 6802 -> 0 bytes
+ tools/_compile/CK_TRAPBOX_DKT_v3.compile.log       |    Bin 6802 -> 0 bytes
+ tools/_compile/CK_TREND_ATR_v1.compile.log         |    Bin 6790 -> 0 bytes
+ tools/_compile/CK_TURTLE_SOUP_v1.compile.log       |    Bin 6802 -> 0 bytes
+ tools/binance_dl.py                                |     90 -
+ tools/build_portfolio.py                           |    199 -
+ tools/compile_ea.ps1                               |     76 -
+ tools/cost_sweep.py                                |     35 -
+ tools/crypto_compile.txt                           |     49 -
+ tools/detect_env.ps1                               |    110 -
+ tools/diag_aud.log                                 |    111 -
+ tools/duka_cache/USATECHIDXUSD/2025-08-01.csv      |    720 -
+ tools/duka_cache/USATECHIDXUSD/2025-08-02.csv      |      0
+ tools/duka_dl.py                                   |    119 -
+ tools/duka_nas_find.py                             |     34 -
+ tools/duka_nas_probe.py                            |     66 -
+ tools/duka_one.py                                  |     37 -
+ tools/duka_one_nas.py                              |     21 -
+ tools/duka_one_nas2.py                             |     23 -
+ tools/duka_probe.out.txt                           |    Bin 708 -> 0 bytes
+ tools/duka_probe.py                                |     37 -
+ tools/edge_diagnose.py                             |     77 -
+ tools/env.json                                     |     15 -
+ tools/exit_breakdown.py                            |     50 -
+ tools/filter_hours.py                              |     36 -
+ tools/gen_presets.out                              |     25 -
+ tools/gen_presets.py                               |     53 -
+ tools/gex_calc.py                                  |     65 -
+ tools/gex_calc_out.txt                             |      4 -
+ tools/gitdiag.txt                                  |     17 -
+ tools/import_compile.log                           |    Bin 3208 -> 0 bytes
+ tools/importcrypto_compile.log                     |    Bin 3216 -> 0 bytes
+ tools/ledger_combo.txt                             |     41 -
+ tools/ledger_deliver.txt                           |     39 -
+ tools/ledger_eda.txt                               |     40 -
+ tools/ledger_final.txt                             |     37 -
+ tools/ledger_gex.txt                               |     39 -
+ tools/ledger_gexbuild.txt                          |     39 -
+ tools/ledger_interim.txt                           |     39 -
+ tools/ledger_pivot.txt                             |     41 -
+ tools/ledger_prereg2.txt                           |     42 -
+ tools/ledger_prereg3.txt                           |     39 -
+ tools/ledger_r2.txt                                |     42 -
+ tools/ledger_result.txt                            |     38 -
+ tools/ledger_slv.txt                               |     39 -
+ tools/ledger_v2res.txt                             |     37 -
+ tools/ledger_val.txt                               |     46 -
+ tools/ledger_verify.txt                            |      1 -
+ tools/ledger_win.txt                               |     43 -
+ tools/live_signals.py                              |     48 -
+ tools/live_signals_out.txt                         |     12 -
+ tools/make_ini.ps1                                 |     93 -
+ tools/make_set.py                                  |     20 -
+ tools/monthly_breakdown.py                         |     35 -
+ tools/nas_probe_out.txt                            |      8 -
+ tools/nasfind_out.txt                              |      8 -
+ tools/net_probe.py                                 |     60 -
+ tools/net_probe_out.txt                            |     10 -
+ tools/one_nas2_out.txt                             |      2 -
+ tools/one_nas_out.txt                              |      2 -
+ tools/one_out.txt                                  |      6 -
+ tools/opt_probe.py                                 |     35 -
+ tools/opt_probe2.py                                |     40 -
+ tools/opt_probe2_out.txt                           |     14 -
+ tools/opt_probe_out.txt                            |      4 -
+ tools/parse_opt.py                                 |    219 -
+ tools/plot_equity.py                               |    120 -
+ tools/portfolio_merge.py                           |    107 -
+ tools/prep_crypto.txt                              |      3 -
+ tools/prep_crypto_import.py                        |     19 -
+ tools/probe2.txt                                   |     13 -
+ tools/probe2_read1.txt                             |     13 -
+ tools/probe_result.txt                             |      6 -
+ tools/ranked_scoreboard.py                         |    141 -
+ tools/run_batch.ps1                                |     46 -
+ tools/run_candidate.ps1                            |    173 -
+ tools/run_gex_daily.bat                            |      7 -
+ tools/run_optimize.ps1                             |    132 -
+ tools/run_sweep.ps1                                |     16 -
+ tools/sample.bi5                                   |    Bin 34605 -> 0 bytes
+ tools/scan_log.py                                  |     30 -
+ tools/screen_confirm.ps1                           |     69 -
+ tools/screen_gate.py                               |     83 -
+ tools/split_analyze.py                             |     50 -
+ tools/sum_all.py                                   |     72 -
+ tools/sum_trend.py                                 |     61 -
+ tools/summarize_all.py                             |     47 -
+ tools/sweep_all.log                                |   2069 -
+ tools/sweep_snap1.txt                              |    100 -
+ tools/sweep_snap2.txt                              |    100 -
+ tools/sweep_snap3.txt                              |    100 -
+ tools/sweep_summary.txt                            |    101 -
+ tools/sweep_trend.log                              |    705 -
+ tools/sweep_turtle.log                             |    708 -
+ tools/trend_compile.txt                            |     49 -
+ tools/trend_summary.txt                            |     11 -
+ tools/tsmom_bt.py                                  |    130 -
+ tools/tsmom_combo.py                               |     86 -
+ tools/tsmom_combo_out.txt                          |     11 -
+ tools/tsmom_crypto.py                              |     65 -
+ tools/tsmom_crypto_out.txt                         |     28 -
+ tools/tsmom_dashboard.py                           |     55 -
+ tools/tsmom_dashboard_out.txt                      |     13 -
+ tools/tsmom_map.py                                 |     95 -
+ tools/tsmom_map_out.txt                            |     82 -
+ tools/tsmom_recent.py                              |     88 -
+ tools/tsmom_recent_out.txt                         |     14 -
+ tools/tsmom_result.txt                             |     14 -
+ tools/tsmom_sleeves.py                             |    106 -
+ tools/tsmom_sleeves_out.txt                        |     18 -
+ tools/tsmom_v2.py                                  |     96 -
+ tools/tsmom_v2_out.txt                             |     11 -
+ tools/tsmom_validate.py                            |    134 -
+ tools/tsmom_validate_out.txt                       |     39 -
+ tools/v2_compile.txt                               |     49 -
+ tools/warm_ticks.ps1                               |     88 -
+ tools/yahoo_crypto.py                              |     31 -
+ tools/yahoo_crypto_out.txt                         |     21 -
+ tools/yahoo_dl.py                                  |     74 -
+ tools/yahoo_dl_out.txt                             |     40 -
+ v1_lab/.gitignore                                  |      3 -
+ v1_lab/FINDINGS.md                                 |     50 -
+ v1_lab/README.md                                   |     40 -
+ v1_lab/STRATEGY_SCREEN.md                          |     25 -
+ v1_lab/VARIANT_REPORT.md                           |    303 -
+ v1_lab/VARIANT_REPORT_REAL.md                      |    357 -
+ v1_lab/__pycache__/benchmark.cpython-314.pyc       |    Bin 7025 -> 0 bytes
+ v1_lab/__pycache__/cost_stress.cpython-314.pyc     |    Bin 3015 -> 0 bytes
+ v1_lab/__pycache__/metrics.cpython-314.pyc         |    Bin 6339 -> 0 bytes
+ v1_lab/_prev_rep.md                                |    303 -
+ v1_lab/ab_diff.py                                  |     34 -
+ v1_lab/benchmark.py                                |     79 -
+ v1_lab/cost_stress.py                              |     41 -
+ v1_lab/data_drop/VARIANT_REPORT_REAL.md            |    302 -
+ v1_lab/data_io.py                                  |    237 -
+ v1_lab/ema_plateau.py                              |    116 -
+ v1_lab/erl_detect.py                               |    418 -
+ v1_lab/forensic_agent.py                           |     90 -
+ v1_lab/hello_config.json                           |      9 -
+ v1_lab/hello_metrics.csv                           |      2 -
+ v1_lab/hello_signal_engine.py                      |     18 -
+ v1_lab/hyp_bad.json                                |     15 -
+ v1_lab/hyp_good.json                               |     24 -
+ v1_lab/idm_detect.py                               |    360 -
+ v1_lab/manifest.py                                 |     45 -
+ v1_lab/metrics.py                                  |     82 -
+ v1_lab/ny_session.py                               |    393 -
+ v1_lab/orchestrator.py                             |    122 -
+ v1_lab/paramstability.py                           |     46 -
+ v1_lab/pipeline.py                                 |    186 -
+ v1_lab/poi_zone.py                                 |    528 -
+ v1_lab/qm_detect.py                                |    370 -
+ v1_lab/qm_state_machine.py                         |   1313 -
+ v1_lab/regime.py                                   |     77 -
+ v1_lab/smt_detect.py                               |    543 -
+ v1_lab/strategies/ctc_signal_engine.py             |     35 -
+ v1_lab/strategies/judge_signal_engine.py           |     61 -
+ v1_lab/strategies/stddev_signal_engine.py          |     33 -
+ v1_lab/strategies/trend_signal_engine.py           |     34 -
+ v1_lab/variant_runner.py                           |    821 -
+ v1_lab/vibe_validate.py                            |    103 -
+ v1_lab/walkforward.py                              |     64 -
+ v23_backtest.ps1                                   |     40 -
+ v23_diag.ps1                                       |     32 -
+ v23_diag2.ps1                                      |     18 -
+ v23_diag3.ps1                                      |     21 -
+ validate_best.ps1                                  |     42 -
+ validation/analyze_trades.py                       |    124 -
+ validation/cpcv.py                                 |     43 -
+ validation/pbo.py                                  |     63 -
+ validation/validate.py                             |    255 -
+ write_fix09_preset.ps1                             |     33 -
+ 1362 files changed, 81060 insertions(+), 634330 deletions(-)
+=====XAU-HYBRID-KNEE-V23=====
+523dbbb Add CK_XAU_HybridKnee_V23 - revert to MT5-verified V20 baseline
+1258f06 Add CK_XAU_HybridKnee_V22 EA (backtest-driven fixes)
+78deebd Add CK_XAU_HybridKnee_V21 EA and spec
+e7c2151 Merge pull request #1 from rupamsaha704-svg/kiro/v13-final-fixes
+81d8432 Add files via upload
+3626780 all pro tips
+194634b Add v13 final fixed EA + complete handover document
+e8f37dc Create CK_XAU_DonchianTrend_H2_V1_FIXED.mq5
+ .../2026-08-29-091252-review.md                    |     82 -
+ .../2026-08-29-092611-review.md                    |     67 -
+ .../tasks/task-qm-ict-variant-engine/context.json  |     30 -
+ .../features/FEAT-001.json                         |     30 -
+ .../features/FEAT-002.json                         |     30 -
+ .../features/FEAT-003.json                         |     30 -
+ .../features/FEAT-004.json                         |     28 -
+ .../features/FEAT-005.json                         |     30 -
+ .agents/tasks/task-qm-ict-variant-engine/task.json |     20 -
+ .gitignore                                         |      7 -
+ .kiro/agents/auditor.md                            |     40 -
+ .kiro/agents/forensic-journal.md                   |     39 -
+ .kiro/agents/setup-decoder.md                      |     40 -
+ .kiro/agents/validator.md                          |     45 -
+ AUDIT_BUNDLE.md                                    |    100 -
+ A_B_REGRESSION_RESULT.md                           |     46 -
+ CAPITAL_RETURN_SPEC.md                             |     89 -
+ CK_AMA2_v1.mq5                                     |    128 -
+ CK_AMA_v1.mq5                                      |    130 -
+ CK_BEST_diag.mq5                                   |     88 -
+ CK_CRYPTO_TSMOM_v1.mq5                             |    170 -
+ CK_CRYPTO_TSMOM_v2.mq5                             |    124 -
+ CK_ExportOHLC.mq5                                  |     84 -
+ CK_GFT_Fast_v14.mq5                                |    489 -
+ CK_GFT_Fast_v15.mq5                                |    458 -
+ CK_GFT_Fast_v16.mq5                                |    369 -
+ CK_GFT_Fast_v17.mq5                                |    463 -
+ CK_GFT_Fast_v17_T.mq5                              |    501 -
+ CK_GFT_Fast_v18.mq5                                |    375 -
+ CK_GFT_Fast_v19.mq5                                |    381 -
+ CK_GFT_Fast_v20.mq5                                |    376 -
+ CK_GFT_Fast_v23_ROBUST.mq5                         |    329 -
+ CK_GFT_Fast_v24_ROBUST.mq5                         |    148 -
+ CK_GFT_Fast_v25_ROBUST.mq5                         |    183 -
+ CK_GFT_Fast_v26_ROBUST.mq5                         |    136 -
+ CK_GFT_Fast_v27_ROBUST.mq5                         |    123 -
+ CK_GFT_Fast_v28_ROBUST.mq5                         |    122 -
+ CK_GFT_Fast_v29_ROBUST.mq5                         |    117 -
+ CK_GFT_Fast_v333333.mq5                            |    460 -
+ CK_GFT_v23_capstudy.mq5                            |    175 -
+ CK_GFT_v23_diag.mq5                                |    136 -
+ CK_GFT_v23_live.mq5                                |    223 -
+ CK_GFT_v23_regime.mq5                              |    158 -
+ CK_GFT_v23_tfilter.mq5                             |    151 -
+ CK_GFT_v23_ts.mq5                                  |     99 -
+ CK_GFT_v810_diag.mq5                               |    208 -
+ CK_GOLD_FINAL_v1.mq5                               |    115 -
+ CK_GOLD_PRO.mq5                                    |    166 -
+ CK_GOLD_PRO_FIX09.mq5                              |    191 -
+ CK_GOLD_PRO_FIX09_HRS.mq5                          |    210 -
+ CK_GOLD_PRO_FIX10_regime.mq5                       |    131 -
+ CK_GOLD_PRO_OFFSET.mq5                             |    135 -
+ CK_ICT_OTE_v1.mq5                                  |    196 -
+ CK_MR_StdDev_v1.mq5                                |    117 -
+ CK_MR_StdDev_v1_T.mq5                              |    131 -
+ CK_POC_VA_SESS.mq5                                 |    149 -
+ CK_POC_VA_v1.mq5                                   |    141 -
+ CK_QM_ICT_EA.mq5                                   |    409 -
+ CK_QM_ICT_FAITHFUL_v1.mq5                          |    395 -
+ CK_QT_CRT_v1.mq5                                   |    194 -
+ CK_TRAPBOX_DKT_v1.mq5                              |    184 -
+ CK_TRAPBOX_DKT_v2.mq5                              |    203 -
+ CK_TRAPBOX_DKT_v3.mq5                              |    147 -
+ CK_TREND_ATR_v1.mq5                                |    158 -
+ CK_TURTLE_SOUP_v1.mq5                              |    142 -
+ CK_VDELTA_EMA_v1.mq5                               |    147 -
+ CK_XAU_HybridKnee_V22.mq5                          |   2207 +
+ CK_XAU_HybridKnee_V23.mq5                          |   2436 +
+ DEFENSIBLE_SUMMARY.md                              |     50 -
+ DEMO_FORWARD_TEST.md                               |     51 -
+ DEPLOY_GUIDE.md                                    |     43 -
+ FINAL_REPORT_HONEST.md                             |    108 -
+ FINAL_SUMMARY_BANGLA.md                            |     90 -
+ FIX09_DEV_VERDICT.md                               |     39 -
+ FIX09_VALIDATION_REPORT.md                         |    118 -
+ KIRO_RESUME_PROMPT.md                              |     91 -
+ MONTE_CARLO_STRESS.md                              |     27 -
+ MULTI_EA_VALIDATION_REPORT.md                      |     54 -
+ OFFSET_TEST_RESULT.md                              |     57 -
+ OVERFIT_CHECK_RESULT.md                            |     29 -
+ POCVA_DIAGNOSIS_REPORT.md                          |     57 -
+ PORTFOLIO/CK_XAUUSD_BOSS_PACKAGE.zip               |    Bin 532797 -> 0 bytes
+ PORTFOLIO/CK_XAUUSD_Strategies.zip                 |    Bin 93840 -> 0 bytes
+ PORTFOLIO/CK_XAUUSD_Validation_Report.html         |    147 -
+ PORTFOLIO/CK_XAUUSD_Validation_Report.pdf          |    Bin 537976 -> 0 bytes
+ PORTFOLIO/Ranked_Results_MT5style.html             |     48 -
+ PORTFOLIO/Ranked_Results_MT5style.pdf              |    Bin 120145 -> 0 bytes
+ PORTFOLIO/STRATEGIES/1_CK_GFT_Fast_v17.mq5         |    463 -
+ PORTFOLIO/STRATEGIES/2_CK_GOLD_PRO_FIX09.mq5       |    191 -
+ PORTFOLIO/STRATEGIES/CK_GFT_Fast_v17.ex5           |    Bin 39720 -> 0 bytes
+ PORTFOLIO/STRATEGIES/CK_GFT_Fast_v17.set           |     47 -
+ PORTFOLIO/STRATEGIES/CK_GOLD_PRO_FIX09.ex5         |    Bin 43972 -> 0 bytes
+ PORTFOLIO/STRATEGIES/CK_GOLD_PRO_FIX09.set         |     39 -
+ PORTFOLIO/STRATEGIES/README.txt                    |    118 -
+ PORTFOLIO/_BOSS/READ_ME_FIRST.txt                  |     35 -
+ PORTFOLIO/_BOSS/Reports/1_Validation_Report.pdf    |    Bin 537976 -> 0 bytes
+ PORTFOLIO/_BOSS/Reports/2_Ranked_Results.pdf       |    Bin 120145 -> 0 bytes
+ PORTFOLIO/_BOSS/Strategies/1_CK_GFT_Fast_v17.mq5   |    463 -
+ PORTFOLIO/_BOSS/Strategies/2_CK_GOLD_PRO_FIX09.mq5 |    191 -
+ PORTFOLIO/_BOSS/Strategies/README.txt              |     87 -
+ PORTFOLIO/scoreboard.png                           |    Bin 43542 -> 0 bytes
+ PORTFOLIO_FINAL/README.md                          |     85 -
+ PORTFOLIO_FINAL/REJECTED/REJECTED.md               |     46 -
+ PORTFOLIO_FINAL/RESULTS/00_unified_dashboard.txt   |     13 -
+ PORTFOLIO_FINAL/RESULTS/01_edge_map_where_when.txt |     82 -
+ PORTFOLIO_FINAL/RESULTS/02_crypto_validation.txt   |     39 -
+ PORTFOLIO_FINAL/RESULTS/03_crypto_NQ_combo.txt     |     11 -
+ PORTFOLIO_FINAL/RESULTS/04_v2_basket_test.txt      |     11 -
+ PORTFOLIO_FINAL/RESULTS/05_sleeve_screen_all.txt   |     18 -
+ PORTFOLIO_FINAL/RESULTS/06_recent_1yr_regime.txt   |     14 -
+ PORTFOLIO_FINAL/RESULTS/07_broker_sweep.txt        |    101 -
+ PORTFOLIO_FINAL/RESULTS/08_todays_signals.txt      |     12 -
+ PORTFOLIO_FINAL/RESULTS/09_live_gex.txt            |      4 -
+ PORTFOLIO_FINAL/WORKS/BTCUSD.set                   |     16 -
+ PORTFOLIO_FINAL/WORKS/CK_CRYPTO_TSMOM_PACKAGE.zip  |    Bin 38917 -> 0 bytes
+ PORTFOLIO_FINAL/WORKS/CK_CRYPTO_TSMOM_v2.ex5       |    Bin 33686 -> 0 bytes
+ PORTFOLIO_FINAL/WORKS/CK_CRYPTO_TSMOM_v2.mq5       |    124 -
+ PORTFOLIO_FINAL/WORKS/ETHUSD.set                   |     16 -
+ PORTFOLIO_FINAL/WORKS/NQ.set                       |     16 -
+ PORTFOLIO_FINAL/WORKS/README.md                    |     58 -
+ PROJECT_SUMMARY.md                                 |     44 -
+ QMF_DIAGNOSIS_TP_BANGLA.md                         |     54 -
+ QMF_FAITHFUL_REPORT_BANGLA.md                      |     76 -
+ QM_ICT_STATUS.md                                   |     92 -
+ QTCRT_REPORT_BANGLA.md                             |     45 -
+ README_SUBMISSION.md                               |     52 -
+ REGIME_GATE_CONSISTENCY.md                         |     30 -
+ REGIME_TEST_RESULT.md                              |     26 -
+ ReportTester-109861033333.html                     |    Bin 919708 -> 0 bytes
+ ReportTester-109861045.html                        |    Bin 252154 -> 0 bytes
+ SESSION_EXPORT_PROMPT.md                           |     49 -
+ SPEC/AGENT_SYSTEM_v1.md                            |    129 -
+ SPEC/DESIGN_v1.0.md                                |    131 -
+ SPEC/DESIGN_v1.1_amendment.md                      |     39 -
+ SPEC/MASTER_PROMPT.md                              |    170 -
+ SPEC/QM_ICT_BUILD_PLAN_v1.md                       |     55 -
+ SPEC/QM_ICT_STRATEGY_SPEC.md                       |    131 -
+ SPEC/dof_ledger.jsonl                              |    138 -
+ SPEC/dof_ledger.py                                 |     67 -
+ SPEC/knowledge_gate.py                             |    102 -
+ SPEC/knowledge_ledger.jsonl                        |      1 -
+ SPEC/metric_dictionary.md                          |     35 -
+ SPEC/offset_entry_prereg.md                        |     28 -
+ SPEC/regime_classifier_v1.md                       |     39 -
+ STRATEGIES_CRYPTO/BTCUSD.set                       |     16 -
+ STRATEGIES_CRYPTO/CK_CRYPTO_TSMOM_PACKAGE.zip      |    Bin 38917 -> 0 bytes
+ STRATEGIES_CRYPTO/CK_CRYPTO_TSMOM_v2.ex5           |    Bin 33686 -> 0 bytes
+ STRATEGIES_CRYPTO/CK_CRYPTO_TSMOM_v2.mq5           |    124 -
+ STRATEGIES_CRYPTO/ETHUSD.set                       |     16 -
+ STRATEGIES_CRYPTO/NQ.set                           |     16 -
+ STRATEGIES_CRYPTO/README.md                        |     58 -
+ SUBMISSION.md                                      |     60 -
+ SYSTEM_DESIGN_PRINCIPLES.md                        |     55 -
+ TECH_REVIEW_RESPONSE.md                            |     55 -
+ TFILTER_TEST_RESULT.md                             |     35 -
+ VALIDATION_PIPELINE.md                             |     95 -
+ XAGUSD_M15_2022.csv                                | 100001 -------------
+ XAGUSD_M5_202504071050_202608282255.csv            | 100001 -------------
+ XAUUSD_M15_export.csv                              | 100001 -------------
+ XAUUSD_M5_202508010105_202607271000.csv            | 136838 +++++++++---------
+ analyze_best.ps1                                   |     33 -
+ baseline_v23ts_trades.csv                          |    204 -
+ data_crypto/AAVE.csv                               |   2160 -
+ data_crypto/ADA.csv                                |   3218 -
+ data_crypto/ALGO.csv                               |   2630 -
+ data_crypto/ATOM.csv                               |   2729 -
+ data_crypto/AVAX.csv                               |   2173 -
+ data_crypto/BCH.csv                                |   3219 -
+ data_crypto/BNB.csv                                |   3219 -
+ data_crypto/BTC.csv                                |   3653 -
+ data_crypto/DOGE.csv                               |   3219 -
+ data_crypto/DOT.csv                                |   2204 -
+ data_crypto/ETC.csv                                |   3219 -
+ data_crypto/ETH.csv                                |   3219 -
+ data_crypto/LINK.csv                               |   3219 -
+ data_crypto/LTC.csv                                |   3653 -
+ data_crypto/MATIC.csv                              |   2159 -
+ data_crypto/SOL.csv                                |   2336 -
+ data_crypto/TRX.csv                                |   3219 -
+ data_crypto/UNI.csv                                |   2007 -
+ data_crypto/XLM.csv                                |   3219 -
+ data_crypto/XRP.csv                                |   3219 -
+ data_daily/AUDUSD.csv                              |   2602 -
+ data_daily/BTC.csv                                 |   3654 -
+ data_daily/BZ.csv                                  |   2515 -
+ data_daily/CC.csv                                  |   2514 -
+ data_daily/CL.csv                                  |   2514 -
+ data_daily/CT.csv                                  |   2515 -
+ data_daily/DAX.csv                                 |   2537 -
+ data_daily/ES.csv                                  |   2515 -
+ data_daily/ETH.csv                                 |   3219 -
+ data_daily/EURUSD.csv                              |   2602 -
+ data_daily/FTSE.csv                                |   2526 -
+ data_daily/GBPUSD.csv                              |   2602 -
+ data_daily/GC.csv                                  |   2513 -
+ data_daily/HE.csv                                  |   2513 -
+ data_daily/HG.csv                                  |   2514 -
+ data_daily/HSI.csv                                 |   2458 -
+ data_daily/KC.csv                                  |   2515 -
+ data_daily/LE.csv                                  |   2513 -
+ data_daily/NG.csv                                  |   2515 -
+ data_daily/NIKKEI.csv                              |   2441 -
+ data_daily/NQ.csv                                  |   2515 -
+ data_daily/NZDUSD.csv                              |   2602 -
+ data_daily/PA.csv                                  |   2512 -
+ data_daily/PL.csv                                  |   2513 -
+ data_daily/RTY.csv                                 |   2303 -
+ data_daily/SB.csv                                  |   2515 -
+ data_daily/SI.csv                                  |   2513 -
+ data_daily/STOXX.csv                               |   2512 -
+ data_daily/USDCAD.csv                              |   2602 -
+ data_daily/USDCHF.csv                              |   2603 -
+ data_daily/USDJPY.csv                              |   2603 -
+ data_daily/YM.csv                                  |   2515 -
+ data_daily/ZB.csv                                  |   2514 -
+ data_daily/ZC.csv                                  |   2511 -
+ data_daily/ZF.csv                                  |   2515 -
+ data_daily/ZN.csv                                  |   2514 -
+ data_daily/ZS.csv                                  |   2513 -
+ data_daily/ZT.csv                                  |   2515 -
+ data_daily/ZW.csv                                  |   2513 -
+ data_gex/_NDX_gex.csv                              |      2 -
+ data_gex/snapshots/_NDX_2026-09-01.csv             |  15479 --
+ docs/session_exports/README.md                     |      4 -
+ .../SESSION_ai_hedge_fund_mt5_deepseek.md          |    880 -
+ .../SESSION_ck_gft_ea_and_validation_toolkit.md    |    357 -
+ .../SESSION_ck_gft_fast_optimization.md            |    237 -
+ .../SESSION_csv_upload_size_limit_fix.md           |    564 -
+ .../SESSION_gft_backtest_degradation_review.md     |    314 -
+ .../SESSION_gft_gold_ea_risk_mgmt.md               |    686 -
+ docs/session_exports/SESSION_gold_goat1_ea_v819.md |    608 -
+ ...ESSION_institutional_propfirm_ea_v3_backtest.md |    349 -
+ .../SESSION_python_mt5_backtester_xauusd.md        |    327 -
+ .../SESSION_xau_smart_ea_breakout_retest.md        |    306 -
+ .../SESSION_xauusd_validation_and_combine.md       |     96 -
+ .../Institutional_Gold_Trader_ProX_V2.mq5          |   1190 -
+ .../Institutional_Gold_Trader_ProX_V3.mq5          |    586 -
+ .../Institutional_PropFirm_EA_V3.mq5               |    931 -
+ .../backtest_analyzer.py                           |    323 -
+ .../XAUUSD_realdata_backtest_report.txt            |    485 -
+ .../python_mt5_backtester_files/backtest_engine.py |    454 -
+ .../python_mt5_backtester_files/data_loader.py     |    372 -
+ .../report_generator.py                            |    447 -
+ .../python_mt5_backtester_files/requirements.txt   |      4 -
+ .../python_mt5_backtester_files/run_backtest.py    |    246 -
+ .../python_mt5_backtester_files/strategy_ck_gft.py |    513 -
+ .../python_mt5_backtester_files/symbol_info.py     |    216 -
+ .../xau_smart_ea_files/EA_FINAL.mq5                |    777 -
+ .../xau_smart_ea_files/GFT_2Step_5K_EA.mq5         |    732 -
+ .../Institutional_Gold_Trader_Pro.mq5              |    575 -
+ .../Institutional_Gold_Trader_Pro_v2.mq5           |    760 -
+ .../xau_smart_ea_files/XAU_Smart_EA_V2.mq5         |   1171 -
+ .../xau_smart_ea_files/XAU_Smart_EA_V3_Final.mq5   |    811 -
+ experiments/_ALL_SUMMARY.txt                       |     23 -
+ experiments/_BATCH_LOG.txt                         |    Bin 24395 -> 0 bytes
+ experiments/_COMBO_BUILD.txt                       |     24 -
+ experiments/_WARM_LOG.txt                          |    Bin 432 -> 0 bytes
+ experiments/crypto_btc/preset.json                 |     30 -
+ experiments/fix09_baseline/preset.json             |     35 -
+ experiments/fix09_baseline/report.md               |     47 -
+ .../baseline_realtick/baseline_realtick.ini        |     38 -
+ .../windows/baseline_realtick/report.htm           |    Bin 726232 -> 0 bytes
+ .../windows/baseline_realtick/tester.log           |    Bin 4416346 -> 0 bytes
+ .../windows/baseline_realtick/trades.csv           |    360 -
+ .../fix09_current_regime/full_regime_trades.csv    |    265 -
+ experiments/fix09_current_regime/preset.json       |     36 -
+ experiments/fix09_current_regime/report.md         |     73 -
+ .../fix09_current_regime/windows/cr_h1/cr_h1.ini   |     38 -
+ .../fix09_current_regime/windows/cr_h1/report.htm  |    Bin 279068 -> 0 bytes
+ .../fix09_current_regime/windows/cr_h1/tester.log  |    Bin 6851386 -> 0 bytes
+ .../fix09_current_regime/windows/cr_h1/trades.csv  |    130 -
+ .../fix09_current_regime/windows/cr_h2/cr_h2.ini   |     38 -
+ .../fix09_current_regime/windows/cr_h2/report.htm  |    Bin 290722 -> 0 bytes
+ .../fix09_current_regime/windows/cr_h2/tester.log  |    Bin 7122582 -> 0 bytes
+ .../fix09_current_regime/windows/cr_h2/trades.csv  |    136 -
+ experiments/fix09_dep50k/preset.json               |     35 -
+ experiments/fix09_dep50k/report.md                 |     47 -
+ .../windows/baseline_dep50k/baseline_dep50k.ini    |     38 -
+ .../windows/baseline_dep50k/report.htm             |    Bin 746222 -> 0 bytes
+ .../windows/baseline_dep50k/tester.log             |    Bin 5853084 -> 0 bytes
+ .../windows/baseline_dep50k/trades.csv             |    370 -
+ experiments/fix09_is_oos/preset.json               |     36 -
+ experiments/fix09_is_oos/report.md                 |     86 -
+ .../fix09_is_oos/windows/IS_2025H2/IS_2025H2.ini   |     38 -
+ .../fix09_is_oos/windows/IS_2025H2/report.htm      |    Bin 327550 -> 0 bytes
+ .../fix09_is_oos/windows/IS_2025H2/tester.log      |    Bin 6163200 -> 0 bytes
+ .../fix09_is_oos/windows/IS_2025H2/trades.csv      |    155 -
+ .../fix09_is_oos/windows/OOS_2026/OOS_2026.ini     |     38 -
+ .../fix09_is_oos/windows/OOS_2026/report.htm       |    Bin 446462 -> 0 bytes
+ .../fix09_is_oos/windows/OOS_2026/tester.log       |    Bin 6589888 -> 0 bytes
+ .../fix09_is_oos/windows/OOS_2026/trades.csv       |    216 -
+ experiments/fix09_lev100/preset.json               |     35 -
+ experiments/fix09_lev100/report.md                 |     47 -
+ .../windows/baseline_lev100/baseline_lev100.ini    |     38 -
+ .../windows/baseline_lev100/report.htm             |    Bin 726200 -> 0 bytes
+ .../windows/baseline_lev100/tester.log             |    Bin 5124992 -> 0 bytes
+ .../windows/baseline_lev100/trades.csv             |    360 -
+ experiments/fix09_live5k/edge_diag.txt             |     45 -
+ experiments/fix09_live5k/equity_last1yr.png        |    Bin 117587 -> 0 bytes
+ experiments/fix09_live5k/monthly.txt               |     17 -
+ experiments/fix09_live5k/preset.json               |     35 -
+ experiments/fix09_live5k/report.md                 |     47 -
+ experiments/fix09_live5k/run.log                   |    Bin 10432 -> 0 bytes
+ experiments/fix09_live5k/split.txt                 |     13 -
+ .../fix09_live5k/windows/last1yr/last1yr.ini       |     38 -
+ .../fix09_live5k/windows/last1yr/report.htm        |    Bin 594140 -> 0 bytes
+ .../fix09_live5k/windows/last1yr/tester.log        |    Bin 6496024 -> 0 bytes
+ .../fix09_live5k/windows/last1yr/trades.csv        |    292 -
+ experiments/fix09_proof/preset.json                |     36 -
+ experiments/fix09_proof/preset.sha256              |      1 -
+ experiments/fix09_proof/report.md                  |     73 -
+ .../fix09_proof/windows/is_2025H2/is_2025H2.ini    |     38 -
+ .../fix09_proof/windows/is_2025H2/report.htm       |    Bin 24078 -> 0 bytes
+ .../fix09_proof/windows/is_2025H2/tester.log       |    Bin 3449404 -> 0 bytes
+ .../fix09_proof/windows/is_2025H2/trades.csv       |    166 -
+ .../fix09_proof/windows/oos_2026H1/oos_2026H1.ini  |     38 -
+ .../fix09_proof/windows/oos_2026H1/report.htm      |    Bin 43882 -> 0 bytes
+ .../fix09_proof/windows/oos_2026H1/tester.log      |    Bin 3758438 -> 0 bytes
+ .../fix09_proof/windows/oos_2026H1/trades.csv      |      9 -
+ .../fix09hrs_50k_off/equity_recent_regime.png      |    Bin 106170 -> 0 bytes
+ experiments/fix09hrs_50k_off/preset.json           |     39 -
+ experiments/fix09hrs_50k_off/report.md             |     73 -
+ .../windows/older_trend/older_trend.ini            |     41 -
+ .../windows/older_trend/report.htm                 |    Bin 328612 -> 0 bytes
+ .../windows/older_trend/tester.log                 |    Bin 8066582 -> 0 bytes
+ .../windows/older_trend/trades.csv                 |    155 -
+ .../windows/recent_regime/recent_regime.ini        |     41 -
+ .../windows/recent_regime/report.htm               |    Bin 309162 -> 0 bytes
+ .../windows/recent_regime/tester.log               |    Bin 8355622 -> 0 bytes
+ .../windows/recent_regime/trades.csv               |    145 -
+ experiments/fix09hrs_50k_on/preset.json            |     39 -
+ experiments/fix09hrs_50k_on/report.md              |     73 -
+ .../windows/older_trend/older_trend.ini            |     41 -
+ .../fix09hrs_50k_on/windows/older_trend/report.htm |    Bin 285776 -> 0 bytes
+ .../fix09hrs_50k_on/windows/older_trend/tester.log |    Bin 8623358 -> 0 bytes
+ .../fix09hrs_50k_on/windows/older_trend/trades.csv |    133 -
+ .../windows/recent_regime/recent_regime.ini        |     41 -
+ .../windows/recent_regime/report.htm               |    Bin 250772 -> 0 bytes
+ .../windows/recent_regime/tester.log               |    Bin 8853350 -> 0 bytes
+ .../windows/recent_regime/trades.csv               |    115 -
+ experiments/fix09hrs_off/preset.json               |     40 -
+ experiments/fix09hrs_off/report.md                 |     88 -
+ experiments/fix09hrs_off/run.log                   |    Bin 12658 -> 0 bytes
+ .../fix09hrs_off/windows/last1yr/last1yr.ini       |     41 -
+ .../fix09hrs_off/windows/last1yr/report.htm        |    Bin 595024 -> 0 bytes
+ .../fix09hrs_off/windows/last1yr/tester.log        |    Bin 7073252 -> 0 bytes
+ .../fix09hrs_off/windows/last1yr/trades.csv        |    292 -
+ .../windows/older_trend/older_trend.ini            |     41 -
+ .../fix09hrs_off/windows/older_trend/report.htm    |    Bin 316656 -> 0 bytes
+ .../fix09hrs_off/windows/older_trend/tester.log    |    Bin 7372228 -> 0 bytes
+ .../fix09hrs_off/windows/older_trend/trades.csv    |    149 -
+ .../windows/recent_regime/recent_regime.ini        |     41 -
+ .../fix09hrs_off/windows/recent_regime/report.htm  |    Bin 44800 -> 0 bytes
+ .../fix09hrs_off/windows/recent_regime/tester.log  |    Bin 7755788 -> 0 bytes
+ .../fix09hrs_off/windows/recent_regime/trades.csv  |      9 -
+ experiments/fix10_holdout/preset.json              |     38 -
+ experiments/fix10_holdout/report.md                |     10 -
+ experiments/fix10_holdout/run.log                  |    Bin 8948 -> 0 bytes
+ .../fix10_holdout/windows/holdout/holdout.ini      |     41 -
+ experiments/fix10_trendmod/preset.json             |     38 -
+ experiments/fix10_trendmod/report.md               |     47 -
+ experiments/fix10_trendmod/run.log                 |    Bin 10534 -> 0 bytes
+ experiments/fix10_trendmod/windows/build/build.ini |     41 -
+ .../fix10_trendmod/windows/build/report.htm        |    Bin 345400 -> 0 bytes
+ .../fix10_trendmod/windows/build/tester.log        |    Bin 16898526 -> 0 bytes
+ .../fix10_trendmod/windows/build/trades.csv        |    164 -
+ experiments/mr_live5k/preset.json                  |     30 -
+ experiments/mr_live5k/report.md                    |     88 -
+ experiments/mr_live5k/run.log                      |    Bin 12570 -> 0 bytes
+ experiments/mr_live5k/windows/last1yr/last1yr.ini  |     31 -
+ experiments/mr_live5k/windows/last1yr/report.htm   |    Bin 282290 -> 0 bytes
+ experiments/mr_live5k/windows/last1yr/tester.log   |    Bin 12602096 -> 0 bytes
+ experiments/mr_live5k/windows/last1yr/trades.csv   |    133 -
+ .../mr_live5k/windows/older_trend/older_trend.ini  |     31 -
+ .../mr_live5k/windows/older_trend/report.htm       |    Bin 189028 -> 0 bytes
+ .../mr_live5k/windows/older_trend/tester.log       |    Bin 12799478 -> 0 bytes
+ .../mr_live5k/windows/older_trend/trades.csv       |     85 -
+ .../windows/recent_regime/recent_regime.ini        |     31 -
+ .../mr_live5k/windows/recent_regime/report.htm     |    Bin 154160 -> 0 bytes
+ .../mr_live5k/windows/recent_regime/tester.log     |    Bin 12967578 -> 0 bytes
+ .../mr_live5k/windows/recent_regime/trades.csv     |     67 -
+ experiments/poc_sess_ny/preset.json                |     35 -
+ experiments/poc_sess_ny/report.md                  |    116 -
+ .../poc_sess_ny/windows/IS_2025H2/IS_2025H2.ini    |     35 -
+ .../poc_sess_ny/windows/IS_2025H2/report.htm       |    Bin 365742 -> 0 bytes
+ .../poc_sess_ny/windows/IS_2025H2/tester.log       |    Bin 19500396 -> 0 bytes
+ .../poc_sess_ny/windows/IS_2025H2/trades.csv       |    175 -
+ .../poc_sess_ny/windows/OOS_2026/OOS_2026.ini      |     35 -
+ .../poc_sess_ny/windows/OOS_2026/report.htm        |    Bin 484706 -> 0 bytes
+ .../poc_sess_ny/windows/OOS_2026/tester.log        |    Bin 20021696 -> 0 bytes
+ .../poc_sess_ny/windows/OOS_2026/trades.csv        |    236 -
+ experiments/poc_sess_ny/windows/cr_h1/cr_h1.ini    |     35 -
+ experiments/poc_sess_ny/windows/cr_h1/report.htm   |    Bin 289874 -> 0 bytes
+ experiments/poc_sess_ny/windows/cr_h1/tester.log   |    Bin 20327582 -> 0 bytes
+ experiments/poc_sess_ny/windows/cr_h1/trades.csv   |    136 -
+ experiments/poc_sess_ny/windows/cr_h2/cr_h2.ini    |     35 -
+ experiments/poc_sess_ny/windows/cr_h2/report.htm   |    Bin 336658 -> 0 bytes
+ experiments/poc_sess_ny/windows/cr_h2/tester.log   |    Bin 20677480 -> 0 bytes
+ experiments/poc_sess_ny/windows/cr_h2/trades.csv   |    160 -
+ experiments/poc_sess_us/preset.json                |     35 -
+ experiments/poc_sess_us/report.md                  |    116 -
+ .../poc_sess_us/windows/IS_2025H2/IS_2025H2.ini    |     35 -
+ .../poc_sess_us/windows/IS_2025H2/report.htm       |    Bin 521388 -> 0 bytes
+ .../poc_sess_us/windows/IS_2025H2/tester.log       |    Bin 17429646 -> 0 bytes
+ .../poc_sess_us/windows/IS_2025H2/trades.csv       |    255 -
+ .../poc_sess_us/windows/OOS_2026/OOS_2026.ini      |     35 -
+ .../poc_sess_us/windows/OOS_2026/report.htm        |    Bin 691014 -> 0 bytes
+ .../poc_sess_us/windows/OOS_2026/tester.log        |    Bin 18176150 -> 0 bytes
+ .../poc_sess_us/windows/OOS_2026/trades.csv        |    342 -
+ experiments/poc_sess_us/windows/cr_h1/cr_h1.ini    |     35 -
+ experiments/poc_sess_us/windows/cr_h1/report.htm   |    Bin 416356 -> 0 bytes
+ experiments/poc_sess_us/windows/cr_h1/tester.log   |    Bin 18618916 -> 0 bytes
+ experiments/poc_sess_us/windows/cr_h1/trades.csv   |    201 -
+ experiments/poc_sess_us/windows/cr_h2/cr_h2.ini    |     35 -
+ experiments/poc_sess_us/windows/cr_h2/report.htm   |    Bin 463164 -> 0 bytes
+ experiments/poc_sess_us/windows/cr_h2/tester.log   |    Bin 19108854 -> 0 bytes
+ experiments/poc_sess_us/windows/cr_h2/trades.csv   |    225 -
+ experiments/poc_va/_nylate_diag.txt                |     32 -
+ experiments/poc_va/preset.json                     |     32 -
+ experiments/poc_va/report.md                       |    119 -
+ experiments/poc_va/windows/IS_2025H2/IS_2025H2.ini |     32 -
+ experiments/poc_va/windows/IS_2025H2/report.htm    |    Bin 689764 -> 0 bytes
+ experiments/poc_va/windows/IS_2025H2/tester.log    |    Bin 14363042 -> 0 bytes
+ experiments/poc_va/windows/IS_2025H2/trades.csv    |    342 -
+ experiments/poc_va/windows/OOS_2026/OOS_2026.ini   |     32 -
+ experiments/poc_va/windows/OOS_2026/report.htm     |    Bin 925530 -> 0 bytes
+ experiments/poc_va/windows/OOS_2026/tester.log     |    Bin 15366012 -> 0 bytes
+ experiments/poc_va/windows/OOS_2026/trades.csv     |    463 -
+ experiments/poc_va/windows/cr_h1/cr_h1.ini         |     32 -
+ experiments/poc_va/windows/cr_h1/report.htm        |    Bin 594496 -> 0 bytes
+ experiments/poc_va/windows/cr_h1/tester.log        |    Bin 16003404 -> 0 bytes
+ experiments/poc_va/windows/cr_h1/trades.csv        |    293 -
+ experiments/poc_va/windows/cr_h2/cr_h2.ini         |     32 -
+ experiments/poc_va/windows/cr_h2/report.htm        |    Bin 592590 -> 0 bytes
+ experiments/poc_va/windows/cr_h2/tester.log        |    Bin 16636304 -> 0 bytes
+ experiments/poc_va/windows/cr_h2/trades.csv        |    292 -
+ experiments/qm_ict/preset.json                     |     39 -
+ experiments/qm_ict/report.md                       |    103 -
+ experiments/qm_ict/windows/IS_2025H2/IS_2025H2.ini |     39 -
+ experiments/qm_ict/windows/IS_2025H2/report.htm    |    Bin 84662 -> 0 bytes
+ experiments/qm_ict/windows/IS_2025H2/tester.log    |    Bin 16698514 -> 0 bytes
+ experiments/qm_ict/windows/IS_2025H2/trades.csv    |     30 -
+ experiments/qm_ict/windows/OOS_2026/OOS_2026.ini   |     39 -
+ experiments/qm_ict/windows/OOS_2026/report.htm     |    Bin 96378 -> 0 bytes
+ experiments/qm_ict/windows/OOS_2026/tester.log     |    Bin 16771678 -> 0 bytes
+ experiments/qm_ict/windows/OOS_2026/trades.csv     |     36 -
+ experiments/qm_ict/windows/cr_h1/cr_h1.ini         |     39 -
+ experiments/qm_ict/windows/cr_h1/report.htm        |    Bin 69252 -> 0 bytes
+ experiments/qm_ict/windows/cr_h1/tester.log        |    Bin 16819246 -> 0 bytes
+ experiments/qm_ict/windows/cr_h1/trades.csv        |     22 -
+ experiments/qm_ict/windows/cr_h2/cr_h2.ini         |     39 -
+ experiments/qm_ict/windows/cr_h2/report.htm        |    Bin 69240 -> 0 bytes
+ experiments/qm_ict/windows/cr_h2/tester.log        |    Bin 16866796 -> 0 bytes
+ experiments/qm_ict/windows/cr_h2/trades.csv        |     22 -
+ experiments/qmf_poi3/_analysis.txt                 |     79 -
+ experiments/qmf_poi3/preset.json                   |     46 -
+ experiments/qmf_poi3/report.md                     |    103 -
+ .../qmf_poi3/windows/IS_2025H2/IS_2025H2.ini       |     46 -
+ experiments/qmf_poi3/windows/IS_2025H2/report.htm  |    Bin 90608 -> 0 bytes
+ experiments/qmf_poi3/windows/IS_2025H2/tester.log  |    Bin 1547392 -> 0 bytes
+ experiments/qmf_poi3/windows/IS_2025H2/trades.csv  |     32 -
+ experiments/qmf_poi3/windows/OOS_2026/OOS_2026.ini |     46 -
+ experiments/qmf_poi3/windows/OOS_2026/report.htm   |    Bin 146876 -> 0 bytes
+ experiments/qmf_poi3/windows/OOS_2026/tester.log   |    Bin 1761638 -> 0 bytes
+ experiments/qmf_poi3/windows/OOS_2026/trades.csv   |     61 -
+ experiments/qmf_poi3/windows/cr_h1/cr_h1.ini       |     46 -
+ experiments/qmf_poi3/windows/cr_h1/report.htm      |    Bin 109938 -> 0 bytes
+ experiments/qmf_poi3/windows/cr_h1/tester.log      |    Bin 1908020 -> 0 bytes
+ experiments/qmf_poi3/windows/cr_h1/trades.csv      |     42 -
+ experiments/qmf_poi3/windows/cr_h2/cr_h2.ini       |     46 -
+ experiments/qmf_poi3/windows/cr_h2/report.htm      |    Bin 96382 -> 0 bytes
+ experiments/qmf_poi3/windows/cr_h2/tester.log      |    Bin 2038264 -> 0 bytes
+ experiments/qmf_poi3/windows/cr_h2/trades.csv      |     35 -
+ experiments/qmf_smt/_analysis.txt                  |     79 -
+ experiments/qmf_smt/preset.json                    |     46 -
+ experiments/qmf_smt/report.md                      |    103 -
+ .../qmf_smt/windows/IS_2025H2/IS_2025H2.ini        |     46 -
+ experiments/qmf_smt/windows/IS_2025H2/report.htm   |    Bin 90600 -> 0 bytes
+ experiments/qmf_smt/windows/IS_2025H2/tester.log   |    Bin 912290 -> 0 bytes
+ experiments/qmf_smt/windows/IS_2025H2/trades.csv   |     32 -
+ experiments/qmf_smt/windows/OOS_2026/OOS_2026.ini  |     46 -
+ experiments/qmf_smt/windows/OOS_2026/report.htm    |    Bin 146868 -> 0 bytes
+ experiments/qmf_smt/windows/OOS_2026/tester.log    |    Bin 1126518 -> 0 bytes
+ experiments/qmf_smt/windows/OOS_2026/trades.csv    |     61 -
+ experiments/qmf_smt/windows/cr_h1/cr_h1.ini        |     46 -
+ experiments/qmf_smt/windows/cr_h1/report.htm       |    Bin 109930 -> 0 bytes
+ experiments/qmf_smt/windows/cr_h1/tester.log       |    Bin 1272882 -> 0 bytes
+ experiments/qmf_smt/windows/cr_h1/trades.csv       |     42 -
+ experiments/qmf_smt/windows/cr_h2/cr_h2.ini        |     46 -
+ experiments/qmf_smt/windows/cr_h2/report.htm       |    Bin 96374 -> 0 bytes
+ experiments/qmf_smt/windows/cr_h2/tester.log       |    Bin 1403104 -> 0 bytes
+ experiments/qmf_smt/windows/cr_h2/trades.csv       |     35 -
+ experiments/qmf_tp2/_analysis.txt                  |     79 -
+ experiments/qmf_tp2/preset.json                    |     46 -
+ experiments/qmf_tp2/report.md                      |    103 -
+ .../qmf_tp2/windows/IS_2025H2/IS_2025H2.ini        |     46 -
+ experiments/qmf_tp2/windows/IS_2025H2/report.htm   |    Bin 69260 -> 0 bytes
+ experiments/qmf_tp2/windows/IS_2025H2/tester.log   |    Bin 2163078 -> 0 bytes
+ experiments/qmf_tp2/windows/IS_2025H2/trades.csv   |     21 -
+ experiments/qmf_tp2/windows/OOS_2026/OOS_2026.ini  |     46 -
+ experiments/qmf_tp2/windows/OOS_2026/report.htm    |    Bin 104140 -> 0 bytes
+ experiments/qmf_tp2/windows/OOS_2026/tester.log    |    Bin 2337562 -> 0 bytes
+ experiments/qmf_tp2/windows/OOS_2026/trades.csv    |     39 -
+ experiments/qmf_tp2/windows/cr_h1/cr_h1.ini        |     46 -
+ experiments/qmf_tp2/windows/cr_h1/report.htm       |    Bin 73112 -> 0 bytes
+ experiments/qmf_tp2/windows/cr_h1/tester.log       |    Bin 2449856 -> 0 bytes
+ experiments/qmf_tp2/windows/cr_h1/trades.csv       |     23 -
+ experiments/qmf_tp2/windows/cr_h2/cr_h2.ini        |     46 -
+ experiments/qmf_tp2/windows/cr_h2/report.htm       |    Bin 76990 -> 0 bytes
+ experiments/qmf_tp2/windows/cr_h2/tester.log       |    Bin 2562474 -> 0 bytes
+ experiments/qmf_tp2/windows/cr_h2/trades.csv       |     25 -
+ experiments/qmf_v1/_analysis.txt                   |     79 -
+ experiments/qmf_v1/_diagnosis.txt                  |     83 -
+ experiments/qmf_v1/preset.json                     |     46 -
+ experiments/qmf_v1/report.md                       |    103 -
+ experiments/qmf_v1/windows/IS_2025H2/IS_2025H2.ini |     46 -
+ experiments/qmf_v1/windows/IS_2025H2/report.htm    |    Bin 166310 -> 0 bytes
+ experiments/qmf_v1/windows/IS_2025H2/tester.log    |    Bin 178198 -> 0 bytes
+ experiments/qmf_v1/windows/IS_2025H2/trades.csv    |     70 -
+ experiments/qmf_v1/windows/OOS_2026/OOS_2026.ini   |     46 -
+ experiments/qmf_v1/windows/OOS_2026/report.htm     |    Bin 320174 -> 0 bytes
+ experiments/qmf_v1/windows/OOS_2026/tester.log     |    Bin 462872 -> 0 bytes
+ experiments/qmf_v1/windows/OOS_2026/trades.csv     |    150 -
+ experiments/qmf_v1/windows/cr_h1/cr_h1.ini         |     46 -
+ experiments/qmf_v1/windows/cr_h1/report.htm        |    Bin 148796 -> 0 bytes
+ experiments/qmf_v1/windows/cr_h1/tester.log        |    Bin 584960 -> 0 bytes
+ experiments/qmf_v1/windows/cr_h1/trades.csv        |     62 -
+ experiments/qmf_v1/windows/cr_h2/cr_h2.ini         |     46 -
+ experiments/qmf_v1/windows/cr_h2/report.htm        |    Bin 213032 -> 0 bytes
+ experiments/qmf_v1/windows/cr_h2/tester.log        |    Bin 768022 -> 0 bytes
+ experiments/qmf_v1/windows/cr_h2/trades.csv        |     95 -
+ experiments/qtcrt_consol/_analysis.txt             |     79 -
+ experiments/qtcrt_consol/preset.json               |     40 -
+ experiments/qtcrt_consol/report.md                 |    103 -
+ .../qtcrt_consol/windows/IS_2025H2/IS_2025H2.ini   |     40 -
+ .../qtcrt_consol/windows/IS_2025H2/report.htm      |    Bin 184052 -> 0 bytes
+ .../qtcrt_consol/windows/IS_2025H2/tester.log      |    Bin 3557546 -> 0 bytes
+ .../qtcrt_consol/windows/IS_2025H2/trades.csv      |     81 -
+ .../qtcrt_consol/windows/OOS_2026/OOS_2026.ini     |     40 -
+ .../qtcrt_consol/windows/OOS_2026/report.htm       |    Bin 236702 -> 0 bytes
+ .../qtcrt_consol/windows/OOS_2026/tester.log       |    Bin 3763722 -> 0 bytes
+ .../qtcrt_consol/windows/OOS_2026/trades.csv       |    107 -
+ experiments/qtcrt_consol/windows/cr_h1/cr_h1.ini   |     40 -
+ experiments/qtcrt_consol/windows/cr_h1/report.htm  |    Bin 154896 -> 0 bytes
+ experiments/qtcrt_consol/windows/cr_h1/tester.log  |    Bin 3892278 -> 0 bytes
+ experiments/qtcrt_consol/windows/cr_h1/trades.csv  |     66 -
+ experiments/qtcrt_consol/windows/cr_h2/cr_h2.ini   |     40 -
+ experiments/qtcrt_consol/windows/cr_h2/report.htm  |    Bin 160740 -> 0 bytes
+ experiments/qtcrt_consol/windows/cr_h2/tester.log  |    Bin 4026124 -> 0 bytes
+ experiments/qtcrt_consol/windows/cr_h2/trades.csv  |     69 -
+ experiments/qtcrt_v1/_analysis.txt                 |     79 -
+ experiments/qtcrt_v1/preset.json                   |     40 -
+ experiments/qtcrt_v1/report.md                     |    103 -
+ .../qtcrt_v1/windows/IS_2025H2/IS_2025H2.ini       |     40 -
+ experiments/qtcrt_v1/windows/IS_2025H2/report.htm  |    Bin 215170 -> 0 bytes
+ experiments/qtcrt_v1/windows/IS_2025H2/tester.log  |    Bin 2748098 -> 0 bytes
+ experiments/qtcrt_v1/windows/IS_2025H2/trades.csv  |     97 -
+ experiments/qtcrt_v1/windows/OOS_2026/OOS_2026.ini |     40 -
+ experiments/qtcrt_v1/windows/OOS_2026/report.htm   |    Bin 332092 -> 0 bytes
+ experiments/qtcrt_v1/windows/OOS_2026/tester.log   |    Bin 3044832 -> 0 bytes
+ experiments/qtcrt_v1/windows/OOS_2026/trades.csv   |    156 -
+ experiments/qtcrt_v1/windows/cr_h1/cr_h1.ini       |     40 -
+ experiments/qtcrt_v1/windows/cr_h1/report.htm      |    Bin 193814 -> 0 bytes
+ experiments/qtcrt_v1/windows/cr_h1/tester.log      |    Bin 3210362 -> 0 bytes
+ experiments/qtcrt_v1/windows/cr_h1/trades.csv      |     86 -
+ experiments/qtcrt_v1/windows/cr_h2/cr_h2.ini       |     40 -
+ experiments/qtcrt_v1/windows/cr_h2/report.htm      |    Bin 221090 -> 0 bytes
+ experiments/qtcrt_v1/windows/cr_h2/tester.log      |    Bin 3401500 -> 0 bytes
+ experiments/qtcrt_v1/windows/cr_h2/trades.csv      |    100 -
+ experiments/sweep_trend_AMD/preset.json            |     41 -
+ experiments/sweep_trend_AMD/report.md              |     19 -
+ .../sweep_trend_AMD/windows/IS_build/IS_build.ini  |     30 -
+ .../sweep_trend_AMD/windows/IS_build/report.htm    |    Bin 25930 -> 0 bytes
+ .../sweep_trend_AMD/windows/IS_build/tester.log    |    Bin 1822014 -> 0 bytes
+ .../sweep_trend_AMD/windows/IS_build/trades.csv    |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../sweep_trend_AMD/windows/OOS_build/report.htm   |    Bin 25936 -> 0 bytes
+ .../sweep_trend_AMD/windows/OOS_build/tester.log   |    Bin 1850726 -> 0 bytes
+ .../sweep_trend_AMD/windows/OOS_build/trades.csv   |      1 -
+ .../sweep_trend_AMD/windows/holdout/holdout.ini    |     30 -
+ .../sweep_trend_AMD/windows/holdout/report.htm     |    Bin 25920 -> 0 bytes
+ .../sweep_trend_AMD/windows/holdout/tester.log     |    Bin 1865628 -> 0 bytes
+ .../sweep_trend_AMD/windows/holdout/trades.csv     |      1 -
+ experiments/sweep_trend_AUDUSD/preset.json         |     41 -
+ experiments/sweep_trend_AUDUSD/report.md           |     88 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_AUDUSD/windows/IS_build/report.htm |    Bin 218344 -> 0 bytes
+ .../sweep_trend_AUDUSD/windows/IS_build/tester.log |    Bin 2129148 -> 0 bytes
+ .../sweep_trend_AUDUSD/windows/IS_build/trades.csv |    101 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 168286 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 2320434 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     75 -
+ .../sweep_trend_AUDUSD/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_AUDUSD/windows/holdout/report.htm  |    Bin 91086 -> 0 bytes
+ .../sweep_trend_AUDUSD/windows/holdout/tester.log  |    Bin 2412726 -> 0 bytes
+ .../sweep_trend_AUDUSD/windows/holdout/trades.csv  |     35 -
+ experiments/sweep_trend_INTC/preset.json           |     41 -
+ experiments/sweep_trend_INTC/report.md             |     19 -
+ .../sweep_trend_INTC/windows/IS_build/IS_build.ini |     30 -
+ .../sweep_trend_INTC/windows/IS_build/report.htm   |    Bin 25940 -> 0 bytes
+ .../sweep_trend_INTC/windows/IS_build/tester.log   |    Bin 2444754 -> 0 bytes
+ .../sweep_trend_INTC/windows/IS_build/trades.csv   |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../sweep_trend_INTC/windows/OOS_build/report.htm  |    Bin 25948 -> 0 bytes
+ .../sweep_trend_INTC/windows/OOS_build/tester.log  |    Bin 3496 -> 0 bytes
+ .../sweep_trend_INTC/windows/OOS_build/trades.csv  |      1 -
+ .../sweep_trend_INTC/windows/holdout/holdout.ini   |     30 -
+ .../sweep_trend_INTC/windows/holdout/report.htm    |    Bin 25930 -> 0 bytes
+ .../sweep_trend_INTC/windows/holdout/tester.log    |    Bin 4231806 -> 0 bytes
+ .../sweep_trend_INTC/windows/holdout/trades.csv    |      1 -
+ experiments/sweep_trend_MSFT/preset.json           |     41 -
+ experiments/sweep_trend_MSFT/report.md             |     19 -
+ .../sweep_trend_MSFT/windows/IS_build/IS_build.ini |     30 -
+ .../sweep_trend_MSFT/windows/IS_build/report.htm   |    Bin 25940 -> 0 bytes
+ .../sweep_trend_MSFT/windows/IS_build/tester.log   |    Bin 2518150 -> 0 bytes
+ .../sweep_trend_MSFT/windows/IS_build/trades.csv   |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../sweep_trend_MSFT/windows/OOS_build/report.htm  |    Bin 25948 -> 0 bytes
+ .../sweep_trend_MSFT/windows/OOS_build/tester.log  |    Bin 2545750 -> 0 bytes
+ .../sweep_trend_MSFT/windows/OOS_build/trades.csv  |      1 -
+ .../sweep_trend_MSFT/windows/holdout/holdout.ini   |     30 -
+ .../sweep_trend_MSFT/windows/holdout/report.htm    |    Bin 25930 -> 0 bytes
+ .../sweep_trend_MSFT/windows/holdout/tester.log    |    Bin 2561188 -> 0 bytes
+ .../sweep_trend_MSFT/windows/holdout/trades.csv    |      1 -
+ experiments/sweep_trend_NVDA/preset.json           |     41 -
+ experiments/sweep_trend_NVDA/report.md             |     19 -
+ .../sweep_trend_NVDA/windows/IS_build/IS_build.ini |     30 -
+ .../sweep_trend_NVDA/windows/IS_build/report.htm   |    Bin 25940 -> 0 bytes
+ .../sweep_trend_NVDA/windows/IS_build/tester.log   |    Bin 2592274 -> 0 bytes
+ .../sweep_trend_NVDA/windows/IS_build/trades.csv   |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../sweep_trend_NVDA/windows/OOS_build/report.htm  |    Bin 25948 -> 0 bytes
+ .../sweep_trend_NVDA/windows/OOS_build/tester.log  |    Bin 2619610 -> 0 bytes
+ .../sweep_trend_NVDA/windows/OOS_build/trades.csv  |      1 -
+ .../sweep_trend_NVDA/windows/holdout/holdout.ini   |     30 -
+ .../sweep_trend_NVDA/windows/holdout/report.htm    |    Bin 25930 -> 0 bytes
+ .../sweep_trend_NVDA/windows/holdout/tester.log    |    Bin 2636218 -> 0 bytes
+ .../sweep_trend_NVDA/windows/holdout/trades.csv    |      1 -
+ experiments/sweep_trend_NZDUSD/preset.json         |     41 -
+ experiments/sweep_trend_NZDUSD/report.md           |     88 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_NZDUSD/windows/IS_build/report.htm |    Bin 235978 -> 0 bytes
+ .../sweep_trend_NZDUSD/windows/IS_build/tester.log |    Bin 2905684 -> 0 bytes
+ .../sweep_trend_NZDUSD/windows/IS_build/trades.csv |    110 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 174174 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 3102976 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     78 -
+ .../sweep_trend_NZDUSD/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_NZDUSD/windows/holdout/report.htm  |    Bin 89456 -> 0 bytes
+ .../sweep_trend_NZDUSD/windows/holdout/tester.log  |    Bin 3195014 -> 0 bytes
+ .../sweep_trend_NZDUSD/windows/holdout/trades.csv  |     34 -
+ experiments/sweep_trend_USDCAD/preset.json         |     41 -
+ experiments/sweep_trend_USDCAD/report.md           |     88 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_USDCAD/windows/IS_build/report.htm |    Bin 257152 -> 0 bytes
+ .../sweep_trend_USDCAD/windows/IS_build/tester.log |    Bin 3499840 -> 0 bytes
+ .../sweep_trend_USDCAD/windows/IS_build/trades.csv |    121 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 141206 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 3679264 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     61 -
+ .../sweep_trend_USDCAD/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_USDCAD/windows/holdout/report.htm  |    Bin 93160 -> 0 bytes
+ .../sweep_trend_USDCAD/windows/holdout/tester.log  |    Bin 3771718 -> 0 bytes
+ .../sweep_trend_USDCAD/windows/holdout/trades.csv  |     36 -
+ experiments/sweep_trend_USDCHF/preset.json         |     41 -
+ experiments/sweep_trend_USDCHF/report.md           |     88 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_USDCHF/windows/IS_build/report.htm |    Bin 240004 -> 0 bytes
+ .../sweep_trend_USDCHF/windows/IS_build/tester.log |    Bin 4049018 -> 0 bytes
+ .../sweep_trend_USDCHF/windows/IS_build/trades.csv |    112 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 178034 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 4247776 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     80 -
+ .../sweep_trend_USDCHF/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_USDCHF/windows/holdout/report.htm  |    Bin 98788 -> 0 bytes
+ .../sweep_trend_USDCHF/windows/holdout/tester.log  |    Bin 4344936 -> 0 bytes
+ .../sweep_trend_USDCHF/windows/holdout/trades.csv  |     39 -
+ experiments/sweep_trend_USDCNH/preset.json         |     41 -
+ experiments/sweep_trend_USDCNH/report.md           |     88 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_USDCNH/windows/IS_build/report.htm |    Bin 199110 -> 0 bytes
+ .../sweep_trend_USDCNH/windows/IS_build/tester.log |    Bin 4573880 -> 0 bytes
+ .../sweep_trend_USDCNH/windows/IS_build/trades.csv |     91 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 66390 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 4627808 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     22 -
+ .../sweep_trend_USDCNH/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_USDCNH/windows/holdout/report.htm  |    Bin 101010 -> 0 bytes
+ .../sweep_trend_USDCNH/windows/holdout/tester.log  |    Bin 4725210 -> 0 bytes
+ .../sweep_trend_USDCNH/windows/holdout/trades.csv  |     40 -
+ experiments/sweep_trend_USDJPY/preset.json         |     41 -
+ experiments/sweep_trend_USDJPY/report.md           |     88 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_USDJPY/windows/IS_build/report.htm |    Bin 223398 -> 0 bytes
+ .../sweep_trend_USDJPY/windows/IS_build/tester.log |    Bin 5003468 -> 0 bytes
+ .../sweep_trend_USDJPY/windows/IS_build/trades.csv |    104 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 167844 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 5191040 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     75 -
+ .../sweep_trend_USDJPY/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_USDJPY/windows/holdout/report.htm  |    Bin 94788 -> 0 bytes
+ .../sweep_trend_USDJPY/windows/holdout/tester.log  |    Bin 5283606 -> 0 bytes
+ .../sweep_trend_USDJPY/windows/holdout/trades.csv  |     37 -
+ experiments/sweep_trend_USDSEK/preset.json         |     41 -
+ experiments/sweep_trend_USDSEK/report.md           |     77 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_USDSEK/windows/IS_build/report.htm |    Bin 25984 -> 0 bytes
+ .../sweep_trend_USDSEK/windows/IS_build/tester.log |    Bin 5291080 -> 0 bytes
+ .../sweep_trend_USDSEK/windows/IS_build/trades.csv |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 37472 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 5316354 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |      7 -
+ .../sweep_trend_USDSEK/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_USDSEK/windows/holdout/report.htm  |    Bin 31802 -> 0 bytes
+ .../sweep_trend_USDSEK/windows/holdout/tester.log  |    Bin 5329086 -> 0 bytes
+ .../sweep_trend_USDSEK/windows/holdout/trades.csv  |      4 -
+ experiments/sweep_trend_XAUUSD/preset.json         |     41 -
+ experiments/sweep_trend_XAUUSD/report.md           |     88 -
+ .../windows/IS_build/IS_build.ini                  |     30 -
+ .../sweep_trend_XAUUSD/windows/IS_build/report.htm |    Bin 198698 -> 0 bytes
+ .../sweep_trend_XAUUSD/windows/IS_build/tester.log |    Bin 5587108 -> 0 bytes
+ .../sweep_trend_XAUUSD/windows/IS_build/trades.csv |     91 -
+ .../windows/OOS_build/OOS_build.ini                |     30 -
+ .../windows/OOS_build/report.htm                   |    Bin 140774 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 5749520 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     61 -
+ .../sweep_trend_XAUUSD/windows/holdout/holdout.ini |     30 -
+ .../sweep_trend_XAUUSD/windows/holdout/report.htm  |    Bin 83392 -> 0 bytes
+ .../sweep_trend_XAUUSD/windows/holdout/tester.log  |    Bin 5828800 -> 0 bytes
+ .../sweep_trend_XAUUSD/windows/holdout/trades.csv  |     31 -
+ experiments/sweep_turtle_AMD/preset.json           |     43 -
+ experiments/sweep_turtle_AMD/report.md             |     19 -
+ .../sweep_turtle_AMD/windows/IS_build/IS_build.ini |     32 -
+ .../sweep_turtle_AMD/windows/IS_build/report.htm   |    Bin 26540 -> 0 bytes
+ .../sweep_turtle_AMD/windows/IS_build/tester.log   |    Bin 5911892 -> 0 bytes
+ .../sweep_turtle_AMD/windows/IS_build/trades.csv   |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../sweep_turtle_AMD/windows/OOS_build/report.htm  |    Bin 26546 -> 0 bytes
+ .../sweep_turtle_AMD/windows/OOS_build/tester.log  |    Bin 5979602 -> 0 bytes
+ .../sweep_turtle_AMD/windows/OOS_build/trades.csv  |      1 -
+ .../sweep_turtle_AMD/windows/holdout/holdout.ini   |     32 -
+ .../sweep_turtle_AMD/windows/holdout/report.htm    |    Bin 26530 -> 0 bytes
+ .../sweep_turtle_AMD/windows/holdout/tester.log    |    Bin 6012076 -> 0 bytes
+ .../sweep_turtle_AMD/windows/holdout/trades.csv    |      1 -
+ experiments/sweep_turtle_AUDUSD/preset.json        |     43 -
+ experiments/sweep_turtle_AUDUSD/report.md          |    101 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 785334 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 731122 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |    390 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 533544 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 1219646 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |    261 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_AUDUSD/windows/holdout/report.htm |    Bin 270004 -> 0 bytes
+ .../sweep_turtle_AUDUSD/windows/holdout/tester.log |    Bin 1458020 -> 0 bytes
+ .../sweep_turtle_AUDUSD/windows/holdout/trades.csv |    126 -
+ experiments/sweep_turtle_INTC/preset.json          |     43 -
+ experiments/sweep_turtle_INTC/report.md            |     19 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../sweep_turtle_INTC/windows/IS_build/report.htm  |    Bin 26550 -> 0 bytes
+ .../sweep_turtle_INTC/windows/IS_build/tester.log  |    Bin 6095234 -> 0 bytes
+ .../sweep_turtle_INTC/windows/IS_build/trades.csv  |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../sweep_turtle_INTC/windows/OOS_build/report.htm |    Bin 26558 -> 0 bytes
+ .../sweep_turtle_INTC/windows/OOS_build/tester.log |    Bin 6151356 -> 0 bytes
+ .../sweep_turtle_INTC/windows/OOS_build/trades.csv |      1 -
+ .../sweep_turtle_INTC/windows/holdout/holdout.ini  |     32 -
+ .../sweep_turtle_INTC/windows/holdout/report.htm   |    Bin 26540 -> 0 bytes
+ .../sweep_turtle_INTC/windows/holdout/tester.log   |    Bin 6184336 -> 0 bytes
+ .../sweep_turtle_INTC/windows/holdout/trades.csv   |      1 -
+ experiments/sweep_turtle_MSFT/preset.json          |     43 -
+ experiments/sweep_turtle_MSFT/report.md            |     19 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../sweep_turtle_MSFT/windows/IS_build/report.htm  |    Bin 26550 -> 0 bytes
+ .../sweep_turtle_MSFT/windows/IS_build/tester.log  |    Bin 6273678 -> 0 bytes
+ .../sweep_turtle_MSFT/windows/IS_build/trades.csv  |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../sweep_turtle_MSFT/windows/OOS_build/report.htm |    Bin 26558 -> 0 bytes
+ .../sweep_turtle_MSFT/windows/OOS_build/tester.log |    Bin 6336484 -> 0 bytes
+ .../sweep_turtle_MSFT/windows/OOS_build/trades.csv |      1 -
+ .../sweep_turtle_MSFT/windows/holdout/holdout.ini  |     32 -
+ .../sweep_turtle_MSFT/windows/holdout/report.htm   |    Bin 26540 -> 0 bytes
+ .../sweep_turtle_MSFT/windows/holdout/tester.log   |    Bin 6371284 -> 0 bytes
+ .../sweep_turtle_MSFT/windows/holdout/trades.csv   |      1 -
+ experiments/sweep_turtle_NVDA/preset.json          |     43 -
+ experiments/sweep_turtle_NVDA/report.md            |     19 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../sweep_turtle_NVDA/windows/IS_build/report.htm  |    Bin 26550 -> 0 bytes
+ .../sweep_turtle_NVDA/windows/IS_build/tester.log  |    Bin 6453968 -> 0 bytes
+ .../sweep_turtle_NVDA/windows/IS_build/trades.csv  |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../sweep_turtle_NVDA/windows/OOS_build/report.htm |    Bin 26558 -> 0 bytes
+ .../sweep_turtle_NVDA/windows/OOS_build/tester.log |    Bin 6519068 -> 0 bytes
+ .../sweep_turtle_NVDA/windows/OOS_build/trades.csv |      1 -
+ .../sweep_turtle_NVDA/windows/holdout/holdout.ini  |     32 -
+ .../sweep_turtle_NVDA/windows/holdout/report.htm   |    Bin 26540 -> 0 bytes
+ .../sweep_turtle_NVDA/windows/holdout/tester.log   |    Bin 6556880 -> 0 bytes
+ .../sweep_turtle_NVDA/windows/holdout/trades.csv   |      1 -
+ experiments/sweep_turtle_NZDUSD/preset.json        |     43 -
+ experiments/sweep_turtle_NZDUSD/report.md          |    101 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 777522 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 7279698 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |    386 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 533532 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 7768936 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |    261 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_NZDUSD/windows/holdout/report.htm |    Bin 262180 -> 0 bytes
+ .../sweep_turtle_NZDUSD/windows/holdout/tester.log |    Bin 7999706 -> 0 bytes
+ .../sweep_turtle_NZDUSD/windows/holdout/trades.csv |    122 -
+ experiments/sweep_turtle_USDCAD/preset.json        |     43 -
+ experiments/sweep_turtle_USDCAD/report.md          |    102 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 767632 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 8711748 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |    381 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 535444 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 9201970 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |    262 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_USDCAD/windows/holdout/report.htm |    Bin 271968 -> 0 bytes
+ .../sweep_turtle_USDCAD/windows/holdout/tester.log |    Bin 9442134 -> 0 bytes
+ .../sweep_turtle_USDCAD/windows/holdout/trades.csv |    127 -
+ experiments/sweep_turtle_USDCHF/preset.json        |     43 -
+ experiments/sweep_turtle_USDCHF/report.md          |    101 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 783426 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 10176244 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |    389 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 535486 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 10666920 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |    262 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_USDCHF/windows/holdout/report.htm |    Bin 264164 -> 0 bytes
+ .../sweep_turtle_USDCHF/windows/holdout/tester.log |    Bin 10899710 -> 0 bytes
+ .../sweep_turtle_USDCHF/windows/holdout/trades.csv |    123 -
+ experiments/sweep_turtle_USDCNH/preset.json        |     43 -
+ experiments/sweep_turtle_USDCNH/report.md          |     88 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 748192 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 11601124 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |    371 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 164604 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 11739444 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     72 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_USDCNH/windows/holdout/report.htm |    Bin 266096 -> 0 bytes
+ .../sweep_turtle_USDCNH/windows/holdout/tester.log |    Bin 11974070 -> 0 bytes
+ .../sweep_turtle_USDCNH/windows/holdout/trades.csv |    124 -
+ experiments/sweep_turtle_USDJPY/preset.json        |     43 -
+ experiments/sweep_turtle_USDJPY/report.md          |    101 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 782228 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 12700596 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |    390 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 523642 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 13180936 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |    257 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_USDJPY/windows/holdout/report.htm |    Bin 255408 -> 0 bytes
+ .../sweep_turtle_USDJPY/windows/holdout/tester.log |    Bin 13406110 -> 0 bytes
+ .../sweep_turtle_USDJPY/windows/holdout/trades.csv |    119 -
+ experiments/sweep_turtle_USDSEK/preset.json        |     43 -
+ experiments/sweep_turtle_USDSEK/report.md          |     77 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 26594 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 13414252 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |      1 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 67368 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 13460714 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |     22 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_USDSEK/windows/holdout/report.htm |    Bin 36308 -> 0 bytes
+ .../sweep_turtle_USDSEK/windows/holdout/tester.log |    Bin 13477916 -> 0 bytes
+ .../sweep_turtle_USDSEK/windows/holdout/trades.csv |      6 -
+ experiments/sweep_turtle_XAUUSD/preset.json        |     43 -
+ experiments/sweep_turtle_XAUUSD/report.md          |     88 -
+ .../windows/IS_build/IS_build.ini                  |     32 -
+ .../windows/IS_build/report.htm                    |    Bin 480536 -> 0 bytes
+ .../windows/IS_build/tester.log                    |    Bin 13929702 -> 0 bytes
+ .../windows/IS_build/trades.csv                    |    235 -
+ .../windows/OOS_build/OOS_build.ini                |     32 -
+ .../windows/OOS_build/report.htm                   |    Bin 274734 -> 0 bytes
+ .../windows/OOS_build/tester.log                   |    Bin 14179504 -> 0 bytes
+ .../windows/OOS_build/trades.csv                   |    129 -
+ .../windows/holdout/holdout.ini                    |     32 -
+ .../sweep_turtle_XAUUSD/windows/holdout/report.htm |    Bin 102016 -> 0 bytes
+ .../sweep_turtle_XAUUSD/windows/holdout/tester.log |    Bin 14415804 -> 0 bytes
+ .../sweep_turtle_XAUUSD/windows/holdout/trades.csv |     40 -
+ experiments/trapbox2_live5k/preset.json            |     40 -
+ experiments/trapbox2_live5k/report.md              |    101 -
+ experiments/trapbox2_live5k/run.log                |    Bin 14478 -> 0 bytes
+ .../trapbox2_live5k/windows/last1yr/last1yr.ini    |     41 -
+ .../trapbox2_live5k/windows/last1yr/report.htm     |    Bin 723416 -> 0 bytes
+ .../trapbox2_live5k/windows/last1yr/tester.log     |    Bin 15277608 -> 0 bytes
+ .../trapbox2_live5k/windows/last1yr/trades.csv     |    359 -
+ .../windows/older_trend/older_trend.ini            |     41 -
+ .../trapbox2_live5k/windows/older_trend/report.htm |    Bin 490524 -> 0 bytes
+ .../trapbox2_live5k/windows/older_trend/tester.log |    Bin 15750472 -> 0 bytes
+ .../trapbox2_live5k/windows/older_trend/trades.csv |    239 -
+ .../windows/recent_regime/recent_regime.ini        |     41 -
+ .../windows/recent_regime/report.htm               |    Bin 240260 -> 0 bytes
+ .../windows/recent_regime/tester.log               |    Bin 16089382 -> 0 bytes
+ .../windows/recent_regime/trades.csv               |    110 -
+ experiments/trapbox3_build/preset.json             |     36 -
+ experiments/trapbox3_build/report.md               |     73 -
+ experiments/trapbox3_build/run.log                 |    Bin 11924 -> 0 bytes
+ .../trapbox3_build/windows/IS_build/IS_build.ini   |     38 -
+ .../trapbox3_build/windows/IS_build/report.htm     |    Bin 282290 -> 0 bytes
+ .../trapbox3_build/windows/IS_build/tester.log     |    Bin 16345242 -> 0 bytes
+ .../trapbox3_build/windows/IS_build/trades.csv     |    132 -
+ .../trapbox3_build/windows/OOS_build/OOS_build.ini |     38 -
+ .../trapbox3_build/windows/OOS_build/report.htm    |    Bin 125202 -> 0 bytes
+ .../trapbox3_build/windows/OOS_build/tester.log    |    Bin 16570882 -> 0 bytes
+ .../trapbox3_build/windows/OOS_build/trades.csv    |     51 -
+ experiments/trapbox_live5k/preset.json             |     38 -
+ experiments/trapbox_live5k/report.md               |    101 -
+ experiments/trapbox_live5k/run.log                 |    Bin 14474 -> 0 bytes
+ .../trapbox_live5k/windows/last1yr/last1yr.ini     |     39 -
+ .../trapbox_live5k/windows/last1yr/report.htm      |    Bin 592862 -> 0 bytes
+ .../trapbox_live5k/windows/last1yr/tester.log      |    Bin 13698894 -> 0 bytes
+ .../trapbox_live5k/windows/last1yr/trades.csv      |    292 -
+ .../windows/older_trend/older_trend.ini            |     39 -
+ .../trapbox_live5k/windows/older_trend/report.htm  |    Bin 445374 -> 0 bytes
+ .../trapbox_live5k/windows/older_trend/tester.log  |    Bin 14129058 -> 0 bytes
+ .../trapbox_live5k/windows/older_trend/trades.csv  |    216 -
+ .../windows/recent_regime/recent_regime.ini        |     39 -
+ .../windows/recent_regime/report.htm               |    Bin 278508 -> 0 bytes
+ .../windows/recent_regime/tester.log               |    Bin 14465044 -> 0 bytes
+ .../windows/recent_regime/trades.csv               |    130 -
+ experiments/trend_eurusd/preset.json               |     29 -
+ experiments/trend_eurusd/report.md                 |     88 -
+ .../trend_eurusd/windows/IS_build/IS_build.ini     |     30 -
+ .../trend_eurusd/windows/IS_build/report.htm       |    Bin 216128 -> 0 bytes
+ .../trend_eurusd/windows/IS_build/tester.log       |    Bin 256792 -> 0 bytes
+ .../trend_eurusd/windows/IS_build/trades.csv       |    100 -
+ .../trend_eurusd/windows/OOS_build/OOS_build.ini   |     30 -
+ .../trend_eurusd/windows/OOS_build/report.htm      |    Bin 170270 -> 0 bytes
+ .../trend_eurusd/windows/OOS_build/tester.log      |    Bin 449036 -> 0 bytes
+ .../trend_eurusd/windows/OOS_build/trades.csv      |     76 -
+ .../trend_eurusd/windows/holdout/holdout.ini       |     30 -
+ .../trend_eurusd/windows/holdout/report.htm        |    Bin 104470 -> 0 bytes
+ .../trend_eurusd/windows/holdout/tester.log        |    Bin 546750 -> 0 bytes
+ .../trend_eurusd/windows/holdout/trades.csv        |     42 -
+ experiments/trend_gbpusd/preset.json               |     29 -
+ experiments/trend_gbpusd/report.md                 |     88 -
+ .../trend_gbpusd/windows/IS_build/IS_build.ini     |     30 -
+ .../trend_gbpusd/windows/IS_build/report.htm       |    Bin 227830 -> 0 bytes
+ .../trend_gbpusd/windows/IS_build/tester.log       |    Bin 824480 -> 0 bytes
+ .../trend_gbpusd/windows/IS_build/trades.csv       |    106 -
+ .../trend_gbpusd/windows/OOS_build/OOS_build.ini   |     30 -
+ .../trend_gbpusd/windows/OOS_build/report.htm      |    Bin 185668 -> 0 bytes
+ .../trend_gbpusd/windows/OOS_build/tester.log      |    Bin 1030768 -> 0 bytes
+ .../trend_gbpusd/windows/OOS_build/trades.csv      |     84 -
+ .../trend_gbpusd/windows/holdout/holdout.ini       |     30 -
+ .../trend_gbpusd/windows/holdout/report.htm        |    Bin 91318 -> 0 bytes
+ .../trend_gbpusd/windows/holdout/tester.log        |    Bin 1125628 -> 0 bytes
+ .../trend_gbpusd/windows/holdout/trades.csv        |     35 -
+ experiments/trend_xagusd/preset.json               |     29 -
+ experiments/trend_xagusd/report.md                 |     88 -
+ .../trend_xagusd/windows/IS_build/IS_build.ini     |     30 -
+ .../trend_xagusd/windows/IS_build/report.htm       |    Bin 221050 -> 0 bytes
+ .../trend_xagusd/windows/IS_build/tester.log       |    Bin 1476654 -> 0 bytes
+ .../trend_xagusd/windows/IS_build/trades.csv       |    103 -
+ .../trend_xagusd/windows/OOS_build/OOS_build.ini   |     30 -
+ .../trend_xagusd/windows/OOS_build/report.htm      |    Bin 148082 -> 0 bytes
+ .../trend_xagusd/windows/OOS_build/tester.log      |    Bin 1704040 -> 0 bytes
+ .../trend_xagusd/windows/OOS_build/trades.csv      |     65 -
+ .../trend_xagusd/windows/holdout/holdout.ini       |     30 -
+ .../trend_xagusd/windows/holdout/report.htm        |    Bin 92460 -> 0 bytes
+ .../trend_xagusd/windows/holdout/tester.log        |    Bin 1793150 -> 0 bytes
+ .../trend_xagusd/windows/holdout/trades.csv        |     36 -
+ experiments/turtle_EURUSD/preset.json              |     31 -
+ experiments/turtle_EURUSD/report.md                |    101 -
+ .../turtle_EURUSD/windows/IS_build/IS_build.ini    |     32 -
+ .../turtle_EURUSD/windows/IS_build/report.htm      |    Bin 785274 -> 0 bytes
+ .../turtle_EURUSD/windows/IS_build/tester.log      |    Bin 18849332 -> 0 bytes
+ .../turtle_EURUSD/windows/IS_build/trades.csv      |    390 -
+ .../turtle_EURUSD/windows/OOS_build/OOS_build.ini  |     32 -
+ .../turtle_EURUSD/windows/OOS_build/report.htm     |    Bin 533486 -> 0 bytes
+ .../turtle_EURUSD/windows/OOS_build/tester.log     |    Bin 19337394 -> 0 bytes
+ .../turtle_EURUSD/windows/OOS_build/trades.csv     |    261 -
+ .../turtle_EURUSD/windows/holdout/holdout.ini      |     32 -
+ .../turtle_EURUSD/windows/holdout/report.htm       |    Bin 271860 -> 0 bytes
+ .../turtle_EURUSD/windows/holdout/tester.log       |    Bin 19577386 -> 0 bytes
+ .../turtle_EURUSD/windows/holdout/trades.csv       |    127 -
+ experiments/turtle_GBPUSD/preset.json              |     31 -
+ experiments/turtle_GBPUSD/report.md                |    101 -
+ .../turtle_GBPUSD/windows/IS_build/IS_build.ini    |     32 -
+ .../turtle_GBPUSD/windows/IS_build/report.htm      |    Bin 785316 -> 0 bytes
+ .../turtle_GBPUSD/windows/IS_build/tester.log      |    Bin 20305294 -> 0 bytes
+ .../turtle_GBPUSD/windows/IS_build/trades.csv      |    390 -
+ .../turtle_GBPUSD/windows/OOS_build/OOS_build.ini  |     32 -
+ .../turtle_GBPUSD/windows/OOS_build/report.htm     |    Bin 533472 -> 0 bytes
+ .../turtle_GBPUSD/windows/OOS_build/tester.log     |    Bin 20793896 -> 0 bytes
+ .../turtle_GBPUSD/windows/OOS_build/trades.csv     |    261 -
+ .../turtle_GBPUSD/windows/holdout/holdout.ini      |     32 -
+ .../turtle_GBPUSD/windows/holdout/report.htm       |    Bin 271890 -> 0 bytes
+ .../turtle_GBPUSD/windows/holdout/tester.log       |    Bin 21033884 -> 0 bytes
+ .../turtle_GBPUSD/windows/holdout/trades.csv       |    127 -
+ experiments/turtle_XAGUSD/preset.json              |     31 -
+ experiments/turtle_XAGUSD/report.md                |     88 -
+ .../turtle_XAGUSD/windows/IS_build/IS_build.ini    |     32 -
+ .../turtle_XAGUSD/windows/IS_build/report.htm      |    Bin 376284 -> 0 bytes
+ .../turtle_XAGUSD/windows/IS_build/tester.log      |    Bin 21493738 -> 0 bytes
+ .../turtle_XAGUSD/windows/IS_build/trades.csv      |    182 -
+ .../turtle_XAGUSD/windows/OOS_build/OOS_build.ini  |     32 -
+ .../turtle_XAGUSD/windows/OOS_build/report.htm     |    Bin 229260 -> 0 bytes
+ .../turtle_XAGUSD/windows/OOS_build/tester.log     |    Bin 21753062 -> 0 bytes
+ .../turtle_XAGUSD/windows/OOS_build/trades.csv     |    106 -
+ .../turtle_XAGUSD/windows/holdout/holdout.ini      |     32 -
+ .../turtle_XAGUSD/windows/holdout/report.htm       |    Bin 117068 -> 0 bytes
+ .../turtle_XAGUSD/windows/holdout/tester.log       |    Bin 21857788 -> 0 bytes
+ .../turtle_XAGUSD/windows/holdout/trades.csv       |     48 -
+ experiments/turtle_btc/preset.json                 |     31 -
+ experiments/turtle_build/preset.json               |     30 -
+ experiments/turtle_build/report.md                 |     73 -
+ experiments/turtle_build/run.log                   |    Bin 11902 -> 0 bytes
+ .../turtle_build/windows/IS_build/IS_build.ini     |     32 -
+ .../turtle_build/windows/IS_build/report.htm       |    Bin 480482 -> 0 bytes
+ .../turtle_build/windows/IS_build/tester.log       |    Bin 17636324 -> 0 bytes
+ .../turtle_build/windows/IS_build/trades.csv       |    235 -
+ .../turtle_build/windows/OOS_build/OOS_build.ini   |     32 -
+ .../turtle_build/windows/OOS_build/report.htm      |    Bin 274680 -> 0 bytes
+ .../turtle_build/windows/OOS_build/tester.log      |    Bin 17886128 -> 0 bytes
+ .../turtle_build/windows/OOS_build/trades.csv      |    129 -
+ experiments/turtle_holdout/preset.json             |     29 -
+ experiments/turtle_holdout/report.md               |     47 -
+ experiments/turtle_holdout/run.log                 |    Bin 10436 -> 0 bytes
+ .../turtle_holdout/windows/holdout/holdout.ini     |     32 -
+ .../turtle_holdout/windows/holdout/report.htm      |    Bin 101978 -> 0 bytes
+ .../turtle_holdout/windows/holdout/tester.log      |    Bin 18122430 -> 0 bytes
+ .../turtle_holdout/windows/holdout/trades.csv      |     40 -
+ experiments/v17_holdout/preset.json                |     39 -
+ experiments/v17_holdout/report.md                  |     47 -
+ experiments/v17_holdout/run.log                    |    Bin 10418 -> 0 bytes
+ .../v17_holdout/windows/holdout/holdout.ini        |     42 -
+ experiments/v17_holdout/windows/holdout/report.htm |    Bin 188162 -> 0 bytes
+ experiments/v17_holdout/windows/holdout/tester.log |    Bin 17184536 -> 0 bytes
+ experiments/v17_holdout/windows/holdout/trades.csv |    112 -
+ experiments/v17_live5k/cost_older.txt              |      9 -
+ experiments/v17_live5k/cost_recent.txt             |      9 -
+ experiments/v17_live5k/edge_recent.txt             |     32 -
+ experiments/v17_live5k/equity_last1yr.png          |    Bin 113266 -> 0 bytes
+ experiments/v17_live5k/equity_recent.png           |    Bin 99458 -> 0 bytes
+ experiments/v17_live5k/monthly.txt                 |     17 -
+ experiments/v17_live5k/pipeline_clean.txt          |     46 -
+ experiments/v17_live5k/preset.json                 |     41 -
+ experiments/v17_live5k/report.md                   |    101 -
+ experiments/v17_live5k/run.log                     |    Bin 14496 -> 0 bytes
+ experiments/v17_live5k/windows/last1yr/last1yr.ini |     42 -
+ experiments/v17_live5k/windows/last1yr/report.htm  |    Bin 1368624 -> 0 bytes
+ experiments/v17_live5k/windows/last1yr/tester.log  |    Bin 10642762 -> 0 bytes
+ experiments/v17_live5k/windows/last1yr/trades.csv  |    952 -
+ .../v17_live5k/windows/older_trend/older_trend.ini |     42 -
+ .../v17_live5k/windows/older_trend/report.htm      |    Bin 631758 -> 0 bytes
+ .../v17_live5k/windows/older_trend/tester.log      |    Bin 11455580 -> 0 bytes
+ .../v17_live5k/windows/older_trend/trades.csv      |    431 -
+ .../windows/recent_regime/recent_regime.ini        |     42 -
+ .../v17_live5k/windows/recent_regime/report.htm    |    Bin 610554 -> 0 bytes
+ .../v17_live5k/windows/recent_regime/tester.log    |    Bin 12238188 -> 0 bytes
+ .../v17_live5k/windows/recent_regime/trades.csv    |    417 -
+ experiments/v23_opt/opt.json                       |     39 -
+ experiments/v23_opt/opt_results.xml                |    403 -
+ experiments/v23_opt/opt_results_forward.xml        |    429 -
+ experiments/v23_opt/opt_v23_opt.ini                |     38 -
+ experiments/v23_opt/plateau_report.txt             |     33 -
+ experiments/v23_opt/run_opt.log                    |    Bin 12400 -> 0 bytes
+ experiments/v23_robust/preset.json                 |     37 -
+ .../v23_robust/windows/IS_2025H2/IS_2025H2.ini     |     37 -
+ .../v23_robust/windows/IS_2025H2/report.htm        |    Bin 327258 -> 0 bytes
+ .../v23_robust/windows/IS_2025H2/tester.log        |    Bin 8323960 -> 0 bytes
+ .../v23_robust/windows/IS_2025H2/trades.csv        |    155 -
+ .../v23_robust/windows/IS_2025H2/trades_t.csv      |    155 -
+ .../v23_robust/windows/OOS_2026/OOS_2026.ini       |     37 -
+ experiments/v23_robust/windows/OOS_2026/report.htm |    Bin 440314 -> 0 bytes
+ experiments/v23_robust/windows/OOS_2026/tester.log |    Bin 10906424 -> 0 bytes
+ experiments/v23_robust/windows/OOS_2026/trades.csv |    213 -
+ .../v23_robust/windows/OOS_2026/trades_t.csv       |    213 -
+ experiments/v23_robust/windows/cr_h1/cr_h1.ini     |     37 -
+ experiments/v23_robust/windows/cr_h1/report.htm    |    Bin 274808 -> 0 bytes
+ experiments/v23_robust/windows/cr_h1/tester.log    |    Bin 13290392 -> 0 bytes
+ experiments/v23_robust/windows/cr_h1/trades.csv    |    128 -
+ experiments/v23_robust/windows/cr_h1/trades_t.csv  |    128 -
+ experiments/v23_robust/windows/cr_h2/cr_h2.ini     |     37 -
+ experiments/v23_robust/windows/cr_h2/report.htm    |    Bin 288416 -> 0 bytes
+ experiments/v23_robust/windows/cr_h2/tester.log    |    Bin 13619326 -> 0 bytes
+ experiments/v23_robust/windows/cr_h2/trades.csv    |    135 -
+ experiments/v23_robust/windows/cr_h2/trades_t.csv  |    135 -
+ export_xag_dxy.ps1                                 |     48 -
+ final_report.ps1                                   |     87 -
+ install_ck_gold_pro.ps1                            |     19 -
+ install_export_script.ps1                          |     34 -
+ install_fix09_demo.ps1                             |     31 -
+ install_gold_diag.ps1                              |     41 -
+ install_gold_final.ps1                             |     28 -
+ install_v23live_demo.ps1                           |     33 -
+ opt_v23.ps1                                        |     43 -
+ report 17                                          |   1749 -
+ risk_scan.ps1                                      |     39 -
+ run_abdiff.ps1                                     |     32 -
+ run_ama2_dump.ps1                                  |     35 -
+ run_ama_dump.ps1                                   |     35 -
+ run_best_dump.ps1                                  |     35 -
+ run_capstudy.ps1                                   |     47 -
+ run_compare.ps1                                    |     38 -
+ run_csvdiag.ps1                                    |     24 -
+ run_diag.ps1                                       |     35 -
+ run_dump_both.ps1                                  |     12 -
+ run_export_data.ps1                                |     65 -
+ run_export_push.ps1                                |     77 -
+ run_fix09.ps1                                      |     43 -
+ run_fix09_all.ps1                                  |     55 -
+ run_fix09_all2.ps1                                 |     56 -
+ run_fix09_oos_pipeline.ps1                         |     53 -
+ run_fix10_regime_is.ps1                            |     45 -
+ run_fix10_regime_oos.ps1                           |     45 -
+ run_ict.ps1                                        |     43 -
+ run_install_final.ps1                              |     28 -
+ run_journal.ps1                                    |     19 -
+ run_mr_dump.ps1                                    |     35 -
+ run_offset_explore.ps1                             |     39 -
+ run_offset_is.ps1                                  |     39 -
+ run_offset_oos_pipeline.ps1                        |     53 -
+ run_overfit_check.ps1                              |     56 -
+ run_paramgrid.ps1                                  |     49 -
+ run_poc_dump.ps1                                   |     35 -
+ run_qm_ict.ps1                                     |     59 -
+ run_regime.ps1                                     |     55 -
+ run_risk_ladder.ps1                                |     40 -
+ run_risk_ladder2.ps1                               |     37 -
+ run_s1_final.ps1                                   |     45 -
+ run_tfilter.ps1                                    |     44 -
+ run_tfilter_oos.ps1                                |     50 -
+ run_timeframes.ps1                                 |     49 -
+ run_v23_10yr.ps1                                   |     50 -
+ run_v23_1yr.ps1                                    |     46 -
+ run_v23_ab.ps1                                     |     70 -
+ run_v23_dump.ps1                                   |     35 -
+ run_v23_final.ps1                                  |     52 -
+ run_v23_r2_dump.ps1                                |     36 -
+ run_v23live_17.ps1                                 |     51 -
+ run_v23live_20.ps1                                 |     44 -
+ run_v23live_dump.ps1                               |     61 -
+ run_v23ts_dump.ps1                                 |     35 -
+ run_v24_final.ps1                                  |     40 -
+ run_v25.ps1                                        |     44 -
+ run_v26_dump.ps1                                   |     35 -
+ run_v27_dump.ps1                                   |     35 -
+ run_v28_dump.ps1                                   |     35 -
+ run_v29_dump.ps1                                   |     35 -
+ run_v810_dump.ps1                                  |     35 -
+ tools/ENGINE.md                                    |     39 -
+ tools/_compile/CK_CRYPTO_TSMOM_v1.compile.log      |    Bin 6808 -> 0 bytes
+ tools/_compile/CK_CRYPTO_TSMOM_v2.compile.log      |    Bin 6808 -> 0 bytes
+ tools/_compile/CK_GFT_Fast_v17.compile.log         |    Bin 6790 -> 0 bytes
+ tools/_compile/CK_GFT_Fast_v17_T.compile.log       |    Bin 6802 -> 0 bytes
+ tools/_compile/CK_GFT_Fast_v23_ROBUST.compile.log  |    Bin 6832 -> 0 bytes
+ tools/_compile/CK_GOLD_PRO_FIX09.compile.log       |    Bin 6802 -> 0 bytes
+ tools/_compile/CK_GOLD_PRO_FIX09_HRS.compile.log   |    Bin 6826 -> 0 bytes
+ .../_compile/CK_GOLD_PRO_FIX10_regime.compile.log  |    Bin 6844 -> 0 bytes
+ tools/_compile/CK_MR_StdDev_v1_T.compile.log       |    Bin 6802 -> 0 bytes
+ tools/_compile/CK_POC_VA_SESS.compile.log          |    Bin 6784 -> 0 bytes
+ tools/_compile/CK_POC_VA_v1.compile.log            |    Bin 6772 -> 0 bytes
+ tools/_compile/CK_QM_ICT_EA.compile.log            |    Bin 6772 -> 0 bytes
+ tools/_compile/CK_QM_ICT_FAITHFUL_v1.compile.log   |    Bin 6826 -> 0 bytes
+ tools/_compile/CK_QT_CRT_v1.compile.log            |    Bin 6772 -> 0 bytes
+ tools/_compile/CK_TRAPBOX_DKT_v1.compile.log       |    Bin 6802 -> 0 bytes
+ tools/_compile/CK_TRAPBOX_DKT_v2.compile.log       |    Bin 6802 -> 0 bytes
+ tools/_compile/CK_TRAPBOX_DKT_v3.compile.log       |    Bin 6802 -> 0 bytes
+ tools/_compile/CK_TREND_ATR_v1.compile.log         |    Bin 6790 -> 0 bytes
+ tools/_compile/CK_TURTLE_SOUP_v1.compile.log       |    Bin 6802 -> 0 bytes
+ tools/binance_dl.py                                |     90 -
+ tools/build_portfolio.py                           |    199 -
+ tools/compile_ea.ps1                               |     76 -
+ tools/cost_sweep.py                                |     35 -
+ tools/crypto_compile.txt                           |     49 -
+ tools/detect_env.ps1                               |    110 -
+ tools/diag_aud.log                                 |    111 -
+ tools/duka_cache/USATECHIDXUSD/2025-08-01.csv      |    720 -
+ tools/duka_cache/USATECHIDXUSD/2025-08-02.csv      |      0
+ tools/duka_dl.py                                   |    119 -
+ tools/duka_nas_find.py                             |     34 -
+ tools/duka_nas_probe.py                            |     66 -
+ tools/duka_one.py                                  |     37 -
+ tools/duka_one_nas.py                              |     21 -
+ tools/duka_one_nas2.py                             |     23 -
+ tools/duka_probe.out.txt                           |    Bin 708 -> 0 bytes
+ tools/duka_probe.py                                |     37 -
+ tools/edge_diagnose.py                             |     77 -
+ tools/env.json                                     |     15 -
+ tools/exit_breakdown.py                            |     50 -
+ tools/filter_hours.py                              |     36 -
+ tools/gen_presets.out                              |     25 -
+ tools/gen_presets.py                               |     53 -
+ tools/gex_calc.py                                  |     65 -
+ tools/gex_calc_out.txt                             |      4 -
+ tools/gitdiag.txt                                  |     17 -
+ tools/import_compile.log                           |    Bin 3208 -> 0 bytes
+ tools/importcrypto_compile.log                     |    Bin 3216 -> 0 bytes
+ tools/ledger_combo.txt                             |     41 -
+ tools/ledger_deliver.txt                           |     39 -
+ tools/ledger_eda.txt                               |     40 -
+ tools/ledger_final.txt                             |     37 -
+ tools/ledger_gex.txt                               |     39 -
+ tools/ledger_gexbuild.txt                          |     39 -
+ tools/ledger_interim.txt                           |     39 -
+ tools/ledger_pivot.txt                             |     41 -
+ tools/ledger_prereg2.txt                           |     42 -
+ tools/ledger_prereg3.txt                           |     39 -
+ tools/ledger_r2.txt                                |     42 -
+ tools/ledger_result.txt                            |     38 -
+ tools/ledger_slv.txt                               |     39 -
+ tools/ledger_v2res.txt                             |     37 -
+ tools/ledger_val.txt                               |     46 -
+ tools/ledger_verify.txt                            |      1 -
+ tools/ledger_win.txt                               |     43 -
+ tools/live_signals.py                              |     48 -
+ tools/live_signals_out.txt                         |     12 -
+ tools/make_ini.ps1                                 |     93 -
+ tools/make_set.py                                  |     20 -
+ tools/monthly_breakdown.py                         |     35 -
+ tools/nas_probe_out.txt                            |      8 -
+ tools/nasfind_out.txt                              |      8 -
+ tools/net_probe.py                                 |     60 -
+ tools/net_probe_out.txt                            |     10 -
+ tools/one_nas2_out.txt                             |      2 -
+ tools/one_nas_out.txt                              |      2 -
+ tools/one_out.txt                                  |      6 -
+ tools/opt_probe.py                                 |     35 -
+ tools/opt_probe2.py                                |     40 -
+ tools/opt_probe2_out.txt                           |     14 -
+ tools/opt_probe_out.txt                            |      4 -
+ tools/parse_opt.py                                 |    219 -
+ tools/plot_equity.py                               |    120 -
+ tools/portfolio_merge.py                           |    107 -
+ tools/prep_crypto.txt                              |      3 -
+ tools/prep_crypto_import.py                        |     19 -
+ tools/probe2.txt                                   |     13 -
+ tools/probe2_read1.txt                             |     13 -
+ tools/probe_result.txt                             |      6 -
+ tools/ranked_scoreboard.py                         |    141 -
+ tools/run_batch.ps1                                |     46 -
+ tools/run_candidate.ps1                            |    173 -
+ tools/run_gex_daily.bat                            |      7 -
+ tools/run_optimize.ps1                             |    132 -
+ tools/run_sweep.ps1                                |     16 -
+ tools/sample.bi5                                   |    Bin 34605 -> 0 bytes
+ tools/scan_log.py                                  |     30 -
+ tools/screen_confirm.ps1                           |     69 -
+ tools/screen_gate.py                               |     83 -
+ tools/split_analyze.py                             |     50 -
+ tools/sum_all.py                                   |     72 -
+ tools/sum_trend.py                                 |     61 -
+ tools/summarize_all.py                             |     47 -
+ tools/sweep_all.log                                |   2069 -
+ tools/sweep_snap1.txt                              |    100 -
+ tools/sweep_snap2.txt                              |    100 -
+ tools/sweep_snap3.txt                              |    100 -
+ tools/sweep_summary.txt                            |    101 -
+ tools/sweep_trend.log                              |    705 -
+ tools/sweep_turtle.log                             |    708 -
+ tools/trend_compile.txt                            |     49 -
+ tools/trend_summary.txt                            |     11 -
+ tools/tsmom_bt.py                                  |    130 -
+ tools/tsmom_combo.py                               |     86 -
+ tools/tsmom_combo_out.txt                          |     11 -
+ tools/tsmom_crypto.py                              |     65 -
+ tools/tsmom_crypto_out.txt                         |     28 -
+ tools/tsmom_dashboard.py                           |     55 -
+ tools/tsmom_dashboard_out.txt                      |     13 -
+ tools/tsmom_map.py                                 |     95 -
+ tools/tsmom_map_out.txt                            |     82 -
+ tools/tsmom_recent.py                              |     88 -
+ tools/tsmom_recent_out.txt                         |     14 -
+ tools/tsmom_result.txt                             |     14 -
+ tools/tsmom_sleeves.py                             |    106 -
+ tools/tsmom_sleeves_out.txt                        |     18 -
+ tools/tsmom_v2.py                                  |     96 -
+ tools/tsmom_v2_out.txt                             |     11 -
+ tools/tsmom_validate.py                            |    134 -
+ tools/tsmom_validate_out.txt                       |     39 -
+ tools/v2_compile.txt                               |     49 -
+ tools/warm_ticks.ps1                               |     88 -
+ tools/yahoo_crypto.py                              |     31 -
+ tools/yahoo_crypto_out.txt                         |     21 -
+ tools/yahoo_dl.py                                  |     74 -
+ tools/yahoo_dl_out.txt                             |     40 -
+ v1_lab/.gitignore                                  |      3 -
+ v1_lab/FINDINGS.md                                 |     50 -
+ v1_lab/README.md                                   |     40 -
+ v1_lab/STRATEGY_SCREEN.md                          |     25 -
+ v1_lab/VARIANT_REPORT.md                           |    303 -
+ v1_lab/VARIANT_REPORT_REAL.md                      |    357 -
+ v1_lab/__pycache__/benchmark.cpython-314.pyc       |    Bin 7025 -> 0 bytes
+ v1_lab/__pycache__/cost_stress.cpython-314.pyc     |    Bin 3015 -> 0 bytes
+ v1_lab/__pycache__/metrics.cpython-314.pyc         |    Bin 6339 -> 0 bytes
+ v1_lab/_prev_rep.md                                |    303 -
+ v1_lab/ab_diff.py                                  |     34 -
+ v1_lab/benchmark.py                                |     79 -
+ v1_lab/cost_stress.py                              |     41 -
+ v1_lab/data_drop/VARIANT_REPORT_REAL.md            |    302 -
+ v1_lab/data_io.py                                  |    237 -
+ v1_lab/ema_plateau.py                              |    116 -
+ v1_lab/erl_detect.py                               |    418 -
+ v1_lab/forensic_agent.py                           |     90 -
+ v1_lab/hello_config.json                           |      9 -
+ v1_lab/hello_metrics.csv                           |      2 -
+ v1_lab/hello_signal_engine.py                      |     18 -
+ v1_lab/hyp_bad.json                                |     15 -
+ v1_lab/hyp_good.json                               |     24 -
+ v1_lab/idm_detect.py                               |    360 -
+ v1_lab/manifest.py                                 |     45 -
+ v1_lab/metrics.py                                  |     82 -
+ v1_lab/ny_session.py                               |    393 -
+ v1_lab/orchestrator.py                             |    122 -
+ v1_lab/paramstability.py                           |     46 -
+ v1_lab/pipeline.py                                 |    186 -
+ v1_lab/poi_zone.py                                 |    528 -
+ v1_lab/qm_detect.py                                |    370 -
+ v1_lab/qm_state_machine.py                         |   1313 -
+ v1_lab/regime.py                                   |     77 -
+ v1_lab/smt_detect.py                               |    543 -
+ v1_lab/strategies/ctc_signal_engine.py             |     35 -
+ v1_lab/strategies/judge_signal_engine.py           |     61 -
+ v1_lab/strategies/stddev_signal_engine.py          |     33 -
+ v1_lab/strategies/trend_signal_engine.py           |     34 -
+ v1_lab/variant_runner.py                           |    821 -
+ v1_lab/vibe_validate.py                            |    103 -
+ v1_lab/walkforward.py                              |     64 -
+ v23_backtest.ps1                                   |     40 -
+ v23_diag.ps1                                       |     32 -
+ v23_diag2.ps1                                      |     18 -
+ v23_diag3.ps1                                      |     21 -
+ validate_best.ps1                                  |     42 -
+ validation/analyze_trades.py                       |    124 -
+ validation/cpcv.py                                 |     43 -
+ validation/pbo.py                                  |     63 -
+ validation/validate.py                             |    255 -
+ write_fix09_preset.ps1                             |     33 -
+ 1356 files changed, 73062 insertions(+), 634330 deletions(-)
+=====BEST-BOOK002=====
+6513565 BEST build + $85 daily loss cap + book fixed 0.02 at 50% (no time filter)
+2f9fe37 Add files via upload
+263bcfc Merge pull request #5 from rupamsaha704-svg/kiro/v20-no-partial-tp
+d29c630 Create report 17
+f6fc046 v20: Remove TP2 also - full clean, only BE+20% profit lock at 65%
+8aa4e70 v19: Remove TP1 (was capping winners at 10% = tiny profits)
+1db74af v18: RR 1.33 + Profit Lock at 65% (SL = Entry + 20% of TP distance)
+e50a75c v18: RR 3.0 -> 1.33

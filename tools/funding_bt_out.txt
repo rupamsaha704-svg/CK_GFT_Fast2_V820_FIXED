@@ -1,0 +1,10 @@
+FUNDING-CARRY sleeve  (2020-09-09..2026-09-01, 2435 days)  IS<2023/OOS>=2023  (cost 5%/yr)
+  carry GROSS  FULL Sh 10.14 ret  12.4% DD  0.8% | IS Sh 10.90 | OOS Sh 16.42
+  carry NET    FULL Sh  5.81 ret   6.9% DD  2.7% | IS Sh  7.97 | OOS Sh  5.25
+  corr(carry, crypto-trend): FULL +0.10  OOS +0.06   (near 0 = great diversifier)
+  TREND only       FULL Sh  1.30 DD 11.4% | OOS Sh  0.82 OOS DD 11.4%
+  CARRY only       FULL Sh  5.81 DD 21.1% | OOS Sh  5.25 OOS DD 18.9%
+  COMBO 50/50      FULL Sh  4.79 DD 11.7% | OOS Sh  2.69 OOS DD  9.7%
+  COMBO 60/40 tr/ca FULL Sh  4.12 DD 10.7% | OOS Sh  2.14 OOS DD  8.9%
+  carry NET per-year: 2020:+5%  2021:+34%  2022:-2%  2023:+3%  2024:+8%  2025:+0%  2026:-2%
+DONE-FUNDBT
