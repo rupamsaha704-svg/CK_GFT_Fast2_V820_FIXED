@@ -5,3 +5,7 @@ __pycache__/
 v1_lab/__pycache__/
 v1_lab/run/
 v1_lab/evidence_manifest.jsonl
+
+# Scratch shell scripts (per steering Section 9 discipline)
+# Temp _*.ps1 helpers created during ad-hoc jobs; not durable artifacts.
+_*.ps1
