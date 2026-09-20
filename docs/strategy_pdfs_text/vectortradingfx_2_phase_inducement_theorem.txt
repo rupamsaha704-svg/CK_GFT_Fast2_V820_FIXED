@@ -1,0 +1,1842 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+www.tradesmint.com
+2 
+ 
+All Rights Reserved©2022 
+Table of Contents 
+Pages 1-9: Pre-Trading Sessions & Planning 
+Perfectly pre-plan your trading day with Key Details, Session Time & Price, Asia Manipulation, and a 10-step 
+daily markup process. 
+ 
+Pages 10-21: The Daily Cycle 
+Get a clear understanding of when to trade, and the intent of the market maker through piecing together intra-day 
+expectations with the Daily Cycle and its components.  
+ 
+Pages 22-25: Identify Valid Orderblocks Through Order-Flow 
+Identify all the high probability orderblocks within the market, and figure out exactly how to use and validate them 
+through the high-volume injection technique. 
+ 
+Pages 26-37: The 2-Phase Inducement Theorem 
+Scope into the never-been-taught 2-Phase inducement theory; learn how to identify these inducements 
+consistently, each of their low time-frame entry setups, and the Power of 3.  
+ 
+Pages 38-42: Step-by-Step Entry Processes 
+Follow the exact methods to trade reversals and continuations like the algorithm does. Simplify and execute 
+based on the idea that trading only exists in 3 cycles – reversals, continuations, and liquidity build-ups. 
+ 
+Pages 43-49: Key Trading Movements & Concepts 
+Identify certain fractal movements in the market, and understand exactly what they mean, their intention, and how 
+to utilise them to your advantage. 
+ 
+Pages 50-53: Pro-Trend/Counter-Trend Entry Setups 
+See clear price action setups based on pro-trend and counter-trend movement in the market through clear 
+diagrams and step-by-step entry processes. 
+ 
+Page 54: Conclusion 
+Access Vector’s resources to further expand your knowledge to apply to the markets.  
+ 
+NOTE: This eBook is designed for intermediate-advanced+ traders, so we recommend you understand the basics of market structure, supply & 
+demand, liquidity, and imbalance. This overall strategy does not require any indicators (unless they are session/time or divergence based). 
+www.tradesmint.com
+3 
+ 
+All Rights Reserved©2022 
+Pre-Trading Sessions & Planning: 
+Key Details + Concepts 
+(Psychological, Technical & Concepts): 
+Psychological: 
+ Don’t trade if your emotions aren’t aligning with what is on the screen.  
+ If you’re not super happy about entering, and you don’t fully accept the loss, don’t take the trade. 
+ Don’t ‘force’ something to work because it won’t. 
+ Trade as if you are looking for buys and sells in your markup. This removes mental bias, and effectively 
+emotion in trading. 
+Technical: 
+ Cause is the most important factor in trading – find what caused the injection of volume (‘follow the 
+money’). Did it get effectively mitigated? Did it leave imbalance? … Find that block of orders and don’t 
+get liquidated 
+ The more inducement respected, the more liquidity to take out, the bigger the move 
+ Zones to trade from must have resting orders to mitigate. Make sure they have inducement above/below 
+(or create it), and they are the cause of structural breaks, demand/supply fails etc 
+ Start analysing on the daily first! Find the intention of price and follow it 
+ Mark out S/R – (support becomes resistance levels vice versa) as that level will be liquidated to usually 
+meet our orderblock above/below it 
+ Previous daily/weekly highs/lows can act as strong structural inducement points  
+ Price needs reason to move to certain levels – imbalance 
+ Often when we have a low Phase 2 inducement, we will sweep it’s orderblock as a SMT because of the 
+zone’s large imbalance = lack of inducement 
+ If you don’t spot the buyers/sellers who got swept before entering, you’ll become liquidated 
+ Mark out pullback zones too 
+ If we break our LPOD/S, we are effectively going to run through all mitigated price until the next valid 
+orderblock 
+ Ensure you wait for your respective time-frame reaction (e.g., don’t look for a 1m reversal from a 4h 
+zone) 
+ If price taps the outside of a zone but doesn’t enter it, it can still be used as inducement 
+ We don’t recommend stacking countertrend trades 
+ A mitigation can be confirmed when price sweeps into its previous range over another small-range 
+inducement. 
+ 
+Concepts/Discoveries: 
+ The demand/supply that took out the Phase 1 inducement then gets broken confirms a shift in market 
+structure. If it is respected, we can trade a continuation. 
+ A ‘slight mitigation’ is when price sweeps liquidity into a range, but doesn’t properly mitigate the 
+orderblock where the high-volume orders lie. Even though we may react from there, we can come back 
+to this orderblock and properly mitigate it, using the ‘slight mitigation’ level as a point of inducement. 
+ It is important for the AR (automatic rally) to ‘fail’ in a reversal range after the B/SC (Buyers/sellers 
+climax) as it often grabs the LPOD/S (the last point of demand & supply), so it is successfully mitigated 
+ News candles can be targeted high/lows as they don’t have inducement 
+ Price works with momentum. You will never see something shoot up or down randomly 
+ Refine zones by excluding the inducement it swept before it – draw a line through the orderblock from 
+the inducement it swept. This will refine your orderblock to the pure manipulation *has exceptions* 
+ If an inducement phase isn’t very clean or only sweeps a small range, there will be another opportunity 
+as more manipulation is needed to fuel a larger move  
+ Weak highs and lows are determined after a leg has been properly mitigated; the 5-15m TF is best to 
+determine an active zone 
+ A high/low is likely to be targeted when it wicks the other side’s high/low (to sweep) instead of having a 
+candle closing over (BoS) 
+www.tradesmint.com
+4 
+ 
+All Rights Reserved©2022 
+ The first part of a ChoCh is often formed from Phase 1 inducement getting swept, creating a slight 
+pullback, then breaking it again to hit the refinement 
+Used Word Definitions: 
+ LPOD/S – Last point of demand/supply 
+ ChoCh – Change of character (a sweep of liquidity then a break of structure) 
+ BoS – Break of structure (a failure of supply or demand creating a price leg break) 
+ OB – Orderblock (a valid zone to trade from) 
+ FVG – Fair value gap (a form of inefficiency/price gaps in the market) 
+ IMB – Imbalance (a form of inefficiency/price gaps in the market) 
+ IPA – Inefficient price action (imbalance) 
+ S&D – Supply and demand (the levels of buying and selling) 
+ IFC – Institutionally funded candle (a candle created by institutions to push price to a certain area) 
+ IPB – Inducement Pullback (The level where price pullbacks before a continuation) 
+ PA – Price action (how price is moving) 
+ B2S – Buy to sell (often seen as a wick to mitigate or sweep) 
+ S2B – Sell to buy (often seen as a wick to mitigate or sweep) 
+ AOI – Area of interest (an area of price that is reactive or tradable) 
+ POI – Point of interest (a specific point where price is reactive or tradable) 
+ IND – Inducement (placement of liquidity that is used to manipulate traders) 
+ EQH/L’s – Equal highs/lows 
+ SMT – Smart money trap (a zone that doesn’t have liquidity under/above it, and gets run, trapping SMC 
+traders) 
+ MSS - Market Structure Shift (a confirmed shift in the markets direction towards the next reversal zone) 
+ Vectors – Large-bodied, impulsive candles that are to push price to its purposeful target 
+ V-SR – V-Shaped Recovery (quick movement of price to enter and exit a zone) 
+ TF – Time frame 
+ FR – Failed Reaction (Internal supply/demand failure) 
+ OF – Order-flow (the movement of money through the market) 
+ True Zone – The actual orderblock that will be used which holds the high volume or orders 
+ PDH/PWH or PDL/PWL – Previous daily/weekly high/low 
+ 
+Colour Codes: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+www.tradesmint.com
+5 
+ 
+All Rights Reserved©2022 
+Time and Price (Times in AEST): 
+ASIA > FRANKFURT > LONDON > NEW YORK 
+Asia: – Asia is important to analyse as it can create the model for New York and London – its purpose is to 
+create liquidity above and below its session. Mark the bottom and top to create a range, as well as the midline. 
+Often, price will aim to take a high/low or both (AWS) starting with Frankfurt + London Open. If Asia takes a form 
+of liquidity and is impulsive, a continuation trade can be played. 
+Frankfurt: - Frankfurt often prepares London for its main movement of the day. It often does this by taking out 
+the high or low of Asia to create an orderblock mitigation for London, creates more Phase 1 inducement for 
+London to take out, or helps to move price to an already-made valid orderblock. 
+London: - When London opens, there is a volatility spike in price. London’s purpose is to attack the liquidity 
+created during Asia. Often, London creates a continuation mitigation after 1.5 hours, but can also contribute to a 
+larger liquidity build-up for New York. Entries that induce + mitigate can be taken at the open (sometimes +30). 
+After 2 hours of opening, we often see a shift in direction. 
+Pre-NY: - Before New York opens, we often see an impulsive move that directly contributes to the New York 
+session. Sometimes, we can create a valid zone for New York to play from by mitigating high-volume orders. 
+Most often, we see an impulse in price to move into a higher timeframe orderblock to then become targeted 
+liquidity, or we create more low timeframe reversal inducement to then be swept. 
+New York: – We open with a volatile shift of momentum. New York’s purpose is to attack the liquidity created 
+during the London session, or to create a continuation from London. The New York trap usually starts 1 hour after 
+opening and reverses. After 1.5 hours of opening (MMM), we often see a clean mitigation of the ‘correct’ 
+orderblock and liquidate the opening move. Sometimes, New York Open can mitigate the high-volume orders and 
+continue in the correct direction of the day.  
+ 
+ London Close – mitigates the peak of NY open / Reversal for a continuation in NY open direction. 
+Sometimes there is a mitigation-inducement before London Close.  
+ 
+ Magic Minute Mitigations (MMM) - refer to high probability trading times that mitigate active 
+continuation orderblocks. We can best see these 1.5 hours after London and New York Opens – rarely, 
+we can see these 3.5 hours after these opens instead. 
+ 
+ 
+ 
+Minor Inducement: M1/M5 break of a structural point that does nothing to the left (Asia is always minor) 
+Medium Inducement: M5/M15 break of a structural point that does something to the left 
+Major Inducement: M15/H1 break of a structural point 
+ 
+ 
+ Timings (AEST) Day light savings 
+Asian 10am-17:00 (5pm) 9am-16:00 (4pm) 
+Frankfurt Opening 17:00-18:00 (5pm-6pm) 16:00-17:00 (4pm-5pm) 
+London Opening 18:00-19:00 (6pm-7pm) 17:00-18:00 (5pm-6pm) 
+NY Open/ Reversal 23:00 (11pm) 22:00 (10pm) 
+NY Trap Timing 00:00 (12pm) 23:00 (11pm) 
+London Close 03:00am 02:00am 
+Magic Minute Mitigations 
+(can mitigate +/-30) 
+LDN: 30m after open or 
+1.5Hrs after open 
+NY: 30m after open or 1.5Hrs 
+after open 
+LDN: 30m after open or 
+1.5Hrs after open 
+NY: 30m after open or 1.5Hrs 
+after open 
+www.tradesmint.com
+6 
+ 
+All Rights Reserved©2022 
+8-Step Daily Markup Process 
+(Build up -> Inducement -> Manipulation -> Mitigation): 
+ 
+1. Utilise the daily (or 4h) timeframe to establish directional bias to understand where price is being targeted to 
+and the overall influence on 'today's' PA. 
+ 
+2. Now, we want to find the unmitigated high-volume zones that current PA will encounter (levels where price can 
+react from after manipulation). If mitigated, we want to connect the high-volume order-flow to the last open & 
+active zone. These open orderblocks should follow the 3-rules system and be found on the 5m+ timeframe (can 
+use 1m to refine). 
+ 
+3. Draw out all levels of undetermined inducement above/below our intra-day zones (5m-1h - can refine to the 
+1m imbalance) and label the main ones for the day. We will either have an IPB (Inducement Pullback) from valid 
+but weak zones, or a Phase 1 (to then play the Phase 2 reversal) from these levels. Note, we can play the 2-
+Phase Theory in a smaller timeframe for IPB entries. 
+ 
+4. Utilise the incoming direction method (Daily Cycle) - this will enable us to utilise prices' current momentum in 
+our favour and shift our respect for buys and sells. 
+ 
+5. Use premium/discount for the 50% leg equilibrium, mark out targeted/retail liquidity, protected and targeted 
+highs/low, price targets (Phase 1 reversal points), utilise the Asia Manipulation setups for zone validation, and 
+always follow time & price. Apply other key movements/concepts that are relevant to the PA. 
+ 
+6. If the leg that created the sweep of the inducement level is broken, we can confirm a Phase 1 reversal and 
+play our Phase 2 from the manipulation as we have a Market Structure Shift to run to our opposing Phase 1 
+(mitigation-inducement) target. 
+If the leg that created the sweep of the inducement level is respected and creates the 3 valid orderblock rules, we 
+can play a continuation trade from it to run to our opposing Phase 1 (mitigation-inducement) target - these entry 
+processes go all the way down until we create a 1m zone where we enter. 
+ 
+7. Smaller targets allow more movement to trade buys and sells within a larger leg as long as we are following 
+the rules (Ping-Pong). Before each trade, we must play our 2-Phase Theorem, even from an IPB. 
+ 
+8. Partial uncertain/higher risk trades at key levels, or put your stop-loss at breakeven if we create a sweeping 
+mitigation after our manipulation entry. We want to see the market as 2 things: continuation or reversal. We 
+always want to trade the pure manipulation levels; manipulation = large move. 
+ 
+Asian Session Manipulation Cycles: 
+Following the price action and manipulation of the Asia Session range can structure the overall idea of movement & 
+direction for London and New York. All setups will slightly vary and are dependent on what happens to the left. 
+ 
+Asian Whipsaw (AWS) (Case Study 1) 
+www.tradesmint.com
+7 
+ 
+All Rights Reserved©2022 
+Asian High/Low (Case Study 2) 
+ 
+Asian Continuation (Case Study 3) 
+ 
+Asian High-Low/Midline Mitigation (Case Study 4) 
+ 
+www.tradesmint.com
+8 
+ 
+All Rights Reserved©2022 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Impulsive Asian Range (Case Study 5) 
+ 
+ 
+ 
+www.tradesmint.com
+9 
+ 
+All Rights Reserved©2022 
+Asia + London Liquidity Phase 1 Build-Up (Case Study 6) 
+ 
+ 
+ 
+ 
+ 
+Completely Range-bound (Case Study 7) 
+ 
+Asia Session Characteristics: 
+ If we are moving in an uptrend during Asia, we are inducing buying by creating a liquidity build-up. 
+Therefore, we will take these buyers out at as our FF/London manipulation – we can sweep-wick them, 
+retest, then continue up, or continue higher, take out their buy-stop continuations and reverse. 
+ 
+ If we are moving in a downtrend during Asia, we are inducing selling by creating a liquidity build-up. 
+Therefore, we will take these sellers out at as our FF/London manipulation – we can sweep-wick them, 
+retest, then continue down, or continue down, take out their sell-stop continuations and reverse. 
+ 
+ Asia can either act as a liquidity source for London and New York with it’s high and low, or it can sweep 
+and mitigate high-volume orders to create a continuation orderblock. 
+ 
+ If the height of Asia’s movement is 40+ pips, we usually create a continuation orderblock for London to 
+trade from due to its impulsiveness. A smaller pip height signifies a liquidity build up for a side (or both) 
+to get taken then reverse.  
+www.tradesmint.com
+10 
+ 
+All Rights Reserved©2022 
+The Daily Cycle 
+ 
+3 Most Common Daily Cycle Variants: 
+ 
+1. Build-Up, Manipulation & Continuation 
+Diagram: 
+ 
+Actual Example: 
+www.tradesmint.com
+11 
+ 
+All Rights Reserved©2022 
+2. Break and Retest 
+Diagram: 
+ 
+ 
+Actual Example: 
+www.tradesmint.com
+12 
+ 
+All Rights Reserved©2022 
+3. Asian Whipsaw 
+ 
+Diagram: 
+ 
+Actual Example: 
+www.tradesmint.com
+13 
+ 
+All Rights Reserved©2022 
+Utilising Direction & Momentum with the Daily Cycle 
+Based on the expectational order-flow and its respective HTF influence, we can get an understanding of price’s current 
+intentions. The algorithm has a pre-determined HTF objective to play out, and it’s our job to piece the puzzle together. 
+ 
+ 
+Daily Cycle Trading Process: (TOP ROW - incoming momentum, SIDE COLUMN - intra-day movement factors) 
+ 
+1. Determine our current momentum by analysing where current price is reacting from on a higher timeframe, and 
+its previous days influence (e.g., we might be within a HTF Phase 1 Inducement or heading into an opposing 1H 
+orderblock). This will help us understand price’s movement targets.  
+ 
+2. Match the daily cycle variant and momentum below with today’s price action. Follow the 8-Step Process (page 
+6) listed above to markup current trend bias, manipulation areas (including Asia), locating inducement + 
+high-volume orderblocks, and pullback/reversal levels. 
+ 
+3. Utilise the 2-Phase inducement theory for our reversal before each continuation trade and utilise your risk 
+management. Using this concept, we can understand which liquidity will be targeted during each session – each 
+incoming trend direction setup will slightly differ to the diagrams provided. 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+DOWN/UP-TREND RUN 
+CONTINUATION 
+ᛎ 
+ 
+SLIGHT DOWN/UP-TREND 
+RUN CONTINUATION 
+ᛎ 
+ 
+WITHIN IN A RANGE 
+  ᛎ 
+ 
+TREND-REVERSAL 
+TOP/BOTTOM 
+ᛎ 
+ 
+ 
+ 
+ 
+ 
+ 
+ASIA 
+MANIPULATION 
+(Will vary based on 
+diagrams above) 
+ 
+• If it doesn’t mitigate the pro-
+trend high-volume orders: 
+Consolidates and creates more 
+Phase 1 liquidity for NY/London 
+ 
+• If it does impulse & mitigates 
+high-volume orders: 
+Creates a playable orderblock for 
+London or New York 
+ 
+• If Asia starts high (if buying) or low 
+(if selling) on yesterday’s leg, Asia 
+and London may contribute to 
+creating more Phase 1 Inducement. 
+ 
+• If it doesn’t mitigate the pro-
+trend high-volume orders: 
+Consolidates and creates more 
+Phase 1 liquidity for NY/London 
+ 
+• If it does impulse & mitigates 
+high-volume orders: 
+Creates a playable orderblock for 
+London or New York 
+ 
+• If Asia starts high (if buying) or low 
+(if selling) on yesterday’s leg, Asia 
+and London may contribute to 
+creating more Phase 1 Inducement. 
+ 
+ 
+ 
+ 
+ 
+• Will often create it’s high 
+and low in the centre of the 
+ranging leg by consolidating 
+ 
+• It is most common to see 
+the Asian Whipsaw setup  
+ 
+• Asia can be impulsive and 
+create the range’s main leg.  
+ 
+ 
+• If it doesn’t mitigate the pro-
+trend high-volume orders: 
+Consolidates and creates more 
+Phase 1 liquidity for NY/London 
+ 
+• If it does impulse & 
+mitigates high-volume 
+orders: 
+Creates a playable orderblock 
+for London or New York 
+ 
+•If Asia starts high (if buying) or 
+low (if selling), Asia and London 
+may contribute to creating more 
+Phase 1 Inducement. 
+ 
+ 
+ 
+ 
+ 
+ 
+MOVEMENT 
+EXPECTATIONS 
+ 
+• Price holds a lot of pro-trend 
+momentum, seeing a low chance of 
+a reversal for the day – this is done 
+by mitigating the pro-trend high-
+volume zone and taking out it’s 
+respective Phase 1 Inducement 
+(manipulation). 
+ 
+> If it isn’t targeting a high or low for 
+the day, it may be consolidative and 
+create a continued run to reach the 
+opposing Phase 1 Mitigation-
+Inducement to the left. 
+ 
+ 
+• Price is moving with pro-trend 
+momentum but with slightly less as 
+there is medium/strong opposing 
+supply/demand. Due to the build-up, 
+we may have impulsive liquidation 
+depending on the reaction to the left. 
+ 
+• Price could potentially be slowing 
+down to enter a reversal point in 
+which can create a setup later that 
+day or for the next day 
+ 
+ 
+ 
+• Price will move without a 
+clear bullish/bearish bias. 
+This can create as sort of 
+daily accumulation that can 
+be manipulated the next 
+day/s or sometimes during 
+New York 
+ 
+ 
+ 
+• Price creates a strong 
+momentum shift to move with 
+force towards the next HTF 
+Phase 1 Inducement. We can 
+often play the continuation after 
+the origin of this movement, but 
+it might not always be a full 
+reversal. 
+ 
+ 
+ 
+ 
+ 
+CHARACTERISTICS 
+ 
+• New York often provides the 
+biggest move for this setup if Asia 
+and London contribute to the Phase 
+1 Inducement and don’t mitigate the 
+high-volume order zone. 
+ 
+• With this setup, there will usually 
+only be weak pullback zones to the 
+left that are unable to change the 
+trend structure for the day 
+ 
+ 
+• Due to the slight pro-trend 
+movement, we often need to take 
+more liquidity than usual to sustain 
+the direction. This is why New York 
+is most commonly the largest move 
+for this setup. 
+ 
+• The opposing supply/demand 
+creates both buy and sell 
+opportunities, often to the Phase 1 
+inducement points 
+ 
+ 
+ 
+• Price is essentially stuck 
+within a larger leg’s range 
+with opposing demand and 
+supply 
+ 
+• This is often the setup used 
+for Ping-Pong trading 
+ 
+• This setup is best to play after 
+the V-SR reaction that created 
+the first impulsive move to 
+move in the other direction 
+ 
+• This often occurs after a HTF 
+demand/supply mitigation or a 
+HTF (15m+) liquidity sweep into 
+an active zone 
+ 
+ 
+COUNTER-TREND 
+TRADABLE? 
+ 
+VERY RARELY 
+ 
+YES 
+ 
+YES 
+(No trend bias) 
+ 
+NO 
+www.tradesmint.com
+14 
+ 
+All Rights Reserved©2022 
+For this setup, price 
+will be incoming 
+with this momentum 
+ Downtrend Run Continuation 
+ (Heavily Bearish Direction – Strong Momentum) 
+There is an expectation that no demand zone to the left will be able to break protected buy-side structure (unless we are 
+HTF countertrend), so when the high-volume supply is manipulated, there will be a downward continuation. 
+ 
+Diagram Example (Build-Up Manipulation & Continuation): 
+ 
+Real Example: 
+Order of Events: 
+① Frankfurt takes Asia high’s Phase 1 inducement then breaks demand to create a 5m shift in market structure (MSS) 
+② Frankfurt’s session (Pre-London) creates Phase 2 inducement for London open. 
+③ London opens by mitigating Frankfurt Open’s valid supply zone. {Sell Opportunity 1} 
+④ London Magic Minutes (1.5 hours after open) mitigates London Open and sweeps liquidity. {Sell Opportunity 2} 
+⑤ New York Open mitigates the supply chain down. New York’s Magic Minutes (1.5 hours after open) create a final intra-
+day drop to the downside. {Sell Opportunity 3}  
+High-volume 
+orderblock 
+remains 
+respected 
+Demand cannot 
+sustain the heavily 
+bearish momentum 
+www.tradesmint.com
+15 
+ 
+All Rights Reserved©2022 
+For this setup, price 
+will be incoming 
+with this momentum 
+ Uptrend Run Continuation 
+(Heavily Bullish Direction – Strong Momentum) 
+There is an expectation that no supply zone to the left will be able to break protected sell-side structure (unless we are 
+HTF countertrend), so when the high-volume demand is manipulated, there will be an upwards continuation. 
+ 
+Diagram Example (Break and Retest): 
+ 
+Real Example: 
+ 
+Order of Events: 
+① Asia sweeps liquidity and mitigates the high-volume orders after an IPB, then impulses to break structure and create a 
+playable demand zone. 
+② Frankfurt’s session (Pre-London) contributes to the Phase 1 inducement for Asia’s zone. 
+③ London Open whipsaws the high and low of Frankfurt, and mitigates the Asian midline zone whilst sweeping Phase 1 
+inducement. A <1m Phase 2 inducement creates trade confirmation for this zone. {Buy Opportunity 1} 
+④ London Magic Minutes (1.5 hours after open) mitigates London Open and sweeps liquidity. {Buy Opportunity 2} 
+⑤ New York continues this demand chain with a valid setup during it’s Magic Minutes, creating a final intra-day push to 
+the upside until London Close. {Buy Opportunity 3} 
+High-volume 
+orderblock 
+remains 
+respected 
+Supply cannot 
+sustain the heavily 
+bearish momentum 
+www.tradesmint.com
+16 
+ 
+All Rights Reserved©2022 
+For this setup, price 
+will be incoming 
+with this momentum 
+Slight Downtrend Continuation 
+(Slightly Bearish Direction - Medium Momentum) 
+Slightly bearish means there is medium/strong opposing demand that will contest the current downtrend. The lack of 
+momentum may signal a corrective build-up of liquidity for a later bullish reversal if we break our main high-volume supply. 
+ 
+Diagram Example (Build-Up, Manipulation & Continuation): 
+ 
+Real Example: 
+ 
+Order of Events: 
+① Frankfurt takes Asia’s low and mitigates a clear pullback demand zone (from a leg that didn’t break structure to the 
+upside). We then create a ChoCh by breaking structure to the upside. 
+② London open mitigates Frankfurt, and leaves a valid orderblock with Phase 2 ChoCh inducement. 
+③ London Magic Minutes mitigates this orderblock and runs to the upside, clearing the Asia high – Asia has now become 
+whipsawed by London. {Buy Opportunity 1} 
+④ New York Open pushes up to sweep London’s high after it’s pullback, clearing the Phase 2 Second Miss inducement. 
+⑤ New York’s Magic Minutes tap into the strong bearish orderblock for a clean trade opportunity. {Sell Opportunity 1} 
+⑥ New York creates a downwards continuation, with a final sweep of liquidity after reacting to the weak extreme 
+demand. {Sell Opportunity 2} 
+High-volume 
+orderblock needs 
+manipulation to 
+remain respected 
+ 
+There is 
+medium/strong 
+counter-demand 
+present (often 
+tradable) 
+www.tradesmint.com
+17 
+ 
+All Rights Reserved©2022 
+For this setup, price 
+will be incoming 
+with this momentum 
+ Slight Uptrend Continuation 
+(Slightly Bullish Direction - Medium Momentum) 
+Slightly bullish means there is medium/strong opposing supply that will contest the current uptrend. The lack of momentum 
+may signal a corrective build-up of liquidity for a later bearish reversal if we break our main high-volume demand. 
+ 
+Diagram Example (Break and Retest): 
+ 
+Real Example: 
+Order of Events: 
+① Asia mitigates high-volume orders and sweeps liquidity to create a ChoCh with valid orderblock rules.  
+② Frankfurt and London open contribute to the Asia orderblock Phase 1 inducement which then gets swept but doesn’t 
+enter the zone. 
+③ London Magic Minutes mitigates this sweep creating a trade opportunity to the next point of supply, sweeping Asia’s 
+high. {Buy Opportunity 1} 
+④ Once London sweeps the weak leg’s Phase 1 to pullback, it mitigates down to take London’s low. {Sell Opportunity 1} 
+⑤ New York Open mitigates the Asia orderblock to create a ChoCh. New York’s Magic Minutes (1.5 hours after open) 
+creates a continuation to the upside. {Buy Opportunity 2&3} 
+High-volume 
+orderblock needs 
+manipulation to 
+remain respected 
+There is 
+medium/strong 
+counter supply 
+present (often 
+tradable) 
+www.tradesmint.com
+18 
+ 
+All Rights Reserved©2022 
+For this setup, price 
+will be incoming 
+with this momentum 
+ Within a Range 
+(No Trend Bias - Opposing Momentum) 
+In this scenario, demand and supply are both internalised within a range. This means we can trade within the top and 
+bottom confines of the extremities. New York often creates a continuation, breaking the bottom/top depending on the HTF: 
+ 
+Diagram Example (Build-Up, Manipulation & Continuation): 
+ 
+Real Example: 
+ 
+Order of Events: 
+① Asia contributes to the buy-side Phase 1 inducement, then gets its low swept at Frankfurt Open. 
+② London Open sweeps Frankfurt open, and contributes to building more sell-side Phase 1 inducement. 
+③ London Magic Minutes tap into our ranging leg’s demand zone and impulses, creating a ChoCh. {Buy Opportunity 1} 
+④ We get an internal Phase 2 on the 1m for our London continuation. {Buy Opportunity 2} 
+⑤ New York Open mitigates the demand chain up and sweeps. {Buy Opportunity 3} 
+⑥ New York’s trap time begins with a reversal and sweeps buy-side Phase 1 inducement. It then sweeps 1m Phase 2 
+inducement for a continuation sell, and again sweeps and mitigates at London Close. {Sell Opportunity 1&2} 
+Supply is 
+respected 
+throughout 
+the day 
+Demand is 
+respected 
+throughout 
+the day 
+www.tradesmint.com
+19 
+ 
+All Rights Reserved©2022 
+For this setup, price 
+will be incoming 
+with this momentum 
+ 
+Trend-Reversal Bottom 
+(New Bullish Bias – Strong Momentum) 
+In this scenario, there is a strong intent for price to go higher. We can trade a continuation from the previous day’s 
+impulsive bullish reaction, often depicted as a V-SR that creates a shift in market structure and sweeps HTF liquidity. 
+ 
+Diagram Example (Build-Up, Manipulation & Continuation): 
+ 
+Real Example: 
+ 
+Order of Events: 
+① Before this day, there was a large 4hr V-SR that created a MSS – we want to play this as a continuation up. 
+② While Asia adds more inducement to the Phase 1 by consolidating, London Open takes the low and sweeps the 
+Phase 1. This creates an impulsive ChoCh and an open valid demand zone. 
+③ London Magic Minutes mitigates this zone and also sweep a small Phase 2 ChoCh inducement. {Buy Opportunity 1} 
+④ New York Opens (+30m) by mitigating a London zone that has carried the high-volume orders and sweeps another 
+Phase 2 inducement pool. We continue up with force. {Buy Opportunity 2} 
+High-volume 
+orderblock 
+remains 
+respected 
+No supply will 
+break the main 
+orderblock 
+www.tradesmint.com
+20 
+ 
+All Rights Reserved©2022 
+For this setup, price 
+will be incoming 
+with this momentum 
+ 
+Trend-Reversal Top 
+(New Bullish Bias – Strong Momentum) 
+In this scenario, there is a strong intent for price to go lower. We can trade a continuation from the previous day’s impulsive 
+bearish reaction, often depicted as a V-SR that creates a shift in market structure and sweeps HTF liquidity. 
+ 
+ 
+Diagram Example (Build-Up, Manipulation & Continuation): 
+ 
+Real Example: 
+Order of Events: 
+① Before this day, there was a large 2hr V-SR that created a MSS – we want to play this as a continuation down. 
+② While Asia adds more inducement to the Phase 1 by consolidating, London Open creates a continuation of the Asian 
+high, sweeping the Phase 1 inducement.  
+③ London Magic Minutes (-30m) mitigates the strong supply zone carrying the high-volume orders, creating a ChoCh. 
+④ London continues down, creating a Phase 2 ChoCh inducement and falls towards the LPOD to create a NY entry. 
+⑤ New York Open mitigates the LPOD, and New York’s Magic Minutes mitigates the strong supply zone, sweeping the 
+Phase 2 inducement and creating a tradable entry. {Sell Opportunity 1} 
+High-volume 
+orderblock remains 
+respected 
+No demand will 
+break the main 
+orderblock 
+www.tradesmint.com
+21 
+ 
+All Rights Reserved©2022 
+Utilising the Daily Cycle with the Weekly Cycle (1hr) 
+ 
+ 
+Although each week is different, this is a common variance in the way liquidity 
+is targeted with every day of the week 
+ 
+Monday (+ sometimes Tuesday): Often the ‘fake move’ of the week to continue its move into a 
+stronger HTF zone and become future liquidity in the later of the week. 
+Tuesday - Thursday: Often the ‘real move’ of the week with continuations after a large manipulation 
+liquidity grab.  
+Friday: Usually a lesser volatility continuation or a reversal accumulation to be used as liquidity for 
+next week. Sometimes Thursday can start the reversal. 
+ 
+Note: Exceptions to this are dependent on which day/s grab the high-volume orders and create valid orderblocks 
+www.tradesmint.com
+22 
+ 
+All Rights Reserved©2022 
+Utilising Valid Orderblocks: 
+ 
+Entry Orderblock Setups 
+With the overall inducement strategy, orderblocks aren’t just certain supply/demand zones, but instead are for 
+locating a tradable reaction zone with high money volume after sweeping mitigated liquidity (Phase 1): 
+ 
+1. Engulfed Orderblock 
+If we have a buy/sell candle before a big drop/up-move and it has clear inducement above/under it. These 
+are the cleanest as institutions always look to transfer money and clear the imbalance left behind. 
+Picture example: 
+ 
+2. Imbalance Orderblock 
+If we have a big V-shaped ridge with no clear zone and have imbalance, the valid zone is after sweeping the 
+top/bottom of the Phase 1 inducement and sweeping the last candle to mitigate the V-SR – it does not have 
+to hit the extreme of the V-SR. Inducement shouldn’t be close to the extreme, but close to the bottom (if 
+selling) or top (if buying) of the area that created the failure. Often you can find a LTF zone in the imbalance. 
+Picture example:  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+www.tradesmint.com
+23 
+ 
+All Rights Reserved©2022 
+3. Wick/Hammer Orderblock 
+If the 50% of a wick from an IFC is unmitigated, it can be used as an orderblock especially if more liquidity 
+under/above it needs to be taken out. These can be high probability zones as they show that institutions are 
+carrying the money by hitting the zone then moving in the other direction rapidly to take out buyers/sellers.  
+Picture example (hammer): 
+ 
+ 
+Picture example (wick): 
+ 
+ 
+ 
+ 
+ 
+www.tradesmint.com
+24 
+ 
+All Rights Reserved©2022 
+4. Complex (Smart Money Trap) Orderblock 
+This is where there is a clean orderblock above/below a V-SR (that creates imbalance) but it has no inducement. 
+Therefore, price runs this block then takes off – also known as a Smart Money Trap Orderblock. Often, we put a 
+square above the trap block to signify its lack of inducement as seen below. 
+Picture example: 
+ 
+5. Phase 1 Inducement Reaction-Sweep (Imbalance Orderblock Idea 2) 
+Sometimes, price will not use a clean orderblock and you might wonder why. It is often because price reverses 
+just after sweeping Phase 1 mitigation inducement into a larger range with imbalance. For institutions, there job is 
+‘done’ as they have taken out the chain of buy/sell-side liquidity. Sometimes, you can find an orderblock after the 
+sweep in the LTF but may react to imbalance if there is no clean zone close after the end of the Phase 1. This 
+illustrates the main idea of inducement-liquidity trap trading. 
+Picture example: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+www.tradesmint.com
+25 
+ 
+All Rights Reserved©2022 
+Finding Valid Orderblock Setups Through the Market Flow: 
+Not all orderblocks mentioned above can be used blindly. There are 3 certain rules that are needed for them to 
+be valid: 
+1. Has Imbalance – creates inefficiency in the market due to its impulsive nature (can be found on the 1m TF) 
+2. Be Impulsive - it must create or efficiently mitigate a flow of high-volume orders (have cause in the market) 
+3. Creates Inducement - above/below it must create Phase 1 mitigation-inducement in the timeframe of 
+reference. We can have our Phase 2 before, or create it after mitigating the orderblock 
+Orderblock Tips: 
+- Orderblocks that sweep liquidity are often higher probability (or mitigate something that swept) 
+- Refine it up to the 1m by overlaying your supply/demand boxes. Don’t over-refine. 
+- Price slight entering your orderblock when refining is a failed mitigation and will be swept. 
+- Daily OB – 4h, 4h OB – 15m, 15m OB – 5m/1m, 5m OB – 1m, 1m OB – 15s/5s. 
+How to identify unobvious orderblocks (high volume money areas) through range boxes: 
+IDEA: Range boxes help to interconnect order-flow through mitigation and help to identify IFC manipulation 
+(sweeps). This helps us figure out where the injection of volume has mitigated to and where it induces. 
+EXPLAINED: Use boxes to encompass ranges before an entry orderblock setup and analyse what they are 
+doing. Look to the left to see what price will interfere with and why.  
+Below explains the idea of a range which leaves the volume of orders behind though imbalance. In our range, we 
+are sweeping sellers to mitigate the supply order-flow and create a support of retail liquidity to break through at 
+the bottom (buyers).  
+As we break through demand (BoS), we fail to mitigate the volume of orders down as we leave imbalance/ 
+inefficiency (cited below), meaning we have a failed mitigation. This is done to fuel an even larger move to the 
+downside as we build a chain of mitigation-inducement (Phase 1) before re-grabbing the injection of orders that 
+was the cause of the structural break. When we tapped into the zone (not shown below), we had a large reaction 
+creating a sell trade opportunity. 
+The circled candlestick below represents the extreme of the Phase 1 inducement. We now know not to trade 
+below this created level as these traders are classified as early sellers. There is still day-trade opportunity within 
+inducement, but it is important to be mindful that it will get run. 
+ 
+www.tradesmint.com
+26 
+ 
+All Rights Reserved©2022 
+The 2-Phase Inducement Theorem 
+ 
+Inducement and why it is the forefront of trading – theory + application 
+(‘x1’ = Phase 1, ‘x2’ = Phase 2) 
+Overall Idea – we want to find 2 inducement phases to validate a reversal before trading it’s continuations: 
+ 
+- Inducement is a fractal liquidity trap that takes place above/below valid orderblocks to fuel large moves 
+- After we have the 2-Phase Reversal, we can follow order-flow with IPB continuation within our buy/sell equilibrium until reaching 
+our counter Phase 1 reversal target 
+- If an inducement phase is small in the timeframe of reference, it will build another small phase (two small Phase 2’s) 
+- Inducement creates mitigation-like reactions to act as supply & demand. It does this to compile more orders to then liquidate 
+Timing: The two phases below must take place before a reversal. This 2-Phase strategy happens on every timeframe until the 1m 
+entry, so we want to see it happen from a 15m/5m orderblock until we look to enter. If we see the two phases happen on the 1h, 4h, or 
+daily for example, we must wait to mitigate to the >15m timeframe to trade; the diagrams below use this concept. 
+The same fractal nature goes with all other timeframes (Daily – 4h, 4hr -1h, 1hr – 15m/5m, 15m/5m – 1m, 1m – 15/5s). 
+Phase 1: The end point of the first stage of early sellers/buyers before a 5m+ orderblock – we mitigate this inducement 
+to build more liquidity to get swept. If we have a supply (sell) orderblock for example, price will build a false supply chain 
+underneath, detached from the orderblock, and instead mitigate a retail level. Early seller’s stop-losses will be under the 
+true zone and get taken out as the mitigation of orders become liquidated as the orderblock’s inducement.  
+This Phase 1 inducement structure mitigates as a supply/demand chain detached short from a valid high-volume 
+orderblock which is why all types of traders can get induced. Target-wise, take-profits are best at the top of the horizontal 
+inducement-mitigation level if buying, and the bottom if selling. 
+Phase 1 is known as: 
+ Mitigation-Inducement – Price mitigates early sellers/buyers to collect more orders to take. Phase 1 can be found 
+when price gets mitigated below/above an imbalance and doesn’t use the actual refined zone (so it ends up getting 
+swept). We can see Phase 1 as the last level of price before the imbalance of a valid orderblock. 
+Phase 2: A second layer of inducement to validate the mitigation of the original orderblock. This will either build another 
+manipulation phase before or after the orderblock tap-in. Phase 2 is the final form of inducement required to take our 
+trade. If Phase 2 forms before the orderblock tap-in, we will have built enough inducement to play aggressively from the 
+tap-in. If it forms after, it will create another layer of inducement again after the tap-in for a more passive valid mitigation. 
+Phase 2 is depicted as either: 
+ ChoCh Inducement – Another inducement phase that occurs after tapping into the orderblock refinement, 
+mitigating/breaking our Vector Level, and creating another valid 1m orderblock to trade from as our confirmed 
+manipulation – Most Passive 
+ 
+ Resting Liquidity Before a Refined Orderblock / Smart Money Trap – a pool of resting orders under/above an 
+orderblock that fail to carry the high-volume orders. This form of liquidity is often used to manipulate traders before 
+tapping into the true zone (refined orderblock). Price can run these formed zones if they don’t have inducement. If the 
+pre-tap-in accumulation size is large when we react to this liquidity (takes out a lot of orders after Phase 1), we will 
+have less (sometimes no) post-tap confirmation. – Semi-Aggressive 
+ 
+ Two Phase 1’s/One long Phase 1 – Prior to hitting the refinement, two mitigation-inducements or a single long-
+chain mitigation-inducement with imbalance form before a clear refined orderblock, usually seen during a strong 
+bullish/bearish run – Aggressive 
+ 
+ A Second Miss of the Refinement – after Phase 1, price misses the refinement again which impulses and breaks 
+internal structure; this then gets swept as a second form of inducement, then rallies from the true zone - Aggressive 
+ 
+ 
+ 
+ 
+ 
+ 
+www.tradesmint.com
+27 
+ 
+All Rights Reserved©2022 
+The Two Phases in Action (5-15m Charts) 
+15m Phase 1+2 Setup – Second Miss (Phase 2 is before the orderblock) 
+ 
+ 
+ 
+15m Phase 1+2 Setup – Two Phase 1’s + One Long-Chain Phase 1 (Phase 2 is before the orderblock) 
+ 
+www.tradesmint.com
+28 
+ 
+All Rights Reserved©2022 
+ 
+ 
+ 
+5m Phase 1+2 Setup – Resting Liquidity Before the Refined Orderblock / Smart Money Trap (Phase 2 is 
+before & often after the orderblock) 
+ 
+www.tradesmint.com
+29 
+ 
+All Rights Reserved©2022 
+5m Phase 1+2 Setup – ChoCh Creates Inducement (after the orderblock) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+www.tradesmint.com
+30 
+ 
+All Rights Reserved©2022 
+1m LTF Entries Based on Phase 2 Inducement (Post Phase 1) 
+ 
+All Entry Factors/Considerations: 
+ The more liquidity hunted, the more impulsive the move will be 
+ A corrective leg will not provide much confirmation after it taps into its zone 
+ The Phase 2 entry types change through their mitigations into the lower timeframes 
+ Phase 2 pre-tap-in inducement (Second Miss + Two Phase 1’s) are the only ones we should play with a limit order 
+that is not from a 1m zone 
+ 
+1. ChoCh Inducement - 1m Entry – Most Passive 
+(Inducement is after tapping the original zone) 
+- After sweeping Phase 1, price will need to break the leg that created the sweep of the Phase 1 level. If we do 
+break this structure, we create a market structure shift (MSS) confirming our ChoCh. 
+- After the ChoCh forms, it will create its Phase 2 mitigation-inducement under (if selling) and above (if buying) 
+the new valid zone it forms in its respective time frame – when this inducement is swept, we can then look to 
+place our trade; this means that we must wait for a mitigation of a refined zone that the ChoCh forms.  
+- To trade this, we can play a 5-15s supply/demand fail, or set a limit for the mitigation of this second zone. A 
+corrective leg entry is also possible (as shown below) after grabbing the main leg’s weak LPOD/S.  
+ 
+1m Entry needs to show: 
+ Price needs to mitigate/break the Vector Level that created the Phase 1 sweep. 
+ A grab into our valid orderblock (the very top/bottom of the ChoCh) which then breaks the Vector Level 
+or mitigates it then creates inducement for a new formed 1m zone 
+ If this happens, we now have a MSS which makes our ChoCh valid to trade from. We should trade from 
+our new formed zone from where we had the original supply/demand failure (or where it mitigated to). If 
+there is no clear zone, it will sweep the mitigated liquidity then reverse. 
+ Sweeping this liquidity before the new-formed valid orderblock is our Phase 2 inducement. You can play 
+a limit from the zone or wait for the 5s/15s supply/demand fail after tapping into it. 
+ 
+1m Post Phase 1 Entry Example: 
+ 
+ 
+www.tradesmint.com
+31 
+ 
+All Rights Reserved©2022 
+2. Resting Liquidity / Smart Money Trap - 1m Entry – Slightly Aggressive 
+(Inducement is before and often after tapping the original zone) 
+With this inducement type, the Phase 2 is not just the SMT / resting liquidity before the refinement, but is the 
+post-tap inducement (similar to a ChoCh inducement), or small-range accumulation that price creates after 
+reacting to this liquidity before hitting our true zone. 
+What makes this different to a ChoCh inducement is that the market provides less post-tap confirmation after 
+sweeping the reaction of the trap / resting liquidity as it has successfully induced another layer of sellers/buyers.  
+Often, we will see an imbalance detachment from Phase 1 and this resting liquidity / trap. When we react to this 
+liquidity, we have not yet mitigated our high-volume orderblock, so price often tries to reverse but cannot. These 
+misses of the true zone refinement often create an accumulation-like structure (see diagram) which acts as 
+another level of inducement, making our new 1m zone mitigation more aggressive to enter from; in some 
+circumstances there is no post-tap inducement after the manipulation of the small-range accumulation. 
+- When we react to this liquidity and build a large accumulation before the true zone, we may have no post-tap 
+confirmation and treat is similar to the structure of a Second Miss. 
+- The resting liquidity / SMT can be seen as a weak mitigation of the orderblock, so traders enter from it thinking it 
+is the correct zone to trade from but become a form of inducement. Traders can also become induced when the 
+SMT zone does not have or build inducement, so price ends up running it. 
+- As we then tap into the true zone and sweep, we will create a demand/supply fail (failed reaction) – the move 
+should break internal structure and create a zone to play from. Depending on time & price, a limit can be placed. 
+- Playing the 5s demand/supply fail or a limit trade from this final 1m mitigation is ideal. 
+ 
+1m Entry needs to show: 
+ A price reaction from the resting liquidity / trap, creating a small-range accumulation to get swept 
+ The tap into the true zone should break / mitigate our Vector Level then create mitigation-inducement for 
+the final buy zone 
+ A 5-15s demand/supply fail or limit can be played after tapping the final refined zone 
+ 
+1m Post Phase 1 Entry Example: 
+www.tradesmint.com
+32 
+ 
+All Rights Reserved©2022 
+3. Second Miss + Two Phase 1’s/One Long Phase 1 - 1m Entry - Most Aggressive 
+(Inducement is before tapping the original zone) 
+- These setups have the same application as they involve liquidating early high-volume buyers/sellers. This 
+Phase 2 is often used when we are heavily bearish/bullish and encounter a Minor Inducement Pullback level 
+- When price misses the refined zone after Phase 1’s early sellers/buyers, it ends up inducing the refinement 
+again then impulses – these misses compile a lot of orders before hitting the orderblock and getting swept, 
+meaning minimal to no inducement will take place after the orderblock to hit its target. 
+- The way we can analyse this high intent to buy/sell is through the second miss - we often break internal 
+structure taking out even more early buyers/sellers. We can also see this with two Phase 1’s, where we have two 
+lots of mitigation-inducement before creating a rapid impulsive move when we reach the true refined zone. 
+- This is best seen at London/NY open or at news release during a pro-trend move with little counter impact 
+(pullback). 
+- Taking limits is a good strategy for this setup, but waiting for a 1m or <1m rapid mitigation can provide a safer 
+entry. Often, there will only be a single opportunity to trade when price taps the refined zone if enough 
+inducement is taken out, otherwise we may have another single mitigation-inducement post-tap. 
+ 
+1m Entry needs to show: 
+ Impulsive move from hitting the refined zone after two misses. Price will often grab the LPOS/D from this 
+move 
+ Creation of a zone after an internal failed reaction from sweeping the second miss. This creates the last 
+area to play from unless there is still opposing demand/supply open in the leg. 
+ The more impulsive the second miss break of structure is, the less confirmation is needed after tapping 
+the refinement 
+ An entry opportunity #2 may present itself if it reacts from a weak open zone still active in the leg, 
+otherwise price will leave without another opportunity 
+ 
+1m Post Phase 1 Entry Example: 
+ 
+ 
+www.tradesmint.com
+33 
+ 
+All Rights Reserved©2022 
+What Makes a Market Structure Shift Valid? (To Trade Reversals) 
+To confirm a reversal, we need two things: 2-Phase Inducement and a Market Structure Shift. The way we can 
+decipher the validity of a MSS is dependent on how we react to our Vector Level (which must be reached): 
+ 
+What is our Vector Level? 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Valid: Mitigation (of the level) + Reversal Inducement: 
+ 
+ 
+Our Vector Level is a valid zone that is created 
+before we create a push into our orderblock of 
+interest. 
+This level follows our 3 valid orderblock rules 
+(importantly imbalance) and is responsible for 
+the sweep of our Phase 1 level, but fails to 
+create a new low (if buying) / high (if selling). 
+We MUST react to this level in some way to 
+objectively confirm our reversal. 
+We often have a form of price mitigation after 
+this level forms. We must sweep past this small 
+mitigation cycle (often into the Vector level’s 
+imbalance) to transfer the orders from our level 
+to current price.  
+We can either mitigate this Vector Level down (if 
+buying) / up (if selling), or break past it. We then 
+have to create inducement for our reversal with 
+a new-formed zone. This will confirm our MSS. 
+www.tradesmint.com
+34 
+ 
+All Rights Reserved©2022 
+Valid: Break (of the level) + Reversal Inducement: 
+ 
+Invalid: Respect of the Vector Level (Continuation not a Reversal): 
+There are other factors that contribute to an invalid reversal. These include sweeping an Inducement Pullback 
+Level (IPB) rather than a Phase 1 and reacting to a low-medium order volume zone creating a pullback.  
+www.tradesmint.com
+35 
+ 
+All Rights Reserved©2022 
+How to Use The Power of 3 (AMD) with the 2-Phase Theorem 
+MAIN IDEA: Phase 1 – Accumulation Phase is to confirm an orderblock | Phase 2 – The mitigation of the 
+Manipulation Phase (this is known as the Distribution/Expansion) 
+ 
+1. Accumulation Phase: 
+In this phase, price is encapsulated in a retail-trap range where position build up, creating a box of buy-side and 
+sell-side liquidity. This fractal phase happens above (if buying) and below (if selling) a valid 3-rule orderblock. 
+If we are buying, we can see the Phase 1 Inducement as the bottom of this boxed accumulation as it is the last 
+point of mitigation-inducement that will get swept before tapping into our orderblock. Vice-versa for selling, as we 
+will see the Phase 1 Inducement at the top of this boxed accumulation.  
+ 
+2. Manipulation Phase: 
+This phase is the sweep of the engineered accumulation liquidity (Phase 1), into our valid orderblock. We quickly 
+enter then exit into our orderblock to take the orders then reverse. Our manipulation is confirmed if we break the 
+level that broke past the Phase 1 sweep, creating our market structure shift. 
+At this point, we can start looking to trade from the mitigation of the manipulation phase (with Second Miss & Two 
+Phase 1’s as the exceptions). Between this mitigation, we can find the Phase 2 Inducement entry. Its volatility will 
+be dependent on the Phase 2 entry type. Below, we have a ChoCh inducement lining up with Time & Price, 
+making it a perfectly structured London trade.  
+ 
+3. Distribution/Expansion:  
+The distribution phase is the downwards continuation after the manipulation. When buying, this can be seen as 
+an expansion to the upside from the manipulation move, often followed by a distribution after the push up. At this 
+point, trade continuations can be taken towards the next active valid orderblock within the premium/discount. 
+When selling, the distribution phase starts when price successfully mitigates the manipulation phase. We can 
+often take sells from the new formed orderblock after a Phase 2. The same concept goes for buying – after our 
+manipulation, we have our expansion. 
+ 
+www.tradesmint.com
+36 
+ 
+All Rights Reserved©2022 
+Phase 1 Reversal vs Inducement Pullback Continuation (Validate Inducement Levels) 
+To validate either a pullback (then a pro-trend continuation) or a Phase 1 Inducement (for a reversal trade), we can follow the 
+following system to take advantage of understanding market intentions and where the manipulation is: 
+ 
+Phase 1 Validation: When we have a Phase 1, we are collecting mitigated liquidity from the left to validate our 
+manipulation (price’s quick reversal after sweeping Phase 1). We can then trade from the mitigation of the 
+manipulation towards our target as we have a clear shift in market structure. Note - Phase 1 doesn’t have to be 
+the high/low of a leg; it can be under/above a valid orderblock (‘A’ can be respected if valid). 
+To trade from our Phase 1, we need our Phase 2 inducement. The way we spot whether we have a valid Phase 1 
+manipulation is by: 
+ Breaking the demand/supply of the leg that created the Phase 1 Sweep to then play our Phase 2 from 
+the manipulation (unless our Phase 2 is before the tap-in). 
+ Price needs to react to a medium/strong order volume zone, rather than a weak pullback zone. 
+ Price must enter a 3-rule orderblock from the manipulation level to reverse after the Phase 1 sweep. 
+ This ‘B’ leg should use corrective price action so it can liquidate it without a large pullback from an open 
+unmitigated zone. 
+ Most often, our first TP is the end of the B leg as it does not have any clear zone imbalance. 
+Entry: We only want to enter from our manipulation zone which is the price above (if selling) and below (if 
+buying) the Phase 1 Sweep. We can play from the MSS (Market Structure Shift) mitigation. 
+ 
+Phase 1 Reversal: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+If we can break the last leg that initiates 
+the Phase 1 sweep level, it validates our 
+market structure shift, confirming our 
+manipulation which is what we want to 
+trade from as a reversal. Objectively, 
+price will run the opposing already-
+mitigated level. 
+Often reversals create larger moves than 
+Inducement Pullback Continuations. 
+ 
+ 
+www.tradesmint.com
+37 
+ 
+All Rights Reserved©2022 
+Inducement Pullback Validation: To trade from our Inducement Pullback (IPB) - price sweeps an inducement 
+level but continues in its trend direction - we need to form pro-trend continuation inducement (which is before 
+pullback level) to be swept for price to continue to our target – as we know, after we have our two phases, we can 
+keep playing single small-range inducements until reaching our counter Phase 1 reversal. An Inducement 
+Pullback can also be seen as a BoS (break of structure) as they have the same function. 
+The way we spot whether we have a valid Inducement Pullback is by: 
+ Creating a valid orderblock zone with small-range inducement underneath (if buying) and on-top (if 
+selling) of the Inducement Pullback line. We will fail to break this zone and use it for our pro-trend 
+continuation after the Inducement Pullback. 
+ The pullback reacts from a weaker zone that holds small-medium volume orders and is unable to create 
+a reversal. 
+ Before sweeping the IPB, the B leg should create structural manipulation (small-range sweeps) rather 
+than an already-mitigated corrective leg while the C leg becomes a reversal trap. 
+ Most often, our TP is until the next imbalance zone (end of our opposing Phase 1 Inducement). 
+Entry: We can play from the zone that created the sweep of the Inducement Pullback level. This zone must 
+create inducement and follow the 3 orderblock rules. 
+ 
+Inducement Pullback Continuation: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+If we sweep the Inducement Pullback level, 
+then fail to break the last valid orderblock 
+leg that created the move, we will create 
+inducement for that zone. We can then 
+confirm the sweeping level being a 
+pullback, and the manipulation to be in the 
+continuation direction rather than a 
+reversal. 
+Often continuations create smaller moves 
+than Phase 1 Reversals. 
+www.tradesmint.com
+38 
+ 
+All Rights Reserved©2022 
+Step-by-Step Entry Processes 
+ 
+Reversals & Continuation Trade Checklist 
+We need to shift our view of trading into an objective step-by-step process like an algorithm. We need to simplify 
+our view of the trading market into 3 cycles: liquidity build-up (where we don’t trade), reversals & continuations. 
+ 
+How to trade a reversal (2-Phase Theorem): 
+1. Utilise the 8-Step Markup Process and the HTF/Daily Bias to establish overall control and purpose 
+2. Draw out valid 5/15m+ zones: 
+Join the order-flow of high-volume money injected into the market that will influence current price movement, and 
+draw the location of internal breaks that created the valid zones. Also include the active opposing zones from our 
+point of interest and their inducement levels that price will encounter. 
+- we can find these valid zones using our Daily Cycle strategy (Momentum + Asia Manipulation) 
+- we want to mark out our zone mitigation-inducement levels as “undetermined” (with an ‘x’) as we cannot yet 
+classify them as a potential Phase 1 or an Inducement Pullback (IPB) 
+- if we are trading from a 15m+ zone, we need to wait for more sweep + mitigation cycles until we have a <15m 
+zone to be able to take our 1m trade. (Follow the fractal timeframe concept, e.g., 4h - 15m, 1h - 5m etc). 
+3. Before we tap into our zone, we need to ensure our orderblock of interest will carry enough orders to reach our 
+target/s when we have a valid mitigation. This means we should be using strong high-volume zones and stay 
+away from weaker pullback zones for our 2-Phase reversals. Remember, inducement fuels a large move. 
+We want to see a build-up before price creates vectors (fast & impulsive candles) that push past our main zone’s 
+inducement level. Our build-up is our last area of liquidity tightening within our Phase 1 before the push to sweep 
+the Phase 1 inducement level. These vector candles create room for reversal strength to push through as they 
+utilise weak structural price action for the purpose of manipulating the early traders (Phase 1 level) before tapping 
+into our valid zone. 
+4. Utilise important confluences:  
+ Wait for our premium/discount 50% (rebalancing) from the main 15m+ leg we are using to trade from 
+(swing high & low) and for the post-tap of the valid orderblock leg that is created 
+ Protected & Targeted Highs/Lows – did the high/low fail or succeed in breaking structure? (often act as 
+good inducement levels) 
+ Time & Price 
+ Mitigation – we want to follow where price is taking the orders to 
+ Corrective Legs & LPOD/LPOS 
+ Smart Money Traps + Invalid ChoCh’s 
+5. Post-tap step-by-step entry confirmation: 
+ We enter from the 1m: The first thing we need is a Market Structure Shift (MSS) to confirm our 
+reversal after the 5/15m orderblock mitigation. There are rules for a MSS to be valid (page 33-34): 
+When vector candles create a push past the Phase 1 into the orderblock of interest, we create a Vector 
+Level with imbalance. We MUST reach and mitigate the Vector Level, or break it, then create reversal 
+inducement. If we mitigate it then create Phase 2 ChoCh inducement, the structural shift also becomes valid. 
+ Based on our Phase 2 entry setups, we can decipher what the price action will look like post-tap, and 
+the volatility it provides based on the liquidity taken 
+ We need the 2-Phase Theorem to confirm our reversal before we can take single-sweep continuation 
+trades (IPB) to our opposing valid reversal zone 
+After mitigating/breaking the Vector Level, we need to see price form reversal inducement for the new post-tap 
+orderblock that mitigated the valid 5/15m zone – this inducement will be our Phase 2 (except for Two Phase 
+1’s/Long Phase 1 & Second Miss) and will confirm our reversal. 
+www.tradesmint.com
+39 
+ 
+All Rights Reserved©2022 
+If we tap into this new zone, we will have confirmed our 2-Phase reversal and price will rally. 
+ First Trade/s: We can play a limit from this Phase 2 valid zone or wait for a 15s demand/supply failure 
+buy/sell stop. 
+For confirmational continuations after our reversal, we want to see inducement being created for our current high-
+volume zones after sweeping IPB levels – this may not be an option if there is no unmitigated LPOS/D pullback 
+after the MSS. We can trade these continuations until we reach our opposing reversal zone (and follow our IPB 
+rules) 
+ Second Trade/s: We can play a limit from our continuation zones after a single sweep or wait for a 15s 
+demand/supply failure buy/sell stop.  
+6. Stop-loss placement:  
+Our stop-loss is safest at the end of our confirmed manipulation sweeps; we can move these throughout the 
+reversal to secure profits with our trade/s as long as we are efficiently mitigating the high-volume orders with our 
+pullback continuations (see how to trade IPB continuations below). 
+ 
+Tips: 
+ Price will often reverse (for either a pullback or an actual reversal) after it sweeps the last level of price 
+that is before the imbalance within a valid zone – we can see this best if we sweep into an imbalance 
+orderblock (big V-SR range with no clear zone) 
+ For a zone to at least be a pullback, it has to create cause, such as internal demand/supply breaks/fails 
+before it pushed price 
+ In a way, inducement belongs to zones. When price pushes into imbalance after the weak mitigation leg 
+that creates that sweep of our Phase 1, it is taking the opposing inducement away from the next 
+opposing zone. If we create reversal inducement (Phase 2) after that sweep, that confirms our 
+manipulation. 
+ We can draw horizontal lines to signify the point of demand/supply failure for active zones including 
+those that are opposing so we can either play a reversal or continuation. The point of failure is where the 
+injection of orders come into the market in which price will react from. 
+ 
+2-Phase Reversal Trade Example: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+www.tradesmint.com
+40 
+ 
+All Rights Reserved©2022 
+How to trade a continuation (Inducement Pullback): 
+ 
+1. Utilise the 8-Step Markup Process and the HTF/Daily Bias to establish overall control and purpose 
+2. The main idea is that after we have a reversal (2-Phase), we can then trade IPB’s (inducement pullbacks) until 
+reaching our target zone in which we will have an opposing reversal. We must have the 2-Phase reversal 
+before trading IPB’s. 
+Important factors: 
+ We should only trade IPB’s if the high-volume orders from the reversal are mitigated efficiently to current 
+price, or when price encounters a very weak pullback zone (such as reacting from imbalance or reacting 
+from a high/low that is weak/targeted) then creates inducement for a new continuation zone. 
+ We can trade IPB with single sweeps. We do not need 2 inducement phases unless we are trading a 
+HTF (1hr+) IPB as price will give us lower time-frame confirmations. 
+ We want to mark out our zone mitigation-inducement levels as “undetermined” (with an ‘x’) as we cannot 
+yet classify them as a potential Phase 1 or an Inducement Pullback (IPB) 
+3. Draw out valid 5/15m+ opposing zones after our 2-Phase reversal: these zones don’t have to have high-
+volume orders but should follow our valid rules as we want to see pullbacks from them after our IPB level sweep. 
+We also want to mark the targets in which we will have possible reversals from as this will be the end of our 
+buying/selling continuation cycle. 
+What do pullback zones look like?  
+- Low-medium order volume zones that are valid 
+- Smart money traps/fake orderblocks 
+- Active supply/demand levels from weak/targeted lows/highs 
+4. Utilise important confluences: 
+ Don’t overrefine pullback zones – as long as they are marked valid 
+ Utilising the 50% premium & discount is essential. Once price passes the 50% of the higher timeframe 
+leg it is trading within, we cannot trade anymore pro-trend continuations 
+ If a zone breaks internal structure (cause) and follows the 3 valid rules, it is considered active. 
+ If we are trading an IPB from the 15m+, we can often play a lower time frame 2-Phase reversal within 
+this movement as we will have more lower time frame confirmations. 
+5. Post-IPB sweep step-by-step entry confirmation: 
+ When we encounter an ‘undetermined’ inducement level, we need to wait to see what price does as it 
+sweeps past it to confirm it being an IPB level.  
+ 
+ The zone that pushed price past the inducement level must: create inducement for continuations, carry 
+high-volume orders, and must follow the 3 valid orderblock rules; imbalance tells us that there is a 
+detachment from the order-flow, inducement is that manipulative building of the detached orders to then 
+be swept, and impulsiveness tells us that the valid zone created a large push utilising the reversal order 
+mitigation. 
+ 
+ If we create this valid zone before sweeping the ‘undetermined’ inducement level and we react from a 
+pullback zone mentioned above, we can then confirm our level as an Inducement Pullback. 
+ 
+We want to enter from the 1m: 
+- If our new-formed inducement pullback zone is 5m+, we can utilise a 1m 2-Phase reversal within this created 
+range, but it is important to note that price is extra bullish/bearish, so less inducement is needed to be taken 
+making it is easier to miss a trade this way. 
+- If our new-formed inducement pullback zone is <5m, we can take a limit trade directly from the zone. 
+ 
+www.tradesmint.com
+41 
+ 
+All Rights Reserved©2022 
+6. Stop-loss placement:  
+Our stop-loss is safest at the end of our confirmed manipulation sweeps; we can move these throughout the 
+reversal to secure profits with our trade/s as long as we are efficiently mitigating the high-volume orders with our 
+pullback continuations. 
+ 
+Tips: 
+ If there is an imbalance detachment from the high-volume orders, then another leg forms that sweeps the 
+IPB level, but we don’t create inducement for it, wait until we rebalance price to our high-volume zone to 
+trade the continuation. 
+ Draw the location of internal breaks that created the valid zones. 
+ We can find valid zones using our Daily Cycle strategy (Momentum + Asia Manipulation) 
+ If we are trading from a 15m+ zone, we need to wait for more sweep + mitigation cycles until we have a zone 
+<15m to be able to take our 1m trade. 
+ 
+IPB Continuation Trade Examples: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+www.tradesmint.com
+42 
+ 
+All Rights Reserved©2022 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Utilising a reversal & continuations 
+together (Buy Example): 
+www.tradesmint.com
+43 
+ 
+All Rights Reserved©2022 
+Key Trading Movements & Concepts: 
+ 
+1. Corrective Leg 
+What is it?  
+A corrective leg is when price has a final move before a rally by mitigating the last point of demand or supply 
+(LPOD/S). This demand/supply it reacts from is often just a pullback that won’t break structure, but it creates a 
+trade opportunity as it mitigates one final time before there is no other opportunity.  
+The LPOD/S is the last open zone in which price can react from within a leg of any timeframe. If this fails to 
+become a continuation and make new highs/lows, it will make the end of the leg a targeted low/high.  
+How to use it?  
+A corrective leg can be produced when a zone is already mitigated, but price reacts from it again as it holds 
+another clean looking orderblock, or when there is a clear zone with imbalance that doesn’t hold much order 
+volume. This gives institutions another opportunity to induce traders as we are taking out all possible demand (if 
+selling) and supply (if buying) out of the market to target Phase 1 inducement without any major pullbacks. 
+If price is all mitigated (the LPOD/S is taken out) to a point, price will run all that mitigation – this is the Phase 1 
+inducement. That is why a corrective leg is the last (and safest) trade opportunity – it is the final pullback move 
+before all the mitigation-inducement will be taken out. 
+Technical:  
+In a corrective leg, we only need to see a 15/5s fail after a single Phase 1 inducement. No Phase 2 is needed as 
+there is no more inducement needed for these movements due to having no demand (if selling) or supply (if 
+buying) left in the mitigation-chain. 
+ 
+Corrective Leg Structure (Weakness) Vs Normal Leg Structure (Strength): 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+www.tradesmint.com
+44 
+ 
+All Rights Reserved©2022 
+2. Premium & Discount 
+What is it?  
+Premium and discount is a basic principle that can be used when purchasing something on the market from 
+securities, consumer-goods, and forex. The main idea is that the pricing of the market balances out before 
+creating its continuation. 
+This concept involves marking the equilibrium of a large price leg, and dividing it in its two parts to be purchased 
+at either a premium (over the fair value of the thing you’re buying) or at a discount (buying something that is on 
+sale). 
+How to use it?  
+Rather than being a trading confluence, this idea should be used to sit on your hands and wait till price enters the 
+side of interest to trade from – discount we look for buys, and premium we look for sells. Once price has entered 
+our side – like below where we enter the discount region of the 4H leg – we can then look for continuation buys 
+until we break the weak high. 
+This is a fractal concept and can also be applied at low timeframes. 
+Diagram Explanation:  
+Below, we can see that we entered the discount region and reversed straight away, telling us that the market has 
+balanced out and entered the discount so buys become valid.  
+We can also see that buyers in the premium zone became liquidated as they failed to trade from the discount. 
+ 
+ 
+ 
+www.tradesmint.com
+45 
+ 
+All Rights Reserved©2022 
+3. V-SR (V-Shaped Recovery) 
+What is it?  
+A V-SR is a ‘V-Shaped Recovery’. It tells is that price quickly enters and exists a certain point in the market. 
+Often, this is due to institutions rapidly sweeping then mitigating a high-volume order zone. These can be labelled 
+as IFC’s as they are purposely created to take out inducement (early sellers/buyers). They are often used at the 
+start of reversals, or to quickly mitigate/sweep a zone during high volatility times. 
+How to use it?  
+A V-SR can be used to understand what Institutions are trying to do, and to take advantage of it. If it is created as 
+a sign of strength (high intent) in the market for sellers or buyers, it can be used like an imbalance orderblock. In 
+this case, wait for inducement to be created above/below it, then play the respect of it if it creates a zone. 
+These can be seen as a normal candlestick on a higher timeframe. 
+ 
+ 
+4. Evil Candle 
+What is it?  
+An evil candle is the first candle that misses high-volume order zones and then mitigates, creating a chain of 
+engineered liquidity. This is another way of defining the top/bottom of Phase 1 inducement. We mark these with a 
+circle. 
+How to use it? 
+Mark out the mitigated liquidity that the Evil Candle created, and ensure you don’t trade it. Wait till it gets swept; 
+this will be your Phase 1 inducement. Being able to spot these candles ensures you are not going to be liquidated 
+by trading from an inducement level. 
+Technical: 
+With the use of imbalance, we can find these candles. Find a HTF range in which gets broken then rallies, 
+leaving behind imbalance.  
+www.tradesmint.com
+46 
+ 
+All Rights Reserved©2022 
+The last, properly mitigated zone should be marked as active and valid, but the extreme candle that created 
+mitigation-inducement just short of the valid zone is the evil candle. Wait till price breaks this, then look for Phase 
+2 to create a trade. 
+ 
+5. Ping-Pong Ranging 
+What is it?  
+A Ping-Pong range allows you to trade buys and sells within a large, higher time-frame leg. There is no heavy 
+bias on bulls or bears at this time as we are trading within a range, so if played correctly, you can make some 
+successful sells and buys while price is within its range. 
+How to use it?  
+- Wait for the 2-Phase inducement theorem before each reversal point. We can then trade its Inducement 
+Pullback continuations until finding another reversal point and repeating the process. 
+- Use the HTF to understand the overall directional bias 
+- Take profits points can be at the opposing Phase 1 inducements (evil candles)  
+www.tradesmint.com
+47 
+ 
+All Rights Reserved©2022 
+6. Divergence 
+What is it?  
+Divergence is a confluence in which the indicator (such as an oscillator) and the currency pair are moving in 
+opposite directions. The implication is that the price is losing momentum and is likely to reverse soon. 
+How to use it? 
+This concept should only be used as a confluence. It can show the overbought/sold manipulation of the market to 
+hit a deeper zone and liquidate traders, but there are many more factors that are needed to confirm the move and 
+should only be used in a HTF pro-trend scenario.  
+Technical: 
+We can see below that whilst the indicator is trading in one direction, the actual price action is moving the other 
+way. Using our overall strategy, we can use this to confirm an over/under-priced manipulation move. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Standard Bearish 
+Divergence 
+ 
+Standard Bullish 
+Divergence 
+ 
+www.tradesmint.com
+48 
+ 
+All Rights Reserved©2022 
+7. Small Sweep vs Big Sweep 
+What is it?  
+A small sweep tells us that price is looking to reverse, but only for a short duration of time, and will become 
+liquidated much faster than a large sweep. Sometimes these can look like equal highs/lows when we zoom out, 
+becoming targeted rather than playable zones. 
+A big sweep is when price is looking to reverse with force. This is often seen on the 4h, daily or weekly as a big 
+wick liquidating highs/lows and breaking structure in the other direction. This makes these movements protected 
+highs/lows, and tradable in the reversing direction after the sweep.  
+How to use it?  
+- Mark out small sweeps as potential liquidity targets in the near future 
+- Mark out big sweeps as protected highs/lows that mitigate 4h/daily/weekly zones and sweep 
+www.tradesmint.com
+49 
+ 
+All Rights Reserved©2022 
+8. Invalid ChoCh / Smart Money Traps 
+What is it?  
+An invalid ChoCh (SMT) is a way the market induces smart money traders. Below we can see a supply chain 
+continuation, then a ChoCh. The first diagram shows a SMT – this is due to the fact that we came up and tapped 
+into the valid supply zone first before coming back into our ChoCh to create inducement.  
+The second diagrams show a valid ChoCh. This is because we came and broke the ChoCh high, then came back 
+down to manufacture/react then break our demand zone’s inducement. 
+How to use it?  
+- Mark out pullback zones to the left – these will likely create SMT’s rather than valid ChoCh’s due to just 
+being short term pullbacks. 
+- Mark out valid orderblocks to the left – these will likely create valid ChoCh’s rather than SMT’s due to being 
+strong reversal zones 
+- Analyse whether the ChoCh reaction is creating inducement. If not, it has no intention to break the 
+supply/protected highs – same idea for demand chain control. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+www.tradesmint.com
+50 
+ 
+All Rights Reserved©2022 
+PT/CT Entry Setups – Putting it All Together: 
+ 
+Pro-Trend Mitigation 
+Scenario: Price is moving pro-trend and has a large impulsive move, leaving behind a clear orderblock with inducement and 
+imbalance. We want to wait for price to return to this leg where the money is to play the 2-Phase inducement by following EOF 
+with momentum on our side. The trend is based on 15m movement 
+Post Trade Stop-loss: Stop-loss placed after 1m BoS after entering 
+Time Stamps: 4h – 1h – 15m – 5m/1m – 1m/15s – 5s fail 
+ 
+15/5m Bullish PT Clean Setup: 
+www.tradesmint.com
+51 
+ 
+All Rights Reserved©2022 
+15/5m Bearish PT Clean Setup: 
+Pro-trend Entry Process: 
+1. A clear zone formed from the mitigation of bullish/bearish pro-trend order-flow originating from a strong break 
+of structure or a sweeping IFC. This zone should have a form of Phase 1 inducement above and below it to be 
+valid. 
+2. We should see respect from this zone. If Phase 2 was before the orderblock (Second Miss/Two Phase 1’s) you 
+can enter with a limit or wait for a direct mitigation on the lower timeframes. Otherwise, we must wait for the 
+second inducement to build after we tap in. The tap should break structure in the pro-trend direction; this will 
+either be a ChoCh or a Failed Reaction within internal structure. 
+3. The new zone formed can be played when mitigated after sweeping Phase 2. If the original zone was 15m+, a 
+possible 15s entry can be played from the 1-minute mitigation. If the LPOD/S hasn’t been taken, a second entry 
+is possible from the corrective leg. 
+4. Due to our expectational order-flow, we can target the weak high/low; ensure the leg has been properly 
+mitigated. As soon as you have the two inducement phases, you can play continuous sweeping mitigations within 
+the 50% of the leg until reaching the next Phase 1 inducement pullback or weak high/low. 
+www.tradesmint.com
+52 
+ 
+All Rights Reserved©2022 
+Counter-Trend Order Flow 
+Scenario: Price reacts strongly from a HTF valid orderblock after sweeping 15m+ liquidity, but the opposite force 
+(supply/demand) is still in control. Price must create intention, respect counter-trend price and manipulate (2-phase 
+inducement) before trading as momentum is not on our side.  
+Post Trade Stop-loss: Stop-loss placed after 1m BoS after entering 
+Time Stamps: 4h – 1h – 15m – 5m – 1m – 1m – 15s fail 
+ 
+15/5m Bullish CT Clean Setup: 
+ 
+ 
+www.tradesmint.com
+53 
+ 
+All Rights Reserved©2022 
+15/5m Bearish CT Clean Setup: 
+ 
+Counter-trend Entry Process: 
+1. A spike of bullish/bearish intention such as a high-momentum IFC pullback, or counter respect that breaks 
+internal structure from a higher time-frame zone. We need to then wait for price to respect (mitigate) this and 
+create a Failed Reaction (FR) zone. We cannot trade this setup without counter respect first. 
+2. From the FR zone that formed, we should see Phase 1 inducement form above/under it. When we tap into the 
+FR zone after sweeping, we will have a possible second’s Phase 2 entry unless it was created before entering 
+the zone. 
+3. Ensure the LPOD/S is broken, and keep your targets safe. Don’t try and target the end of a leg as that will go 
+against the order-flow unless one is confirmed weak shown with the bullish setup. Stacking trades is dangerous if 
+PA isn’t clear, and moving your SL to breakeven after a 1m or <1m BoS or creating partial take profits is crucial. 
+www.tradesmint.com
+54 
+ 
+All Rights Reserved©2022 
+Conclusion: 
+ 
+It is important you backtest all these concepts yourself, as learning the content is one thing, but 
+understanding and applying it will bring true trading success.  
+We have complied some links to further benefit your trading: 
+ 
+ACCESS 50+ REAL TRADE MARKUPS (DISCORD): 
+➡️ https://launchpass.com/vector-premium-group/pasttrades 
+ 
+Scale into EOD Markups + Intra-day Precision Trades that are valid in-line with the 2-Phase Strategy 
+(We recommend this as it can give a deeper understanding of applying the theory to the actual charts) 
+ 
+INCLUDES:  
+- Full Strategy within each Trade Markup + Annotations 
+ 
+- You will receive a 50% discount for the upcoming course if purchased – Contact us for this 
+ 
+- Hidden gems explained with each movement to get a full understanding of why and what creates the 10:1+ 
+trades 
+ 
+MY FOREX FUNDS: 
+➡️ https://myforexfunds.com/?wpam_id=96713 
+Once you have learnt the content, applied it into your strategy and successfully backtested or have maintained 
+profit on a demo account, we recommend trying to get funded with MyForexFunds. 
+ 
+ 
+VECTOR SOCIAL LINKS: 
+INSTAGRAM: @vectortradingfx 
+TIKTOK: @vectortrading 
+LINKTREE: https://linktr.ee/vectortrading 
+COURSE: We have a course in progress. To see if we have completed it, please use the Instagram link above to 
+contact us. 
+ 
+ 
+ 
+*This eBook cannot be shared to others from the person who purchased it. All Rights Reserved ©2022* 
+ 
+ 
+www.tradesmint.com

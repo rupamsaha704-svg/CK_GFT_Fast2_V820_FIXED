@@ -1,0 +1,75 @@
+//@version=6
+// ============================================================================
+// CK GOLD FIX - VISUAL (approx of the MT5 CK_GOLD_COMBO "FIX" breakout sleeve)
+// PURPOSE: eyeball WHERE entries / SL / TP fall on the chart. VISUAL AID ONLY.
+// This is NOT the real strategy. The real, validated strategy = the MT5 EA
+// (CK_GOLD_COMBO + the .set files). TradingView data & results will NOT match
+// MT5 (no daily governor, no news gate, no DT sleeve, different broker data).
+// Use: XAUUSD, M15 chart.  White=entry, Red=SL, Green=TP.
+// ============================================================================
+strategy("CK GOLD FIX visual (XAUUSD M15)", overlay=true, initial_capital=5000,
+     default_qty_type=strategy.fixed, default_qty_value=1, pyramiding=0,
+     process_orders_on_close=true, calc_on_every_tick=false)
+
+// ---- Inputs (mirror the MT5 FIX sleeve) ----
+htfTF     = input.timeframe("60",  "HTF timeframe for trend (H1)")
+trendEma  = input.int(200,  "HTF trend EMA")
+entryEma  = input.int(20,   "Entry EMA (M15)")
+atrLen    = input.int(14,   "ATR length")
+bkLook    = input.int(20,   "Breakout lookback")
+swingLook = input.int(10,   "Swing lookback (SL)")
+slBufAtr  = input.float(0.20,"SL buffer x ATR")
+maxSlAtr  = input.float(2.5, "Max SL x ATR")
+rr        = input.float(3.0, "Reward : Risk")
+allowLong = input.bool(true, "Allow longs")
+allowShort= input.bool(true, "Allow shorts")
+
+// ---- Indicators ----
+emaEntry = ta.ema(close, entryEma)
+atr      = ta.atr(atrLen)
+htfClose = request.security(syminfo.tickerid, htfTF, close,               lookahead=barmerge.lookahead_off)
+htfEma   = request.security(syminfo.tickerid, htfTF, ta.ema(close, trendEma), lookahead=barmerge.lookahead_off)
+bull = htfClose > htfEma
+bear = htfClose < htfEma
+
+// recent-range breakout (close breaks the prior N-bar high/low)
+hh = ta.highest(high, bkLook)[1]
+ll = ta.lowest(low,  bkLook)[1]
+brokeUp = close > hh
+brokeDn = close < ll
+
+// entry logic (approx FIX: HTF trend + breakout + pullback to EMA + confirming close)
+longSig  = allowLong  and bull and brokeUp and (low  <= emaEntry) and close > open and close > emaEntry
+shortSig = allowShort and bear and brokeDn and (high >= emaEntry) and close < open and close < emaEntry
+flat = strategy.position_size == 0
+
+var float eEntry = na
+var float eSL    = na
+var float eTP    = na
+
+if longSig and flat
+    sl0  = math.min(ta.lowest(low, swingLook), low) - slBufAtr * atr
+    risk = math.min(close - sl0, maxSlAtr * atr)
+    if risk > 0
+        eEntry := close
+        eSL    := close - risk
+        eTP    := close + rr * risk
+        strategy.entry("L", strategy.long)
+        strategy.exit("Lx", "L", stop=eSL, limit=eTP)
+
+if shortSig and flat
+    sl0  = math.max(ta.highest(high, swingLook), high) + slBufAtr * atr
+    risk = math.min(sl0 - close, maxSlAtr * atr)
+    if risk > 0
+        eEntry := close
+        eSL    := close + risk
+        eTP    := close - rr * risk
+        strategy.entry("S", strategy.short)
+        strategy.exit("Sx", "S", stop=eSL, limit=eTP)
+
+inTrade = strategy.position_size != 0
+plot(inTrade ? eEntry : na, "Entry", color=color.white, style=plot.style_linebr, linewidth=2)
+plot(inTrade ? eSL    : na, "SL",    color=color.red,   style=plot.style_linebr, linewidth=2)
+plot(inTrade ? eTP    : na, "TP",    color=color.green, style=plot.style_linebr, linewidth=2)
+plotshape(longSig  and flat, "Buy",  shape.triangleup,   location.belowbar, color.lime, size=size.small)
+plotshape(shortSig and flat, "Sell", shape.triangledown, location.abovebar, color.orange, size=size.small)

@@ -1,9 +1,14 @@
-import pandas as pd, numpy as np, re, os
+import pandas as pd, numpy as np, re, os, sys
 DEP=5000.0; FIX,DT="20260716","20260930"
-D=r"experiments\combo_funded\windows\last1y"
+ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repo root (this file lives in tools/)
+# window dir to check: optional CLI arg (absolute, or relative to repo root); default = shipped funded run
+_arg=sys.argv[1] if len(sys.argv)>1 else r"experiments\combo_funded\windows\last1y"
+D=_arg if os.path.isabs(_arg) else os.path.join(ROOT,_arg)
 GG=DEP*0.02   # Goat Guard = 2% of initial = $100
 FLAT=DEP*0.015 # our flatten buffer = 1.5% = $75
-df=pd.read_csv(os.path.join(D,"trades.csv")); df.columns=[c.strip().lower() for c in df.columns]
+_tcsv=os.path.join(D,"trades.csv")
+if not os.path.exists(_tcsv): sys.exit(f"[funded_check] trades.csv not found: {_tcsv}\n  usage: python tools/funded_check.py [window_dir]   (path absolute or relative to repo root)")
+df=pd.read_csv(_tcsv); df.columns=[c.strip().lower() for c in df.columns]
 df["time"]=pd.to_datetime(df["time"],format="%Y.%m.%d %H:%M"); df["profit"]=pd.to_numeric(df["profit"],errors="coerce").fillna(0.0)
 df["magic"]=df["magic"].astype(str); df=df.sort_values("time").reset_index(drop=True)
 prof=df["profit"].values; eq=np.concatenate([[DEP],DEP+np.cumsum(prof)])

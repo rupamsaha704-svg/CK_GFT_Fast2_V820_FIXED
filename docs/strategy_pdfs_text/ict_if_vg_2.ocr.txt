@@ -1,0 +1,50 @@
+ty)
+INVERSION
+Fair Value Gap
+Mr Stoploss
+
+Table of Contents
+» What are Inversion FVGs?
+» High Probability way of using IFVGs
+» Is it worth using IF VG?
+» Alternate ways of Execution:
+@ Liquidity Sweeps (agressive
+@ Orderblocks
+@ FVGs t For Confirmation Traders
+@ S/R Flip on Lower Timeframe
+
+What are Inversion FVGs?
+
+Key Points @
+>> Before understanding IFVGs you must have an understanding
+
+of Fair Value Gaps(FVGs)
+
+Fair Value Gap l
+
+>» On the most elementary level, FVGs are of 2 types only
+
+@ BIS! (Buyside Imbalance Sellside Inefficiency)
+
+@ SIBI (Sellside Imbalance Buyside Inefficiency)
+
+BISI
+Key Points
+» 3 candle pattern
+» Buyside Imbalance Sellside Inefficiency
+» Buyside was offered but sellside wasnt present causing inefficiency.
+»» Good BISI respect the Consequent Encroachment (CE)
+How to mark it?
+» Gap between the first candle high and third candle low.
+Examples Ahead
+
+wl
+
+Key Points
+» 3 candle pattern
+» Sellside Imbalance Buyside Inefficiency
+» Sellside was offered but buyside wasn't present causing inefficiency.
+»» Good SIBI respect the Consequent Encroachment (CE)
+How to mark it?
+» Gap between the first candle low and third candle high.
+Examples Ahead

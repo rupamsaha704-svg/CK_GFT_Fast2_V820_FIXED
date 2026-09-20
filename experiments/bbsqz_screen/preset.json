@@ -1,0 +1,31 @@
+{
+  "ea": "CK_BB_SQZ",
+  "trades_csv": "ck_bb_sqz_trades.csv",
+  "symbol": "XAUUSD",
+  "period": "M15",
+  "model": 1,
+  "execution_mode": 0,
+  "deposit": 5000,
+  "currency": "USD",
+  "leverage": 100,
+  "windows": [
+    { "id": "is",    "from": "2025.09.02", "to": "2026.03.31" },
+    { "id": "oos",   "from": "2025.01.02", "to": "2025.08.31" },
+    { "id": "is_h1", "from": "2025.09.02", "to": "2025.12.15" },
+    { "id": "is_h2", "from": "2025.12.15", "to": "2026.03.31" }
+  ],
+  "inputs": {
+    "SQ_Magic": 20260906,
+    "SQ_BBPeriod": 20,
+    "SQ_BBStd": 2.0,
+    "SQ_ATRPeriod": 14,
+    "SQ_SqLookback": 5,
+    "SQ_SqHitsMin": 3,
+    "SQ_SqRatio": 1.5,
+    "SQ_SLBufATR": 0.15,
+    "SQ_RR": 1.5,
+    "SQ_MaxTradesPerDay": 3,
+    "SQ_Lot": 0.01,
+    "SQ_MaxSpreadPrice": 0.60
+  }
+}

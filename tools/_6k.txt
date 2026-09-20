@@ -1,0 +1,28 @@
+=== $6,000 ACCOUNT re-validation (real ticks, 2025.10.01-2026.09.18) ===
+trades 272 (FIX 253 / DT 19) | win 25.4%
+NET 2022.11 on $6000 = 33.7% | FIX 656.63 / DT 1365.48
+(compare: $5k run net was 2239.56; FIX fixed-lot same $, DT pct-lot scales up)
+
+RULE AUDIT at $6k limits:
+ daily 5%=$300: worst realized day -250.09 (2026.09.02); days<=-300 = 0 []
+ conservative floating: worst 233.33 (2026-01-13); days>300 = 0
+ static floor $5400: min balance 5914.34 -> SAFE
+ funded 3%=$180: days floating>180 = 6
+
+INCOME (take @80%%, real-ticks basis):
+ per month ~$139 (~Tk 16037) | 6mo ~$837 | 12mo ~$1673
+ 12mo taka ~Tk 192449
+
+MONTHLY net (gross, account):
+  2025.10 : 915.99
+  2025.11 : 208.17
+  2025.12 : 147.19
+  2026.01 : 1204.55
+  2026.02 : -104.52
+  2026.03 : 398.09
+  2026.04 : -186.33
+  2026.05 : -37.95
+  2026.06 : 247.17
+  2026.07 : -271.97
+  2026.08 : -127.12
+  2026.09 : -371.16

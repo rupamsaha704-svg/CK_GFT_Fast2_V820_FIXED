@@ -1,0 +1,63 @@
+Quarterly Theory - Daye simplified
+1
+Quarterly Theory - Daye 
+simplified
+AMDX quarterly theory
+[Q1] A - Accumulation
+[Q2] M - Manipulation
+[Q3] D - Distribution
+[Q4] X - Reversal/Continuation dari fase sebelumnya
+Nb: Q2-Q3 adalah tempat entry terbaik untuk AMDX cycle 90 menit quarterly theory.
+or
+XAMD quarterly theory
+[Q1] X - Reversal/Continuation dari fase sebelumnya
+[Q2] A - Accumulation 
+[Q2] M - Manipulation
+[Q3] D - Distribution
+Nb: Q3-Q4 adalah tempat entry terbaik untuk XAMD cycle 90 menit quarterly theory.
+
+Quarterly Theory - Daye simplified
+2
+Quarterly cycle 90min
+18:00 - 00:00 [sesi Asia] 6 jam*
+00:00 - 06:00 [sesi London] 6jam*
+06:00 - 12:00 [sesi New york] 6jam*
+12:00 - 18:00 [sesi PM] 6jam*
+24 jam semua dijumlahkan
+setiap 6 jam akan dibagi  menjadi 4 cycle dan setiap cyclenya 90 menit
+Time 90min cycles
+Q1: 18:00 - 19:30 | Q2: 19:30 - 21:00 | Q3: 21:00 - 22:30 | Q4: 22:30 - 00:00 [cycle 
+sesi Asia]
+Q1: 00:00 - 01:30 | Q2: 01:30 - 03:00 | Q3: 03:00 - 04:30 | Q4: 04:30 - 06:00 [cycle 
+sesi London]
+Q1: 06:00 - 07:30 | Q2: 07:30 - 09:00 | Q3: 09:00 - 10:30 | Q4: 10:30 - 12:00 [cycle 
+sesi New york]
+Q1: 12:00 - 13:30 | Q2: 13:30 - 15:00 | Q3: 15:00 - 16:30 | Q4: 16:30 - 18:00 [cycle 
+sesi PM]
+Time daily quarters
+Q1: 18:00 - 00:00 | Q2: 00:00 - 06:00 | Q3: 06:00 - 12:00 | Q4: 12:00 - 18:00
+Time weekly quarters
+Q1: sunday 18:00 - monday 18-00 | Q2: monday 18:00 - tuesday 18:00 | Q3: 
+tuesday 18:00 - wednesday 18:00 | Q4: wednesday 18:00 - thursday 18:00
+Time monthly quarters
+Q1: minggu 1 | Q2: minggu 2 | Q3: minggu 3 | Q4: minggu 4
+Time yearly quarters
+Q1: JAN-MAR | Q2: APR-JUN | Q3: JUN-SEP | Q4: OCT-DES
+Nb: waktu lokal new york UTC-4
+
+Quarterly Theory - Daye simplified
+3
+Pairs rekomendasi untuk 90min cycles
+sesi Asia quarterly [pair mata uang AUD,JPY,NZD seperti usdjpy, audusd dll]
+sesi London quarterly [pair mata uang GBP & EUR seperti eurusd, gbpusd dll]
+sesi New york quarterly [pair indeks seperti nasdaq, s&p dll]
+sesi Pm quarterly [ pair indeks seperti nasdaq, s&p dll]
+Nb: perhatikan urutan waktunya + PD array key level [setup terbaik jika bereaksi dari 
+PD array]
+
+Quarterly Theory - Daye simplified
+4
+Contoh quarterly theory AMDX 90m cycles
+
+Quarterly Theory - Daye simplified
+5

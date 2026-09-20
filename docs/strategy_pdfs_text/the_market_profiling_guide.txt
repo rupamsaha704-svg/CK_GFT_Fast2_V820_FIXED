@@ -1,0 +1,2244 @@
+_amtrades
+THE MARKET PROFILING GUIDE
+overview
+1
+weekly profile prerequisite
+2 - 4
+weekly profile overview
+5 - 15
+classic expansion
+16
+TGIF video
+17 - 31
+consolidation reversal
+32 - 47
+midweek reversal
+48 - 49
+avoiding low-probability
+50
+weekly profile video
+51
+simplified protocol
+52
+daily profile prerequisite
+53 - 55
+daily profile overview
+56 - 74
+london reversal
+75 - 93
+new york manipulation
+94 - 110
+new york reversal
+111
+market profiling
+112
+master resources
+WEEKLY PROFILE PREREQUISITE
+ICT content
+2022 Mentorship
+base concept knowledge
+Market Maker Series Vol. 4
+applying weekly profile example
+Core Content – Defining Weekly Range Profiles 
+weekly profile overviews
+1
+CLASSIC EXPANSION
+profile overview
+TUE WED THU FRIMON
+2
+CONSOLIDATION REVERSAL
+profile overview
+TUE WED THU FRIMON
+3
+MIDWEEK REVERSAL
+profile overview
+TUE WED THU FRIMON
+4
+CLASSIC EXPANSION
+volume 1 – weekly profile
+5
+bullish classic expansion week
+6
+bearish classic expansion week
+7
+framework
+8
+economic calendar
+9
+monday protocol
+10
+negative condition
+11
+reversal structure
+12
+high-probability days
+13
+bullish TGIF setup
+14
+bearish TGIF setup
+15
+TGIF target
+16
+TGIF video
+_amtrades
+_amtrades
+_amtrades
+≥ H4 PDA [discount]
+MON - TUE
+THU - FRI
+TUE -THU
+O
+L
+H
+C
+DOL [opposing array]
+BULLISH CLASSIC EXPANSION
+weekly candle + hourly profile
+5
+_amtrades
+_amtrades
+≥ H4 PDA [premium]
+THU - FRI
+MON - TUE
+TUE -THU
+O
+H
+L
+C
+DOL [opposing array]
+BEARISH CLASSIC EXPANSION
+weekly candle + hourly profile
+6
+_amtrades
+_amtrades_amtrades
+_amtrades
+FRAMEWORK
+relevant [≥ H4] PD arrays
+7
+equilibrium
+premium
+discount
+external high
+BSL
+rejection block
+-RB
+order block
+-OB
+breaker block
+-BRK
+fair value gap
+-FVG
+external low
+SSL
+rejection block
++RB
+order block
++OB
+breaker block
++BRK
+fair value gap
++FVG
+MON - TUE engagement = bearish classic expansion
+MON - TUE engagement = bullish classic expansion
+8
+ECONOMIC CALENDAR
+forexfactory.com/calendar
+the economic calendar is a form of time
+pair with relevant [≥ H4] PD arrays to establish bias
+•  
+high-impact news = volatility
+speed and exaggerated manipulation do not invalidate the chart
+ideal expansion scenario: [MON] accumulation
+[TUE] manipulation
+≥ H4 PD array reversal
+high/low of week
+[WED – THU] expansion
+news volatility injections
+trade towards weekly draw
+[FRI] return into range
+follow the high-impact news manipulation and expansion in respect to [≥ H4] PD arrays
+•  
+weekly profile + economic calendar
+[≥ H4] PD arrays
+= time and price
+_amtrades
+_amtrades
+_amtrades
+MONDAY PROTOCOL
+rules + expectations
+9
+[1] avoid monday participation
+accumulation
+[2] study monday daily range
+or
+judas swing
+weekly range accumulation
+•  
+lacks high-impact news
+[consolidation]
+weekly range judas swing
+•  
+opposing direction to DOL
+[manipulation]
+DOL
+or
+A
+M
+D
+≥ H4 premium array
+TUE
+MON accumulation
+•  
+TUE manipulation [premium]
+high of week
+MON
+≥ H4 discount array
+MON judas swing
+•  
+MON reversal [discount]
+low of week MON
+wide range
+≥ H4 discount array
+A
+M
+D
+TUE
+MON accumulation
+•  
+TUE manipulation [discount]
+ low of week
+MON
+≥ H4 premium array
+MON judas swing
+•  
+MON reversal [premium]
+high of week
+MON
+wide range
+_amtrades
+_amtrades
+NEGATIVE CONDITION
+low-probability classic expansion weekly profile
+10
+[1] monday accumulation, tuesday expansion without manipulation
+[2] monday opening expansion towards weekly draw on liquidity, continuation without manipulation
+or
+or
+≥ H4 premium array
+TUE
+MON
+≥ H4 discount array
+TUE
+MON
+week open
+MON ≥ H4 premium array
+DOLMON
+week open
+≥ H4 discount array
+DOL
+no manipulation
+no high-timeframe PD array
+always = low-quality framework
+_amtrades
+_amtrades
+≥ H4 PDA [discount]
+REVERSAL STRUCTURE
+hourly change in state of delivery
+11
+≥ H4 PDA [premium]
+MON - TUE
+MON - TUE
++BRK
+-BRK
+bullish
+bearish
+MON – TUE
+≥ H4 discount array
+[engaged]
+•  
+H1-H4 candle close above breaker
+[change in state of delivery]
+= start bullish order flow
+MON – TUE
+≥ H4 premium array
+[engaged]
+•  
+H1-H4 candle close below breaker
+[change in state of delivery]
+= start bearish order flow
+_amtrades
+_amtrades
+DOL
+≥ H4 PDA
+12
+tuesday
+wednesday
+thursday
+4/5 rating
+•  
+expansion candidate
+potential reversal day
+use monday data
+bullish classic expansion
+5/5 rating
+•  
+ideal day of week within profile
+previously confirmed reversal
+bulk of weekly range expansion
+4.5/5 rating
+•  
+continuation setup to weekly draw
+london + new york am session
+potential reversal capping weekly range
+bearish classic expansion
+O
+O
+H
+H
+C
+C
+L
+L
+TUE
+WED
+THU
+≥ H4 PDA
+DOL
+range expansion
+TUE
+WED
+THU
+range expansion
+HIGH-PROBABILITY DAYS
+TUE - THU
+_amtrades
+_amtrades
+weekly objective
+BULLISH TGIF SETUP
+friday weekly range counter-trend
+T
+M
+W
+T
+MON - TUE
+week open
+or
+F
+[W] objective
+THU
+FRI
+THU
+[W] objective
+FRI
+internal
+external
+utilize SMT for confluence
+13
+_amtrades
+_amtrades
+BEARISH TGIF SETUP
+friday weekly range counter-trend
+or
+weekly objective
+T
+M
+W
+T
+MON - TUE
+week open
+F
+[W] objective
+THU
+FRI
+internal
+THU
+[W] objective
+FRI
+external
+utilize SMT for confluence
+14
+_amtrades
+_amtrades 0.30
+0.20
+TGIF TARGET
+fibonacci
+15
+T
+M
+W
+T F
+T
+M
+W
+T F
+0.20
+0.30
+high of week
+low of week
+high of week
+low of week
+target internal ≥ H1 PD arrays within 0.20 – 0.30 retracement of weekly range
+TGIF VIDEO
+3-step protocol
+3
+2
+1
+MON – TUE reversal
+expansive through thursday
+weekly objective achieved
+TGIF
+video link
+16
+CONSOLIDATION REVERSAL
+volume 2 – weekly profile
+17
+bullish consolidation reversal
+18
+bearish consolidation reversal
+19
+condition
+20
+following expansion : bullish
+21
+following expansion : bearish
+22
+continued consolidation : bullish
+23
+continued consolidation : bearish
+24
+framework
+_amtrades
+25
+pd array
+26
+economic calendar
+27
+weekly protocol
+28
+reversal structure
+29
+high-probability days
+30
+targets
+31
+olhc • ohlc
+FRI
+BULLISH CONSOLIDATION REVERSAL
+weekly candle + hourly profile
+17
+external range low
+≥ H4 PDA [discount] : confluence
+THU
+O
+L
+H
+C
+_amtrades
+_amtrades
+MON - WED
+DOL [opposing array]
+BEARISH CONSOLIDATION REVERSAL
+weekly candle + hourly profile
+18
+FRI
+≥ H4 PDA [premium] : confluence
+external range high
+THU
+_amtrades
+_amtrades
+MON - WED
+DOL [opposing array]
+O
+H
+L
+C
+_amtrades
+CONDITION
+daily price delivery
+19
+1
+2
+3
+daily expansion
+period of consolidation
+daily expansion
+larger range candles which leave displacement
+3 consecutive directional days (max expectation)
+ 
+daily consolidation
+smaller range candles which lack displacement
+can consolidate for any amount of time until manipulation
+trading within defined range (equilibrium)
+
+_amtrades
+_amtrades
+FOLLOWING EXPANSION
+bullish profile example
+20
+M T T
+W
+F
+previous expansion
+external low
+THU
+M
+T
+W
+previous expansion
+T
+F
+external low
+THU
+_amtrades
+_amtrades
+FOLLOWING EXPANSION
+bearish profile example
+21
+M T
+previous expansion
+external high
+THU
+W
+T
+F
+M
+T
+previous expansion
+W
+external high
+T
+THU
+F
+_amtrades
+CONTINUED CONSOLIDATION
+bullish profile example
+previous consolidation
+M
+T
+W
+external low
+THU
+T
+F
+22
+_amtrades
+CONTINUED CONSOLIDATION
+bearish profile example
+previous consolidation
+M T
+W
+T
+F
+external high
+THU
+23
+FRAMEWORK
+external consolidation range engagement
+24
+_amtrades
+_amtrades
+external consolidation range high [engineered buyside liquidity]
+external consolidation range low [engineered sellside liquidity]
+internal range liquidity
+avoid internal range
+THU
+THU
+daily consolidation protocol
+PD ARRAY
+reversal optional confluence
+25
+equilibrium
+premium
+discount
+_amtrades
+rejection block
+-RB
+order block
+-OB
+_amtrades
+fair value gap
+-FVG
+_amtrades
+rejection block
++RB
+order block
++OB
+_amtrades
+fair value gap
++FVG
+THU – pair with external consolidation range high [buyside]
+THU – pair with external consolidation range low [sellside]
+26
+ECONOMIC CALENDAR
+forexfactory.com/calendar
+the economic calendar is a form of time
+•  
+pair with external consolidated range to establish bias
+ideal profile scenario:
+follow the high-impact news manipulation and expansion in respect to consolidated range
+•  
+if MON – WED high-impact news unable to manipulate external range, anticipate potential consolidation reversal profile 
+[MON - WED]
+daily consolidation
+[THU] manipulation
+external range reversal
+[FRI] expansion continuation
+
+_amtrades
+WEEKLY PROTOCOL
+rules + expectations
+_amtrades
+[1] avoid monday participation
+high-resistance
+smaller range day
+•  
+lacks high-impact news
+[consolidation]
+[2] study tuesday and wednesday range
+assuming previous week expansion
+or
+continued consolidation T
+M
+W
+TUE + WED
+fail to engage relevant HTF PD arrays
+NO expansion week
+•  
+trade within internal range
+[consolidation]
+•  
+THU
+wait to observe external range manipulation
+     no manipulation = no participation
+     manipulation = profile confirmation
+27
+_amtrades
+_amtrades
+external consolidation range low [sellside]
+REVERSAL STRUCTURE
+change in state of delivery
+28
+external consolidation range high [buyside]
+THU
+THU
++BRK
+-BRK
+bullish
+bearish
+THU
+external consolidation range low
+[engaged]
+•  
+M15 – H1 candle close above breaker
+[change in state of delivery]
+= start bullish order flow
+THU
+external consolidation range high
+[engaged]
+•  
+M15 – H1 candle close below breaker
+[change in state of delivery]
+= start bearish order flow
+_amtrades
+4/5 rating
+•  
+expansion candidate
+reversal day
+speculating manipulation
+5/5 rating
+•  
+ideal day of week within profile
+previously confirmed reversal
+clear draw on liquidity
+thursday
+friday
+_amtrades
+bullish consolidation reversal
+bearish consolidation reversal
+range expansionrange expansion
+external low
+THU
+FRI
+external high
+THU
+FRI
+29
+HIGH-PROBABILITY DAYS
+THU - FRI
+TARGETS
+profile price objectives
+30
+_amtrades
+_amtrades
+consolidation range high
+consolidation range low
+equilibrium [0.5]
+BULLISH CONSOLIDATION REVERSAL
+•  
+targets
+[THU] equilibrium
+[FRI] consolidation range high
+BEARISH CONSOLIDATION REVERSAL
+•  
+targets
+[THU] equilibrium
+[FRI] consolidation range low
+_amtrades
+_amtrades
+OLHC • OHLC 
+weekly candle
+[O] near equilibrium
+H
+[L] manipulation
+C
+THU
+[H] manipulation
+THU
+L
+C
+[O] near equilibrium
+FRI
+FRI
+31
+consolidation range high
+bearish weekly draw
+bullish weekly draw
+consolidation range low
+MIDWEEK REVERSAL
+volume 3 – weekly profile
+32
+bullish midweek reversal [1/2]
+33
+bullish midweek reversal [2/2]
+34
+bearish midweek reversal [1/2]
+35
+bearish midweek reversal [2/2]
+36
+accumulation
+37
+retracement
+38
+following expansion
+39
+continued consolidation
+_amtrades
+40
+framework
+41
+economic calendar
+42
+weekly protocol
+43
+negative condition
+44
+reversal structure
+45
+high-probability days
+46
+intermarket analysis : bullish
+47
+intermarket analysis : bearish
+FRI
+BULLISH MIDWEEK REVERSAL [1/2]
+weekly candle + hourly profile
+32
+≥ H4 PDA [discount]
+WED
+O
+L
+H
+C
+_amtrades
+_amtrades
+MON - TUE
+DOL [opposing array]
+[accumulation]
+FRI
+BULLISH MIDWEEK REVERSAL [2/2]
+weekly candle + hourly profile
+33
+≥ H4 PDA [discount]
+WED
+O
+L
+H
+C
+_amtrades
+_amtrades
+MON - TUE
+DOL [opposing array]
+[retracement]
+FRI
+BEARISH MIDWEEK REVERSAL [1/2]
+weekly candle + hourly profile
+≥ H4 PDA [premium]
+WED
+O
+L
+H
+C
+_amtrades
+_amtrades
+MON - TUE
+DOL [opposing array]
+[accumulation]
+34
+FRI
+BEARISH MIDWEEK REVERSAL [2/2]
+weekly candle + hourly profile
+35
+≥ H4 PDA [premium]
+WED
+O
+L
+H
+C
+_amtrades
+_amtrades
+MON – TUE
+DOL [opposing array]
+[retracement]
+≥ H4 PDA [discount]
+≥ H4 PDA [premium]
+ACCUMULATION
+MON - TUE
+36
+M T W
+T
+F
+M T W
+T
+F
+MON – TUE accumulation
+MON – TUE accumulation
+WED
+WED
+bullish bearish
+
+≥ H4 PDA [discount]
+≥ H4 PDA [premium]
+RETRACEMENT
+MON - TUE
+37
+M
+T W
+T
+F
+M
+T W
+T
+F
+MON – TUE retracement
+MON – TUE retracement
+WED
+WED
+bullish bearish
+
+_amtrades
+FOLLOWING EXPANSION
+retracement profile example
+38
+M
+T
+T
+W
+Fprevious expansion
+WED
+_amtrades
+previous expansion
+M
+T
+T
+W
+F
+WED
+≥ H4 PDA [discount]
+_amtrades
+CONTINUED CONSOLIDATION
+accumulation profile example
+previous consolidation
+M
+T W
+T
+F
+39
+WED
+≥ H4 PDA [premium]
+_amtrades
+previous consolidation
+M
+T W
+T
+F
+WED
+_amtrades
+_amtrades
+_amtrades
+_amtrades
+FRAMEWORK
+relevant [≥ H4] PD arrays
+40
+equilibrium
+premium
+discount
+external high
+BSL
+rejection block
+-RB
+order block
+-OB
+breaker block
+-BRK
+fair value gap
+-FVG
+external low
+SSL
+rejection block
++RB
+order block
++OB
+breaker block
++BRK
+fair value gap
++FVG
+WED engagement = bearish midweek reversal
+WED engagement = bullish midweek reversal
+41
+ECONOMIC CALENDAR
+forexfactory.com/calendar
+the economic calendar is a form of time
+•  
+pair with relevant [≥ H4] PD arrays to establish bias
+ideal profile scenario:
+place emphasis on wednesday high-impact news within midweek reversal profile
+•  
+[observe]
+wednesday manipulation upon high-impact news release into ≥ H4 PD array
+= high-quality reversal for midweek reversal profile
+[MON - TUE]
+accumulation or retracement
+[WED] manipulation
+≥ H4 PD array reversal
+[THU - FRI]
+ expansion continuation
+
+_amtrades
+_amtrades
+_amtrades
+WEEKLY PROTOCOL
+rules + expectations
+_amtrades
+[1] avoid monday participation
+high-resistance
+smaller range day
+•  
+lacks high-impact news
+[consolidation]
+[2] study monday and tuesday range
+M T
+MON - TUE
+fail to engage relevant HTF PD arrays
+•  
+[1]
+accumulation 
+above ≥ H4 discount array
+below ≥ H4 premium array
+•  
+[2] 
+retracement
+down into ≥ H4 discount array
+up into ≥ H4 premium array
+42
+or
+retracement
+weekly range retracement
+•  
+opposing direction to DOL
+[manipulation]
+DOL
+M
+T
+NEGATIVE CONDITION
+unfavorable midweek reversal condition
+43
+T
+M
+week open
+DOL
+bullish profile anticipation 
+T
+M
+week open
+DOL
+MON - TUE
+two consecutive up-close daily candles
+•  
+trading towards upside weekly objective
+•  
+no retracement
+no accumulation
+no manipulation
+= no profile
+MON - TUE
+two consecutive down-close daily candles
+•  
+trading towards downside weekly objective
+•  
+no retracement
+no accumulation
+no manipulation
+= no profile
+bearish profile anticipation 
+_amtrades
+_amtrades
+≥ H4 PDA [discount]
+REVERSAL STRUCTURE
+hourly change in state of delivery
+44
+≥ H4 PDA [premium]
+WED
+WED
++BRK
+-BRK
+bullish
+bearish
+WED
+≥ H4 discount array
+[engaged]
+•  
+H1-H4 candle close above breaker
+[change in state of delivery]
+= start bullish order flow
+WED
+≥ H4 premium array
+[engaged]
+•  
+H1-H4 candle close below breaker
+[change in state of delivery]
+= start bearish order flow
+HIGH-PROBABILITY DAYS
+WED - FRI
+3.5/5 rating
+•  
+expansion candidate
+reversal day
+speculating manipulation
+5/5 rating
+•  
+ideal day of week within profile
+previously confirmed reversal
+bulk of range expansion
+wednesday
+thursday
+bullish midweek reversal
+bearish midweek reversal
+45
+4.5/5 rating
+•  
+expansion continuation to weekly draw
+london + new york am session
+capping weekly range
+friday
+_amtrades
+O
+H
+C
+L WED
+THU
+FRI
+≥ H4 PDA
+DOL
+range expansion
+_amtrades
+DOL
+≥ H4 PDA
+O
+H
+C
+L
+WED
+THU
+FRI
+range expansion
+DOL [opposing array]
+INTERMARKET ANALYSIS : BULLISH
+correlated pair conditional scenario
+46
+≥ H4 PDA [discount]
+BULLISH CLASSIC EXPANSION
+TM
+W
+T
+F
+correlated pair [1]
+≥ H4 PDA [discount]
+T
+M
+W
+T
+F
+BULLISH MIDWEEK REVERSAL
+correlated pair [2]
+2/5 rating
+•  
+weekly objective achieved
+•  
+[correlated pair]
+bullish classic expansion week
+= TGIF tendency
+potential return back into range
+friday
+
+INTERMARKET ANALYSIS : BEARISH
+correlated pair conditional scenario
+47
+DOL [opposing array]
+≥ H4 PDA [premium]
+BEARISH CLASSIC EXPANSION
+TM
+W
+T
+F
+correlated pair [1]
+≥ H4 PDA [premium]
+T
+M
+W
+T
+F
+BEARISH MIDWEEK REVERSAL
+correlated pair [2]
+2/5 rating
+•  
+weekly objective achieved
+•  
+[correlated pair]
+bearish classic expansion week
+= TGIF tendency
+potential return back into range
+friday
+
+AVOIDING CONSOLIDATION MIDWEEK EXPANSION
+filtering out low-probability profiles
+≥ H4 PDA
+_amtrades
+_amtrades
+MON - WED
+external consolidation range
+FRI
+no manipulation, no participation
+48
+AVOIDING SEEK AND DESTROY 
+filtering out low-probability profiles
+_amtrades
+_amtrades
+49
+reversals “non-specific” to day of week
+[low-probability]
+WEEKLY PROFILE VIDEO
+simplified protocol
+video link
+NOTE 
+This video is a simplified process of applying weekly profiles to gain daily 
+bias. It is outlined in a way which is effective and upholds the core reasons of 
+"why" weekly profiles work, but in an easy-to-understand format. While this 
+is not the limit of how to operate under weekly profiles, it is a structured 
+protocol that ensures the clearest read on price for any level of trader.
+video : introductory approach
+previous slides : refined understanding
+50
+SIMPLIFIED PROTOCOL
+step-by-step
+1 • avoid monday
+NO high-impact news • NO expansion • NO profile data 
+why?
+2 • economic calendar
+forexfactory.com/calendar
+AVOID trading days PRIOR to FIRST high-impact news event within week
+focus list: “FOMC Press Conference” and 8:30 red folder news
+3 • ≥ H4 framework : reversal + draw
+_amtrades
+_amtrades
+LIQ
+RB
+OB BRK
+FVG
+4 • weekly profile 
+_amtrades _amtrades_amtrades
+T
+M
+W T
+classic expansion
+midweek reversal
+consolidation reversal
+5 • H1 - [M30 refinement] change in state of delivery
+_amtrades
+_amtrades
+≥ H4 PDA
+CISD
+day of week
+≥ H4 PDA
+CISD
+day of week
+51
+DAILY PROFILE PREREQUISITE
+ICT content • daily profile
+2022 Mentorship
+base concept knowledge
+Market Maker Series Vol. 4
+applying daily profile example
+Core Content – Intraday Profiles
+daily profile overviews
+52
+LONDON REVERSAL
+profile overview
+NEW YORKLONDON
+53
+NEW YORK MANIPULATION
+profile overview
+NEW YORKLONDON
+54
+NEW YORK REVERSAL
+profile overview
+NEW YORKLONDON
+55
+LONDON REVERSAL
+volume 1 • daily profile
+56
+session time window
+57
+bullish london reversal
+58
+bearish london reversal
+59
+framework
+60
+time variable
+61
+london : bullish
+62
+new york : bullish
+63
+entry range : bullish
+64
+london : bearish
+65
+new york : bearish
+66
+entry range : bullish
+67
+change in state of delivery
+68
+negative condition
+69
+days of week
+70
+classic expansion
+71
+midweek reversal
+72
+consolidation reversal
+73
+olhc
+74
+ohlc
+Eastern Standard Time
+ (EST) 
+12:00
+SESSION TIME WINDOW
+asset conditional
+london
+•allassets
+new
+york
+•
+forex
+new
+york•indices
+56
+BULLISH LONDON REVERSAL
+daily candle + M15 profile
+_amtrades
+_amtrades
+london
+draw on liquidity 
+O
+L
+H
+C
+new york
+57
+≥ H1 PDA [discount] : engaged
+BEARISH LONDON REVERSAL
+daily candle + M15 profile
+_amtrades
+_amtrades
+london
+draw on liquidity 
+O
+H
+L
+C
+new york
+58
+≥ H1 PDA [premium] : engaged
+_amtrades
+_amtrades_amtrades
+_amtrades
+FRAMEWORK
+relevant [≥ H1] PD arrays
+equilibrium
+premium
+discount
+external high
+BSL
+rejection block
+-RB
+order block
+-OB
+breaker block
+-BRK
+fair value gap
+-FVG
+external low
+SSL
+rejection block
++RB
+order block
++OB
+breaker block
++BRK
+fair value gap
++FVG
+engagement above midnight opening price [ 2:00 – 5:00 ] 
+engagement below midnight opening price [ 2:00 – 5:00 ]
+59
+16:00
+[potential]
+expansion
+continuation
+TIME VARIABLE
+profile logic
+new york • forex 12:00
+[potential]
+expansion
+continuation
+7:00 10:00
+new york • indices
+8:30 12:00
+london
+2:00 5:000:00
+intraday reversal forms
+[≥ H1] PDA
+high-probability expansion time window
+majority of daily range
+high-probability expansion time window
+majority of daily range
+60
+LONDON : BULLISH
+reversal
+_amtrades
+≥ H1 PDA [discount]
+0:00
+protraction : judas swing
+london low
+midnight open
+bullish daily draw
+61
+_amtrades
+NEW YORK : BULLISH
+expansion
+≥ H1 PDA [discount]
+london low
+bullish daily draw
+intraday expansion
+bullish order flow
+62
+_amtrades
+ENTRY RANGE : BULLISH
+intraday retracement
+london reversal
+new york
+retracements towards london 
+reversal low become buying 
+opportunities during new york
+internal [M15 – H1] PD arrays
+optional : utilize fib levels
+63
+_amtrades
+LONDON : BEARISH
+reversal
+≥ H1 PDA [premium]
+0:00
+protraction : judas swing
+london high
+midnight open
+bearish daily draw
+64
+_amtrades
+NEW YORK : BEARISH
+expansion
+≥ H1 PDA [premium]
+london high
+bearish daily draw
+intraday expansion
+bearish order flow
+65
+_amtrades
+ENTRY RANGE : BEARISH
+intraday retracement
+london reversal
+new york
+retracements towards london 
+reversal high become selling 
+opportunities during new york
+internal [M15 – H1] PD arrays
+optional : utilize fib levels
+66
+CHANGE IN STATE OF DELIVERY
+london reversal
+_amtrades
+_amtrades
+≥ H1 PDA [discount]
+≥ H1 PDA [premium]
++ breaker
+- breaker
+bullish
+bearish
+london
+≥ H1 PDA : discount
+[engaged]
+•  
+M15 candle close above breaker
+M30 – H1 : high-quality
+[change in state of delivery]
+= start intraday bullish order flow
+london
+≥ H1 PDA : premium
+[engaged]
+•  
+M15 candle close below breaker
+M30 – H1 : high-quality
+[change in state of delivery]
+= start intraday bearish order flow
+67
+london
+london
+_amtrades
+_amtrades
+NEGATIVE CONDITION
+unfavorable profile expectation
+[1] london reversal : lacking ≥ H1 PDA engagement  
+[2] new york pm session : high-impact news release
+≥ H1 PDA [discount]
+≥ H1 PDA [premium]
+pre-release consolidation expectation
+68
+DAYS OF WEEK 
+profile anticipation
+TUE WED THU FRIMON
+classic expansion
+midweek reversal
+consolidation reversal
+the weekly profile guide
+expansion days : following reversal days 
+highest-probable (but not restricted to) profile occurrence
+_amtrades
+69
+_amtrades
+_amtrades
+CLASSIC EXPANSION
+profile anticipation
+T
+W
+T
+T
+W
+T
+classic expansion
+[bullish]
+tuesday
+wednesday
+thursday
+[bearish]
+classic expansion
+thursday
+wednesday
+tuesday
+70potential to form on friday
+_amtrades
+_amtrades
+MIDWEEK REVERSAL
+profile anticipation
+W
+T
+F
+W
+T
+F
+midweek reversal
+[bullish]
+thursday
+friday
+[bearish]
+midweek reversal
+friday
+thursday
+71
+wednesday
+wednesday
+_amtrades
+_amtrades
+CONSOLIDATION REVERSAL
+profile anticipation
+T
+F
+T
+F
+consolidation reversal
+[bullish]
+friday
+[bearish]
+consolidation reversal
+friday
+72
+thursday
+thursday
+OLHC
+daily candle overview
+_amtrades
+[O] midnight
+H
+[L] london
+C
+retracements + expansion
+london
+new york
+73
+bullish daily draw
+≥ H1 PDA [discount]
+OHLC
+daily candle overview
+_amtrades
+[O] midnight
+L
+[H] london
+C
+retracements + expansion
+london
+new york
+74
+≥ H1 PDA [premium]
+bearish daily draw
+NEW YORK MANIPULATION
+volume 2 • daily profile
+75
+session time window
+76
+bullish new york manipulation
+77
+bearish new york manipulation
+78
+framework
+79
+time variable
+80
+london : bullish
+81
+new york : bullish
+82
+entry range : bullish
+83
+london : bearish
+84
+new york : bearish
+85
+entry range : bearish
+86
+negative condition
+87
+economic calendar
+88
+days of week
+89
+classic expansion
+90
+midweek reversal
+91
+consolidation reversal
+92
+olhc
+93
+ohlc
+Eastern Standard Time
+ (EST) 
+12:00
+SESSION TIME WINDOW
+asset conditional
+london
+•allassets
+new
+york
+•
+forex
+new
+york•indices
+75
+BULLISH NEW YORK MANIPULATION
+daily candle + M15 profile
+_amtrades
+_amtrades
+≥ H1 PDA [discount] : confluence
+draw on liquidity 
+O
+L
+H
+C
+new york
+76
+london
+consolidation low
+BEARISH NEW YORK MANIPULATION
+daily candle + M15 profile
+77
+_amtrades
+_amtrades
+≥ H1 PDA [premium] : confluence
+draw on liquidity 
+O
+H
+L
+C
+new york
+london
+consolidation high
+_amtrades
+_amtrades_amtrades
+_amtrades
+FRAMEWORK
+relevant [≥ H1] PD arrays
+equilibrium
+premium
+discount
+external high
+BSL
+rejection block
+-RB
+order block
+-OB
+breaker block
+-BRK
+fair value gap
+-FVG
+external low
+SSL
+rejection block
++RB
+order block
++OB
+breaker block
++BRK
+fair value gap
++FVG
+engagement above midnight opening price [ new york ] 
+engagement below midnight opening price [ new york ]
+78
+16:00
+[potential]
+expansion
+continuation
+TIME VARIABLE
+profile logic
+new york • forex 12:00
+[potential]
+expansion
+continuation
+7:00 10:00
+new york • indices
+8:30 12:00
+london
+2:00 5:000:00
+continued consolidation range
+external consolidation manipulation
+= expansion
+external consolidation manipulation
+= expansion
+79
+LONDON : BULLISH
+consolidation
+80
+0:00
+_amtrades
+_amtrades
+≥ H1 PDA [discount]
+consolidation low
+midnight open
+bullish daily draw
+NEW YORK : BULLISH
+manipulation - expansion
+81
+_amtrades
+consolidation
+≥ H1 PDA [discount] : confluence
+A
+M
+D
+_amtrades
+ENTRY RANGE : BULLISH
+intraday retracement
+new york manipulation [low]
+retracements towards new york 
+manipulation low become 
+buying opportunities
+internal [M1 – M15] PD arrays
+1 – breaker
+2 – order block
+3 – fair value gap
+82
+1
+2
+3
+LONDON : BEARISH
+consolidation
+83
+0:00
+_amtrades
+_amtrades
+≥ H1 PDA [premium]
+consolidation high
+midnight open
+bearish daily draw
+NEW YORK : BEARISH
+manipulation - expansion
+84
+_amtrades
+consolidation
+≥ H1 PDA [premium] : confluence
+A
+M
+D
+_amtrades
+ENTRY RANGE : BEARISH
+intraday retracement
+new york manipulation [high]
+retracements towards new york 
+manipulation high become 
+selling opportunities
+internal [M1 – M15] PD arrays
+1 – breaker
+2 – order block
+3 – fair value gap
+85
+1
+2
+3
+_amtrades
+_amtrades
+NEGATIVE CONDITION
+unfavorable profile expectation
+[1] external consolidation range : lacking new york manipulation
+[2] new york pm session : high-impact news release
+pre-release consolidation expectation
+86
+consolidation high
+consolidation low
+NY
+NY
+87
+ECONOMIC CALENDAR
+forexfactory.com/calendar
+common profile formation:
+8:30 high-impact news driver
+•  
+accumulation prior to red folder event
+manipulation upon news release
+distribution to draw on liquidity
+profile : red folder news
+currencies:
+select based on pair traded
+focus list:
+CPI                 NFP                 FOMC                 PCE                 GDP                 PPI
+DAYS OF WEEK 
+profile anticipation
+TUE WED THU FRIMON
+classic expansion
+midweek reversal
+consolidation reversal
+the weekly profile guide
+normal occurrence : days following reversal
+potential occurrence : reversal days (high-impact news)
+_amtrades
+88
+_amtrades
+_amtrades
+CLASSIC EXPANSION
+profile anticipation
+T
+W
+T
+T
+W
+T
+classic expansion
+[bullish]
+tuesday
+wednesday
+thursday
+[bearish]
+classic expansion
+thursday
+wednesday
+tuesday
+89potential to form on friday
+_amtrades
+_amtrades
+MIDWEEK REVERSAL
+profile anticipation
+W
+T
+F
+W
+T
+F
+midweek reversal
+[bullish]
+thursday
+friday
+[bearish]
+midweek reversal
+friday
+thursday
+90
+wednesday
+wednesday
+_amtrades
+_amtrades
+CONSOLIDATION REVERSAL
+profile anticipation
+T
+F
+T
+F
+consolidation reversal
+[bullish]
+friday
+[bearish]
+consolidation reversal
+friday
+91
+thursday
+thursday
+OLHC
+daily candle overview
+_amtrades
+[O] midnight
+H
+[L] new york
+C
+92
+retracements + expansion
+london
+new york
+consolidation low
+bullish daily draw
+OHLC
+daily candle overview
+_amtrades
+[O] midnight
+L
+[H] new york
+C
+93
+retracements + expansion
+london
+new york
+consolidation high
+bearish daily draw
+NEW YORK REVERSAL
+volume 3 • daily profile
+94
+session time window
+95
+bullish new york reversal
+96
+bearish new york reversal
+97
+framework
+98
+london : bullish
+99
+new york : bullish
+100
+entry range : bullish
+101
+london : bearish
+102
+new york : bearish
+103
+entry range : bearish
+104
+negative condition
+105
+days of week
+106
+classic expansion
+107
+midweek reversal
+108
+consolidation reversal
+109
+olhc
+110
+ohlc
+Eastern Standard Time
+ (EST) 
+12:00
+SESSION TIME WINDOW
+asset conditional
+london
+•allassets
+new
+york
+•
+forex
+new
+york•indices
+94
+BULLISH NEW YORK REVERSAL
+daily candle + M15 profile
+_amtrades
+_amtrades
+≥ H1 PDA [discount]
+draw on liquidity 
+O
+L
+H
+C
+new york
+95
+london
+BEARISH NEW YORK REVERSAL
+daily candle + M15 profile
+O
+L
+H
+C
+96
+_amtrades
+_amtrades
+≥ H1 PDA [premium]
+draw on liquidity 
+new york
+london
+_amtrades
+_amtrades_amtrades
+_amtrades
+FRAMEWORK
+relevant [≥ H1] PD arrays
+equilibrium
+premium
+discount
+external high
+BSL
+rejection block
+-RB
+order block
+-OB
+breaker block
+-BRK
+fair value gap
+-FVG
+external low
+SSL
+rejection block
++RB
+order block
++OB
+breaker block
++BRK
+fair value gap
++FVG
+new york engagement : high of day
+new york engagement : low of day
+97
+LONDON : BULLISH 
+judas swing
+forming daily candle wick
+98
+_amtrades
+0:00midnight open
+bullish daily draw
+≥ H1 PDA [discount]
+[bullish]
+profile
+daily
+candle
+open
+low
+NEW YORK : BULLISH
+reversal - expansion
+99
+_amtrades
+london
+protraction
+≥ H1 PDA [discount] : engaged
+reversal
+expansion
+ENTRY RANGE : BULLISH
+intraday opportunity
+100
+_amtrades
+new york reversal [low]
+retracements towards new york 
+reversal low become buying 
+opportunities
+internal [M1 – M15] PD arrays
+1 – breaker
+2 – order block
+3 – fair value gap
+1
+2
+3
+[bullish]
+profile
+daily
+candle
+open
+low
+midnight opening price [buying below]
+≥ H1 PDA [discount] : engaged
+bullish daily draw
+LONDON : BEARISH
+judas swing
+101
+_amtrades
+0:00midnight open
+bearish daily draw
+≥ H1 PDA [premium]
+forming daily candle wick
+[bearish]
+profile
+daily
+candle
+open
+high
+NEW YORK : BEARISH
+reversal - expansion
+102
+_amtrades
+london
+protraction
+≥ H1 PDA [premium] : engaged
+reversal
+expansion
+ENTRY RANGE : BEARISH
+intraday opportunity
+103
+_amtrades
+new york reversal [high]
+retracements towards new york 
+reversal high become selling 
+opportunities
+internal [M1 – M15] PD arrays
+1 – breaker
+2 – order block
+3 – fair value gap
+1
+2
+3
+[bearish]
+profile
+daily
+candle
+open
+high
+midnight opening price [selling above]
+≥ H1 PDA [premium] : engaged
+bearish daily draw
+NEGATIVE CONDITION
+unfavorable profile expectation
+[1] ≥ H1 PDA : lacking new york engagement
+[2] new york pm session : high-impact news release
+pre-release consolidation expectation
+104
+_amtrades
+NY
+≥ H1 PDA [discount]
+_amtrades
+NY
+≥ H1 PDA [premium]
+DAYS OF WEEK 
+profile anticipation
+TUE WED THU FRIMON
+classic expansion
+midweek reversal
+consolidation reversal
+the weekly profile guide
+reversal day within weekly profile
+highest-probable (but not restricted to) profile occurrence
+_amtrades
+105
+_amtrades
+_amtrades
+CLASSIC EXPANSION
+profile anticipation
+T
+W
+T
+T
+W
+T
+classic expansion
+[bullish]
+tuesday
+wednesday
+thursday
+[bearish]
+classic expansion
+thursday
+wednesday
+tuesday
+106potential to form on friday
+_amtrades
+_amtrades
+MIDWEEK REVERSAL
+profile anticipation
+W
+T
+F
+W
+T
+F
+midweek reversal
+[bullish]
+thursday
+friday
+[bearish]
+midweek reversal
+friday
+thursday
+107
+wednesday
+wednesday
+_amtrades
+_amtrades
+CONSOLIDATION REVERSAL
+profile anticipation
+T
+F
+T
+F
+consolidation reversal
+[bullish]
+friday
+[bearish]
+consolidation reversal
+friday
+108
+thursday
+thursday
+OLHC
+daily candle overview
+109
+_amtrades
+O • midnight
+H
+L • new york
+C
+new york
+≥ H1 PDA [discount]
+bullish daily draw
+0:00
+ideal buys
+protraction : seeking discount array
+ideal entry : reversal – midnight open
+expansion : towards daily draw
+OHLC
+daily candle overview
+110
+_amtrades
+O • midnight
+L
+H • new york
+C
+new york
+≥ H1 PDA [premium]
+bearish daily draw
+0:00
+ideal sells
+protraction : seeking premium array
+ideal entry : reversal – midnight open
+expansion : towards daily draw
+MARKET PROFILING
+overview
+NOTE 
+The content within this PDF includes instructions on market profiling from 
+my own refined perspective; three weekly profiles and three daily profiles. 
+They offer as a tool for framing high-quality trades on an intra-week basis 
+with the goal of capturing expansion in low-resistance conditions. Patience is 
+rewarded for this style of trading.
+weekly profile : framing formation of weekly candle [bias]
+daily profile : framing formation of daily candle [entry]
+“ high-probability daily profile is anticipated when in line with a defined weekly profile,
+you cannot have one without the other “
+111
+14
+trade execution reviews
+classic expansion [TGIF] : new york reversal
+classic expansion : new york reversal
+midweek reversal : london reversal
+classic expansion : london reversal
+consolidation reversal : london reversal
+classic expansion [TGIF] : new york manipulation
+classic expansion [TGIF] : london reversal
+classic expansion : london reversal
+midweek reversal : london reversal
+consolidation reversal : london reversal
+consolidation reversal : new york reversal
+consolidation reversal : new york reversal [live video]
+consolidation reversal : new york manipulation
+classic expansion : new york manipulation
+classic expansion : new york reversal
+weekly profile recaps
+classic expansion
+classic expansion
+classic expansion
+consolidation reversal
+midweek reversal
+MASTER RESOURCES
+links
+_amtrades
+112
+ICT youtube content
+month 7 – weekly range profiles
+month 8 – intraday profiles
+month 8 – essentials to day trading
+market maker series vol. 2
+market maker series vol. 3
+market maker series vol. 4
+2022 mentorship
+related personal content
+economic calendar lesson
+simplified weekly profile protocol
+change in state of delivery
+weekly reversal framework
+path to learning ICT concepts
+selective trading days
+trading in consolidations
+monday price expectations
+high-probability conditions
+high-quality reversal structure
+weekly profile logic
+introduction standard deviations
+economic calendar rules
+twitter
+instagram
+youtube
+profile
+SOCIALS
+follow for more
+all content
+follower engagement
+simplifying concepts
+general links

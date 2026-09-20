@@ -1,0 +1,51 @@
+A Complete Guide.
+=
+
+2 = s
+What is Daily Bias?
+The Daily Bias is your roadmap. It tells you where price is likely to go for the day.
+Without it, you're just guessing.
+But with IRL & ERL, you gain the skill to anticipate price movements.
+Here's the foundation:
+
+J s
+Price ALWAYS does 1of 2 things:
+Seeks Liquidity (ERL - External Range Liquidity)
+Offers Fair Value (IRL - Internal Range Liquidity)
+INTERNAL AND EXTERNAL LIQUIDITY
+Internal Range Liquidity (IRL) is defined by Fair Value Gap (FVG)
+External Range Liquidity (ERL) is defined by Highs and Lows
+When External Range Liquidity is taken a FVG (IRL) becomes the next draw
+When a FVG is tagged an old low or old high (ERL) becomes the next draw
+WA
+WV
+
+ee | , | ERL
+. TIMEFRAME ALIGNMENT
+». Monthly IRL & ERL — Daily MMXM
+IRL i
+Weekly IRL & ERL - H4 MMXM
+PRICE ONLY DOES TWO THINGS Daily IRL & ERL — HiMMXM
+Draw To Old Highs And Lows H4 IRL & ERL — MIS MMXM
+Rebalance An imbalance Y A ee ae RE
+
+BONUSES
+Previous Daily Candle Confirmation
+Daily OHLC/OLHC/PO3
+Higher Timeframe SMT
+Vv
+
+DOL PDH
+PDH » PDH
+if price trades as aninside bar that
+if price closes chove previous day high (PDH), doesn’t take either PDHor PDL, it will
+the following day's bias will Larget POH; refer tothe previous candle for bias. If
+the previous day closed aboveits open,
+it will target PDH and vice versa. if
+price trades asc an outside bar that
+takes both PDH and PDL, but closes
+inside that range, no biasis assigned.
+PDH PDH
+DOL » PDL
+if price trades above its PDH but closes hack below it, WZ
+the following day's bias will target previous day low (PDL). WA

@@ -1,0 +1,103 @@
+FF an
+UWF <p Ze
+6007 \
+“i — Wc
+WOKS?
+\ Wess
+“ WA?
+. Woon?
+PEE WS Y ZZ
+eereeceee Ey
+
+What is a Precision Swing Point?
+A Precision Swing Point is a swing point which closed in different delivery states
+trough out closely correlated assets such as:
+NQ-ES-YM
+DXY - EUR/USD - GBP/USD
+ZB - ZN - ZF
+Gold - Silver - DXY
+
+v v
+NQ | ES 1
+
+Why do they matter?
+PSP ’‘s indicate the Terminus of a Price leg and therefore a potential Reversal or
+Retracement in Price, they work best in combination with Sequential SMT and have to
+power of confirming it.
+PSP's can confirm SSMT
+SSMT can confirm PSP's
+As we all know a Swing point is a 3 Candle Pattern, the same obviously applies to
+PSP ’s as well.
+The PSP will always be Candle 2 of the Swing point EVEN TOUGH it is not the swing
+point itself, this might sound confusing but it really is not.
+Something that really is important is that we see a crack in correlation between
+Candle 1 closing Price and Candle 3 Opening Price, this way you have 2 Cracks in
+correlation within the 3 Candle Sequence of the PSP which makes it High Probability.
+Some people call it TPD (Terminus Price Divergence) which was originally founded by
+@JacobSpeculates on X.
+But to keep its simple with all the different names we will just call it PSP.
+
+, 1/2
+
+How can we use PSP s?
+As i already said, a PSP is a 3 Candle Sequence that indicates the Terminus of a Price
+Swing.
+In combination with SSMT we can get very precise as i already said, a PSP is a 3
+Candle Sequence that indicates the Terminus of a Price Swing.
+PSP ’s on different Timeframes can confirm SSMT of different Cycles, for example a
+Daily Cycle SSMT can be confirmed with a 15min PSP but here are the other Cycles
+and Timeframes:
+Yearly Cycle - Weekly PSP
+Monthly Cycle - 4H PSP
+Weekly Cycle - 1H PSP gut ‘é psp »)
+Daily Cycle - 15min PSP VV
+90min Cycle - Smin PSP
+Micro Cycle - Imin PSP
+
+zs 2/2
+How can we use PSP s?
+We can also Confirm a PSP with SSMT by using the 3 Candle Sequence again.
+A PSP has a lot of Liquidity above and below it, therefore it is ideal for a potential turtle
+soup and when i say turtle soup i mean SSMT because we know that SSMT reveals
+true soups.
+So what we would like to see is SSMT between the Candles of the Swing Formation,
+for example SSMT between Candle 1 (C1) and Candle 2 (C2) to anticipate a
+Continuation in Candle 3 (C3) or we could see a SSMT between C2 and C3.
+In this example you can see the Daily Chart with a PSP and SSMT between C1 and C2
+which caused a expansion in C3.
+The fact that we had SSMT between Candle 1 and Candle 2 indicated that we wont
+see another SSMT
+from Candle 2 to
+Candle 3.
+pe
+This is called a &
+Pre-Defined SMT.
+If we dont have that
+C1 to C2 SSMT we can
+Expect SSMT between
+C2 and C3.
+
+Timebased PSP s
+There are PSP that form at specific Times that are the Highest Probability because
+they overlap Quarters.
+What do ij mean with that?
+Within the 3 Candle Sequence we will not always see Quarter overlap between the
+Candles.
+For example if we see a 1H PSP at 8:00 AM we know that the next 1H Candle opens at
+9:00 AM what does also begin at 9:00 AM?
+Q3 of the NY Session.
+So the 8:00 Candle represents Q2 of the NY Cycle and the 9:00 Candle represents Q3
+of the NY Cycle so if we now see SMT between 8:00 and 9:00 we will most likely see a
+90min SSMT, this is so important because we have a lot of Liquidity above and below
+PSP's.
+So in general if we see PSP ’s that represent Quarters we get a High Probability
+Sequence.
+Here are some TF PSP's that you can focus on: . .
+4H PSP - 2:00 =
+i
+1H PSP - 8:00 i" i"
+|
+You can also use that for Weekly and Daily PSP’s My,
+because each day and each week represents a [
+Weekly and Monthly Quarter. |
+Q2 Q3

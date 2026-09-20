@@ -1,0 +1,150 @@
+LOTUSXBT TRADING MODEL
+C R Y P T O  T R A D I N G  U S I N G  P R I C E  A C T I O N
+@ L O T U S _ X B T
+   A guide to how i trade per the:
+ICT Market Maker Buy/Sell Model
+                           +
+  ICT 2022 YT Mentorship Model
+All credits go to ICT for aiding in development of this Trading Model. All concepts 
+used here are based on concepts taught by ICT.
+Price moves from:
+Consolidation -> Expansion -> HTF POI Sweep -> Smart Money Reversal 
+(SMR) -> Return to the original consolidation
+ 
+ 
+The Market Maker Buy/Sell Model
+Smart Money Reversal
+A Smart Money Reversal (SMR) can occur in 2 ways;
+ - Liquidity Raid (Turtle Soup)
+ - Failure Swing
+ 
+ 
+ 
+Directional Bias & Trading Framework
+ Directional Bias is determined via the Draw on Liquidity (DOL)
+The DOL will be either:
+- An Liquidity Pool: Buy/Sell Side Liquidity
+- An Imbalance
+Directional Bias will be to take trades in the direction of the DOL.
+ 
+Weekly: 
+- What is the market most likely to draw towards? 
+ - Is there an imbalance or liquidity pool?
+This sets the initial bias for the week.
+ 
+Daily:
+- Where are the liquidity pools price can seek?
+- The draw on liquidity for the most part is found on the Daily chart.
+ 
+ 
+ 
+Credit: ICT
+Premium/Discount  & Dealing Ranges
+If bias is bearish, we seek to enter shorts in the premium of the current 
+trading range.
+If bias is bullish, we seek to enter longs in the discount of the current 
+trading range.
+ 
+ 
+ 
+Dealing Ranges Notes - By @Fytte
+ICT Youtube Video: Dealing Ranges
+Created after a run of buy/sell side liquidity
+In premium of the price leg that broke structure if bias is bearish or 
+in discount of the price leg that broke structure if bias is bullish
+During NY/Asia/Euro Session
+1.
+2.
+3.
+The optimal FVG:
+FVGs are an area of liquidity. Price delivers to this area to pick up 
+liquidity and distribute this liquidity to willing buyers/sellers
+above/below old highs/lows.
+ 
+ 
+ 
+Fair Value Gaps
+Sessions
+Increasing correlation with BTC and TradFi markets recently means it 
+makes more sense to trade 'Equity sessions'.
+Morning Session:
+8:30AM-12:00PM EST (UTC-New York on Tradingview)
+Afternoon Session:
+1:00PM - 4:30 PM EST (UTC-New York on Tradingview)
+ 
+Before 8:30AM mark out key highs/lows/for a stop hunt or FVGs.
+At/After 9:30AM open, wait for a raid of Liquidity (either FVG/Old 
+highs/low) and a displacement above/below the liquidity pool.
+Entry at FVG targeting an opposing POI. Preferrable entry timeframe 
+M1-M5.
+1.
+2.
+3.
+Refer to NY Session charts for examples.
+NY Session Process
+Timeframes
+Monthly -> Daily
+Weekly -> H4
+Daily -> M15/H1
+H4 -> M5/M15
+H1 -> M1-M5
+M15 -> M1-M5
+1.
+2.
+3.
+4.
+5.
+6.
+Process
+     1.   Establish Bias/Identify Draw on Liquidity
+2.  High time frame (HTF) Draw on Liquidity is taken. Either or both:
+   - Buy/Sell Side Liquidity Raid: HTF raid of old high/low
+ 3. Low Time Frame Entry:
+   -Wait for Price to fall below the BSL/SSL/FVG level.
+  - MMXM
+  - SMR + MSB + Return to FVG
+4. Take Profit targets:
+  -BSL/SSL resting above/below consolidation points along the MMXM 
+curve
+  -HTF Fair Value Gaps
+Process Flowchart
+Checklist
+Examples
+Annotated Chart Examples
+Tips
+Before the Daily/Weekly open, mark out previous day/week highs/lows, 
+then wait on LTF for possible entries.
+If there are multiple FVGs within the price leg that broke structure, use 
+the Fib tool to mark out the premium/discount of that price leg, and set 
+orders in the FVGs close to the 0.5/equilibrium point. 
+IWhen trading Altcoins, it helps to be in sync with BTC. If an altcoin 
+breaks structure but BTC price action is indicating the opposite, i often 
+wont take the altcoin trade.  Your FVG/Orderblock entry on the altcoin 
+has a low chance of holding if BTC is indicating a different bias.
+Twitter Thread on Market Structure/Bias:
+How to Determine Bias
+Relevant Links
+- ICT Course of Study
+ 
+ 
+ 
+- Market Maker Model Youtube Playlist
+ 
+ 
+ 
+- ICT 2022 Youtube Mentorship
+ 
+ 
+ 
+- Chart Examples
+ 
+ 
+ 
+- NY Session Charts BTC
+ 
+ 
+ 
+- Braveheart PDF Notes
+ 
+ 
+ 

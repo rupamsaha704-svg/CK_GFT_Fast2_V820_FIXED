@@ -1,0 +1,33 @@
+External & Internal Range Liquidity
+1
+External & Internal Range 
+Liquidity
+TIME FRAME ALIGNMENT
+1. Monthly levels > Daily structure
+2. Weekly levels > H4 structure
+3. Daily levels > H1 structure
+DEFINING EXTERNAL & INTERNAL RANGE LIQUIDITY
+1. External Range Liquidity [ERL] is defined by highs or lows.
+2. Internal Range Liquidity [IRL] is defined by Fair value gaps.
+When external range liquidity is taken a FVG [IRL] becomes the next draw
+When a FVG is tagged an old low or old high [ERL] becomes the next draw
+PRICE ONLY DOES TWO THINGS
+1. Draws to old highs and lows
+2. Rebalances an Imbalance
+
+External & Internal Range Liquidity
+2
+
+External & Internal Range Liquidity
+3
+
+External & Internal Range Liquidity
+4
+case study internal range liquidity to external range liquidity
+
+External & Internal Range Liquidity
+5
+
+External & Internal Range Liquidity
+6
+case study external range liquidity to internal range liquidity

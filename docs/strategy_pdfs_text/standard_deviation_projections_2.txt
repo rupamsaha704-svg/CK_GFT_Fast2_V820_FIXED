@@ -1,0 +1,232 @@
+LUMI T R A D E R S 
+STANDARD DEVIATIONS PROJECTIONS
+LumiTraders 
+LumiTraders 
+Basic explanation of Standard Deviations is a potential target of MMXM. In other words,
+we use STDV to anticipate a zone of reversal or retracement.
+There are different types of STDV projections levels that I use:
+Accumulation --> Manipulation (Credit to DexterLab)1.
+Manipulation --> Distribution (Classic)2.
+Impulse Leg3.
+Time Distortion4.
+Measuring Gap5.
+LUMI T R A D E R S 
+ACCUMULATION LEG
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+Accumulation is where "smart money," accumulate positions to set up framework for
+distribution phase. During this phase, price action usually range-bound, with low
+volatility and relatively small price movements. 
+We can see accumulation (consolidation) above/below or near opening price.
+In Accumulation phase, we see consolidation where a lot of liquidity is generated and
+then we see a fake move (manipulation) to clear all the liquidity and then SMR. 
+LUMI T R A D E R S 
+ACCUMULATION
+MANIPULATION
+DISTRIBUTION 
+HTF PDA
+MANIPULATION
+DISTRIBUTION 
+DISTRIBUTION
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+Standard Deviation: Accumulation
+Phase
+During the Accumulation, the
+lowest/highest obvious and visible
+range measured from the low/high
+to the high/low will project the
+Manipulation. 
+Note: 2-2.5 Standard Deviation
+zone is used to anticipate
+manipulation.
+Credit to DexterLab LUMI T R A D E R S 
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+4h SSL
+Yes, you can trade the move from consolidation to the HTF level or aim for 2 and 2.5STD
+range.
+What is the best entry for this?
+The best entry will be the change in the state of delivery/OB that was formed near 50% of
+this consolidation. 
+We may see that price may break below consolidation and immediately back to the range.
+Most of the time we see this quick retracement back to the range to retest the change in
+the state of delivery near 50% of accumulation. 
+But it doesn’t mean we need to wait for the break above/below consolidation to retest
+this OB! This retest may happen within consolidation.
+LUMI T R A D E R S 
+Can I trade the move from consolidation?
+
+MANIPULATION LEG
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+Manipulation is where smart money engineers price moves to create liquidity. 
+They do this by running price above or below the accumulation phase. 
+In other words, manipulation is where fake move occurs in the opposite direction of a
+key HTF PDA. 
+Basically, it is the wick (high/low) that is developing.
+LUMI T R A D E R S 
+As I said, the Manipulation usually occurs between 2-2.5 Standard Deviations range of consolidation leg
+projection. 
+How do I know when this manipulation phase has finished? Think in terms of MMXM. Always!
+1. HTF level
+2. LTF CISD 
+3. LTF Market Structure Shift
+4. SMT Divergence (optional)
+Ideally within 2 and 2.5STDV range!
+IN ORDER TO CONFIRM A TRANSITION FROM ONE PROGRAM TO ANOTHER ONE, WE MUST HAVE HTF
+LEVEL, LTF CISD AND LTF MSS AND ONLY AFTER THIS I CAN DRAW MANIPULATION LEG PROJECTIONS. 
+I WILL USE THE VERY LAST LEG BEFORE SMR CONFIRMED BY CISD AND MSS. THIS LEG WIL BE MY
+MANIPULATION LEG AND THIS RANGE PREFERABLY WITHIN 2 AND 2.5STDV RANGE.
+LUMI T R A D E R S 
+When I use standard deviation projections, I must understand the specific instrument I am trading.
+For example, the projections for ES (E-mini S&P 500) will be completely different from those that I
+use for NQ (Nasdaq-100), CL (Crude Oil), DXY (US Dollar Index), the crypto market, FOREX, etc.
+LUMI T R A D E R S 
+FOR ES:
+I WANT TO SEE SMR FROM HTF PDA. 
+After I found my MANIPULATION LEG, I am going to use FIB RETRACEMENT tool with 1, 1.5, 2, 3,
+and 4 levels. ES loves rounded numbers!
+The range between 1 and 1.5STDV will be my RETRACEMENT RANGE. I will be interested in the
+retracement to the breaker block and it must be breaker block only! 
+After price reached the breaker block on the same time frame where we measured our
+manipulation leg, I expect to see continuation of the move to the 2STDV and this level will be a
+key level for us. If we are still below/above HTF PDA, I will consider 2STDV as my partial level
+only and will aim for 4STDV.
+At the range between 2 and 3STDV I will expect to see another retracement (once again, I will
+consider retracement from this range only in case ES still did not take HTF PDA) to the FVG that
+was formed around 1 and 1.5STDV range and once we reach this FVG, this is where I will be
+interested in moving my SL!  My TP at this point will be 4STDV. LUMI T R A D E R S 
+HTF LEVEL
+HTF LEVEL
+LUMI T R A D E R S 
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+FOR NQ, DXY, GOLD, OIL AND ANY OTHER INSTRUMENTS I USE IT IN A BIT DIFFRENT WAY:
+Same idea with manipulation leg confirmed by CISD and MSS but my interest is STDV level will
+start once price reaches the range between 2.25 and 2.5STDV.
+THIS RANGE IS USUALLY A PART OF 2ND STAGE OF RE-ACCUMULATION / RE-DISTRIBUTION.
+This means that we will expect to see time distortion at this range that will be a final setup for us
+to finish MMXM. 
+Between 2.25 and 2.5STDV I want to see consolidation that finally will offer run below/above this
+consolidation low/high. With this run I will wait for IFVG formation to enter my trade as a part of
+2nd stage as i mentioned above.
+Ideally, when it run distortion high or low, I want to see run to the FVG that was formed inside the
+range between 1 and 1.5STDV. 
+LUMI T R A D E R S 
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+LUMI T R A D E R S 
+Good invalidation sign of the manipulation leg for me is when price left the range between 1 and
+1.5STDV after it retraced from 2.25 and 2.5STDV range.
+Once again, this invalidation also comes from HTF PDA. What do I mean by this? 
+This means that HTF PDA is much more important than STDV levels. If price reached any HTF level
+say at 1.5STDV and reversed, we must start considering potential SMR from that level even if it
+reversed from 1.5STDV!
+LUMI T R A D E R S 
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+TIME DISTORTION
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+LUMI T R A D E R S 
+WHAT IS TIME DISTORTION?
+Time Distortion - the price consolidation. As I have already said, time distortion will be the part of
+2nd stage of re-accumulation / re-distribution.
+One common mistake we make is thinking that price is offering MSS and we look for a trade
+considering this as 2022 model but instead we see fake move down/up (below distortion low/high)
+and then reversal and delivery to the HTF level to complete MMXM. 
+L U M I
+T R A D E R S
+L U M I
+T R A D E R S
+Time Distortion
+L U M I
+T R A D E R S
+Important to understand that with this time distortion we see MMs accumulating longs/shorts to
+complete the move.
+You will notice that most of the time we will see price is slowing down near the range between 2.25
+and 2.5STDV. This is where we don’t need to feel FOMO. Much more important is to understand
+that TIME will offer final move.
+We must wait for the break below/above distortion to consider the trade!
+LUMI T R A D E R S 
+For intraday trading, time distortion typically occurs during the quarterly shift between 10:30 AM
+and 12:00 PM, or in the second half of the Q2 (90-minute) PM session from 2:15 PM to 3:00 PM.
+The specific timing depends on the type of time manipulation in play. I explained this in detail in
+my Po3 video!
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+Now we know that time distortion usually occurs near 2.25 and 2.5STDV range of manipulation leg
+projection.
+If price is still below/above HTF PDA, we will get retracement from 2.25 and 2.5STDV (if reached
+HTF PDA, we will get reversal!). 
+This retracement will deliver us to the range between 1 and 1.5STDV and ideally we want to see
+price reaches BISI/SIBI inside this range.
+Once we got this break below/above distortion low/high, we can consider this as another
+manipulation. This manipulation is a part of 2nd stage of re-accumulation/re-distribution! 
+We want to use entire leg down/up that broke distortion low/high and project 2STDV move from
+there. 
+Most of the time this 2STDV move will line up with 4STDV of manipulation leg but I usually use it as
+my additional confirmation for my TP.
+LUMI T R A D E R S 
+4STDV MANIPULATION LEG
+2STDV TIME DISTORTION
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+IMPULSE LEG
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+Impulse Leg Projections is a just conservation projections and I use it when we have pretty big
+manipulation leg. 
+I use the very first move up/down after SMR was confirmed and this move up/down must be
+before first retracement. After this I measure this move exactly in the same way as I do with
+manipulation leg.
+But you will not see time distortion at the range between 2.25 and 2.5STDV. Most of the time it will
+be near 1 and 1.5STDV range. This is where you will see formation of the 1st stage of accumulation
+or distribution.
+Once again, I use this only in case I see that we have pretty big manipulation leg and since I am
+not swing trader, I look for the conservative target that will be realistic to reach the same day.
+LUMI T R A D E R S 
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+MEASURING GAP
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+WHAT IS MEASURING GAP?
+A measuring gap (MG) is a FVG that forms at the 50% of the implied range. 
+This FVG typically appears as a pretty big range FVG.
+I usually consider the projection of the measuring gap as my target for MMXM.
+ONCE AGAIN, the MG is the FVG located at the midpoint (50%) of the implied dealing range and
+this is a part of the second stage of re-accumulation or re-distribution.
+To get the measuring move, I use the low/high where SMR occurred, along with the top/bottom of
+the measuring gap. The 100% move from this measurement becomes my target for MMXM.
+Usually we want to see this FVG as unfilled FVG. But I am ok to keep MG valid even when price
+tested it but only if it is IOFED.
+LUMI T R A D E R S 
+LUMI T R A D E R S 
+L U M I
+T R A D E R S
+LUMI T R A D E R S 
+LUMI T R A D E R S 

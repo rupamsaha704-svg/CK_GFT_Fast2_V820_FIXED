@@ -1,2 +1,0 @@
-﻿FILE=20260901.log
-GQ	3	16:50:38.201	Experts	automated trading is disabled because the account has been changed

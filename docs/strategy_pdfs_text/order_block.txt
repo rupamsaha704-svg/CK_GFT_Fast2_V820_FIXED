@@ -1,0 +1,60 @@
+Order Block An Order Block is a candlestick that initiated a move due to the manipulation of the market maker. Up move or down move began with it, and therefore a large number of limit orders of market makers are concentrated around the OB. The logic of an order block is that a major player moves the price up or down in search of liquidity, actually blocking their positions in the OB area and making them unprofitable. To close a trade in the zone of interest, they need the price to return to the order block, after which it will continue to move in the opposite direction. 
+ There are two types of order blocks: 1. Bullish order block: This block is determined by move down, followed by price going up. 2. Bearish order block: This block is determined by move up and then price goes down. For traders, order blocks are necessary for placing limit orders for entry and setting stop losses. It increases the win rate, as it helps to comply with risk management, as well as to open a position more accurately. The correctness of the input depends on the correctness of the block drawing. Why Order Blocks Work? 
+ 
+
+Order Blocks work but only if you know how to correctly identify liquidity in the market. On their own, the order blocks have no practical application, since most of them immediately break when activated (price came back to that OB). It is important to be able to initially determine the direction of the market, and only then look for an entry point. Why does the price bounce off OB? OB is the average price of a big player, if the price goes down below the bullish OB or goes up above the bearish OB, then the big player will be at a loss.  
+ Order Blocks are based on the lack of market liquidity at the moment when smart capital needs to open a position. As a result, the market maker opens positions in both directions, creating artificial counter liquidity in order to fill the required position volume and deliver the price in the direction it needs. 
+ 
+
+ MITIGATION OF THE ORDER BLOCK An order block can be used by traders as a tool for opening a position, since the logic of forming such a model includes the need to mitigate open positions. Mitigation - the process of closing unprofitable positions with smart capital. Since the formation of an order block implies the opening of positions in both directions and the subsequent delivery of the price in a specific direction, smart money is faced with the fact that they still have open positions that were used to fill the main volume. Accordingly, after the price has been delivered and the main position has been distributed, the market will most likely try to test the order block, since the market maker is interested in closing its unprofitable positions at breakeven - the prices where they were opened.  How to Find Order Blocks Order blocks need to be looked for only at the highs and lows of the market. You should immediately understand that these are reversal places, where exactly it will form, you can only guess in advance. Your task is to wait for it to form, and then enter the trade when the OB is retested. 
+ 
+
+ Mean threshold – is 50% level of the total range of the order block; we expect price to respect this level.  The Order Block is validated when the high of the lowest down-close candle or the low of the highest up-close candle is traded through by a more recently formed candle. Ideally the best OB will not see the price trade down below the midway point (mean threshold) of the entire body of the candle (bearish). We do NOT use wicks; we measure from the open to the close on the down candle. We use body because wicks can contain the pure data as everyone uses different brokers/exchanges this can make wicks unreliable at times but it is discretionary – wicks can be used. Price may run away from the OB if it is valid. Often there is a strong reaction so you need to be patient for it to retrace its move and retest the OB. There is an indication that there is a displacement in the marketplace. There is also the evidence in price action that there is institutional sponsorship behind the move. Displacement may also leave behind another POI, the FVG.  Detecting First Order Blocks: Break of Previous Momentum: An order block is the highest candlestick in the direction of the momentum and opposite to the reversal. It represents the last push of candlesticks in the momentum direction. By identifying the break of previous momentum, we can confirm the presence of an order block. Differentiating Valid and Invalid Order Blocks: Valid order blocks are backed up by smart money and liquidity, making them reliable for trading decisions. On the other hand, invalid order blocks lack the necessary conditions and should not be considered for trading. 
+
+ Validity of Order Blocks The orderblock is validated when the high of the lowest down close candle (for a bullish order block) or the low of the highest up close candle is traded through (for a bearish order block) by a more recently formed candle. Ideally the best bullish orderblocks will not see price trade below the mid-point of the down-close candle, or trade above the up-close candle for the bearish orderblock. 
+ Impact of price movement on order block validity: Order blocks are the last push of candlesticks in the direction of momentum and opposite to the reversal. They serve as trade targets for Central Banks and also indicate the accumulation of orders in the market. The first and last order blocks in a momentum are considered valid. Liquidity areas and their significance: Liquidity areas, also known as liquidity zones, are where market makers collect liquidity. These areas are crucial as they can impact the price movement. By identifying these areas, traders can gain insights into the intentions of market makers and make profitable trades. When price reaches this area, it collects liquidity before making its next move. Retail traders often set their stop orders in this area. 
+
+I usually consider liquidity area between 2 OBs close to each other: 
+ Validity of order blocks based on liquidity collection: To determine the validity of an order block, four conditions must be met. Firstly, the order block should be supported by smart money and liquidity. Secondly, it should be the highest candlestick in the direction of momentum and opposite to the reversal. Thirdly, it should serve as a target for Central Banks. Lastly, it should not have a significant correction afterwards. Entry and Risk:  When price impulsively moves away from the bullish/bearish OB, it may retrace after the displacement which can offer a buying or selling opportunities as price returns to the open of the bullish/bearish OB candle. Target the buy stops above/sell stops below the marketplace as your first target profit or full target profit. The low of the Bullish OB or high of the Bearish OB is a relatively safe stop loss place. Bullish OB: 
+ 
+
+ 
+ 
+ 
+ 
+
+ Bearish OB: 
+ 
+ 
+ 
+
+ 
+ Order Block vs Breaker Block The LAST BULLISH or BEARISH candle before an IMPULSE up or down, represent Order Block. Order Blocks are one type of supply and demand on the market, you can expect them to act as a support or resistance depending on the impulse after them. OB is where larger players have orders sitting in wait for the price to return to a level they are interested in, so that's how they act as strong supply or demand areas. The last bearish candle before an impulse up is a BULLISH OB. The last bullish candle 
+ 
+
+before an impulse down is a BEARISH OB. Breaker is an OB that fails to hold and the price finally breaks through it. BULLISH BREAKER, when a bearish OB fails to hold as resistance and the price jumps above it, we expect that area to act as support now vice versa with BEARISH BREAKER, when a bullish OB fails to hold as support and the price breaks it to the downside, we expect that area to act as resistance now. Characteristics of High Probability Order Blocks - Forming at a key level: High probability order blocks tend to occur at key levels in the market, such as previous swing highs or lows, major liquidity pool levels, or areas where significant buying or selling activity has taken place. OBs push the price into a liquidity pool causing a purge on stops – an up-close candle that pushes the price into buy stops when bearish or a down-close candle that pushes the price into sell stops when bullish. Again, bullish OBs in a buy program to support the price higher to a DOL above market price and bearish OBs in a sell program to support the price lower to a DOL below market price. When we are bullish, down-close candles will act as a roadblocks – when the price moves down into OB and support the price higher. When we are bearish, up-close candles will act as a roadblocks – when the price moves up into OB and support the price lower. - Short-term liquidity pool: Bullish order blocks typically form leaving a short-term low liquidity pool above them, while bearish order blocks form leaving a short-term high liquidity pool below them. These liquidity pools can be the result of stop loss orders being triggered. - Pushing price into liquidity pool: Order blocks are created when price is pushed into a liquidity pool, causing a surge in buying or selling activity. This can be observed through up-close candles that push price into buy stops when bearish, or down-close candles that push price into sell stops when bullish. 
+ 
+  [Weekly chart] 
+ [4h chart] 
+ 
+ 
+
+ [1h chart] 
+ [15m chart] Reclaimed Order Block When price is dropping and we see a little displacement to the upside, that’s smart money with new accumulation of orders of long positions. Then when we get to the HTF PD array that’s where the impulsive price action to the upside starts. A lot of people try to get involved in those early rallies while smart money is accumulating end, they end up getting stopped out. 
+ 
+ 
+
+Bullish Reclaimed Order Block – is a candle or bar that was previously used to Buy Price and a short-term bounce confirms minor displacement. In the Buy Side of Curve – these “Old” blocks will be reclaimed longs.  Bearish Reclaimed Order Block – is a candle or bar that was previously used to Sell Price and a short-term decline confirms minor displacement. In the Sell Side of Curve – these “Old” blocks will be reclaimed shorts.  Market Maker Buy Model is understanding that the market is going lower to go higher. 
+ 
+ 
+ 
+ 
+
+Same goes for the opposite, on the buyside of the curve smart money starts hedging that’s why you already see premature bearish orderblocks forming. 
+ 
+ 
+ 
+ 
+
+  
+ 

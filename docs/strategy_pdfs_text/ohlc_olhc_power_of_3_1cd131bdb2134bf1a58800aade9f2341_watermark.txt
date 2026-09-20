@@ -1,0 +1,26 @@
+OHLC/OLHC - Power of 3
+1
+OHLC/OLHC - Power of 3
+What is Power of 3?
+Power of 3 is a concept taught by ICT that relates to the daily open, high, low, close bar 
+on a daily chart. The concept aims to help traders understand the accumulation, 
+manipulation, and distribution phases, which can be applied to daily, weekly and 
+monthly ranges, as well as sessions.
+Element the power of 3
+1. Accumulation/Consolidation
+2. Manipulation/Reversal
+3. Distribution/Expansion
+Things to note:
+1. Open high low close [OHLC] & Open low high close [OLHC]
+2. True day open 00:00 EST - 00:00 EST
+3. Opportunity buy below opening daily 00:00 EST
+4. Opportunity sell above opening daily 00:00 EST
+Nb: EST = UTC-4 [New york time]
+
+OHLC/OLHC - Power of 3
+2
+OLHC
+
+OHLC/OLHC - Power of 3
+3
+OHLC

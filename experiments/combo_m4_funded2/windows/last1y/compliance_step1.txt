@@ -1,0 +1,41 @@
+==============================================================================
+GFT COMPLIANCE REPORT  -  stage: STEP1
+==============================================================================
+  window          : C:\Users\prita\CK_GFT_Repo\experiments\combo_m4_funded2\windows\last1y
+  initial capital : 5,000.00
+  static floor    : 4,500.00   (never trails up)
+  day boundary    : server hour 00:00  (GFT rolls over ~5 PM EST)
+  trades in file  : 276
+  trading days    : 158
+  final balance   : 5,543.75
+  MT5 htm         : Equity DD Abs 8.68   Balance DD Abs 0.01
+
+  RULES
+  --------------------------------------------------------------------------
+  [PASS]        MAX OVERALL LOSS 10% STATIC
+                minimum EQUITY 4,991.32 stayed above the static floor 4,500.00 (MT5
+                Equity Drawdown Absolute 8.68 = 0.17% of initial; includes floating
+                P&L).
+  [UNVERIFIED]  DAILY DRAWDOWN 5%  (lower bound)
+                worst GFT day 2026-01-13 at -1.27% of day-start balance; days at or
+                beyond -5%: 0. Day boundary assumed at server hour 00:00. REALIZED
+                closed trades only. GFT measures this on intraday EQUITY including
+                floating P&L, so this is a LOWER BOUND: a day could have dipped past
+                -5% on open positions and recovered before any trade closed. Supply
+                --equity-series to make this exact.
+  [PASS]        MIN TRADING DAYS
+                158 trading days, needs at least 3.
+  [PASS]        PROFIT TARGET 10%
+                target 500 reached at trade #51 on 2025-10-27 17:07:00 (balance
+                5,536.09) with no prior hard breach.
+
+==============================================================================
+VERDICT: NOT CLEARED
+==============================================================================
+  No breach was found, but at least one rule could NOT be verified from the
+  evidence supplied. 'Not checkable' is not 'safe'. Close the gaps listed above
+  before this configuration is trusted with money.
+
+  (deterministic: same input => same output; limits are the firm's, never relaxed)
+
+EXIT_CODE=1  (NOT CLEARED)

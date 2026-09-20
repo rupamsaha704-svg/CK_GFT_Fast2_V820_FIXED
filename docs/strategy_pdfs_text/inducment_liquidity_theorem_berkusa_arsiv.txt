@@ -1,0 +1,881 @@
+● INTRODUCTION
+Hello. First of all, I want to thank you for your trust and purchase. This is what you'll 
+find in this book. It's a summary of my extensive experience with the market. And 
+there's a secret to proper market analysis to become a professional trader. Strategy, 
+on the other hand, represents only 10% of this market and is nothing. The most 
+important thing you need to understand and focus on is psychology and risk 
+management. I know you won't apply these words, but try them and you'll get 
+impressive results. I hope to be the person who changes your life for the better; it 
+will be an honor for me, and I'll be happy for it.
+1 :Why We Trade The Algo Concept
+2: LIQUIDITY / DAILY CYCLE / HTF CYCLE
+3: MONEY TRANSFER
+4: ALGO MARKET STRUCTURE
+5: PREMIUM / DISCOUNT
+6: EFFICIENT PRICE ACTION / INFECTION PRICE ACTION
+7: ORDER LOCK / SWITCH BLOCK / REJECT BLOCK
+8:TDI Indicator (Illuminated Concepts)
+9: TOP-DOWN ANALYSIS
+10: One-Minute Ping Pong Mastery
+Why we negotiate The concept of Algo
+The foreign exchange market is the largest market in the world in terms of liquidity, and of course, there is 
+supply and demand in this market, but what most traders don't know is that the market is not subject to the 
+laws of supply and demand. Why is this because there are those who manipulate prices? Banks and the world's 
+largest financial institutions do this, so you won't make a profit because you can't explain these manipulations 
+and believe that classic patterns work and all you have to do is apply them. But this isn't true because classical 
+patterns and their logic are based on the fact that they are formed due to supply, demand, and investor 
+psychology. It used to be old, but technology has now developed, and there are ways to store investor data, 
+and for novice traders, this data is owned by a central bank.
+Translated from Spanish to English - www.onlinedoctranslator.com
+1
+When you buy, he sells, and when you sell, he buys because he knows in advance where you bought and 
+where you sold, and on this basis, no matter what you try, he will come against you Remember, because he 
+simply has something that you don't have,Data...and where you get your liquidity I talked about the foreign 
+exchange market because it's the largest market in the world in terms of liquidity, but this talk applies to all 
+other markets.
+Summary: What have we learned so far about why beginner strategies don't work? Price manipulation occurs, and the 
+reason for this manipulation is liquidity. Why don't the laws of supply and demand work?
+SOMETHING OBJECTIVE
+1. induce traders to take positions
+2. Create panic and fear so that traders think irrationally
+3. Press stop loss and delete orders. Force traders into margin calls and pocket the profit.
+money
+LIQUIDITY
+Liquidity is the most important thing in this market. Many SMC traders truly believe they understand what 
+liquidity is. In fact, they don't. Liquidity is what makes the market move, not supply and demand. Rather, liquidity 
+because this is a market that moves based on price manipulation, and price manipulation to obtain liquidity.
+After understanding why liquidity is important, let's move on to the most important step, which is how 
+do we know where liquidity is on the chart? Well, first, you need to know something. We don't know 
+where liquidity is because we don't have the data the Central Bank has. We can only wait and see where 
+liquidity can be found, and there are potential places where liquidity is very high and probabilistic places 
+where liquidity is weak. You should know that all high and low points in a market are liquid. But to know 
+whether it's significant liquidity or not, we must understand that HIGHER LIQUIDITY OVER TIME is not 
+the same as LOWER LIQUIDITY OVER TIME. The longer the time, the greater the liquidity, and therefore 
+the greater the liquidity, and the lower the timeframe, the weaker the liquidity.
+● GREATER LIQUIDITY
+● AVERAGE LIQUIDITY
+● LOWER LIQUIDITY
+1. GREATER LIQUIDITY
+PREVIOUS MONTHLY HIGHS AND LOWS HIGHS AND
+PREVIOUS ANNUAL MINIMA, MAXIMA, AND MINIMA
+PREVIOUS WEEKLY DAILY HIGHS AND LOWS
+PREVIOUS MAXIMA AND MINIMA OF THE STRUCTURE OF
+OSCILLATION (HTF)
+2
+● Example
+Where is the liquidity here?
+All these ups and downs are actually liquidity, but where is the liquidity that seems most important?
+3
+https://www.tradingview.com/x/OknnXR5N/
+After it takes a liquidity price,REVERSES . Well, it's not that simple. I know you're wondering how we'll know 
+if the price will reverse or not. Forget this question because you'll understand it after you finish reading 
+this book. Now I just want you to pay attention with me and understand that after the price takes on 
+significant liquidity (significant liquidity means there's a lot of money, there's enough for the price to make 
+a big move because we're on the monthly chart), it will reverse, and WE'LL call IT (TRAP )
+4
+https://www.tradingview.com/x/2CnB5PTQ/
+GREATER LIQUIDITY = BIG MOVE
+5
+https://www.tradingview.com/x/yClEmZ2Q/
+https://www.tradingview.com/x/fbeBJzIy/ 
+PWH = PREVIOUS WEEKLY MAXIMUM PMH = 
+PREVIOUS MONTHLY MAXIMUM
+6
+PDH = PREVIOUS DAILY LOW PML = 
+PREVIOUS MONTHLY LOW PWL = 
+PREVIOUS WEEKLY LOW PDL = PREVIOUS 
+DAILY LOW
+PYH=PREVIOUS ANNUAL MAXIMUM 
+PYL=PREVIOUS ANNUAL MINIMUM
+● AVERAGE LIQUIDITY
+https://www.tradingview.com/x/qeZRHbC4/
+HIGHS AND LOWS OF THE STRUCTURE IN THE EVERY HOUR CHART
+7
+https://www.tradingview.com/x/dcF22gzV/
+Let's see what retail traders see when they open the chart.
+Retail Merchant: Beautiful Breakout Let's Take a Sale
+Algo Trader: Aha Beautiful Fake Breakout (TRAP) Let's Take a Buy After Grab Retail Traders Stop Losses
+8
+RETAIL SUPPORT AND RESISTANCE
+https://www.tradingview.com/x/YOMnLRNs/
+9
+https://www.tradingview.com/x/hsroMDZL/
+https://www.tradingview.com/x/dcF22gzV/
+10
+You see how many pips after the price Take 
+A MEDIUM LIQUIDITY
+● LOWER LIQUIDITY
+The lower Liquidity you can find in The Minutes (30min..15min..1min Also)
+We use this LIQUIDITY IN THE INTRADAY... SCALPING ALSO AND CONFIRMATION ENTRY So the 
+difference between liquidity is a difference in movement if you want 20 pips per day... Lower is enough... if 
+you want a LOT OF PIPS, you need to FOCUS ON AVERAGE AND HIGHER liquidity
+https://www.tradingview.com/x/CO2vAheg/
+summary :AFTER THE PRICE TAKES THE LIQUIDITY, THEY NEED TO MOVE, SO THE ALGO ESTABLISHES THE ORDER AND THE
+PRICE INVESTS
+HTF LIQUIDITY>LTF LIQUIDITY
+MONTHLY LIQUIDITY > WEEKLY LIQUIDITY >
+DAILY LIQUIDITY>HOURLY LIQUIDITY>MINUTE LIQUIDITY
+INDUCTION
+THE INDUCT IS JUST LIQUIDITY. (NEARLY AN OB)
+11
+https://www.tradingview.com/x/oViG1nVD/
+12
+https://www.tradingview.com/x/ffYg1cVx/
+● Daily Cycle
+So what happens on a typical day? 3rd session: ASIA
+> LONDON>NEW YORK accumulation the initial maximum and the minimum
+of the day are set Trap False movement outside the Asian range against the 
+expected actual movement
+Trend Movement Actual Movement Form THE (DAY'S HIGH)
+End-of-day reversal (day close)
+ASIA TRAP One of the most important things in terms of liquidity, especially for intraday traders…
+13
+THE POWER OF THE CYCLE :THE CYCLE CAN BE FOUND IN ALL TIME FRAMES WITH PATTERNS THAT
+REPEAT
+https://www.tradingview.com/x/Dt3bfYjF/
+● ASIA RANGE TO BUILD LIQUIDITY
+● LONDON PRICE TAKES FRANKFURT LOW +PDL (so maybe this low is the low of the day)
+● Ny Trap At Ny Opening Price CREATE a Trap A Fake Momentum Change (Bos) or You will understand the fake Bos (I explain the Bos)
+false in the Algo structure part) so that the supply zone is just a trap Many money children
+smart to lose money in that trap
+14
+https://www.tradingview.com/x/aZE3Ov6w/
+https://www.tradingview.com/x/p7ZbJ18B/
+DO (DAILY OPENING PRICE) BELOW DO
+15
+the discount and above the premium Build 
+up>INDUCE>Trap>SHIFT
+Minimum form of the day in the London Ny session 
+Complete what London wanted to do
+You can watch A Nyo Trap and then continue to CREATE the high of the day.
+https://www.tradingview.com/x/cIsVqrBn
+ELA: LOW SWEEP IN ASIA
+FFH: FRANKFURT UPPER
+FRANKFURT ALWAYS CREATES FAKE MOVES 
+SO THAT FFH IS ONLY LIQUIDITY
+AND THE PRICE TAKES ADVANTAGE OF FFL LIQUIDITY AND LOW ASIA AT THE LONDON OPEN
+Money ENTERING The Market in London/New York Times of High Volatility …and 90% of the Times London and New York 
+make up the High and Low of the Day…
+HOD: HIGH OF THE DAY LOD: 
+LOW OF THE DAY
+The high and low of Asia is MEDIUM LIQUIDITY and the middle of Asia is lower liquidity
+sixteen
+After Asia takes over, the low price goes in the opposite direction to take Asia High
+https://www.tradingview.com/x/IhaF39Qb/ 
+Approach
+Once you identified where Cycle is from
+It can then be deployed to reduce the time to find a trading setup.
+17
+https://www.tradingview.com/x/yLSZoylE
+VERY CLEAR 1MIN TIME FRAME CREATE 
+LIQUIDITY > TAKE LIQUIDITY
+NOTES: I want to see the sweep of Upper Asia or Lower Asia Aggressive To grab all the liquidity
+18
+https://www.tradingview.com/x/m5f6flXQ
+Cycle: BUILDING>AGGRESSIVE GRIP>REVERSES
+19
+Case 1:
+https://www.tradingview.com/x/NwD8Wh5F
+In Asia, create liquidity in Frankfurt. Fake moves. Aggressive move at the London Open. Take all the 
+liquidity and then move in the opposite direction. Very simple.
+Case 2:
+20
+https://www.tradingview.com/x/9ZUfZlCV/
+In this case, we have a strong low in Asia… A strong low means that liquidity is low and the 
+structure is broken. We have liquidity in Asia. This order will be protected.
+Notes: This case occurs in reversal (HTF reversal) OR 
+when the trend is so strong
+21
+https://www.tradingview.com/x/WGYruI0m/ 
+Bearish HTF direction.
+When you don't see liquidity building up in the LTf, go to the HTF and find where the price builds 
+liquidity.
+22
+Before
+https://www.tradingview.com/x/NCELwC9G/
+23
+After
+https://www.tradingview.com/x/NCELwC9G
+Case 3:
+24
+Price Increase >Trap>
+25
+https://www.tradingview.com/x/9BMawXjb/
+FOLLOW THE LIQUIDITY = FOLLOW THE SOMETHING
+● 90MIN CYCLE
+We start counting at midnight, New York time. Every 90 minutes. There is a possibility that the price
+make a big move... so every 90 minutes we'll define the opening price. TO KNOW WHERE THE FALSE MOVE IS.
+● HTF LIQUIDITY CYCLE
+We have to know that every 3 to 5 days price changes direction but why because INTERNAL BANK PRICE DELIVERY 
+ALGORITHM is always looking for data from last 3 or 5 days or last 3 or 5 weeks... or months or years and from here 
+you understand that ALGO is divided into Long Term Algo and Short Term Algo types
+Internal Bank: He is the one who stores the data...for all the places that have liquidity
+26
+Data = Liquidity
+Let's start with theWeekly cycle:
+Case 1: BULLISH WEEK
+Monday's manipulation move to capture liquidity. MANY TIMES THE MAXIMUM OR MINIMUM OF THE WEEK IS 
+FORMED ON MONDAY
+Tuesday PRICE ACCUMULATES MORE ORDERS AND CONTINUES..
+Wednesday REACUMULATION AND SOMETIMES INVERSION (BASED ON HTF STRUCTURE) 
+Thursday completes the move that occurred on Wednesday
+Friday DISTRIBUTION
+Case 2:
+27
+https://www.tradingview.com/x/LXoOpMBC/
+28
+https://www.tradingview.com/x/5DxsNFOr/
+MONDAYprice Accumulate liquidity (engineered liquidity) on Monday why the price does that
+because the Algo needs more liquidity (more orders entering the market, so on Monday 
+Accumulation
+Tuesday's manipulation price Take Monday's high + Friday's high Then the movement of
+manipulation occurs on Tuesday
+Wednesday+Thursday continuation Price simply CREATES a range to accumulate more orders Friday 
+continuation/weekly low
+● HTF CYCLE
+29
+You should know that there are two types of algos in the market: short-term algos and long-term algos. 
+In the long term, for algos after taking significant liquidity, SETS orders your targets to be short or long, 
+depending on the amount of liquidity you took.
+1
+After the price Get high liquidity and break Pdh (MOMENTUM SHIFT)
++ Ms: bullish momentum change
+Let's go to the beginning of the month 
+(February) and see the last 20/40/60/90 days
+And we define the highest high of the last 20 days and the highest high of the last 40 days... This is the goal of the 
+algorithm.
+After 20 days of The Trap There is a big chance that the price will reverse... not necessarily after 20 days, but most of the time 
+after 20 days, maybe a little less, maybe a little more, BUT the average is 20 days
+1
+30
+https://www.tradingview.com/x/6lBJRNlw/
+Always for confirmation SHE We have a bearish momentum change
+31
+https://www.tradingview.com/x/AosyaFTA/
+Usee that the reversal has not occurred after 20 days because it is not necessary (the price moves after taking 
+significant liquidity) CONFLUENCE OF YOUR BEARISH MOMENTUM CHANGE
+32
+https://www.tradingview.com/x/5Wh9X9Th/
+Right now The Trap and The Target Hit in the same month The
+This will cause the price to generate liquidity... in this case, go to the HTF to see where the liquidity price is 
+generated and where.
+33
+https://www.tradingview.com/x/OKDgTVx5/ price 
+LIQUIDITY ENGINEERING AND Rupture structure
+34
+● MONEY TRANSFER
+https://www.tradingview.com/x/M2OkGXQ1/
+A change of address and money become the BSL's goal afterward
+that took all the SSL
+Switching from sell-side price delivery to buy-side price delivery
+35
+https://www.tradingview.com/x/4Ie1
+Price delivery change from bullish to 
+bearish (from BSL to SSL)
+36
+https://www.tradingview.com/x/vg8P6Wec/
+●ALGO MARKET STRUCTURE
+Market structure
+It is the map that will help you understand and predict the 
+next move And will make you understand where you are, 
+are you in correction or Continuation
+SO THE STRUCTURE OF THE HTF MARKETvery important
+37
+https://www.tradingview.com/x/iOQ9V0si/
+38
+https://www.tradingview.com/x/4RmPVay Well, the 
+structure is not that easy actually when you see a 
+structure like this It means there is no liquidity (
+the price has not taken much liquidity. If
+There is no liquidity, the price accumulates liquidity that
+39
+go through ranges and price manipulation is
+very big ) enough and this makes the price go up
+slowly and makes it easier to read the structure, 
+but
+At the same time a trend like this ENGINEER
+LIQUIDITY FOR THE FUTURE
+Build up liquidity to seek refuge in the future and erase it all.
+https://www.tradingview.com/x/EBw06JDN/
+40
+41
+https://www.tradingview.com/x/tL3Jk1xW/
+IN THE BULLISH OR DOWNSTREAM TREND IF THE PRICE 
+BREAKS THE STRUCTURE AND DOES NOT GO TO A 
+DISCOUNT OR PREMIUM PRICE THIS LOW IS ONLY 
+LIQUIDITY IT IS NOT A HL OR LH
+42
+https://www.tradingview.com/x/bj8pYdKP/ REAL 
+STRUCTURE = DEEP SETBACK ALWAYS ASK 
+WHERE THE LAST STRUCTURE IS AT THIS PRICEI 
+RESPECT
+Respecting the structure means the PRICE GO TO A DIS OR 
+PREI...AND BREAK THE STRUCTURE in this case this is a strong 
+structure
+STRONG TREND"
+43
+STRONG TREND IF YOU SEE THE PRICE GROWING 
+LIQUIDITY >GET A HIGHER LIQUIDITY OR A 
+SIGNIFICANT LIQUIDITY AND CHANGE THIS It indicates 
+that the trend will be strong, which means that the price 
+will not return to the dis price, because the algorithms 
+have to protect the orders That's why the
+44
+Something, builds new structures and will respect the 
+new structures IN THIS SITUATION USE THE WEEKLY 
+CYCLE + DAILY CYCLE and go to the HTF TO SEE WHERE 
+YOU ARE IN THE HTF STRUCTURE (DIS/PRE)
+45
+https://www.tradingview.com/x/96k7mVhb/ price GET 
+LOTS OF LIQUIDITY = STRONG TREND
+https://www.tradingview.com/x/zetw19EN/
+https://www.tradingview.com/x/NsOq824b/
+Notes: The Royal structure was formed after the price took
+significant liquidity
+46
+simple logic
+Remember it algorithms before they take liquidity.
+Accumulate Liquidity. Why are they doing this? They
+build your future goals
+NOTE: FOLLOW THE PRICE STRUCTURE
+CREATE AFTER THEY TAKE LIQUIDITY
+●DISCOUNT AND PREMIUM
+DISCOUNT price = cheap price
+premium price = expensive price
+47
+https://www.tradingview.com/x/4RsQvr77/
+48
+https://www.tradingview.com/x/gWvflY73/
+DAILY OPENING PRICE OR MIDNIGHT NY OPEN USE (00.00)
+49
+https://www.tradingview.com/x/zsW6wKVc/ 
+ABOVE BSL = PREMIUM Price BELOW SSL = 
+DISCOUNT Price
+STRONG HIGH/LOW WEAK HIGH/LOW
+Translated from English to Spanish - www.onlinedoctranslator.com
+50
+Strong Low is the Low that caused the manipulation and breaking of the 
+structure
+■ Strong is high, high is high
+Induced manipulation and breakage of structure.
+Weak low/high is the low that fails to break the structure (WEAK HIGH OR LOW 
+ALWAYS PRODUCED FROM A STRONG HIGH OR LOW)
+● For every strong LOW there is a weak HIGH
+● For every strong high there is a weak low
+https://www.tradingview.com/x/eOL6q7kM/
+51
+https://www.tradingview.com/x/eOL6q7kM/
+When The High or The Grab a significant liquidity This means that High pe Low is so 
+strong
+52
+https://www.tradingview.com/x/1WVQ41CN/
+53
+https://www.tradingview.com/x/OHeMtXti/
+54
+https://www.tradingview.com/x/AMwPv2Ap/
+55
+https://www.tradingview.com/x/KjMarLUQ/
+VERY STRONG HIGH = HIGH GRAB LIQUIDITY (HIGH MANIPULATION 
+CAUSED) BREAK STRONG HIGH + HAVE AINDUCTION
+56
+BEFORE
+https://www.tradingview.com/x/WItTWBQz/
+57
+AFTER
+https://www.tradingview.com/x/6jvRZW3l/
+58
+Before
+https://www.tradingview.com/x/IuQVWq4x/
+59
+After
+https://www.tradingview.com/x/JDVKKAiZ/
+WHEN STRONG HIGH OR LOW TURNS WEAK WHEN PRICE MITIGATES 
+STRONG H/L TURNS WEAK
+STRONG MITIGATION HIGH OR LOW (OB) = BUILDING LIQUIDITY FOR THE 
+FUTURE
+60
+https://www.tradingview.com/x/EiQ4C6SU/
+CASE 3
+Fake BMS THIS pattern happens a lot You'll know it by two 
+things
+1. WHERE IS THE FORT?
+61
+2. HIGHS AND LOWS AND WEAK HIGHS AND LOWS
+3. HTF STRUCTURE (INTENT)
+4. INTERNAL/EXTERNAL LIQUIDITY
+https://www.tradingview.com/x/t4ul6HCX/ FBMS: FALSE 
+BREAK IN MARKET STRUCTURE FMS: FALSE CHANGE IN 
+MOMENTUM
+62
+https://www.tradingview.com/x/OrCwsjwi/
+63
+https://www.tradingview.com/x/CFtmCm7s/
+64
+https://www.tradingview.com/x/xl9LAJLm/
+sixty
+https://www.tradingview.com/x/8bnQXVHA/
+● INTERNAL AND EXTERNAL
+INTERNAL LIQUIDITY MEANS THE LIQUIDITY THAT IS FORMED WITHIN A RANGE. 
+EXTERNAL LIQUIDITY IS THE HEIGHT OF THE LEG. WE USE IT FOR THE PURPOSE.
+66
+https://www.tradingview.com/x/WGc8CeRG/
+●Failed swing
+67
+https://www.tradingview.com/x/VxRPaVLa/
+NOTE: Price cannot create a new LL
+68
+https://www.tradingview.com/x/fJOUzZeJ/
+69
+https://www.tradingview.com/x/yPn1zJw1/ 
+Price fails to create a new HIGH HIGH
+70
+Before
+https://www.tradingview.com/x/7kKdKGqr/
+71
+After
+https://www.tradingview.com/x/NqLVY44G/
+72
+●
+https://www.tradingview.com/x/ZVJpHD4u/
+73
+Before
+https://www.tradingview.com/x/wyglx5SC/
+74
+After
+https://www.tradingview.com/x/wyglx5SC/
+75
+https://www.tradingview.com/x/S5lzmgoC/
+76
+https://www.tradingview.com/x/raTHDuPq/
+●Market maker pattern
+You should know that 80% of price movements are in the form of RANGES. Why does price ranges occur? Because it's the best 
+way to manipulate prices and build liquidity.
+, I will share with you the most important models that the price makes
+1. AMD
+AMD=ACCUMULATION_handling
+77
+DISTRIBUTION
+ACCUMULATION ACCUMULATION LIQUIDITY
+FAKE MOVE (MANIPULATIVE MOVE TO INDUCE RETAILERS ON THE SIDE)
+WRONG MARKET)
+DISTRIBUTION=THE REAL MOVEMENT.
+This is a simple model, and it will be easy for you to understand. This is a model. If you understand it, you 
+can perform many operations daily because it repeats every day, every week, every month. For me, I 
+consider it the most powerful model.
+78
+https://www.tradingview.com/x/kfE7xTJu/
+79
+https://www.tradingview.com/x/kLB90LEH/
+80
+Before
+https://www.tradingview.com/x/XK0Evruk/
+81
+After
+https://www.tradingview.com/x/KqKDIOTF/
+82
+https://www.tradingview.com/x/BXUCdxww/
+83
+https://www.tradingview.com/x/3VjA0tNi/
+84
+https://www.tradingview.com/x/xBWSXI9G/
+85
+BULLISH CANDLE
+https://www.tradingview.com/x/egIOwhDE/
+86
+BEARISH CANDLE
+https://www.tradingview.com/x/zcPY5MDZ/
+2.Market Maker Buy/Sell Model
+87
+Buy model
+https://www.tradingview.com/x/OkmP1kEU/
+88
+MODEL SALE
+https://www.tradingview.com/x/dzdK0E50/
+89
+https://www.tradingview.com/x/DtLRSbNG/
+90
+Before
+https://www.tradingview.com/x/BDVCH4X1/
+91
+After
+https://www.tradingview.com/x/5Sy2x9MU/
+92
+https://www.tradingview.com/x/qD7IpM38/
+93
+https://www.tradingview.com/x/0jKo6fE6/
+●IOF
+IOF = INSTITUTIONAL ORDER FLOW
+Very well. I want you to know: ALWAYS FOCUS ON LIQUIDITY FIRST. OK, LIQUIDITY FIRST, 
+THAN IOF.
+THERE IS ALWAYS A FALSE ZONE OF DEMAND AND SUPPLY...UNDERSTAND THE LOGIC
+1.WATCH SOMETHING
+CA=WATCH SOMETHING
+It is the candle that forms when it takes liquidity and (forms FVG immediately 
+after)
+94
+https://www.tradingview.com/x/wCmnodPC/
+95
+https://www.tradingview.com/x/XTIEgKx6/
+96
+https://www.tradingview.com/x/ubW64yUL/
+NOTES: AC IS WHAT MAKES THE HIGH OR LOWSTRONG
+97
+https://www.tradingview.com/x/cdPLjvko/
+CANDLE SOMETHING VERY STRONG =GAIN LIQUIDITY/BREAK STRONG HIGH OR LOW
+(CHANGE OF MOMENT)
+/THEY HAVE A STIMULUS /FVG
+WHAT IS THE MOST POWERFUL CONFLUENCE?INDUCTION
+98
+https://www.tradingview.com/x/WJlkF4XR/
+99
+https://www.tradingview.com/x/kGUIEd1f/
+Translated from English to Spanish - www.onlinedoctranslator.com
+100
+https://www.tradingview.com/x/UyBVvRJO/
+RULES :
+* Where is The Strong High and Low?
+* Follow structure
+* Where the price accumulates liquidity (weak low and high)
+* Where is the liquidity?
+101
+15 minutes
+https://www.tradingview.com/x/3yE2VFao/
+1 minute
+102
+https://www.tradingview.com/x/Vg7hMG6h/
+https://www.tradingview.com/x/u8qNSNZ0/
+103
+https://www.tradingview.com/x/cihHBMvh/
+15 MINUTES
+1 MINUTE
+https://www.tradingview.com/x/E2Fu13l1/
+104
+https://www.tradingview.com/x/8Xa4s3br/
+https://www.tradingview.com/x/7NJpDwx6/
+105
+https://www.tradingview.com/x/KWO6m5LB/
+106
+https://www.tradingview.com/x/eQr8TNua/
+●2.FAIR VALUE GAP/INEFICIENCY
+Inefficient pricing means the market must remain balanced; for every buy, there must be a sell. When we see only pure buying or 
+selling, this creates gaps in the price that the central banking algorithm
+You have to fill the gaps to make the price efficient again.
+This is described as a market liquidity gap orLiquidity EMPTY
+107
+https://www.tradingview.com/x/DuQmIs1J/
+108
+https://www.tradingview.com/x/y74kR06q/
+The HTF liquidity gap is more important than the LTF liquidity gap (understand the 
+liquidity gap as you understand liquidity) so something needs to fill the gap.
+109
+https://www.tradingview.com/x/WHebf2jq/ 
+WHEN YOU SEE A There is a high probability that the price will reverseFVG FULL FULL
+It depends on the importance of this FVG (HTFFVG>LTF FVG ) (Use frames
+multiple time to SEE ALL Fvg)
+110
+https://www.tradingview.com/x/vuqLfkhS/
+111
+https://www.tradingview.com/x/1AJEpLgz/
+Remember that FVG is just a liquidity gap. JUST LIKE LIQUIDITY (FILL>REVERSE)
+● THE DIFFERENCE BETWEEN EFFICIENT PRICE ACTION AND 
+INEFFICIENT PRICE ACTION
+112
+➢ Displacement
+113
+SAIL VECTOR = WRAP SAIL = move create THE IMBALANCE
+RETAILER
+When they see a strong and fast movement like this, they are afraid of missing the opportunity... 
+they buy... we do the opposite WE ARE LOOKING FOR AN OPPORTUNITY TO SELL
+VC= vector candle LE
+114
+➢HIGH VOLUME IMBALANCE
+115
+HVI: HIGH VOLUME IMBALANCE
+116
+https://www.tradingview.com/x/VqO4EpQh/
+Translated from Spanish to English - www.onlinedoctranslator.com
+117
+https://www.tradingview.com/x/PIpVwBli/
+118
+https://www.tradingview.com/x/7ApRONRC/
+119
+HVI = HIGH VOLUME IMBALANCE
+120
+HTF
+https://www.tradingview.com/x/bLmszaEY/
+121
+WATCH SOMETHING
+https://www.tradingview.com/x/KszhtVio /
+122
+https://www.tradingview.com/x/0ZwKallb/
+CV:vector sail. (Surround sail creates inefficiency)
+123
+https://www.tradingview.com/x/eiFLyYiJ/
+124
+15 MINUTES
+https://www.tradingview.com/x/CtqVUe6t/
+125
+https://www.tradingview.com/x/F9B43Q9g/ 1 
+minute
+CONFLUENCE:
+FOLLOW THE DAILY CYCLE > FULL FILL FVG > MITIGATE THE ALGO CANDLE LTF > REVERSE THE 
+CHANGE IN MARKET STRUCTURE (-MS)
+126
+15 minutes
+https://www.tradingview.com/x/pilj9ViK/
+127
+1 minute
+https://www.tradingview.com/x/rnCBlYHA/
+●SWITCH BLOCK
+128
+https://www.tradingview.com/x/TcYosBio/
+NOTES; when the change in momentum is aggressive the breaker is very strong
+129
+https://www.tradingview.com/x/Gff7zgyA/
+130
+https://www.tradingview.com/x/3y2XQlCQ/
+● REJECTION BLOCK
+131
+132
+https://www.tradingview.com/x/g7wzvehR/
+GRADES:
+STRONG REJECTION BLOCK=HAVE AN INDUCTOR + forms in ONE SESSION (HIGH OR LOW) THE HIGH OF NY
+EITHER LOW OR LONDON HIGH OR LOW AND SOMETIMES ASIA TOO BUT MOST OF THE TIMES THE HIGH AND 
+LOW OF THE SESSIONS IS JUST LIQUIDITY
+THE HTF REJECTION BLOCK IS AN LTF ALGO CANDLE
+133
+https://www.tradingview.com/x/QMTHx2k7/
+● TDI
+134
+135
+1.HIGH VOLUME EXHAUST
+136
+137
+https://www.tradingview.com/x/BvLDiC9R/
+138
+https://www.tradingview.com/x/phyg6sNG/
+139
+https://www.tradingview.com/x/IiEd9UTq/
+140
+https://www.tradingview.com/x/U8FH2sg9/
+141
+https://www.tradingview.com/x/Y8KOW4e4/
+142
+https://www.tradingview.com/x/MVrCHat0/
+143
+45 MIN
+https://www.tradingview.com/x/e638ishX/
+144
+1 MINUTE
+145
+146
+https://www.tradingview.com/x/Rx4jhzPz/
+147
+148
+149
+https://www.tradingview.com/x/wqG6adtg/
+Translated from English to Spanish - www.onlinedoctranslator.com
+150
+https://www.tradingview.com/x/7ipRCMKi/
+➢ DIVERGENCE
+DV: divergence
+151
+2
+https://www.tradingview.com/x/qPtVjp4n/
+2
+152
+https://www.tradingview.com/x/kQjwWTt5/
+153
+https://www.tradingview.com/x/Vukws4et/
+154
+https://www.tradingview.com/x/gvCAxgys/
+155
+https://www.tradingview.com/x/O6oI5zuv/
+156
+https://www.tradingview.com/x/Ql5QFAH6/
+STOCOLOGICAL RSI
+●TOP-DOWN ANALYSIS
+157
+https://www.tradingview.com/x/GM8fF6XU/
+158
+https://www.tradingview.com/x/IozX22jJ/
+159
+https://www.tradingview.com/x/24SDSy72/
+CONFLUENCES: False Momentum Shift 
+HIGH VOLUME IMBALANCE
+INDUCTION
+WHEN THE LTF STRUCTURE DOES NOT FOLLOW THE LATEST STRUCTURE THE 
+PRICE I RESPECT
+160
+https://www.tradingview.com/x/LiIjb9Gn/
+Monday
+LET'S SEE IF YOU WANT TO WAIT FOR THE CONFIRMATION IN 1 MINUTE
+161
+https://www.tradingview.com/x/1c8Ucm1f/
+IF YOU WANT TO SELL FROM THIS STRONG HIGH, YOU WILL LOSE, BE CAREFUL WITH 
+THE TIME AND OPENING TRAP
+OR YOU CAN SET UR SL ABOVE THE HIGH VOLUME IMBALANCE
+162
+https://www.tradingview.com/x/7kKCl5nY/
+163
+https://www.tradingview.com/x/UGzwNoJV/
+164
+https://www.tradingview.com/x/v1t77v24/
+165
+https://www.tradingview.com/x/npX0krmi/
+166
+https://www.tradingview.com/x/qyFIxnuG/
+167
+https://www.tradingview.com/x/iVe7VZ9J/
+168
+BREAK EVEN: Move SL BE WHEN THE PRICE STRUCTURE BREAKS
+169
+RISK ENTRY
+https://www.tradingview.com/x/B8Qu7PK1/ 
+CONFLUENCE:
+Market maker SELLS MODEL + DAILY CYCLE + CANDLE OF SOMETHING 
+VERY STRONG + EXTREME PRIMEIM
+170
+https://www.tradingview.com/x/01gUOUtg/
+171
+FIRST BUSINESS
+https://www.tradingview.com/x/zA6xwWH9/
+CONFIRMATION ENTRY
+CONFLUENCES: LONGER TIME FRAME MITIGATION + AHS + HVB
+172
+SECOND BUSINESS
+https://www.tradingview.com/x/tcoGRkRd/
+LTF CONFLUENCES: AMD / HIGH-IMPACT EVENTS / RETAIL SNR / DIV / +HTF FALSE FLAG
+173
+https://www.tradingview.com/x/aESlPQbO/
+174
+THIRD BLOCK BREAK TRADE https://
+www.tradingview.com/x/0jcxA0Ps/
+175
+https://www.tradingview.com/x/tDbtsgv2/
+NY TRAP EXAMPLE
+CONFLUENCES: TIMING + FMS + HVI + INDUCTION
+176
+https://www.tradingview.com/x/YvW504E7/
+177
+https://www.tradingview.com/x/PSkvj2Pc/
+178
+https://www.tradingview.com/x/fZhzHsav/
+179
+https://www.tradingview.com/x/gGPS1myS/
+180
+https://www.tradingview.com/x/eVcyc8VU/
+181
+https://www.tradingview.com/x/zRf54J9J/
+182
+https://www.tradingview.com/x/pBvLE17u/
+183
+https://www.tradingview.com/x/nHGDs6Av/
+184
+https://www.tradingview.com/x/x0KjgvE5/
+185
+https://www.tradingview.com/x/72RspoxC/
+186
+https://www.tradingview.com/x/8UXd6cPY/
+187
+https://www.tradingview.com/x/Oq5BbA26/
+188
+https://www.tradingview.com/x/EXqudrzB/
+189
+https://www.tradingview.com/x/zDDONN0E/
+190
+https://www.tradingview.com/x/wc3v0FRp/ 
+LC:London Close
+191
+https://www.tradingview.com/x/7wwJK7sG/
+192
+https://www.tradingview.com/x/gUJl9q1b/
+193
+https://www.tradingview.com/x/CphVRibt/
+194
+https://www.tradingview.com/x/6Jvwq865/
+195
+https://www.tradingview.com/x/TtatAS83/
+196
+https://www.tradingview.com/x/0Szxoykj/
+●Confirmation of price action
+80% OF THE TIME SOMETHING CREATES A FAKE PRICE ACTION PATTERNS
+BUT IF WE KNOW WHERE IS THE RIGHT PLACE THAT USES THE SOMETHING TO CREATE A
+REAL PRICE ACTION PATTERNS WE CAN USE THIS PATTERN FOR THE
+CONFIRMATION ENTRY
+197
+198
+IT'S LIKE A REJECTION BLOCK + DISPLACEMENT
+199
+https://www.tradingview.com/x/wsodMT2J/
+Translated from English to Spanish - www.onlinedoctranslator.com
+200
+https://www.tradingview.com/x/577kaAig/
+●PING PONG MASTERY
+If you want to master this concept you need to master the narrative
+201
+https://www.tradingview.com/x/DXNymn2c/
+202
+https://www.tradingview.com/x/IQlRCI5y/
+203
+https://www.tradingview.com/x/ODTnH5Ex/
+204
+https://www.tradingview.com/x/U2d38Rhb/
+205
+Remember, when you lose, ask yourself... Are you responsible for a loss? No, I'm not responsible. I 
+follow the rules. I'm not wrong. I don't make mistakes. I apply the rules.
+But remember that you respect risk management and correctly implement the strategy
+206
+https://www.tradingview.com/x/xjojJvrc/
+207
+https://www.tradingview.com/x/PoOP3mim/ PAYMENT 
+OF PASSION
+208
+Let's see how you can take all these trades
+https://www.tradingview.com/x/QqGR40sN/
+GRADES : USE PING PONG WHEN YOU SEE A HIGH-IMPACT NEWS BREAK OR 
+USE IT IN LO AND NYO DON'T TRY TO CATCH EVERY MOVE
+209
+https://www.tradingview.com/x/MChxOPgF/
+210
+211
+https://www.tradingview.com/x/399vfQLH/
+212
+https://www.tradingview.com/x/MJLlRRVP/
+213
+https://www.tradingview.com/x/lQdL7Grn/
+214
+https://www.tradingview.com/x/BB09VYyP/
+215
+https://www.tradingview.com/x/LYyRZoSM/
+216
+https://www.tradingview.com/x/SWp4tgpS/
+217
+218
+https://www.tradingview.com/x/o3MYpB5G/
+219
+220
+221
+https://www.tradingview.com/x/MKntJnG2/
+222
+https://www.tradingview.com/x/HeohkBJg/
+223
+https://www.tradingview.com/x/aYOYa3oi/ 
+PRICE MITIGATE LVH 1H + ALS
++ NEW YORK TRAP
+224
+https://www.tradingview.com/x/9Igt3H5a/
+225
+https://www.tradingview.com/x/HqOEcUA1/
+226
+https://www.tradingview.com/x/b8F1ZszP/
+227
+https://www.tradingview.com/x/rU7GB3mQ/
+228
+https://www.tradingview.com/x/CBXfJBy8/
+229
+https://www.tradingview.com/x/mM9CHFAf/
+230
+https://www.tradingview.com/x/CBZ0W1JE/
+urges:INDUCTION CYCLE
+231

@@ -1,0 +1,4009 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+2 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+3 
+ 
+ 
+ 
+ 
+ 
+This book is protected and registered under the  
+United Kingdom copyright law. 
+ 
+Any attempt to reproduce the book or the concepts 
+without the author’s approval is prohibited. 
+ 
+ 
+©2025 Ariff T , All rights reserved 
+©2025 The Book of T, All rights reserved 
+©2025 The House of T, All rights reserved 
+ 
+ 
+ 
+
+ 
+4 
+The 
+Book 
+of 
+T. 
+ 
+Memoirs of a Once 
+Struggling Trader 
+and How He Made 
+It Out 
+ 
+
+ 
+5 
+ 
+ 
+ 
+My grandparents, wise and caring. Giving me the advice 
+I needed for life and the ones who started it all 
+ 
+My mother, the guiding light and the one who made me 
+believe in myself, pushing me beyond what I thought was 
+possible 
+ 
+My father, the one who gave me the strength to stand on 
+my two weak legs and kept me away from bad business 
+ 
+My best friends, the ones who believed and supported 
+me throughout the way 
+ 
+My future wife and children, the ones I try to be the best 
+role model for 
+ 
+ 
+ 
+ 
+ 
+
+ 
+6 
+ 
+ 
+ 
+ 
+My love letter to every struggling trader, every human 
+who followed my journey, every soul I’ve touched directly 
+or indirectly and above all, my beloved students. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+This one’s for you. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+7 
+The Epilogue 
+I know why you’re here. You have an undying spirit that 
+wants freedom outside of your usual 9 -5. Something 
+different. Something more. Just like how I was years back. 
+You’re hungry, you’re lost and you have no idea what to do 
+next. You found trading on an instagram reel or a tiktok 
+video, or better yet, from a dude on youtube who claims to 
+have made a billion dollars in a month (spoiler alert, you can’t 
+do that).  
+ 
+You tried everything you could to become profitable but 
+due to the unfortunate nature of this shady f*****g industry, 
+you’re still left clueless, without a guide, without any path to 
+follow. Everything either seems totally out of reach, or simply 
+outright dumb. On the other side, someone is telling you that 
+you need at least 10k USD to fund an account, the other side 
+is saying that retail traders won’t make it because we’re 
+competing with trillion dollar hedge funds, and on the far far 
+far side someone is telling you that you can flip 10 bucks to a 
+million in a few days. So what’s real and what’s not? What’s 
+the truth and what’s bogus? You came here to find that out. 
+And maybe i have the answer you want.  
+
+ 
+8 
+ Reality 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+If you want to be a great trader, you must master all these.  
+Psychology 
+Technique 
+Risk 
+Management 
+Staying 
+Consistent 
+
+ 
+9 
+ 
+ 
+Psychology allows you to master yourself. 
+ 
+Technique allows you to get the best trades. 
+ 
+Risk Management keeps you alive long enough. 
+ 
+Staying Consistent keeps you profitable. 
+ 
+ 
+ 
+Master these 4 pillars, and you’re basically a supertrader 
+Fail one, and you’re done. 
+ 
+By the end of this book, I hope most of you know exactly 
+how to improve in each area. 
+ 
+ 
+
+ 
+10 
+ 
+ 
+ 
+ 
+  
+Section 1:  
+The Journey of a Trader 
+ 
+ 
+ 
+ 
+ 
+
+ 
+11 
+My Story 
+ 
+ My name is Ariff T. I am proudly Malaysian. My friends 
+call me T. Well, at this point everyone calls me that except for 
+my mom. I got that nickname when I was 13 while attending 
+an elite boarding school in Malaysia. Ever since I was a child, 
+I had this affinity towards all that is beautiful. I always 
+wanted to be great. This lead me to pursue so many things 
+when I was in school and university. I represented my 
+country in various competitions, be it ranging from debating, 
+science fairs and rugby. At one poi nt I represented Malaysia 
+to Intel ISEF in America and was able to get a medal that gave 
+me a permanent membership in The Society For Science. I 
+made an invention that would change my young life at the 
+time. Due to my stellar achiements, I was offered a full 
+scholarship to one of the world’s best universities, and 
+graduated with honors. I’ve always wanted to be an all 
+rounded person. I believe that a jack of all trades but a master 
+of none is better than a master of one.  
+ 
+From a young age, I’ve always hated seeing my dad have 
+to work very hard to provide for the family. I wanted to be 
+great for my family. Two types of people exist, one that sees 
+
+ 
+12 
+success and has envy, while the other type of person feels 
+inspired and wants to get involved. I am the latter. I always 
+wondered how people got rich. Because it definitely isn’t by 
+working a good job. While working a job can make you 
+comfortable, how do y ou get RICH? I want sovereignty. I 
+want to truly enjoy my time here on God’s big blue Earth. I 
+wanted to be free. I believe that as a man, being poor is an 
+insult to yourself, a man can only be truly proud of himself if 
+he can provide well, and money is a key factor in providing. 
+During university, I tried everything I could to make money, 
+until my father started trading stocks. I learned some basic 
+technical analysis from him and decided this was the path I 
+wanted to pursue. I mean, easy money right? 
+ 
+BOY WAS I WRONG 
+ 
+I went into the market in my first year thinking that it 
+was just like any other skill, until i lost all my savings. At one 
+point i only had 19MYR(4.5USD) in my bank account and 
+had to last the rest of the month. I deposited it all into a 
+broker and got no thing. Is trading a scam? Absolutely not. 
+But can you make it in a year? Nah I don’t think so. I was also 
+scammed by multiple people and projects throughout my 
+early career. Copytrade this, signal group that. These things 
+
+ 
+13 
+hurt a beginner. Which is why i don’t usually indulge in 
+them. I believe the best way to provide value to traders is only 
+education. Which means the educator and the student will 
+almost always get value. 
+ 
+I started trading using every indicator you could 
+imagine. The RSI, MACD, Ichimoku Clouds, Moving 
+Averages. While i totally respect my friends who trade these 
+kind of styles as they are very profitable, I believe that the true 
+essence of the market lies in trading the naked chart. 
+ 
+Just a few lines on the chart, 
+With a whole lotta logic 
+ 
+ If you really ask me how I went on to find these things, 
+it was because i was raised in the Golden Era of Malaysian 
+Traders. Circa 2019. Something I’d like to revive. There were 
+so many awesome traders to learn from at the time. Each 
+having their own unique skillsets and created so many 
+profitable traders under their guidance. I was lucky. So lucky 
+to be mentored by them. Now that they’re all gone, I bear the 
+torch and their legacy. I am the next generation. And have 
+been for the past few years. I hope that someday, when I retire 
+
+ 
+14 
+from this industry, someone will continue on what i left on 
+as well and go on to be a great person in the industry. 
+ 
+ 
+ I found my edge in only trading XAUUSD and i dare 
+say that now my skillset has become so complete to the point 
+where I can practically grow any account size to any account 
+size, the only barrier is time. (Unless we’re starting with 10 
+bucks lol). I was able to make good money from trading 
+during my final year in university and retired upon 
+graduation. I now own multiple b usinesses to keep my 
+lifestyle afloat while also trading. Usually at this point i prefer 
+to swing trade. It removes the stress from the e quation. I am 
+surrounded by some of my students who love me as a trader 
+and as a person all of which I love back. I’ve always traded 
+SNR like this ever since I started trading, and one day, one 
+person leaked my class recordings to Youtube, went viral 
+then the Internet coined that style as MSNR (Malaysian 
+SNR) and now I just roll with it. Blessings upon blessings 
+from the Most High. What a life. Alhamdulillah. 
+ 
+I told myself, if i were ever to have a presence on social 
+media, i want it to be one without a face. All my followers 
+can see is a silhouette of a man. Me. I chose that path because 
+
+ 
+15 
+I want people to appreciate the art I produce, the trades I 
+make, and the value I want to provide. I dont want people to 
+follow me and adore me just because I have a handsome face 
+or a good looking body. In this superficial world, someone 
+has to make a change. And if you want to change the world, 
+start with yourself. F**k the nice cars and flashy watches, I 
+want to make art . I’ve always been inspired by the art of 
+Leonardo Da Vinci, a visionary of his era. Created the 
+Monalisa, his ultimate work of art that redefined painting as 
+a whole. Throughout the years I’ve spent in the market, I 
+wanted to create my own Monalisa, something that people 
+would look back on years after I’m gone. And I guess I was 
+able to find it. Inspire people with art, with knowledge. That 
+is the way. That is true wealth. Inspiration. 
+ 
+I knew from a very young age that I’d rather work for 
+myself and even fail in the process as long as I have the 
+opportunity to build my dream life. Something in me was 
+always telling me that I refuse to be average, I refuse to be 
+limited by others’ constraints. Now look where that got me. 
+Here! I don’t want to disclose my entire net worth to you, as 
+that would be sinful of me. But we can safely say I reached 6 
+figures quite a long while ago and have grown a lot since (take 
+a guess). And all this started fro m me trying to flip accounts 
+
+ 
+16 
+using my life savings (half of which I lost in the early stages). 
+I now can live my childhood dream of living in London, 
+while caring for my family in Malaysia. Bought everything 
+I’ve ever wanted, and I can now breathe and live happily. I 
+am comfortable. A nd trading has brought me peace that 
+would be almost unachievable if I worked a stressful job.  
+ 
+Now that I’ve reached a more mature stage in my 
+trading career, I wish to share what my experience in a book. 
+They say that whatever is written goes on to live long after 
+you’re gone, and I like that. I like to be remembered in a good 
+light (hopefully). This book is the byproduct of my years of 
+market experience, mostly written while listening to jazz 
+while having an occasional cigar in hand. I purposely made 
+the book to not have an index, so you can go through it 
+without skipping any pages. I do hope you enjoy. 
+ 
+Love, 
+T 
+ 
+ 
+ 
+ 
+
+ 
+17 
+Failure is a Tool 
+  
+“The master has failed more than the disciple has ever 
+tried” 
+ 
+Are you scared of failure?  
+I know I am.  
+ 
+But what if in trading, it’s totally necessary? What if i told 
+you that the more times you fail, the better your odds of 
+making it. Provided, you journal each loss. 
+ 
+Throughout this section of my writing, we’ll explore 
+two categories of failed attempts when taking trades: 
+ 
+1. Failed attempts during the learning process 
+2. Failed attempts after developing a system 
+ 
+One can be learned from, while the other is simply the 
+result of successful trading. Let’s explore how to be a much 
+better trader by dealing with losses effectively and turning 
+them into lessons while simultaneously turning you into a 
+stoic rock 
+
+ 
+18 
+ 
+ 
+ 
+If two were to meet, which one could win? 
+ 
+An unstoppable force 
+or 
+An immovable object? 
+ 
+ 
+ 
+ 
+ 
+Don’t answer. 
+ 
+Because you’re going to need to be both of these if you’re 
+looking to succeed in trading 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+19 
+Failures During The Learning Process 
+ 
+“The master has failed more times than the beginner has 
+even tried” 
+ 
+ If you fail to learn from your mistakes, you truly lose. 
+There’s no way out anymore. Learning how to trade is exactly 
+the same as learning any craft in any field. You simply have to 
+fail forward. In this section, let’s explore how we can fail 
+gracefully. 
+Step 1: Find trading knowledge that you’d like to master. 
+ 
+Step 2: Understand every parameter about that knowledge. 
+ 
+Step 3: Start backtesting. Find months/years of the exact 
+same scenario happening. (Backtesting is to gain familiarity 
+with a technique. Similar to muscle memory.) 
+ 
+Step 4: Start front testing. Show up in the market everyday 
+for a few months minimum to test your understanding. 
+ 
+Step 5: Record all failures that happen during the front 
+testing process. Screenshot with explanation (if there are 
+any) 
+
+ 
+20 
+My personal belief is that there are two types of failed 
+trade attempts in the market. 
+ 
+1. Human Error 
+ 
+ Human error means that you were just an absolute 
+dimwit during the execution of the trade. This can mean a 
+wide range of things like adjusting your stop losses to make 
+them too tight, taking profits too early, entering a trade too 
+late/early, revenge trad ing, or simply being delusional and 
+placing a trade when there’s nothing there.  
+ 
+ Human error is the easiest type of failure to avoid. In my 
+personal experience, most amateur traders that i have had the 
+pleasure to work with have most their losses due to human 
+error. Simply lacking the discipline, patience and trust in 
+their system to execute like a steel-willed samurai. 
+ 
+ A simple and proven way to avoid such errors is to get 
+something to write on, could be a piece of paper or a nice 
+whiteboard, and clearly write your trade rules on that. Before 
+you take any trade, refer to what you’ve written down. If all 
+criterias are me t, then go ahead and trade. If none are met, 
+then turn on the PS5, play a couple games and just WAIT. 
+
+ 
+21 
+2. Technical Error 
+ Ah, so you thought that after rigorous backtesting and 
+front testing you would have a ‘perfect’ understanding of the 
+market? Think again. The market will surprise you. 
+ 
+ Again, my personal belief of mine is that there is no 
+technique or trading method that averages a 100% win rate 
+throughout an extended period of time. Anyone who claims 
+that is either selling you a dream, a total scammer or has the 
+luck of someone redisco vering a Dodo Bird in the Sahara 
+Desert. 
+ 
+ Technical errors fall into the category of losses that 
+happen after you have followed all your rules in your system. 
+They are simply unavoidable and it would be foolish of you 
+to want to avoid them. Trust me, trying to find a flawless 
+technique will cost you years of your time and will only cause 
+a whole lot more confusion than you anticipated. 
+ 
+Albert Einstein said, 
+“Insanity is doing the same thing over and over again 
+expecting different results” 
+ 
+I DISAGREE. 
+
+ 
+22 
+ Trading is not physics. There is nothing that is 100% 
+accurate. For example, in physics, due to the law of gravity, if 
+you throw an apple in the air, the apple WILL fall down. But 
+in trading, the apple can sometimes just fly in the air and 
+never come back.  But if I know that the apple has a 70% 
+chance of coming back down, I will throw that apple 
+everytime and hope for a win. THAT IS TRADING. You 
+can have all the timeframes in your favour, the perfect setups, 
+and it will still fail. But if you do it 100 tim es, you will be 
+profitable.  
+ 
+ If you lose due to a technical lose, meaning that you 
+followed all rules well, then DO THE SAME THING 
+REPEATEDLY. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+23 
+ 
+ 
+ 
+ 
+Stick with a proven, simple, strategy and LET THE 
+ODDS PLAY OUT 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The best traders have mastered the art of losing. 
+ 
+That wasn’t a typo. 
+ 
+Read that again. 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+24 
+The Phases of a Trader 
+ 
+ Every trader goes through multiple phases before 
+reaching the level they want to be. It’s like how in a game, you 
+start off at Level 1, and as you play more, you gain experience 
+and your level increases. The thing about trading is that most 
+traders refuse to respect the process and the grind it takes to 
+truly make it in this industry. In this section, let’s talk about 
+the process. Here are the phases that every trader goes 
+through: 
+ 
+1. Shit Phase 
+2. Learning Phase 
+3. Experience Phase 
+4. Mastery 
+ 
+ Once you learn how to identify which phase you’re in, 
+you start learning to enjoy the process, which most traders 
+fail to do. They come in just for the money and that’s why 
+they leave with none.  
+ 
+Growth comes in phases 
+ 
+
+ 
+25 
+ 
+ 
+ 
+ 
+Who you are now is built on who you were 
+ 
+Growth moves in full circles 
+ 
+ 
+ 
+
+ 
+26 
+Shit Phase 
+  
+Pardon me for the lack of better language, but 
+unfortunately it is what it is. This phase is something that 
+every trader goes through. It is that phase where you have 
+absolutely no guidance, totally relying on Youtube Videos 
+and are constantly jumping from  one trading philosophy to 
+another.  
+ 
+Simply speaking, 
+ 
+YOU ARE LOST 
+ 
+There’s good news and there’s bad news. The good news 
+is, you have so much room to grow. The world is out there 
+for the taking and you are basically a newborn in the trading 
+world. You are at the stage where you have near unlimited 
+amounts of passion and full drive. You are motivated to make 
+it and really, enjoy this buzz while you can because it won’t 
+last.  
+ 
+The bad news? Well, it’s that you won’t be able to make 
+it out unless you properly search for someone to guide you 
+
+ 
+27 
+out there. SO many people give up in this phase simply 
+because they start thinking that trading isn’t for them, or it’s 
+just too complicated. But really, I get it. I’ve been there before 
+and all I can say is.. Good luck.  
+ 
+The only way for you to get out of this is by finally 
+admitting that you need some proper guidance and require 
+someone to tell you what’s right from wrong. The fact that 
+you purchased this book shows that you understand that you 
+require guidance. And i applaud you for that. Good on you! 
+ 
+During my shit phase, I was jumping from signal group 
+to signal group, hoping that each guru would give me some 
+holygrail method that would somehow make me a millionaire 
+overnight. Unfortunately, all I got was simple 2 minute 
+videos of dudes explaining support and resistance in the most 
+uncanny manner. I was mixing and matching every strategy I 
+could find and the more I mixed, the worse it would become. 
+Heh. And I thought I was smart. My shit phase ended when 
+i decided to take matters into my own hands and bought a 
+mentorship. Learned some cool knowledge and built my 
+foundation on it. Awesome 
+ 
+ 
+
+ 
+28 
+ 
+ 
+ 
+ 
+Everyone starts somewhere 
+ 
+But for traders? 
+ 
+We start at the very bottom 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+29 
+Learning Phase 
+ 
+The learning phase is where you decide to break from 
+your old habits because you’re starting to understand that 
+you are inherently lost. You want to do better, so you start 
+paying people for knowledge. I believe that mentorship is not 
+a scam, this book its elf feels like a mentorship but just in 
+written word form. I believe mentorships are only scams 
+when the teacher does not give what is promised or massively 
+under delivers. Otherwise, getting a mentorship is the best 
+decision for anyone starting out in any industry. 
+ 
+Learning can only be done well when done correctly. 
+Most people don’t truly know how to learn. Sometimes, 
+more knowledge leads to destruction especially when not 
+managed properly. Here’s where i can give you some of my 
+experience to hopefully guide you on this path. My personal 
+philosophy to learn is,  
+ 
+“You must know what you don’t know, so you can find 
+what you don’t know” 
+ 
+
+ 
+30 
+To be an effective learner, learn to understand where 
+your weak points are. Where you need help and guidance at. 
+Simply learning without intent will leave you overwhelmed 
+and left in a state of analysis paralysis.  
+ 
+During my learning phase, i identified that i needed help 
+with long term market direction, so i went scavenging for 
+mentors that only do swing trades. I needed help with 
+understanding how to work with lower timeframes, so i went 
+under the wing of a supersc alper. I needed help 
+understanding the hourly timeframes, so I decided to enroll 
+under a mentorship of someone who mainly daytrades. You 
+see, that’s how you effectively learn. Throughout my learning 
+phase, I have had the pleasure to learn with so many teachers, 
+namely Saintsbrian, 411, Emrage Capital and much more 
+that I do not wish to name. But all of these amazing people 
+have shaped me into the trader and person i have become 
+today, and i am eternally grateful for them. 
+ 
+Bottomline, the learning phase is where you start to take 
+bits and pieces of knowledge and add them into your 
+personal arsenal. 
+ 
+ 
+
+ 
+31 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Stand on the shoulders of giants 
+ 
+Then enjoy the view 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+32 
+Experience Phase 
+  
+Your mentorship has ended. Now it’s time for you to 
+face the market. The experience phase is where you no longer 
+learn from a person. Rather, you start learning from yourself 
+and the market. You start collecting data (methods disclosed 
+in further chapters)  and figuring out which pieces of the 
+puzzle work best together. Have you ever heard about a man 
+who has 10+ years in the market but still minimal results? 
+Well that’s usually because he did not collect experience in 
+the right direction. The criterias to b uild a profitable system 
+simply were not met, and he was left moving around in 
+circles. 
+ 
+Direction is more important than speed 
+ 
+ My personal experience phase took years. This is where 
+most truly start giving up. The feeling of “I’ve learnt so 
+much, but i know nothing”. Sound familiar? Been there, 
+done that. The only way out of this is by restructuring 
+yourself and locking in by building yourself a personal system 
+(steps in coming chapters). Here’s a story about one of my 
+mentors and friends and how he achieved profitability.  
+
+ 
+33 
+ 
+ He was a business owner and was very tired working 100 
+hour weeks. Good money, but he needed to rest. What 
+happened was that he devised a plan. At the time, he had 5+ 
+years experience in trading and basically knew everything but 
+was not profitable. He used the monthly revenue to bring his 
+staff members to Langkawi for a company retreat  but he 
+stayed in the hotel room. 18 hours a day just backtesting and 
+front testing while collecting data in the form of annotated 
+screenshots. During this time, he told him self, “I’m tired, i 
+want to rest” If he did not make it in 30 days, he will give up. 
+The human mind works in wondrous ways. When you push 
+it to the absolute extreme, miracles can happen especially 
+when you have a strong connection to God. After 11 days, he 
+was able to turn 5 figures to multiple 6 figures and called off 
+the company retreat. He made it. He’s now able to make 
+money while resting. A few weeks later, he closed off the 
+business, paid off the staff and went on to live as free as a bird. 
+All it takes is years of learning then a short time of continuous 
+and intense pressure. And then you should be set 
+ 
+ 
+
+ 
+34 
+Mastery 
+ 
+ Congratulations, you made it. Everything was worth it 
+in the end. You are now consistently profitable and you 
+either have a huge amount of prop firm funding or have a 
+nicely sized personal account.  *standing ovation* You can 
+now pull money while you’re doing anything. Heck, even 
+while you’re taking a shower. You can make a person’s yearly 
+salary within a week with 1% the effort. But the thing is, no 
+one knows what you had to endure in the process of trying to 
+be profitable. The pain you endured, the nights you doubted 
+yourself, the hardships that came with it. Insane. That’s the 
+insane part about trading. It’s a whole lot of nothing, then 
+boom. All at once. Everything you’ve ever lost, made back 
+within a short amount of time. Do i sound like I’m selling 
+you a dream? Yeah kinda. But is it possible? Absolutely. And 
+I’m coming from a place of experience here. Believe in 
+yourself and you’re already halfway there.  
+ 
+ 
+ 
+ 
+
+ 
+35 
+ How would you know if you’ve achieved total mastery? 
+Well, it is when you have system that you know like the back 
+of your hand. A system you trust, is profitable and can stand 
+the test of time. The second sign is that you are now mostly 
+desensitised to what the market does. It can go to the moon 
+or shoot down thousand of pips but you wouldn't care. You 
+finally realise that you now have control over a lot of things 
+and one of those things is yourself. You’re basically a monk 
+with money making powers. That is the end goal of a trader.  
+ 
+ You open the charts, look at the market, and if there is 
+no setup that looks nice enough or follows your entry 
+models, you close them and learn to wait. It’s a beautiful life.  
+ 
+ How do you maintain yourself in mastery? Well that’s 
+simple. Here’s an analogy, you’ve now turned yourself into a 
+supercar. If you drive through the countrysides enough, 
+you’ll get dirty. So you’ll need a wash and some yearly 
+maintenance. As a trader who has achieved mastery, the best 
+way for you to get a ‘wash’ and ‘maintenance’ is by reviewing 
+your journal, data and screenshots for a few hours every 
+weekend. To make sure you are always as familiar as possible 
+with how it works without missing much details. 
+ 
+
+ 
+36 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Section 2:  
+The Trader’s Mindset 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+37 
+Process Oriented VS 
+Outcome Oriented 
+Above all in trading, it is extremely important to be 
+process oriented rather than being outcome oriented. You 
+don’t have to win every single trade. You just have to win 
+enough to be profitable. If you lose on a setup that has been 
+profitable in the long run, if it comes again in the future, just 
+take it again. You should be a stoic in this sense. Good trading 
+is simply doing the SAME thing again and again. Despite the 
+results, because you know in the long run, you can win. 
+ 
+When you focus on a process, 
+You get a desirable outcome 
+ 
+When you focus on an outcome, 
+You lose 
+ 
+If you’re hungry, 
+Do you find a way to get food, or learn to eat? 
+
+ 
+38 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+You want results? 
+Do something that helps you get results 
+ 
+ 
+Process Oriented 
+Outcome Oriented 
+ 
+Time 
+Equity 
+
+ 
+39 
+Fear and Greed 
+  
+ 
+ 
+These two aspects destroy more traders than you realise. 
+And this is why so many fail in this journey. This is why i love 
+to talk about how trading is largely a personal journey and 
+the only way to get better as a trader is if you take the time to 
+improve as a person.  
+ 
+ To improve as a person, you will need to clearly identify 
+your emotional triggers and the tendencies that come when 
+you feel them. For example, revenge trading or simply full 
+porting an account, both of which could eventually be a 
+silent killer in the realm of trading. 
+ 
+ Let’s talk about this. No, let’s have a heart -to-heart 
+conversation about this. 
+ 
+ 
+ 
+
+ 
+40 
+ 
+ 
+ 
+ 
+ 
+Like anything else in life,  
+ 
+You have to grow inside first to grow on the outside. 
+ 
+Just like how flowers can only bloom when they’re perfectly 
+ready 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+41 
+Fear 
+ 
+ Fear kills more traders than lack of knowledge ever will. 
+Imagine knowing so much about the market, knowing your 
+technique like the back of your hand but still lacking the 
+conviction to execute these trades. Been there? If your answer 
+is yes, then this action is tailor made specifically for you.  
+ 
+ Let’s do a little mental exercise. How many times have 
+you seen a crystal clear setup, and completely ignored it 
+thinking “Nevermind, it wont work” and then a few hours 
+later, you come back and it played out all the way to TP? Why 
+did that happen? It was because you were not able to learn to 
+trust the process. Trades fail, trades work. As long as you 
+know that most of your trades should go well, then just 
+continue hitting the right buttons. There is no need to be 
+scared. Being overly cautious will only hurt you more. 
+ 
+ 
+ 
+ 
+ 
+
+ 
+42 
+Killing Fear 
+ Most fears are created in the mind. Most fears are simply 
+imagined outcomes that took control of you because you 
+weren’t disciplined enough to say NO. 
+ 
+ Fact of the matter is, in order to be a successful trader, 
+you have to totally get rid of a certain human part of yourself, 
+which is why many traders fail. They weren’t able to break 
+free from the mental shackles that haunt them.  
+ 
+Here’s some advice 
+ 
+ If you knew that a trade would work MOST OF THE 
+TIME, would you still be scared? Would you be hesitant? 
+Nope. Of course not. You’d come to terms that if you lose, 
+this is simply just another outcome in the grand probability 
+of things. You would be able to tell yourself,  
+ 
+“I can win if i take this again next time” 
+ 
+To achieve total confidence, you’ll need… DATA (to be 
+continued) 
+
+ 
+43 
+Using Data To Combat Fear 
+ 
+ My personal opinion is that the best traders are simply 
+the best data collectors. Throughout my experience 
+mentoring huge talents, one thing holds true to each one that 
+make it in this industry: 
+ 
+A passion for pattern recognition 
+ 
+ Most of the insane ones that i know say things like, “I’ve 
+been backtesting for 6 hours a day”, “I have hundreds of 
+screenshots of setups in my folder”, “I tried everything i 
+could”. And really, it is just THAT SIMPLE to get where you 
+want in trading. Having being totally familiarised with your 
+technique eliminates most traces of fear. Do those 100 
+screenshots per setup. Find every scenario and keep them in 
+a nice folder. Do that heavylifting, and the fear you 
+experience while dancing with the live market should dissolve 
+on its own 
+ 
+“He who sweats more in training bleeds less in war” 
+ 
+
+ 
+44 
+Greed 
+ 
+  Like everyone else, you came into trading because you 
+thought it could turn small money into big money real quick. 
+While that can be correct, the best path to success is 
+incremental and steady gains rather than full porting your 
+account at every opportunity. 
+ 
+ “Greed makes people poor” 
+ 
+ I know you want to make that $1000. But you only have 
+$50. Simply speaking, your mind wont be able to handle such 
+pressure especially knowing that you MUST turn that money 
+into 4 figures. It’s a hard life, i know. But adding this to it 
+only makes life harder. 
+ 
+ Here’s a little scenario that you might have experienced. 
+You’re in a trade, and you’ve already gotten a 1:2 RR trade. 
+Nice! But instead of taking profit, you want it to go to the 
+moon and get a 1:5 RR trade. That doesn't happen and ends 
+up taking your st oploss. If you took profits and followed 
+your plan, you could have been alright. But your greed got 
+
+ 
+45 
+the best of you and now you have to recover your account 
+from drawdown. Not fun right? But here’s the thing, if only 
+you could learn to respect your plan, things could have 
+turned out much differently. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+46 
+Managing Greed 
+ 
+ In my personal opinion, there are only 2 ways to go 
+about trading. Personal funds or Prop Firms and that’s 
+basically it. Both ways have their pros and cons but are 
+extremely effective when it comes to getting success in 
+trading.  
+ 
+If you’re lucky enough to have personal capital or have a 
+comfortable job that pays well and do not want to follow 
+stringent rules that prop firms force onto you, then personal 
+funds is the way. However, if you don’t have much money 
+but are extremely skill ed in trading, go the prop firm route. 
+Much less flexibility but way more bang for your buck 
+especially if you can make it to a payout. 
+ 
+Human beings are born greedy, and it can manifest in many 
+different ways. Let’s do a little deep dive on how to manage 
+this in both routes so you can learn not only how to make 
+money, but keep it too. 
+ 
+ 
+
+ 
+47 
+Personal Funds 
+ 
+ Since everything is left to your own responsibility, you’ll 
+need to learn the art of account management to squeeze as 
+much value as you possibly can. 
+ 
+ Let’s say you’re starting off with $10000. I can’t go 
+lower than this as people will start saying that i’m giving you 
+unrealistic expectations, but this system can be applied to any 
+amount of capital.  
+ 
+ Take that $10000 and split it into 4 accounts. $2500 
+each. Risk 10 -15% on every trade you take on the $2500 
+account. If you’re able to get a good 50% growth on that 
+account, transfer it back into the large pool of $10000. This 
+takes a HUGE mental burden o ff you and can eventually 
+make your trading very stress free in the long run. And this 
+way, you’re also forcing yourself to not risk your entire 
+capital therefore greed can’t get to you even if it tried.  
+ 
+ 
+ 
+
+ 
+48 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Rinse and repeat 
+ 
+ 
+ 
+
+ 
+49 
+Full Margin (Kamikaze Mode) 
+ 
+ This is using a personal account on steroids. You go 
+risking it all on one setup and wait for an outcome. I know 
+some guru out there will read this and probably diss me on 
+this, but truly, it’s one of the best ways to make good money 
+from trading if you’r e starting from absolute zero. At least 
+that’s how I did it. This method helped me turn 100 Bucks 
+into 1k, 1k to 10k, and slowly scaled up to a much larger 
+amount. If you have more than a 50% win rate on setups more 
+than 1:1 you can make it work marvellously. 
+ 
+ In this world that we live in, people discourage the art of 
+massive risk taking. Somewhere on the net, I heard someone 
+say that a healthy risk is 0.5% of an account. But let’s be real 
+here, you don’t have 100k. You want to start from the 
+absolute bottom. So let me help you grow that thing. Let’s 
+say we’re starting from 1000USD . Let’s get to the money 
+heist. And let’s just hope your broker gives you a nice enough 
+leverage while allowing you to withdraw your money if you 
+succeed with this method.  
+ 
+
+ 
+50 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+All it takes is a few good trades. And you’re golden 
+250USD 
+250USD 
+ 
+250USD 
+ 
+250USD 
+ 
+1000USD 
+1000USD 
+
+ 
+51 
+Prop Firms 
+ Frankly speaking, we are living in the golden era of prop 
+firms. They’re basically everywhere.  But due to this, the bar 
+of entry to the trading industry is now so low you can even 
+start trading with $50. It’s actually insane. But like anything 
+else, it’s  a double edged sword and most people hurt 
+themselves in the process. Let’s learn how to use them 
+smartly. 
+ 
+ In my personal worldview, prop firms are good, but they 
+are only a stepping stone that you must use to fund your 
+personal account. If you are to get a payout, be wise and 
+dump a good chunk of it in a reputable broker. 
+ 
+ Back to the topic. If you have only $500, you’re much 
+much much better off buying a 100k funded account from a 
+firm rather than trying to flip it. Let’s be real here. You want 
+to make big money. And flipping that $500 into something 
+meaningful just isn’t realistic especially if you’re just starting 
+out. Remember, 1% on $500 is $5 but it amounts to $1000 
+on an $100k account. Just a numbers game. Bigger capital 
+helps you think better without taking dumb risks. 
+
+ 
+52 
+ 
+ 
+ 
+If you want a bigger slice, 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Get a bigger pie. 
+ 
+ 
+ 
+ 
+
+ 
+53 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Good Answers come by asking great questions. 
+ 
+Have you asked any? 
+If you have, how many? 
+If you haven’t, when will you start? 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+54 
+ Throughout my career as a trader, I've had the privilege 
+to meet monsters, wizards and legends of the market. 
+Everything seems to fall in place for them, and it seems like 
+they just know the future (which is impossible). I’ve had the 
+privilege to call the m friends, mentors and brothers. I’ve 
+studied them, studied with them, studied under them, and 
+I’ve noticed a very clear pattern in each one of these people 
+ 
+It’s the art of following a system.  
+ 
+You don’t have to care about what the market will do if you 
+know exactly how your next setup looks like. You don’t need 
+to predict if you can react. You don’t need to perceive if you 
+can read. You don’t need to understand everything if you 
+understand a few things clearly. The market does not reward 
+the smartest rather, it rewards the most resilient, the most 
+consistent, and the most meticulous. 
+ 
+It rewards the ones that say, 
+“If this happens I’ll do this” 
+It punishes the ones that say, 
+“This will DEFINITELY happen” 
+ 
+See the difference? 
+
+ 
+55 
+My entire trading career is built on questioning the 
+market. Every level, every movement, every tick and reaction; 
+hoping to find the grand algorithm that governed the thing 
+we call the markets. Funnily enough, i used to believe that a 
+100% win rate was po ssible. I had huge winning streaks at a 
+given time, so i felt invincible. Until a losing streak came 
+which made me fall into a deep depression. But that’s all a 
+part of the journey. Nothing breaks you more than having 
+the stars ripped from the damn sky the moment you thought 
+they aligned. After having that happen, all i could think of 
+was, 
+ 
+“Have the market makers found me?” 
+“Will my technique ever work again?” 
+“Was it all luck?” 
+ 
+Everything felt like it was working against me and i 
+thought it was the end. The end of my trading career. I 
+thought I had to pack my bags and perhaps turn into one of 
+those ecom guys (which is equally as cool) or simply start 
+gambling on memecoin (i’m joking). But little did i know, 
+that was the start of something beautiful. It was the start of 
+my real journey. The true journey of a trader. The growth 
+process 
+
+ 
+56 
+People fail, systems don’t. Read that again. People fail, 
+systems don’t. A foolproof system is designed to protect the 
+fool (the fool in question is yourself and myself). It took me 
+too long to realise that the market wasn’t meant to be 
+understood. It’s si mply a grand casino with repeated 
+outcomes. You can do everything right, and still fail. You can 
+do everything wrong, and still succeed. That’s how absurd 
+the market is. But like anything in life, nothing is truly 
+random. There are patterns even in randomness. 
+ 
+“Everyone thinks trading is fun and games until it 
+breaks you in the process” 
+ 
+Hold five fingers out. Put a finger down if you’ve gone 
+broke trying to trade. Put a finger down if you’ve cried 
+because you have no idea what you’re doing. Put a finger 
+down if you think you’ve been scammed. Put a finger down 
+if you’ve full ported your ac count on one trade. Put a finger 
+down if you’ve thought about giving up. All fingers down? 
+Thought so. You’ll realise your experiences are universal and 
+you’re never alone. Thousands of others reading this book 
+feel the same way as you. Learning trading in volves a lot of 
+pain. But if you survive long enough, it can reward you with 
+more than you ever hoped for. 
+
+ 
+57 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Still here? 
+Great job. We’re only just starting 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+58 
+ 
+ 
+ 
+ 
+ 
+Section 3: 
+Building A Profitable System 
+ 
+ 
+ 
+ 
+ 
+
+ 
+59 
+You’ll need to build a few systems before you enter the 
+market seriously. 
+ 
+1. Trade Entering System 
+2. Trade Exit System 
+3. Psychological Systems 
+3a) Pain Management System (during losses) 
+3b) Pleasure Management System (during wins) 
+ 
+Following these systems allows you to be able to enter 
+supertrader mode provided that you were able to build these 
+systems up on your own. Why is building your own systems 
+so important? It’s because every trader is unique. We have 
+different needs, wants and capabilities. Therefore, there is no 
+one size fits all in trading. Everything is strictly personal. This 
+is the ultimate path to the holy grail in my opinion. Nothing 
+else really comes close.  
+ 
+So what is a holy grail? How does one achieve it? Is the 
+fabled 100% win rate method real? Well, i wouldn't say so. 
+But following these systems allow you to be able to maximise 
+everything you have with minimal downsides. Let’s dive into 
+the creation of each of these systems. 
+ 
+
+ 
+60 
+The Trade Entering 
+System 
+ In order to make money from the market, it’s obvious 
+that you’ll have to take trades. But to keep the money you 
+make, you’ll need to learn the art of managing trades. Let’s 
+talk about entering first. You’ll need a few things to make it 
+work: 
+ 
+1. Understanding of levels 
+2. Understanding what makes them high probability 
+3. Understanding what to ignore 
+ 
+You’ll never see the light of profitability if you have no idea 
+how your next setup looks like. If I were to test you right 
+now, and pulled up the charts on TradingView and asked, 
+ 
+“What do we do now?” 
+ 
+If your answer isn’t, “Wait for x to happen” or  “Enter at x” 
+or “Nothing.” then i have extremely bad news for you. You 
+simply suck as a trader and you’ll either need to backtest for 
+countless more hours and start seriously journaling. 
+
+ 
+61 
+Developing Understanding of Levels 
+ 
+If you haven’t realised yet, my entire writing focuses on 
+helping you ask yourself the right questions to understand 
+the pain points you’ve been experiencing as a trader. I 
+presume that every reader that has a hold of my book has 
+their own style of trading  therefore i can focus on the more 
+juicy parts. 
+ 
+In my opinion, the only way for you to truly understand 
+levels of the market is by learning from a well -seasoned 
+trader, or better yet, a Youtube video that details how to 
+mark and interpret said levels. Once you have that, here 
+comes the next step. 
+ 
+Backtest. 
+ 
+Find each level, and take a screenshot every time you 
+find that level happening in the market. Once you have 
+racked up at least 50 screenshots of the exact same level 
+working, congratulations, you’ve made progress. You’re well 
+on your way to be a trader that doesn’t guess, but instead uses 
+data-backed decisions. Go you! 
+ 
+
+ 
+62 
+Understanding High Probability Levels 
+ 
+ Again, I can’t totally speak for everyone, but my 
+personal way of determining if a level in the market has a 
+good chance of holding and pushing price in the right 
+direction is…. 
+ 
+“CONFLUENCE” 
+ 
+ I am an avid believer that the best way to trade is if there 
+are multiple reasons to support your trade, be it buy/sell. My 
+personal rule is that I must have at least 3 unique reasons to 
+support myself taking the setup. 
+ 
+ The most important thing that all traders should have in 
+their arsenal is a strategy with an edge. 
+ 
+“What’s an edge?” 
+ 
+ An edge means that your desired outcome has more than 
+a 50% chance of happening in a given scenario. If you’d like 
+to copy my edge, go ahead. Before taking a trade, find 
+multiple reasons to support the decision. If you don’t have 
+more than 3, then don’t take it.  Yep, that simple.  
+
+ 
+63 
+Understanding What to Ignore 
+ 
+ Have you ever had an occurrence where you have so 
+many setups that makes you end up as a confused mess? 
+ 
+No? Close this book now and go away 
+ 
+Yes? Okay let’s work on it 
+ 
+ Most traders lose money because they have no idea what 
+to prioritise. No idea what to focus on. No idea how to know 
+if a setup will break.Based on my personal experience, the 
+best way to determine if your bearish/bullish setup has a 
+probability of breaking is if the higher timeframe has made  
+ 
+1. Structure Breakout 
+2. A high confluence setup that caused a sharp movement 
+in the opposite direction of your setup 
+ 
+ Wait, that simple? Yep. I hold on to the belief that price 
+action is fractal and all the smaller timeframes are used to help 
+the bigger ones move. Just like Santa and his elves. 
+ 
+More of this shall be explained in the later chapters 
+
+ 
+64 
+ 
+The Trade Exit System 
+  
+ Good. I will now assume that you now have a clear 
+system to enter. Let’s talk about exiting trades next. Let’s 
+imagine a few scenarios for you now 
+ 
+ 
+SCENARIO ONE (IN PROFIT): 
+ 
+ 
+ You’ve taken a trade, and it’s in profit. A cool 50 pips 
+and you’re just here chilling and enjoying how the trade is 
+going. A part of your mind says to hold until 100 pips, while 
+another says to set it to breakeven and just enjoy the rest of 
+the day. You set your take profit at 100 pips then move your 
+stop loss to breakeven. All of a sudden, price moves towards 
+your breakeven, and you decide to change the plan by 
+adjusting your stop loss to -30 pips. You then end up in a loss. 
+Silly you. 
+ 
+ 
+
+ 
+65 
+ 
+ 
+WHAT YOU COULD HAVE DONE: 
+ 
+ Before entering the trade, determine what you’re 
+playing as first. Will it be a scalp trade, an intraday trade, a 
+multi day trade, or a swing? Depending on the setup, change 
+your stop loss and take profit to accommodate your trade 
+length. Set a rule, for example, if price breaks level x, 
+immediately set a breakeven and let it hit your take profit if 
+it hits. My personal way to manage winners that totally 
+changed my way of trading and increased my profitability is… 
+ 
+PLAYING IT DEFENSIVE 
+ 
+ How I’d do it is pretty darn simple but increases the 
+odds of you winning to a maximum. If I’m in losses, I will 
+focus on recovering that loss. Even if it means early take 
+profits. Once that loss has been recovered, i tend to set my 
+trade at breakeven even if it moved around 20 pips. I like my 
+trades risk free. This way, my profits are either 0 pips or my 
+desired take profit. Which is awesome. Try it out! 
+ 
+ 
+
+ 
+66 
+ 
+SCENARIO TWO (IN LOSS): 
+ 
+ You’ve entered a trade, and now you’re PnL is in the 
+negatives. Obviously, it’s not a sight that you like, but it’s 
+simply just another outcome in the grand scheme of things. 
+You set your stop loss to -30 pips and now your trade is at -
+29. You think to yourself, “Maybe I need to increase my stop 
+loss, I am confident in this trade”. The stop loss is then 
+increased to -50 pips and then -60 pips. The cycle constantly 
+repeats until you got stopped out from your broker/prop 
+firm. After getting stopped out, you look back at the charts 
+and find one trade you didn’t take and it ended up in a 100 
+pip profit. You start questioning if it is all worth it. 
+ 
+ 
+ This is the horror stories traders face everyday 
+ 
+These are our battles. 
+ 
+But you’d be surprised to know that there is the most simple 
+solution to defeat this bad habit 
+ 
+ 
+
+ 
+67 
+WHAT YOU COULD HAVE DONE: 
+ 
+Ready for the dumbest solution to help you go from 0 to 1?  
+ 
+RESPECT YOUR PLAN. 
+ 
+If your stop loss was -30 pips, we can assume that 30 pips 
+is one life. Think of trading like a Pac-Man Game or whatever 
+you grew up playing. 30 pips is one life. One trade loss. If you 
+were to change and adjust your stop loss every single time you 
+trade, to 50 pips or 60 pips, you’ll need to cover that up with 
+more lives instead of 1.  
+ 
+If you’re constantly risking the same percentage in every 
+trade, you’ll start to see trading as simply just a numbers game 
+and if your knowledge and technique is good enough 
+eventually things will fall into place and you can be 
+profitable. Really simple tweaks. 
+ 
+Another note to add is that, my personal emotional 
+barrier breaks when i have more than 3 losses in a row. 
+When that happens, i take my time off the charts, and just 
+mark my setups. If they continuously work, it helps me 
+regain my confidence, and then i slowly jump back in. 
+
+ 
+68 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Good trade management requires immaculate self 
+management 
+ 
+It was always You VS You 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+69 
+ 
+The Art of Journalling 
+ Let’s start off with a story about one of the greatest 
+conquerors of all time ; The Caesar of Ancient Rome, 
+Marcus Aurelius. 
+ 
+ The Caesar was tasked with a significant amount of 
+power from a very young age (18 years old). Naturally, power 
+corrupts, power entices and power reveals what’s hidden 
+underneath a human. He understood this despite being 
+extremely young and decided he nee ded a way to lead with 
+the utmost accountability and to avoid arrogance as the 
+Caesar at all costs. This is how his personal journal, 
+“Meditations” came into the world. Meditations was not 
+meant to read by anyone other than himself, however after 
+his death , his personal journal was leaked to the general 
+public and what was inside gave such intimate insight into 
+his life and allowed philosophers to understand him better 
+than ever before. 
+ 
+ As the Caesar, he focused on quite a few things. But one 
+pillar that was the theme of the entire journal was: 
+ 
+
+ 
+70 
+“Accountability and Constant Learning” 
+ I’m a bit of a Marcus Aurelius nerd, and was always in 
+awe of what he achieved throughout his well -lived life. I 
+mean, who wouldn’t be a fan of a gentleman that defended 
+his nation from a full -on barbarian invasion, managed 
+millions of citizens during the Antonine Plague and all this 
+while maintaining a brotherly bond with his Co -Emperor, 
+Lucius Vertus. Not only did he manage that, bu t he was also 
+able to stay stoic, calm and calculated throughout his ordeals. 
+I’d like to credit journaling for his feats as there is no other 
+better and simpler way to achieve such success without deep 
+and constant introspection.  
+ 
+A few guiding principles that were clear in his personal 
+journals were: 
+ 
+1. Humility and Restraint in Using Power 
+2. Clarity Even Under Pressure 
+3. Balancing Justice and Mercy 
+4. Enduring Loss Without Losing Himself 
+5. Leaving a Legacy of Virtue 
+ 
+Have you started journaling? 
+And if you have, what are your main points? 
+
+ 
+71 
+Journaling as a Trader 
+ 
+ Now that you’re well aware of how journaling shaped 
+one of the best humans to ever walk the face of Earth, let’s 
+start exploring how we can use it to conquer the seemingly 
+impossible skill of trading.  
+ 
+In order to grow as a trader, you’ll need to grow as a 
+person. And what better way is there to grow as a person than 
+to be totally aware of your own habits and hesitations. 
+ 
+Within this chapter, I’ll share with you the journalling 
+habits that helped me identify my weak points and allowed 
+me to turn them into strengths. I would also like to show you 
+the way to journal that allows you to maximise your strengths 
+into the highest echelon possible.  
+ 
+ 
+“What isn’t measured, isn’t managed” 
+ 
+ 
+ 
+ 
+ 
+
+ 
+72 
+HOW TO JOURNAL: 
+ 
+1. Type of Trade (BUY/SELL) 
+2. Expected Length of Trade (SCALP/INTRA/SWING) 
+3. Reason for Trade (CONFLUENCES) 
+4. Feelings Before Trade (BE HONEST) 
+5. Outcome of Trade (PROFIT/LOSS) 
+6. Reason for Trade Closure  (TP/SL/BE) 
+7. Feelings after Trade (BE HONEST) 
+8. How to improve (TECHNICAL/HUMAN/CONTINUE) 
+ 
+ 
+I urge everyone reading this to start making proper 
+tables in their phone or anything that can be written on and 
+start journaling. Once you have a nice journal, you’ll start to 
+see repetitive patterns in the market and also within yourself. 
+And once you se e those patterns, you should know what to 
+do ;) 
+ 
+ 
+THE SHORTCUT TO SUCCESS IS SELF 
+AWARENESS 
+ 
+ 
+
+ 
+73 
+Let me explain to you the logic behind each parameter I 
+have set for you to journal throughout your journey. Bear in 
+mind, I used this during the time I was optimising my models 
+that I currently use. 
+ 
+1. Type of Trade 
+ 
+ You can only Buy or Sell. It’s very important to take note 
+of what type of order you have placed. It totally helps with 
+understanding how your win rate differs when you’re in a 
+different type of trade. Let’s say after you follow your system, 
+you realise t hat your buy trades generate much more profit 
+than your sell trades, therefore your model is more optimised 
+to buy rather than to sell in a longer period of time. This is 
+one of the many observations that you can make after an 
+extended period of journaling. 
+ 
+2. Expected Length of Trade 
+ 
+ Record how long you were supposed to hold that 
+specific trade you took. You’ll find that the win rate  and 
+profitability of your system will vary depending on how long 
+you intend to hold. You will also find that it isn’t everyday 
+that the market provides you with long runners. Once you 
+
+ 
+74 
+have this part of your recording done and dusted, you can 
+start to approach the market with confidence as you now 
+understand the general expectation of a setup you will take 
+after predicting a duration of which your trade is meant to be 
+held. DIAMOND HANDS BABY! 
+ 
+3. Reason For Trade 
+  
+ Trading is a personal endeavour. I can go on and on 
+about how much money I’ve made trading using a specific 
+entry model and teach you A -Z but somehow, you’ll end up 
+with varying results. Understanding a clear reason behind 
+each and every trade you take is extremely important in the 
+grand scale of things as it tests whether or not you are staying 
+disciplined in using your technique the way it is meant to be 
+used. Let’s say that after recording 30 trades, you start 
+realising a certain confluence was not ther e during your 
+trades that you lost. This will give you ideas on where you 
+should start tweaking your trading models and adjusting 
+where necessary. This is quite literally the shortcut to a 
+holistic understanding of your technique and how to truly 
+use it with the proper edge you were hoping for 
+ 
+ 
+
+ 
+75 
+4. Feelings Before Trade 
+  
+Call me crazy but I have had bad experiences taking 
+trades after going through a rough day. Heck, it might be that 
+your wife is causing a scene, your cat scratched you favourite 
+sofa, your car wasn’t able to start or simply you just weren’t 
+feeling it that day. All of this contributes to how well you 
+analyse the market. Personally, i perform much better when 
+I’ve had a proper meal and a good refreshing shower. 
+Understanding these personal triggers allows you to be able 
+to manage yourself accordingly to (hopefully) give your best 
+performance when dancing with the market. If you research 
+the world’s top athletes, yo u’ll find that a good chun k of 
+them have pre -game-rituals. Maybe one of the reasons you 
+haven’t made it yet is because you don’t have one yet? 
+ 
+5. Outcome of Trade 
+ 
+ Yep. Not going to explain this one. Write down if it 
+went in your way or did not. 
+ 
+ 
+ 
+ 
+
+ 
+76 
+6. Reason for Trade Closure 
+ 
+ There are only 3 ways for you to close a trade, and those 
+are Stop loss, Take Profit or Breakeven. Yea, we have Stop 
+Out and Margin Call but I would like to categorise that as 
+Stop loss. For every outcome of the trade, you can collect very 
+valuable data to help you improve. For example, when you 
+put a stop loss at 10 pips, the market tends to take it then 
+move in your desired direction. This ind icates that you need 
+to expand your stop loss or simply stop taking certain 
+opportunities. Analyse every breakeven trade that happened 
+to you and why it returned to your entry point. Most of the 
+time, there is a pattern that you can leverage so your trade 
+does not hit breakeven as often. For example, waiting for a 
+clear breakout to happen before moving your stop loss  to 
+breakeven. Of course, another metric of measurement would 
+be the take profit. Don’t just learn from your losing trades, 
+learn from your winning ones as well. A lot of valuable data 
+can be gained if you start understanding the patterns behind 
+the trades you won. And once you see that pattern, leverage 
+it! 
+ 
+ 
+ 
+
+ 
+77 
+7. Feelings After Trade 
+ 
+ This part is honestly the worst, because you can’t lie to 
+yourself. You’re going to have to write exactly how you feel, 
+and write your future self a little note. Since the only way for 
+you to be successful in this craft is by being totally honest 
+with yourself, you cannot lie in this section. If you feel like 
+giving up, just write that down. My journal is full of stuff 
+like, “dammmmmit i gotta give this up”, “hey i kinda feel like 
+i own the markets today”, “meh. Just another trade.”, “Well 
+that setup was bound to fail in the first place”. After a while 
+of total honesty with yourself, you’ll start to see more 
+patterns in your emotional behaviour and how it affects your 
+trading performance.  The goal of it all is not to eliminate 
+emotion, but rather, to manage them like a wise man. You’ll 
+begin to realise that the more trades you take, the easier it is 
+for you to become unphased with the emotional hurricanes 
+that trading brings forth. Get after it! 
+ 
+
+ 
+78 
+8. How To Improve 
+ 
+ Like I’ve explained before, losses are due to only 2 
+reasons. Human error, which is totally avoidable and can be 
+improved upon and the other is Technical Error, which can 
+only be improved via tweaking your system.  While i do 
+recommend tweaking your system every no w and then to 
+help tackle certain weaknesses, there needs to be a limit. If 
+you’re constantly changing the way you use a system, you will 
+never be able to trade properly. You’ll be stuck in this death 
+loop of constantly finding better ways to tra de and coming 
+out the other end clueless. So make it clear in your journal 
+when you lose a trade if it was a technical loss or a human loss. 
+And immediately give yourself tips to reduce human loss. In 
+a technical loss, simply put this “Good job, you followed your 
+system.”. Treat a technical loss the same way you would treat 
+a profitable trade. Because both are the results of following 
+your system without any compromises 
+ 
+
+ 
+79 
+Journal Example: 
+ 
+Type of Trade BUY SELL 
+Expected Trade 
+Length 
+Swing Scalp 
+Trade Reason H1 Entry with 
+H4 Direction 
+M15 Entry 
+without M30 
+Direction 
+Feelings Before I’m ok. Nervous 
+Trade Outcome Win BE 
+Reason For 
+Closure 
+Hit TP 1:1 Trade went up 30 
+pips and I set 
+Breakeven at entry 
+point. It hit 
+Feelings After Happy, but 
+remain steadfast 
+I am ok. But wish 
+I just held 
+Improvement Stick to same strat Grow a pair and 
+hold a little 
+ 
+
+ 
+80 
+Filtering The B******t 
+Anyone who has a good mastery of any craft has some kind 
+of secret sauce. This just happens to be mine. 
+ 
+ 
+Not many truly understand the art of building a system. 
+Most just jump into the market with whatever they’ve 
+learned from a Youtube Video hoping for consistent profits. 
+That won’t work. Let’s restructure and build together. 
+ 
+
+ 
+81 
+ 
+ 
+ 
+ 
+ 
+Everyone keeps on saying 
+“To make money in the market you’ll need a good system” 
+ 
+But what defines a good system? 
+How do you find it? 
+ 
+But most importantly, 
+How do you make it? 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+82 
+Find What Works 
+ 
+ Let’s start with the fun stuff. Defining what works. 
+With the knowledge that you currently have, do a ton of 
+backtesting, and find every scenario that has made money. 
+Put them somewhere in a folder so you can begin researching 
+them deeply. 
+ 
+ Have you found them? Good. Now find a pattern 
+between each one. There must be one. There always is one.  
+Then find the ones that don’t have much of a pattern 
+between them. Record those as well. They’ll be of very good 
+use as we move forward. 
+ 
+Finding What Does Not Work 
+ 
+ Find setups that have been violated. A true trader 
+embraces the fact that not all his trades will work perfectly 
+and can manage risk and expectations depending on market 
+scenarios.  
+ 
+
+ 
+83 
+Once you have found these setups, again, start finding 
+patterns that connect between them. Similarly to the setups 
+that work, setups that don’t work also usually have a pattern. 
+Use your intuition and find them. What is intuition? It is the 
+gut feeling that comes after unreal amounts of data collection 
+and hardwork. A little hint I’d like to give is that usually 
+setups get violated when a higher timeframe direction is not 
+within agreement. Remember, price is fractal and you cannot 
+disregard larger, stronger timeframes. 
+ 
+Finding What is Consistent 
+ 
+Now this is a fun one. I repeatedly mentioned “find 
+patterns” and now this is where you connect them altogether. 
+The things that consistently work can be put into the Golden 
+Zone while the things that consistently don’t work can be put 
+into the Hades Zone.  I’ll give you a damn good example on 
+how to determine what is “consistent”. You see that if you 
+enter on an M5 setup that does not agree with a H4 direction 
+bias, it can still work. But over  longer period of time, It is 
+NOT consistent. But what is consis tent is if you enter on an 
+M5 setup when timeframes agree with each other. A good 
+
+ 
+84 
+chunk of the time, you’ll be right and you’ll make money. 
+Some things work, but are consistent. And you’ll have to 
+learn to identify that. Some things don’t work, when certain 
+conditions arise. And you’ll have to learn to identify those 
+specific conditions to start developing your edge. 
+ 
+Golden Zone 
+ 
+ This is the overlapping area of the “Works” and 
+“Consistent” Venn diagrams. Now that you’ve totally 
+understood what works consistently, you can start building a 
+proper system and structure yourself around that. This is 
+your working area. Clearly define your rules around these 
+specific conditions. Because if you take any trades that do not 
+fulfil the conditions you have set in the Golden Zone, odds 
+are, the trade will likely fail.  
+ 
+ If you’re meticulous enough in your data collection, 
+You’ll only need to define the Golden Zone once and never 
+change it. The funny thing about messing with your trading 
+system is that, if you change one variable, you’ll need to tweak 
+3 other parameters. If you are comfortable with the way your 
+
+ 
+85 
+system already works, i would recommend you to just stick 
+with it. Most traders fall into the trap of wanting a 100% win 
+rate and this puts them in the spiral of wanting to constantly 
+change their technique and Golden Zone. Where will this 
+lead you? Absolutely nowhere. Because no strategy is right 
+100% of the time. But a lot of the time? Very possible. The 
+Golden Zone is your edge. Stick to it. 
+ 
+Hades Zone 
+ 
+ The Hades Zone is the embodiment of everything you 
+need to avoid as trader. The overlap of what does not work 
+and is consistent. It is not enough that you know what works 
+consistently. But you must also clearly define when your 
+system has a VERY LOW win rate. For example, my personal 
+strategy does not work phenomenally well during news time. 
+So i tend to avoid taking any trades 30 mins before or 30 mins 
+after the release of the data for NFP, FOMC, CPI, PPI, yeah 
+you get the drift. 
+ 
+ Identifying the Hades Zone in your trading can 
+massively help you filter out the crap from the gold when 
+
+ 
+86 
+you’re participating in market shenanigans. Remember this, 
+“The only way to know what to focus on is to know what you 
+should avoid” For example, my personal rule is that a trade 
+should have at least 3 confluences to if i wish to take it. First, 
+an agreemen t with the higher timeframe bias, Second a 
+breakout has happened, Third, smaller timeframes are giving 
+a nicely spaced setup. My Hades Zone states that without 
+these 3 confluences, my trades are likely to fail. Clearly 
+outlining this helps you totally ignore low probability setups 
+and can help with much clearer decision making. 
+ 
+Inconsistent 
+ 
+ If you see a trade that sometimes works and sometimes 
+does not, and you’re not totally sure where to put them as 
+they do not have much explanation behind them, simply 
+categorise these into “Inconsistent”. Researching them is a 
+waste of time. We only want setups that have logical patterns 
+behind them to remove the luck aspect from our trades. 
+ 
+ 
+
+ 
+87 
+ 
+ 
+ 
+ 
+Section 4:  
+The Art of T 
+ 
+ 
+ 
+ 
+ 
+
+ 
+88 
+My Way. 
+ 
+ 
+I personally believe that the naked chart is always the best. 
+ 
+ 
+If you want to trade this way,  
+ 
+ 
+You’re in for a treat 
+ 
+ 
+ 
+The best things are almost always hidden in plain sight  
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+89 
+  My personal way of trading only involves 4 different 
+types of setups and multiple confluences be it a trendline or 
+a little something extra. And for as long as i can remember, 
+most market movements usually just come from these 4 
+levels. You might think t hat this is recycled garbage from 
+Youtube, but I kid you not, I started using these way before 
+they were even popular. I was shocked at how so many traders 
+in my DMs came asking me if I used any smart money 
+concepts or anything liquidity related. Unfortuna tely, i do 
+not. My style is very pattern based and simple. In most of my 
+endeavours in life, I usually find some okay success, 
+Alhamdulillah. And I think it mainly boils down to the 
+principle i set for myself: 
+ 
+KISS 
+(Keep It Simple, Stupid) 
+ 
+I believe that if it’s complicated, it won’t work. 
+And if it does, it won’t work for a long period of time. 
+ 
+ In trading, you need a good balance of simplicity and 
+complexity. And i may have found the sweet spot 
+
+ 
+90 
+The Classic 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Let your setups breathe 
+A miss is always important 
+ 
+Miss 
+
+ 
+91 
+Real Chart Example 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+92 
+The Breakout 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+A classic that got broken out 
+With a miss before and after. 
+Beautiful 
+ 
+ 
+
+ 
+93 
+Real Chart Example 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+94 
+The HNS (Head and Shoulders) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+When used correctly, 
+This thing can signal the start of a lot of swing setups 
+ 
+ 
+
+ 
+95 
+Real Chart Example 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+96 
+The Gap 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The middle thing between two same coloured candles can 
+be used as a support or resistance. 
+DON’T overcomplicate it 
+
+ 
+97 
+Real Chart Example 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+98 
+ These are the most basic of setups. I believe that most of 
+the market movements are caused by these patterns. Some 
+call it liquidity, supply and demand zones or various other 
+names. But reality is, they’re just chart patterns and people 
+are just trying to give them fancy names  and overcomplicate 
+them.  
+ 
+If you know me well enough, you know that i can 
+leverage almost any market condition. That is because i am 
+flexible when it comes to interchanging with my setups. 
+React, don’t predict. Take what the market gives, and don’t 
+ask for more. Hold when the market allows you to, buy or sell 
+only when the market clearly allows it. Learning to wait as a 
+trader can do you wonders.  
+ 
+ 
+ Don’t believe you only need 4 types of setups to flow 
+with the market? See the next example. 
+ 
+ 
+ 
+ 
+
+ 
+99 
+Real Chart Examples: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Guess the setups 
+
+ 
+100 
+Real Chart Examples: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+See it better now? 
+
+ 
+101 
+ Now that you’ve seen these levels, you basically have a 
+good baseline on how I trade. This is the ultimate basics and 
+you’ll need to do a LOT of repetition to start getting familiar 
+with these setups. I think I might know what is running 
+through your head right now.  
+ 
+“I see these levels and they clearly work. But a lot of these 
+levels are ignored. How d o I find the ones that can work 
+consistently?” 
+ 
+ If this is going through your head, good. It means that 
+you’re thinking and not simply just pretending to 
+understand. 
+ 
+As you read further throughout this book, the answers 
+should slowly appear. Enjoy 
+ 
+ 
+ 
+ 
+ 
+
+ 
+102 
+In my opinion, any good style of trading should have these 
+for it to be complete. 
+ 
+1. Long Term Direction 
+2. Confirmation 
+3. Level Filtering (What to Ignore and Focus on) 
+4. Adjustable Stop Loss 
+5. Adjustable Take Profit 
+ 
+Each of these components interact with each other like 
+cogs in a grand machine. Without one, the other would fall 
+apart and the entire machine would inevitably fail. Trading 
+should not be treated as rocket science, simply because it 
+isn’t. Your style does not need to be super advanced for you 
+to make eye-watering amounts of money. Rather, it just has 
+to be very effective, concise and easy to follow. I’ve explained 
+parts of this earlier in this book, but let’s go on a deeper dive 
+together now. 
+ 
+If your style is complicated, then it’s wrong 
+ 
+ 
+
+ 
+103 
+Long Term Direction 
+ 
+Big moves the big 
+ 
+Small follows the big 
+ 
+Big cannot move without small. 
+ 
+ Imagine the market like this colony of ants, all 
+following the direction of the queen ant. Whatever the queen 
+says, the workers will follow. But if the workers decide to one 
+day turn on the queen ant, now she is useless and can no 
+longer order. And let’s say the queen ant is now challenged 
+by another queen ( I don’t know if queen ants fight, this is 
+just an analogy), then now the queen that wins the fight will 
+be followed by the worker ants. This is quite literally how I 
+see the market and how i think it wo rks. This alone has 
+helped me generate a clear understanding of what the market 
+could do next and has helped me structure myself to react 
+accordingly. 
+ 
+ 
+
+ 
+104 
+ 
+ 
+ 
+ 
+ 
+ 
+Price always moves from point A to B 
+It always has a destination 
+ 
+ 
+
+ 
+105 
+ I believe that the market moves in cycles. It goes from 
+timeframe to timeframe, each completing its own cycle. 
+ 
+For example, 
+ 
+Movements from Daily Levels will finish at another Daily Level 
+ 
+Movements from H4 Levels will finish at another H4 Level 
+ 
+Movements from H1 Levels will finish at another H1 Level 
+ 
+ 
+ A queen ant can only be stopped by another queen ant of 
+her size. She cannot be stopped by a simple worker ant. It simply 
+isn’t possible. However, if a guard approaches her and she 
+convinces her well enough…. She might change her mind. What 
+do i mean by this? I mean to say that something slightly smaller 
+than the biggest authority can move price in a different way. We 
+call this, Roadblock Areas. 
+ 
+ 
+ 
+ 
+
+ 
+106 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Journeys aren’t always smooth. 
+Beware of bumps. 
+ 
+ 
+
+ 
+107 
+ Real Chart Example: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+H4 Level to H4 Level 
+
+ 
+108 
+ 
+Price bouncing from H1 Level to H1 Level 
+On its way to the H4 Level 
+
+ 
+109 
+Price truly is a funny thing. It seems almost impossible to 
+decode, until you start viewing it as a fractal object. 
+Remember my first analogy about ants? WORKERS 
+MOVE THE QUEEN. Remember my second analogy? 
+THE QUEEN CAN BE CONVINCED. 
+ 
+ 
+Daily flows can be blocked by H4. 
+ 
+H4 flows can be blocked by H1 
+ 
+H1 flows can be blocked by M30 
+ 
+You know the drill. 
+ 
+ 
+During real practice, mark your levels according to 
+different timeframes and watch how each of them react. 
+You’d be surprised to see how levels on specific timeframes 
+interact with each other. Observe and enjoy. 
+ 
+ 
+
+ 
+110 
+Confirmation 
+ 
+ Let’s talk about how to know if a price journey has 
+started. I believe that the market communicates in breakouts 
+and closing price. It quite literally is the foundation of every 
+movement that occurs. Within every long term movement, a 
+breakout will always occur. Here’s an analogy, going back to 
+ants. If the queen decides to move in a certain direction, she 
+won’t be communicating to the worker ants directly. Rather, 
+she will talk to one of her commanders to fulfil her wishes 
+and order the workers. If the commander does not agree with 
+the queen’s orders, the workers wont receive them, and hence 
+they won’t move. 
+ 
+Price will only move when it can. 
+ 
+It has to break ‘gates’ to get to a destination. 
+ 
+What are these gates?  
+ 
+And why are they important? 
+ 
+
+ 
+111 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+A view of the lower timeframe, at a higher timeframe area 
+ 
+A break of a lower timeframe support on a higher 
+timeframe resistance area is CONFIRMATION 
+ 
+This happens everyday. 
+
+ 
+112 
+Here’s an example on the real chart 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+H4 Breakout Level Touched 
+
+ 
+113 
+ 
+ 
+M15 Breakout of Decision Level 
+(We now have a confirmation) 
+
+ 
+114 
+ 
+M15 Gap Entry 
+(Take the buy with confidence) 
+
+ 
+115 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The Harmony of Timeframes 
+ 
+Can you hear the music? 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+116 
+I know what you’re thinking, 
+ 
+What is the blue line? 
+ 
+What is the red line? 
+ 
+The blue line is a higher timeframe level. It could be 
+any timeframe you wish. 
+ 
+The red line is a small timeframe structure that was 
+created right before it touched the higher timeframe level. I 
+like to call this a decision level. This level determines if the 
+movement is ‘valid’. Imagine the market is a car that wants 
+to go to a certain destination. This is the confirmation that 
+it has enough fuel and is most likely able to reach it! 
+ 
+Using multiple timeframes for entries is an art that 
+takes a lot of time to perfect. But once you can start to piece 
+that together, you might start feeling a sense of control and 
+power you wouldn’t be able to imagine. 
+ 
+ 
+
+ 
+117 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Clear path given? 
+ 
+Step on the pedal. 
+ 
+Reach that destination 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+118 
+ 
+Filtering Levels 
+ 
+As I’ve told in the previous section, 
+ 
+A very reliable way to determine ‘good’ levels is… 
+ 
+CONFLUENCE. 
+ 
+ I believe that the market is attracted to beauty. Aesthetic 
+beauty. As bogus as it sounds, this is what I’ve observed. If a 
+setup is undeniably beautiful, has multiple reasons to take it, 
+and is on the right timeframe, it has a good probability of 
+working out. Here’s another analogy, imagine if you eat well, 
+sleep well and train well. Odds are, if you keep doing this, you 
+can live a long healthy life… unless you get cancer. Again, my 
+analogies might seem out of pocket but that’s how I think 
+about the market. If the level seems right, and it aligns with 
+multiple narratives, just risk your money on it and set a good 
+stop loss and take profit. Trust it and just let it play out. It’s 
+that simple 
+ 
+
+ 
+119 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Trading is more like an art 
+ 
+The art of educated gambling. Haha 
+ 
+ 
+ 
+
+ 
+120 
+Here’s an example on the real chart 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+H4 Classic Level 
+
+ 
+121 
+ 
+ 
+ 
+H1 Trendline as a Confluence 
+
+ 
+122 
+ 
+Candle Closes below M15 Gap Level. 
+Entry with confidence 
+
+ 
+123 
+Having multiple confluences help with making educated 
+guesses. 
+ 
+As trader, all we do is make educated guesses for a living. 
+ 
+What are the confluences in the diagram i just showed you? 
+ 
+1. A level from a higher timeframe. Perhaps H4. 
+2. A trendline that leads up to the level. 
+3. Price touched the level, and made a breakout on the 
+decision level. 
+4. Price retested the decision level and the wick of the 
+candle rejected it. 
+Conclusion: IGNORE all buy levels. Focus on selling 
+ 
+ I’m not here to educate you on my system, as it would 
+be hard to put it into a book, but I’m here to help you 
+understand how to make your own system. And what I’ve 
+shown so far is that to make a successful working system, you 
+need to make sure that multip le biases are in your favor 
+before executing. Observe the market without judgement. 
+Let it guide you instead. Most traders nowadays think they’re 
+
+ 
+124 
+some sort of wizard that can predict the future. Most who 
+think that way will usually get humbled by the market in the 
+long run. This is because the reality is that the market has a 
+degree of randomness. Most predictions are usually flawed. 
+However, if you  are able to create a system that involves 
+monitoring the overall ‘mood’ of the market, you might be 
+well on your way to success.  
+ 
+Never risk your money blindly. It just isn’t the way. As 
+Tradingview always says, look before you leap! 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+125 
+First Entry (Blue Box) 
+ This is called the First Entry, or what most people call a 
+high-risk entry. An immediate touch of a level with a nicely 
+placed trendline is already good enough for you to be 
+confident with a trade. The thing about these entries is that 
+they are very high RR as if you get them, you get the very tip 
+of the movement. The only time I take first entries is when 
+my account is already a bit deep in profit. So if I lose out on 
+this, I would not mind as much 
+ 
+Grey Box (Second Entry) 
+ The Second entry comes from a lower timeframe after a 
+breakout happens. A confirmation. This is very reliable when 
+it comes to win rate, as these setups come after a trend is ready 
+to move. Very simple. Very reliable. 
+ 
+ 
+Breakout – Pullback – Entry 
+ 
+And that’s basically it! 
+ 
+ 
+
+ 
+126 
+ 
+ 
+ 
+ 
+ 
+ 
+If all roads point to one destination, 
+ 
+Then only you follow it. 
+ 
+REACT, don’t PREDICT 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+127 
+ 
+ 
+ 
+ 
+ “Wait, did I just see a trendline? What is this sorcery?” 
+Okay, let me explain for you. I use trendlines all the time, but 
+not in ways you’d expect. I see everywhere people claim that 
+trendlines are useless and fugazi, but I would like to humbly 
+disagree. I believe trendlines are a very important tool in 
+determining if a level is good for use. They are the absolute 
+best confluence for you to use. I love them. 
+ 
+I’d like to teach you two trendlines that can hopefully help 
+you in your trading journey 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+128 
+Trendline Type 1: 
+ 
+This is a sell version. 
+To buy, just flip it around. 
+ 
+Enter at third touch. 
+ 
+
+ 
+129 
+Real Chart Example: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Be sure to draw Point 1 and 2 at the closing price! 
+
+ 
+130 
+Trendline Type 2: 
+ 
+ 
+A Type 1 that simply got broken out. 
+ 
+ 
+ 
+ 
+
+ 
+131 
+Real Chart Example: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+See, not that hard right? 
+
+ 
+132 
+  
+ 
+ 
+ 
+ Trendlines are one of those things that feel random but 
+are not. My key component to trendlines is making sure that 
+its third touch appears close by to a level. Be it classic, hns or 
+a breakout level. What I’ve observed is that they don’t work 
+as well when combined with a gap.   
+ 
+ Always draw a trendline using the closing price of a 
+candle. Never pull point 1 and 2 using a shadow. In my 
+opinion, these are not consistent and may cause confusion. 
+ 
+One is not complete without the other. Be sure to always have 
+multiple confluences when taking any trade. 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+133 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The best part about this all? 
+It happens almost EVERY DAY 
+ 
+Just mix and match timeframes 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+134 
+Adjustable Stop Loss and Take Profit 
+ 
+ Always remember to adjust your risk according to your 
+setups. You cannot treat every setup the same way, just like 
+how you cannot treat each one of your children the same. 
+Each timeframe has its own characteristics, strengths and 
+weaknesses therefore you must leverage them accordingly. 
+For example, an M15 setup will have a much smaller stop loss 
+than a H4 setup. And a H4 setup should have a larger take 
+profit than an M15 setup. Vice versa. 
+ 
+ Every person that has come into contact with me 
+regarding trading has been told the same thing: 
+ 
+“Let your setups breathe” 
+ 
+ The breathing room required for each timeframe is 
+different. And that’s just how it is. In this section, let’s do a 
+dive on how to set stop losses and take profits in an efficient 
+way. 
+ 
+ 
+
+ 
+135 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Same thing, just on a different scale 
+
+ 
+136 
+ 
+It is not that your setups do not work, 
+ 
+Rather, 
+ 
+It is because you do not let them, 
+ 
+BREATHE 
+ 
+But how would you know if enough room is… enough? 
+ 
+ 
+ Here’s an example, what if I treated every setup the same 
+and decided to put 30 pips stop loss on everything. More 
+often than not, every time i decide to take a H4 setup, most 
+of my trades will hit stop loss before the move even starts. But 
+if i trade the M15, I would be profitable. This is why I think 
+lot of traders tend to focus on only one timeframe for the rest 
+of their life thinking that all other timeframes do not make 
+sense. I was in this group of traders at one point in my career 
+as I only traded the smaller timeframes and refused to see the 
+bigger ones because I was scared of hitting stop losses. Like I 
+
+ 
+137 
+said, fear can be mitigated with data. And it took me years to 
+finally understand that the higher timeframes can be traded 
+the exact same way as the smaller timeframes. But just with a 
+more generous stop loss and take profit! 
+ 
+ I love swinging trades. It makes me happy when I see my 
+trades just flying across the chart. How do I find them? Well, 
+the answer is actually very very simple. Just find a good setup 
+on a larger timeframe! Again, price is fractal and a “swing 
+trade” is simply just a Daily setup reaching a take profit and 
+a “day trade” n M30 setup reaching a take profit. D o not 
+identify yourself as a stereotype, i.e. swinger, daytrader, 
+scalper, rather follow what the market gives you and react 
+accordingly. If the market allows you to swing, then swing. If 
+the market only allows you to hold for a few hours, then do 
+just that. 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+138 
+ I feel like nowadays trading feels like a lost art. 
+Something is just missing when it comes to teaching traders 
+how to be a holistic trader. Everyone just seems like a one -
+trick pony. In my personal experiences, the best traders i 
+know use multiple timefr ames to create their views on the 
+market. And that’s what i think most traders lack.  
+ 
+The art of using timeframes 
+ 
+ If more traders knew how to balance this, a lot more 
+people would be profitable and happier in the market, and 
+trading would not just feel like this boring process. While it 
+is true that good trading is boring trading, would you want 
+to spend your entire career as a trader doing just one thing 
+and never truly enjoying the market as it should be? It would 
+be a shame if you said yes. 
+ 
+ Just a question, would it be necessary for a trader to take 
+profit after a few hours just because they took the trade on 
+the M30? What if i told you that you could swing a trade for 
+much much longer even if you used this timeframe? Would 
+you believe me? B efore I answer this, I’d like to repeat that 
+
+ 
+139 
+price is fractal and whatever happens on the lower 
+timeframes happens on the higher timeframes, vice versa. In 
+the start of this chapter, I explained about long term 
+direction. The only way for an M30 setup to be a swing trade 
+would be if it FOLLOWS a higher timeframe flow. And 
+that’s just it. Don’t be so rigid. Allow yourself to explore the 
+beauty of the market. 
+ 
+The best setups occur when the smaller timeframes 
+“agree” with the larger timeframes. This is where you’ll find 
+your edge in the market.   
+ 
+ Let me show you how to use timeframes in an awesome 
+manner. This combines the timeframes, Daily and M30 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+140 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Voila. When a smaller timeframe ‘agrees’ with the higher 
+timeframe 
+ 
+And that’s how you swing using M30. 
+ 
+Do some backtesting and you’ll find that you can use this in 
+so many different timeframe combos 
+
+ 
+141 
+Real Chart Example: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Daily Gap 
+
+ 
+142 
+ 
+ 
+ 
+M30 Decision Level Breakout 
+
+ 
+143 
+ 
+M30 HNS Entry 
+
+ 
+144 
+ 
+400+ Pips and counting 
+
+ 
+145 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Follow the flow, 
+ 
+Until it follows you 
+ 
+In this case, rode a Daily flow using M30! 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+146 
+My personal way to use timeframes: 
+ 
+Weekly, Daily - Long Term Direction 
+I don’t use these timeframes often and i NEVER use them to 
+take entries. These two are mainly to see if i can do a long 
+swing trade or if I should stick with just a healthy take profit 
+level. 
+ 
+H4 - My Everything 
+Not all timeframes are created equal, and i believe that H4 
+rules them all. In order for a long swing to happen, H4 levels 
+must break after price touches the Weekly/Daily Level. In 
+order to Day Trade, if your setup aligns with a H4 direction, 
+more often, t he trade should end up in profit. I love this 
+timeframe and I check it multiple times a day 
+ 
+H1, M30, M15 - Finding Entries 
+Most of my entries come from these timeframes. They are the 
+most reliable entry timeframes no matter what mode you’re 
+in. A breakout happens in these timeframes after touching a 
+higher timeframe level? Pullback and take an entry at a high 
+confluence level. Easy. 
+
+ 
+147 
+M5,M1 - Surgical Precision  
+Some people say these timeframes are just noise. But i view 
+these timeframes as opportunity machines. These two 
+timeframes will almost ALWAYS punish you if you take 
+them without considering direction in advance. But if you 
+follow the direction with these timeframes? SWEET! 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+148 
+The Art of Data 
+Collection 
+ 
+ 
+ 
+Now that you are clear on what to look for, 
+ 
+Let me help you collect data. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+149 
+ I think another reason why most traders fail is because 
+they lack the skill to collect data efficiently and effectively. 
+They usually rely on familiarity or gut feeling to navigate the 
+uncertainty of various market conditions. The thing is… the 
+market cannot be predicted using mere gut feeling. While it 
+is true that instinct is a key component in trading, it can only 
+be used once you are TOTALLY FAMILIAR with your own 
+technique. It is simply impossible to feel the market in its 
+entirety. But it is totally possible to have a feel for your 
+technique.  
+ 
+ A few key points in your data collection process should 
+include: 
+ 
+1. Exact Photos Of Setups. 
+2. Where Price Came From. 
+3. Trade Outcome. 
+ 
+If you’ve mapped out the problem, it is already 50% solved 
+ 
+ 
+ 
+
+ 
+150 
+Exact Photos of Setups 
+ 
+ Self explanatory. You’ll need the discipline to really 
+document the ‘valid setups’ in your eyes and put them in a 
+nice folder. A good thing to note is that in order to be 
+profitable, you need to make sure the technique you use 
+stands the test of time. Sin ce the market is mainly reliant on 
+human emotions, one thing stays true 
+ 
+History Repeats Itself 
+ 
+ Whatever has happened, should happen again. You can 
+unlock the ability to somewhat perceive the future by looking 
+to the past. And that’s the most beautiful thing about the 
+market. What I would recommend is that you must collect at 
+least 100 screenshots of the same exact setup. Let’s say you 
+have 5 different types of setups, so you’ll need 500 different 
+screenshots. Sounds hard? Nah. Just part of the process. This 
+is actually why most trad ers take years to be profitable. It is 
+because they don’t spend enou gh time familiarising 
+themselves with their own setups by backtesting. Rather, 
+they let 500 different setups happen in their front testing 
+
+ 
+151 
+instead. Which costs years of time. Skip the line and do the 
+hardwork instead. Most people avoid it because they are 
+losers. Are you one? 
+ 
+Exercise : 
+ Lock yourself in your room for a deep data collection 
+session. Give yourself 4 hours of uninterrupted focus. Get a 
+coffee and open Tradingview or Metatrader. Make sure you 
+have a system ready to backtest on a piece of paper beside you 
+and find those exact setups. Aim to find at least 30 setups per 
+hour. 2 setups per minute. By the time you finish those good 
+4 hours, you should be left with 120 screenshots of setups. 
+Let’s say you have 5 different entry models and are want to 
+thoroughly backtest each one. Y ou’ll need 500 screenshots 
+each. Amounting to 2500. Since you should be able to collect 
+a good 120 screenshots per hour, you’ll need just 20+ hours 
+minimum to be totally familiar with how all your entry 
+models look like. Ready to put in the work? 
+ 
+ 
+ 
+ 
+
+ 
+152 
+Where Price Came From 
+ 
+ My personal belief is that the art of knowing if a level 
+will hold depends on where price pushed from. An example 
+would be that, if the bullish movement start because of a h4 
+setup, obviously an M15 sell setup would fail. Simple logic. 
+Each timeframe has its own ‘weight’ and of course the 
+heaviest will win.  
+ 
+Big smashes small 
+ 
+ Have you ever seen a perfect setup form, and then get 
+completely violated as if there was no setup there? After that 
+happened, you’re left wondering “What else do i need? What 
+did I not see?” Other than a possible news movement, it was 
+definitely because you did not what truly pushed price. 
+Remember, long term direction, bias, then find an entry. 
+Never skip those steps.  
+ 
+ 
+ 
+ 
+
+ 
+153 
+Real Chart Example: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Price Pushing UP from Daily HNS 
+
+ 
+154 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Because it was a DAILY move, all H1 levels break. 
+
+ 
+155 
+Exercise : 
+If you’ve followed my first exercise, now you have tons 
+of screenshots. I hope in each screenshot, you included 
+multiple timeframes as well. Now let’s do some commentary 
+for each screenshot. For example, “Setup was on M30, but 
+price pushed from a classic H 4 Level”, “Breakout sell setup 
+on M5, but not following higher timeframe bias” Decorate 
+your screenshots with these kind of words. They cannot be 
+just empty screenshots of just charts. Charts are not 
+information. Words are. Explanations are. After a good while 
+of data collecting, you should start seeing patterns. You start 
+seeing that everything is starting to feel more and more 
+predictable as time goes by. 
+ 
+In the time where i was data collecting, i had over 2000 
+screenshots of just market stuff. And it took me just a little 
+over a few months to get it done. But here’s the thing, i wasn’t 
+truly locked in at the time. But theoretically, you should be 
+able to get it done in under a month. 
+ 
+ 
+ 
+
+ 
+156 
+Trade Outcome : 
+ 
+ Duh.. Obviously. Now that you have all your 
+parameters and screenshots done, let’s do some progress and 
+win rate tracking. Remember, in order for a trader to be 
+profitable, he/she must simply follow a system that is proven 
+to be profitable in the long run and that’s just it. Like i 
+explained in my previous chapters, the technical part is much 
+simpler than the psychological part. You’ll need to record 
+them based on several conditions 
+ 
+1. Trade hit SL 
+2. Trade Hit TP 1:1 
+3. Trade Hit TP 1:Extended (Swing Setups) 
+4. Trade Hit BE 
+ 
+ I think that one of the hardest things to do in the data 
+collection process is learning to be honest with yourself. Just 
+be honest with the setups.  
+ 
+ 
+ 
+
+ 
+157 
+ After collecting all that data, find the percentage of 
+times each trade meets each of those 4 criterias. Once you 
+have those, now you can predict if a trade will hit stoploss 
+even before you enter  (Put these things in the Hades Zone) . 
+You can predict if it should just be a 1:1 RR Trade  (Golden 
+Zone). You can now predict if the trade is good for a long 
+swing hold position (also Golden Zone) . You can now learn 
+to manage your breakevens better. And that, my dear reader, 
+is as close to the holy grail as it gets . You are now mostly in 
+control of yourself and constantly have a expected outcome! 
+<3 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+158 
+ 
+ 
+ 
+ 
+Section 5: 
+I Love You 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+159 
+Finale 
+(Motivation) 
+ 
+So there you have it. A nice book laid out just for you.  
+As a man who has spent most of his early adult as a trader, I 
+want to say a few things ; The grind is the hardest thing I’ve 
+ever done in my entire life. And I’ve done quite ahandful of 
+difficult stuff! But the rewards from trading? By far the best 
+I’ve ever experienced. I don’t want to promise you that after 
+you read this book, you’ll immediately know how to totally 
+trade in the market because this takes time. But what I can 
+promise is that I am conf ident that you have can turn into a 
+much better trader or person if you apply what I’ve written 
+for you wholeheartedly. Remember, trading is hard not 
+because it is a test of intelligence, rather it is a test of grit and 
+heart. The ones who can stand up aft er being pushed by the 
+market countless of times are usually the ones that win. All 
+you have to do is stay alive long enough to make it work.  
+ 
+ 
+
+ 
+160 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Thank you for reading, ladies and gentlemen. Before we 
+depart from this wonderful journey we’ve shared, allow me 
+to tell you a few things. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+161 
+ 
+ 
+ 
+ 
+ 
+1. Good traders are not gifted. They just try more things 
+than you, they are scientists in the market. Always trying 
+out new things to see if they click, a lways choosing to 
+not settle for less. They worked harder than you, have 
+more data than you and want it more than you. Most 
+success boils down to how much you want it. If you 
+want it bad enough, then one day, usually a path out of 
+nowhere appears and all you have to do is endure it. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+162 
+ 
+ 
+ 
+ 
+ 
+2. Luck is not a deciding factor as a trader. Yes, it is true 
+that you will never know the outcome of a trade until it 
+runs. But understand that once you have a system in 
+place, luck plays much less of a factor in your 
+profitability. Most ‘lucky’ traders lose  everything once 
+their luck has run out. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+163 
+ 
+ 
+ 
+ 
+ 
+3. Most traders simply lack patience. Yes, it is true that to 
+be a good trader, it requires years of effort. Years. Same 
+like how doctors take years. Same like how architects 
+take years. That is normal. Most success that comes 
+before the 3 year mark is inconsistent. After 5 years, you 
+should have a solid mindset, a solid strategy and a 
+wonderful execution. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+164 
+ 
+ 
+ 
+ 
+ 
+4. Trading is the best skill ever. If you want to go all in into 
+a skill, trading is it. Freedom, time and lots of it. 
+Sometimes so much that you have the time to start 
+writing a 100 page book . (I wonder who that is) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+165 
+ 
+ 
+ 
+ 
+ 
+5. Try it all. I mean it. Learn it all, Everything. Then only 
+you can simpl ify. Go to the complex depths of trading 
+and finally decide where you must prioritise based on 
+your data and comfortability. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+166 
+ 
+ 
+ 
+ 
+ 
+6. I believe in you. I’m rooting for you. I want you to win.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+167 
+ 
+ 
+ 
+ 
+What’s Next? 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+168 
+ 
+ 
+ 
+ 
+The House of T 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+169 
+ 
+ 
+ 
+ 
+I believe in the power of an empowering community. 
+I believe that my knowledge can help so many people. 
+Especially when taught EXTRAORDINARILY well.  
+This is for the ones who have spent years without much 
+progress, wanting to find that little special push forward 
+and even for total beginners looking to start in this 
+trading world. I am building The House of T for you. An 
+educational platform that many can afford to have. This 
+is my way of starting a trading revolution. My way of 
+lowering the bar of entry fo r anyone wanting to learn  
+without sacrificing the quality of education. 
+ 
+Viva La Revolution! 
+We hope to welcome you inside during the launch. 
+ 
+ 
+ 
+ 
+
+ 
+170 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+You’re invited to join the Email Newsletter or FREE 
+and Stay Updated for the launch of The House Of T and 
+any other T Programs 
+ 
+ 
+Sign Up Here 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+171 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Fin. 
+ 
+ 
+Anyone want a Volume 2? 
+ 
+ 
+ 

@@ -1,0 +1,102 @@
+; CK_GOLD_COMBO - FundedNext Stellar 2-Step FUNDED-STAGE set (from experiments/combo_fnext_02f, ledger seq226/227)
+; USE THIS ONLY on the live FUNDED account. For the CHALLENGE (Step 1 + Step 2) use the 0.03 set:
+;   experiments/combo_fnext_03/CK_GOLD_COMBO_FundedNext.set
+; Difference vs the challenge set: FIX lot 0.03 -> 0.02 (single change), to buy a daily-loss safety buffer.
+; Why: at 0.03 the worst single day (2026-01-13) had a conservative combined-floating draw of ~$293 (over the
+;      $250 = 5%-of-initial daily line) because FIX + the DT swing were open together. At 0.02 that worst day
+;      drops to -$220.66, and across the whole year 0 days touch $250 (realized OR conservative floating),
+;      min equity $4,980 (static floor $4,500 never threatened).
+; Backtest (real ticks, last1y, $5k): whole run +64.7%/yr; FUNDED slice +$2,703/329d => ~$246/mo,
+;      your take ~$197/mo @80% (~$222/mo @90%). Firm: NO Goat Guard; daily 5% of INITIAL incl floating; max 10% STATIC.
+; Combo_BlockEntryHours=0,1 (seq252/253): blocks new entries in the 00:00-02:00 server SETTLEMENT window
+;   (FundedNext prohibits profit generated disproportionately in that low-liquidity "dead zone"). Screened
+;   on this 0.02 config: net 3335 -> 3308 (only -0.8%), settlement-window trades 17 -> 0, worst day + breaches
+;   UNCHANGED -> compliant-by-construction, near-zero cost, more robust on the real feed.
+; NOTE: real money only after the forward-demo passes on the real FundedNext feed AND human approval (ledger seq223).
+Combo_EnableFIX09=true
+Combo_EnableDTREND=true
+Combo_UseStaticDD=true
+Combo_StaticDDStopPct=8.0
+Combo_UseDailyLoss=true
+Combo_DailyLossPct=4.5
+Combo_BlockEntryHours=0,1
+Combo_UsePredictiveDaily=true
+Combo_DailyBufferPct=3.5
+Combo_UsePerTradeCap=true
+Combo_PerTradeMaxRiskPct=2.0
+Combo_DailyRefInitial=true
+Combo_Stage=0
+Combo_FundedFloatFlatPct=1.2
+Combo_FundedPerTradePct=0.6
+Combo_FundedFixLot=0.01
+Combo_FundedRiskPct=0.5
+Combo_FundedLogin=0
+Combo_FundedMaxSLpts=0
+Combo_FundedGapSizing=false
+Combo_FundedGapUsd=50.0
+Combo_FundedTradeBudgetUsd=80.0
+Combo_MaxMarginPct=60.0
+Combo_FundedMaxOpenTotal=1
+Combo_UseNewsGate=true
+Combo_NewsBlockMin=6
+Combo_UseMTF=true
+Combo_MTF_EMA=50
+Combo_MTF_MinScore=2
+FIX_Magic=20260716
+FIX_FixedLot=0.02
+FIX_MaxLot=0.02
+FIX_RiskPercent=2.0
+FIX_RR=3.0
+FIX_MaxTradesPerDay=3
+FIX_DailyLossStopR=2.0
+FIX_DailyProfitStopR=4.0
+FIX_MaxSpreadPrice=0.60
+FIX_HTF=16385
+FIX_TrendEMA=200
+FIX_BreakoutLookback=20
+FIX_BreakoutMaxAge=12
+FIX_EntryEMA=20
+FIX_SwingLookback=10
+FIX_MaxSL_ATR=2.5
+FIX_SLBufferATR=0.20
+FIX_UseBreakEven=true
+FIX_BEProgress=0.50
+FIX_UseProfitLock=false
+FIX_ProfitLockGiveBackR=1.0
+FIX_UseReversalExit=false
+FIX_ReversalExitArmR=1.0
+FIX_ReversalExitGiveBackFrac=0.5
+FIX_UseEntryRoom=false
+FIX_EntryRoomATR=0.5
+DT_Magic=20260930
+DT_SigTF=16388
+DT_Engine=0
+DT_FastEMA=20
+DT_SlowEMA=100
+DT_KAMA_ER=10
+DT_KAMA_Fast=2
+DT_KAMA_Slow=30
+DT_UseRegime=true
+DT_RegimeTF=16388
+DT_RegimeADXPeriod=14
+DT_ADXTrendMin=20.0
+DT_UseHTFtrend=true
+DT_HTFtrendTF=16408
+DT_HTFtrendEMA=50
+DT_UseChop=true
+DT_ChopTF=16388
+DT_ChopPeriod=14
+DT_ChopMax=61.8
+DT_ATRPeriod=14
+DT_SL_ATR=2.0
+DT_UseTrailATR=true
+DT_TrailATR=3.0
+DT_RiskPercent=0.8
+DT_MaxLot=0.50
+DT_MaxRiskPerTradePct=5.0
+DT_CapStopToRisk=true
+DT_MaxSpreadPrice=1.00
+DT_UseStdvTP=false
+DT_StdvMult=2.5
+DT_StdvSwingDepth=5
+DT_StdvLookback=60

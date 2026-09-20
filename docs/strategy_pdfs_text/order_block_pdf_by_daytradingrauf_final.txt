@@ -1,0 +1,53 @@
+ICT Order Block PDF(Final Guide)
+DefinitionOrder BlocksBreaker BlocksRejection BlocksPropulsion BlocksVacuum BlocksSocials
+ 
+
+Definition:Order Blocks
+Not every up close or down close candle is an order block,  all of these variations area type of order block however all have different characteristics.Order blocks are time sensitive and the highest probability one's form inside of liquidity pools, paired with an FVG.E.G Up close candle(s) which run buyside liquidity being paired with an FVG.
+To know:An order block is a change in the state of delivery the market is in.Up or Down close candles which form at a higher time frame key level can be used to frame an order block to confirm a CSD.
+•Bullish
+Trading into a Higher time frameKey level and taking sell side liquidity.
+Price trading awayFrom the key level and a sell side run, we can useDown close candles for Valid order blocks.We can use the close of theOrder block to enter orMean threshold, and yourStop loss is at the low of theCandle.
+•Bearish
+Trading into a Higher time frameKey level and taking Buy side liquidity.
+Price trading awayFrom the key level and a buy side run, we can useup close candles for valid order blocks.We can use the close of theOrder block to enter orMean threshold, and yourStop loss is at the low of theCandle.
+To be able to validate the order blocksLook for how sensitive price is at the mean thresholdArea of the order block, if price is in a hurry to move awayChanging its delivery state, the order block is valid,If not do not trade.Ignore the wicks of the order blocks I have found using The bodies will tell you much more what the market isTrying to do and trusting it.
+@Daytradingrauf
+@Daytradingrauf
+Order Block Variant:Breaker Blocks.
+Bearish Template
+Bullish Template
+•Breaker Blocks follow the same       Principles of order block regards to      Utilizing key levels and they form       When price takes sell side for      A bullish breaker and buyside (liquidity)       For a bearish breaker.
+Bullish breaker
+•Chart example.
+@Daytradingrauf
+@Daytradingrauf
+@Daytradingrauf
+Order Block Variant:Rejection Block.
+There are multiple ways to use andIdentify rejection blocks lets keep it simple we treat them as normalorder blocks, we watch the wicks whichform on the highs of the candles when bearishwhen price respects the rejection block, I thenlook at distribution phases of the market, myfocus is not trying to trade a rejection blockhowever, use it as a reference. Bullish and rejection blocks form when priceLow or high has formed with wicks on the candle sticksLows or highs utilizing price running liquidity of candle Bodies before going higher or lower. 
+Bearish Rejection Block Template
+Bullish Rejection Block Template
+@Daytradingrauf
+@Daytradingrauf
+@Daytradingrauf
+Chart example:I don’t need to catch price at the rejection blockI use it as a reference to trade distribution legs
+Order Block Variant:Propulsion block.
+Propulsion blocks are my favorite type of order blocksThis is because of the speed ”propulsion” This is how they form, when we have opposing liquidity run(ideal) and price creates an order block which is then tradedInto and respected, the next down close candle if bullishMade will be the propulsion block price can come back into,The block and the ideal areas are the blocks high and mean thresholdThen repel away.
+Bullish Propulsion Block Template
+Order block
+Propulsion block
+@Daytradingrauf
+@Daytradingrauf
+Bearish Propulsion blockChart example
+Order Block Variant:Vacuum Block.
+Vacuum blocks unlike the rest I do not use or referTo but knowing what their purpose and what they'reUsed for can be useful for future reference to anyone.They usually form when there is a gap down or up after A highly manipulated news event the gap which forms is a “vacuum” of liquidity which forms due to the event.Events such as FOMC, CPI and NFP can cause the Vacuum BlockTo form, I do not trade them but can be used for reference inFraming a trade idea.
+ Bearish Vacuum Block TemplateThe gap is absence of liquidityAs we gap lower the algorithm Will want to trade back intoThe gap. Using our understanding Of a vacuum block we can refer to itAnd watch price use it as a potential sellingOpportunity.
+Bullish Vacuum Block TemplateThe gap is absence of liquidityAs we gap higher the algorithm Will want to trade back intoThe gap. Using our understanding Of a vacuum block we can refer to itAnd watch price use it as a potential buying Opportunity.
+
+SOCIALS 
+- Twitter (X)
+- Instagram
+- YouT ube
+- Telegram
+ Tap for links
+Recommended prop firmUse my code “Rauf” for a discount on Any challenge account size:- Click Here

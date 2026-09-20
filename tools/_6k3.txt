@@ -1,0 +1,17 @@
+### BASE_0.02_6k
+ trades 272 | NET 2022.11 (33.7%) | FIX 656.63 DT 1365.48 | win 25.4%
+ worst day -250.09 (2026.09.02) | days<=-300 0 []
+ conservative floating worst 233.33 (2026-01-13) | days>300 0 | days>180 6
+ min balance 5914.34 (floor 5400) -> SAFE | take ~$139/mo (~Tk 15985)
+
+### TEST_0.03_6k
+ trades 273 | NET 2458.84 (41.0%) | FIX 1093.36 DT 1365.48 | win 25.3%
+ worst day -375.14 (2026.09.02) | days<=-300 1 [('2026.09.02', -375.14)]
+ conservative floating worst 312.15 (2026-01-13) | days>300 2 | days>180 16
+ min balance 5871.52 (floor 5400) -> SAFE | take ~$170/mo (~Tk 19550)
+
+=== 0.03 vs 0.02 @ $6k ===
+ net 2022.11 -> 2458.84 (delta +436.73)
+ worst day -250.09 -> -375.14 | floating 233.33 -> 312.15
+ take/mo $139 -> $170 (Tk 15985 -> 19550)
+ PASS(seq262: 0 days<=-300 AND floating<300 AND min_bal>=5400 AND net>base)? False
