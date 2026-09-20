@@ -119,9 +119,58 @@ did not originally know about (help article 14702245). The three funded limits:
   `INCOME_SCALING_PLAN.md` must be corrected — the 5k->200k same-EA ladder is NOT viable as written.
 
 ## 8. Machine-load discipline (protect the dev PC — our work is CPU-heavy)
-The dev PC (Ryzen 5 5600G, 16GB, 450W PSU) has hard-shut-down under load (Kernel-Power 41,
-BugcheckCode 0, no BSOD/WHEA → suspected PSU/power-delivery or thermal, NOT malware/RAM).
-Because MT5 backtests peg the CPU, always minimise load:
+The dev PC is a **Gigabyte B550M DS3H AC R2 / Ryzen 5 5600GT / 16 GB DDR4 /
+256 GB NVMe (C:) / 450 W PSU**. The Kernel-Power 41 crash cluster
+(Aug 24 – Sep 4 2026, 15+ events, 3-in-1-hour on Sep 3) was **ROOT-CAUSED** to
+the **E: HDD (Daichi DI DE00D, 465.8 GB)**: Reallocated Sector Count = 240
+(should be 0), SMART warning YES. CPU stayed at 44 °C, PSU +12 V = 11.95 V,
+RAM clean, NVMe 99 % life — all healthy. The user shell folders (Documents/
+Downloads/Music/Pictures/Videos) had been redirected to `E:\PERSONAL\`, so
+every Explorer / app open hit the failing drive and the kernel watchdog
+hard-reset the box.
+
+**RESOLUTION — COMPLETED 2026-09-21.** E: is retired. Cloud storage was
+originally planned but not needed — the E:\PERSONAL data was only 12.26 GB
+(Downloads dominated at 12.26 GB / 59,679 items; Documents/Music/Videos
+were near-empty; Pictures was already in OneDrive). Migration went directly
+to C: instead. Final state:
+
+- **Data:** 12.26 GB / 59,679 items robocopied to `C:\Users\prita\Downloads`,
+  Music/Videos to their C: counterparts. Documents was already on C:.
+  Robocopy report: **53,739 / 53,739 files, 0 FAILED, 0 SKIPPED.** Log at
+  `C:\Users\prita\_robocopy_Downloads.log`. Elapsed 39 min (4:50 pure copy,
+  rest was sick-HDD seek latency).
+- **Shell folders (HKCU registry):** `Documents/Downloads/Music/Videos` →
+  `C:\Users\prita\<Folder>`. `Pictures` → `C:\Users\prita\OneDrive\Pictures`.
+- **E: drive letter — REMOVED.** Windows no longer sees an E: mount at all.
+- **E: disk (Disk #0) — OFFLINE.** `Set-Disk -IsOffline $true` applied.
+- **Boot-time guardian:** scheduled task `OfflineSickHDD_Daichi` runs as
+  SYSTEM at every boot and re-applies `Set-Disk -IsOffline $true` on Disk
+  #0. Belt-and-suspenders: even if Windows update or a manual mistake
+  re-onlines it, the task shuts it back down at next boot.
+- **C: free:** 105 GB free after migration (of 237 GB total) — plenty for
+  MT5 tester caches, backtests, and archives.
+
+### E: — HARD RULES for any future session, tool, or sub-agent
+- **NEVER** read from, write to, mount, or reference `E:\` or Disk #0 (the
+  Daichi HDD). E: is dead by design; touching it is guaranteed to bring
+  back the Kernel-Power 41 crash cluster.
+- **NEVER** modify or delete the scheduled task `OfflineSickHDD_Daichi`. If
+  a Windows update wipes it, re-register it (SYSTEM principal, at-startup
+  trigger, action: offline Disk #0).
+- **NEVER** try to un-offline E: or add back a drive letter to test/inspect
+  it. If diagnostic access is genuinely needed, ask the user first, do it
+  in one bounded pass with `-ErrorAction SilentlyContinue`, and re-offline
+  immediately after.
+- If a script, config, or `.set` file references any path starting with
+  `E:\`, that file is stale — fix the path (map to the C: equivalent), do
+  not feed the sick drive.
+- Physical removal (SATA + power cable disconnect) is the ultimate
+  permanent fix, at the user's convenience. Software-side is fully
+  neutralised in the meantime.
+
+**Machine-load rules** (still apply — the box is real hardware, not a server;
+CPU still limits parallel MT5 work regardless of drive):
 - Run only **ONE backtest at a time**; never chain or parallelise heavy MT5 runs.
 - Use **Model 1 (1-min OHLC, fast)** for screening; use **Model 4 (real ticks)** only for a
   final confirmation, and only when the user says the machine is cool/ready.
@@ -131,6 +180,7 @@ Because MT5 backtests peg the CPU, always minimise load:
 - Clean up scratch files (`tools/_*.txt`) after use.
 - Keep the MT5 GUI and other heavy apps closed except while actually testing.
 - If the PC shows any instability, **pause heavy work immediately** — safety > speed.
+  (Reserved for future issues; the Aug–Sep 2026 event was a drive fault, not a CPU/PSU limit.)
 
 ## 9. Storage discipline (clean up after every job)
 - Analysis artifacts (charts, galleries, per-loss PNGs, temp CSVs, scratch `tools/_*.txt`) are
@@ -141,3 +191,38 @@ Because MT5 backtests peg the CPU, always minimise load:
 - NEVER delete files that a currently-running backtest/process is using; do the big cleanup only
   after the run finishes and its results are read.
 - Goal: keep the repo lean so the work stays fast and the disk doesn't fill up.
+
+## 10. Shell hygiene (learned the hard way — 2026-09-19 phantom-file incident)
+On 2026-09-19 18:42, an admin PowerShell whose `cwd` was `C:\Windows\System32`
+executed something like `Get-WmiObject … > Get-WmiObject`, which silently
+created a 0-byte file named `C:\Windows\System32\Get-WmiObject`. Windows /
+VS Code kept trying to re-open that extensionless "file" and triggered a
+recurring "Open with…" pop-up. Deleted 2026-09-21 (elevated); confirmed
+gone. To make sure this class of mistake never happens again:
+
+- **Never redirect (`>` / `>>` / `Out-File`) to a bare filename without a
+  path.** Always use a full, non-protected path — e.g.
+  `... | Out-File C:\Users\prita\_scratch\out.txt`, not
+  `... > out.txt`. A typo becomes a phantom file wherever `cwd` happens
+  to be, which is often somewhere you don't want.
+- **Never `cd` into `C:\Windows\System32`, `C:\Windows`, `C:\Program Files`,
+  or any protected system path from a script.** Reference full paths
+  instead. If a tool insists on a working directory, set it to
+  `C:\Users\prita\CK_GFT_Repo` or a purpose-built scratch folder.
+- **Never redirect output to a name that matches a PowerShell cmdlet**
+  (`Get-*`, `Set-*`, `New-*`, `Invoke-*`, `Remove-*`, …). Cmdlet-name
+  collision on disk is what caused this incident.
+- **`-NoProfile` is required** when Kiro launches PowerShell for E: probes
+  or any file-system enumeration. The user's default PowerShell profile
+  historically enumerated all drives on start-up and hung on the sick HDD;
+  future profile changes can reintroduce the same trap. When in doubt,
+  add `-NoProfile -NonInteractive` to shell invocations.
+- **Elevated (UAC) operations must write results to a log file** on C:
+  (not to the console of the elevated process — you can't read it), then
+  the outer script `Get-Content` the log. Pattern used successfully during
+  the E: retirement: `Start-Transcript -Path <log>` inside the elevated
+  script; parent script reads the log after `Wait -PassThru`.
+- **After any migration / clean-up job, delete the `_*.ps1` / `_*.log`
+  scratch files** created for that job (Section 9 rule). Keep only durable
+  artefacts (real logs the user might want as evidence) and note their
+  paths in the ledger or steering.
