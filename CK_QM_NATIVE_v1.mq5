@@ -59,6 +59,13 @@ input int    InpM5ConfirmTimeout   = 288;        // max M5 bars in WAIT_M5_CONFI
 input double InpSLBufferATR        = 0.5;        // SL beyond head_price by this * ATR(M15,14) (Python winner default)
 input int    InpMaxDeviationPoints = 30;         // trade.SetDeviationInPoints for market fills
 
+input group  "=== session + daily-cap gates (block 6) ==="
+input bool   InpUseSessionGate     = true;       // require entries during the NY session window (Python 'ny_only')
+input int    InpSessionStartHour   = 15;         // server-time hour to START allowing entries (FN GMT+2/+3; 15 covers NY 08:00-09:00 in DST + winter)
+input int    InpSessionEndHour     = 22;         // server-time hour to STOP allowing entries (22 covers NY 15:00-16:00)
+input bool   InpUseNewsGate        = false;      // block ±InpNewsBlockMin around CALENDAR_IMPORTANCE_HIGH releases (default OFF for MVP; enable during forward-demo)
+input int    InpNewsBlockMin       = 6;          // matches combo default
+
 //==================== BLOCK 1: SETUP QUEUE =========================
 // Everything below is Block 1's deliverable.  Blocks 2..7 will call these
 // helpers; nothing here fires an order.
@@ -1225,6 +1232,32 @@ bool QM_PlaceMarketOrder(const int slot_idx, const double conf_close)
    QMSetup s = g_qm_setups[slot_idx];
    int dg = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
 
+   // Block 6 gates: session + daily cap + news. Any block -> skip the fill
+   // and leave the slot in WAIT_M5_CONFIRM to retry on the next M5 bar
+   // (until InpM5ConfirmTimeout expires it).
+   QM_MaybeRollDay(TimeCurrent());
+   if(!QM_SessionOk(TimeCurrent()))
+   {
+      if(InpQueueDebug)
+         PrintFormat("[QM_NATIVE] SKIP_FILL slot=%d reason=out_of_session  now=%s window=%02d-%02d server",
+                     slot_idx, TimeToString(TimeCurrent(), TIME_DATE|TIME_MINUTES),
+                     InpSessionStartHour, InpSessionEndHour);
+      return(false);
+   }
+   if(!QM_UnderDailyCap())
+   {
+      if(InpQueueDebug)
+         PrintFormat("[QM_NATIVE] SKIP_FILL slot=%d reason=daily_cap_reached  today=%d cap=%d",
+                     slot_idx, g_qmTradesToday, InpMaxTradesPerDay);
+      return(false);
+   }
+   if(QM_NewsBlocked())
+   {
+      if(InpQueueDebug)
+         PrintFormat("[QM_NATIVE] SKIP_FILL slot=%d reason=news_window", slot_idx);
+      return(false);
+   }
+
    // Use current bid/ask as the reference "entry" for lot sizing +
    // projected-RR (this is the real fill price after slippage). The
    // Python engine uses the confirmation bar's close; that value is
@@ -1299,9 +1332,11 @@ bool QM_PlaceMarketOrder(const int slot_idx, const double conf_close)
    }
 
    QM_MarkEntered(slot_idx);
+   g_qmTradesToday++;                 // Block 6: consumed one of today's fills
    if(InpQueueDebug)
-      PrintFormat("[QM_NATIVE] FILLED slot=%d dir=%s magic=%I64d lot=%.2f entry_ref=%.2f conf_close=%.2f sl=%.2f tp=%.2f projRR=%.2f",
-                  slot_idx, QM_DirName(s.direction), s.magic, lot, entry_ref, conf_close, sl, tp, projRR);
+      PrintFormat("[QM_NATIVE] FILLED slot=%d dir=%s magic=%I64d lot=%.2f entry_ref=%.2f conf_close=%.2f sl=%.2f tp=%.2f projRR=%.2f today=%d/%d",
+                  slot_idx, QM_DirName(s.direction), s.magic, lot, entry_ref, conf_close, sl, tp, projRR,
+                  g_qmTradesToday, InpMaxTradesPerDay);
    return(true);
 }
 
@@ -1336,10 +1371,78 @@ void QM_AdvanceSetupsOnM5()
 }
 
 //==================== END BLOCK 5 ==================================
-// Block 6 (session / daily-cap / projected-RR gates) will wrap Block 5's
-// entry attempts with additional pre-trade filters (NY session,
-// max_trades_per_day). Projected-RR gate is already enforced inside
-// QM_PlaceMarketOrder above.
+
+
+//==================== BLOCK 6: SESSION + DAILY-CAP + NEWS ===========
+// Wrap Block 5's entry attempt with three pre-trade filters:
+//   (a) NY-session window (server-time gate; default 15:00-22:00
+//       server = roughly NY 08:00-16:00 across DST + winter).
+//   (b) Max trades per broker-day (Python default 2).
+//   (c) High-impact news window (block ±InpNewsBlockMin minutes
+//       around CALENDAR_IMPORTANCE_HIGH events).
+// Projected-RR gate lives inside QM_PlaceMarketOrder (Block 5).
+//===================================================================
+
+//---- daily-cap state (broker-day boundary = midnight server time) --
+int      g_qmTradesToday    = 0;
+datetime g_qmCurrentDayOpen = 0;
+
+//---- server-time helpers -------------------------------------------
+void QM_MaybeRollDay(const datetime now)
+{
+   datetime day = iTime(_Symbol, PERIOD_D1, 0);
+   if(day != 0 && day != g_qmCurrentDayOpen)
+   {
+      g_qmCurrentDayOpen = day;
+      g_qmTradesToday    = 0;
+      if(InpQueueDebug)
+         PrintFormat("[QM_NATIVE] day roll  new day=%s  daily counter reset",
+                     TimeToString(day, TIME_DATE));
+   }
+}
+
+bool QM_SessionOk(const datetime t)
+{
+   if(!InpUseSessionGate) return(true);
+   MqlDateTime dt; TimeToStruct(t, dt);
+   int h = dt.hour;
+   int hStart = InpSessionStartHour;
+   int hEnd   = InpSessionEndHour;
+   if(hStart <= hEnd) return(h >= hStart && h < hEnd);
+   // wrap-around (rare, but survives inputs where end < start)
+   return(h >= hStart || h < hEnd);
+}
+
+bool QM_UnderDailyCap()
+{
+   return(g_qmTradesToday < InpMaxTradesPerDay);
+}
+
+bool QM_NewsBlocked()
+{
+   if(!InpUseNewsGate) return(false);
+   datetime now = TimeCurrent();
+   int win = InpNewsBlockMin * 60;
+   MqlCalendarValue vals[];
+   int n = CalendarValueHistory(vals, now - win, now + win);
+   if(n <= 0) return(false);
+   for(int i = 0; i < n; i++)
+   {
+      MqlCalendarEvent ev;
+      if(!CalendarEventById(vals[i].event_id, ev)) continue;
+      if(ev.importance != CALENDAR_IMPORTANCE_HIGH) continue;
+      return(true);
+   }
+   return(false);
+}
+
+//==================== END BLOCK 6 ==================================
+// Block 7 (OnTester deals CSV + parity check vs signal-player) is
+// the final block; it turns real-tick MT5 runs into a deals CSV
+// with the schema _compare_plans.py expects, and adds a ledger
+// pre-registration + REJECT/ADOPT verdict step against the winner
+// signal-player baseline (88 deals / +$2,296 / PF 1.49 on
+// 2025-08-01 -> 2026-07-28).
 //===================================================================
 
 
@@ -1373,6 +1476,10 @@ int OnInit()
 
    // Block 5: reset M5 confirmation tracker.
    g_lastM5Time   = 0;
+
+   // Block 6: reset daily-cap tracker (rolls on first tick anyway).
+   g_qmTradesToday    = 0;
+   g_qmCurrentDayOpen = 0;
 
    // Block 1 sanity: prove we can add + expire + GC end-to-end.
    // Runs once at startup and leaves the queue empty.
