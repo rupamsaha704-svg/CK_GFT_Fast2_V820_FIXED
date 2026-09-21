@@ -1437,12 +1437,60 @@ bool QM_NewsBlocked()
 }
 
 //==================== END BLOCK 6 ==================================
-// Block 7 (OnTester deals CSV + parity check vs signal-player) is
-// the final block; it turns real-tick MT5 runs into a deals CSV
-// with the schema _compare_plans.py expects, and adds a ledger
-// pre-registration + REJECT/ADOPT verdict step against the winner
-// signal-player baseline (88 deals / +$2,296 / PF 1.49 on
-// 2025-08-01 -> 2026-07-28).
+
+
+//==================== BLOCK 7: ONTESTER + DEALS CSV =================
+// After a Strategy Tester run finishes, dump every closed deal to
+// MQL5\Common\Files\ck_qm_native_deals.csv using the SAME column
+// schema as the signal-player baseline (close_time,type,volume,price,
+// sl,tp,profit,swap,commission,comment) so _compare_plans.py and
+// _consistency_check.py can read this file with zero code changes.
+//
+// Also print a short summary block to the Experts tab so a run can
+// be eyeballed without opening any CSV.  Print includes net / PF /
+// win rate / min balance / worst day / entries -- the same metrics
+// the parity check uses.
+//
+// The actual REJECT-or-ADOPT verdict is a HUMAN + LEDGER step:
+//   1) pre-register the parity test in SPEC/dof_ledger.jsonl with
+//      the pass bar (native net within +/-10% of signal-player,
+//      worst day within +/-10%, min balance >= $5,600, entries
+//      within +/-5 of 88).
+//   2) run Strategy Tester Model 4 real ticks on XAUUSD M15,
+//      window 2025-08-01 -> 2026-07-28, deposit $6,000, EA
+//      inputs = defaults (all Python DEFAULT_CONFIG values).
+//   3) run tools/qm_native_parity.py to diff the two CSVs.
+//   4) log REJECT or ADOPT in the ledger with the specific
+//      metric deltas. NO tuning to rescue a fail per steering §5.
+//===================================================================
+
+//---- summary computed by OnTester over the run's history ----------
+struct QMTesterSummary
+{
+   int    n_deals;
+   double net;
+   double gross_win;
+   double gross_loss;
+   double pf;
+   double win_rate_pct;
+   double min_balance;
+   double peak_balance;
+   double max_dd;
+   double worst_day;
+   int    n_worst_day_over_300;   // FN $300 daily line breaches
+};
+
+//==================== END BLOCK 7 ==================================
+// Ports done: Blocks 1..7. The .mq5 now has a fully-native QM
+// engine that produces a signal-player-comparable deals CSV.
+// Next steps (post-port):
+//   1) Ledger PREREG for the parity test.
+//   2) MT5 Model 4 backtest with user attention (steering §8).
+//   3) tools/qm_native_parity.py diff.
+//   4) Ledger REJECT or ADOPT.
+// If PASS: native replaces signal-player as production engine.
+// If FAIL: diagnose the delta (Block 2 swings? Block 3 POI?
+//   Block 4 IDM clear? Block 5 fill timing?), fix the port, re-run.
 //===================================================================
 
 
@@ -1548,6 +1596,155 @@ void OnTick()
       if(g_lastM5Time != 0) QM_AdvanceSetupsOnM5();
       g_lastM5Time = curM5;
    }
+}
+
+//==================== BLOCK 7: OnTester deals CSV + summary =========
+double OnTester()
+{
+   // Emit deals CSV in signal-player-compatible schema so
+   // _compare_plans.py / _consistency_check.py work directly.
+   int h = FileOpen("ck_qm_native_deals.csv",
+                    FILE_WRITE | FILE_CSV | FILE_COMMON | FILE_ANSI, ',');
+   if(h == INVALID_HANDLE)
+   {
+      Print("[QM_NATIVE] OnTester: FileOpen FAILED err=", GetLastError());
+      return(0.0);
+   }
+   // schema exactly matches qm_signalplayer_deals_baseline.csv
+   FileWrite(h, "close_time", "type", "volume", "price", "sl", "tp",
+                "profit", "swap", "commission", "comment");
+
+   HistorySelect(0, TimeCurrent());
+   int total = HistoryDealsTotal();
+
+   QMTesterSummary sum;
+   ZeroMemory(sum);
+   sum.min_balance  = 6000.0;   // deposit assumption for the run
+   sum.peak_balance = 6000.0;
+   sum.max_dd       = 0.0;
+
+   double running = 6000.0;
+   double peak    = 6000.0;
+   int wins = 0, losses = 0, be_count = 0;
+   double gw = 0.0, gl = 0.0;
+
+   // daily aggregate for worst-day + FN daily-line breach count
+   int    n_days = 0;
+   datetime day_keys[];      // dynamic array, one entry per unique close date
+   double   day_sums[];
+   ArrayResize(day_keys, 0);
+   ArrayResize(day_sums, 0);
+
+   for(int i = 0; i < total; i++)
+   {
+      ulong tk = HistoryDealGetTicket(i); if(tk == 0) continue;
+      if(HistoryDealGetString(tk, DEAL_SYMBOL) != _Symbol) continue;
+      if(HistoryDealGetInteger(tk, DEAL_ENTRY) != DEAL_ENTRY_OUT) continue;
+      // recognise any of our per-slot magic numbers: InpMagic + [0..MAX_QM_SETUPS-1]
+      long mg = HistoryDealGetInteger(tk, DEAL_MAGIC);
+      if(mg < (long)InpMagic || mg >= (long)(InpMagic + MAX_QM_SETUPS)) continue;
+
+      datetime xt = (datetime)HistoryDealGetInteger(tk, DEAL_TIME);
+      double   px = HistoryDealGetDouble(tk, DEAL_PRICE);
+      double   sl = HistoryDealGetDouble(tk, DEAL_SL);
+      double   tp = HistoryDealGetDouble(tk, DEAL_TP);
+      double   pr = HistoryDealGetDouble(tk, DEAL_PROFIT);
+      double   sw = HistoryDealGetDouble(tk, DEAL_SWAP);
+      double   cm = HistoryDealGetDouble(tk, DEAL_COMMISSION);
+      double   vol = HistoryDealGetDouble(tk, DEAL_VOLUME);
+      string   cmt = HistoryDealGetString(tk, DEAL_COMMENT);
+
+      long dt_deal = HistoryDealGetInteger(tk, DEAL_TYPE);
+      string ds = (dt_deal == DEAL_TYPE_BUY) ? "SELL_close" : "BUY_close";  // OUT for BUY is a SELL_close
+
+      FileWrite(h,
+                TimeToString(xt, TIME_DATE|TIME_MINUTES),
+                ds,
+                DoubleToString(vol, 2),
+                DoubleToString(px,  _Digits),
+                DoubleToString(sl,  _Digits),
+                DoubleToString(tp,  _Digits),
+                DoubleToString(pr,  2),
+                DoubleToString(sw,  2),
+                DoubleToString(cm,  2),
+                cmt);
+
+      // aggregate net + wins/losses for the summary
+      double net = pr + sw + cm;
+      sum.net += net;
+      sum.n_deals++;
+      running += net;
+      if(running > peak) peak = running;
+      double dd = peak - running;
+      if(dd > sum.max_dd) sum.max_dd = dd;
+      if(running < sum.min_balance) sum.min_balance = running;
+      if(running > sum.peak_balance) sum.peak_balance = running;
+
+      if(net > 0) { wins++; gw += net; }
+      else if(net < 0) { losses++; gl += net; }
+      else be_count++;
+
+      // per-day aggregate for worst-day + FN daily-line breach count
+      MqlDateTime mdt; TimeToStruct(xt, mdt);
+      MqlDateTime mkey = {mdt.year, mdt.mon, mdt.day, 0, 0, 0, 0, 0};
+      datetime dayKey = StructToTime(mkey);
+      int idx = -1;
+      for(int k = 0; k < n_days; k++) if(day_keys[k] == dayKey) { idx = k; break; }
+      if(idx < 0)
+      {
+         ArrayResize(day_keys, n_days + 1);
+         ArrayResize(day_sums, n_days + 1);
+         day_keys[n_days] = dayKey;
+         day_sums[n_days] = net;
+         n_days++;
+      }
+      else
+      {
+         day_sums[idx] += net;
+      }
+   }
+   FileClose(h);
+
+   sum.gross_win  = gw;
+   sum.gross_loss = gl;
+   sum.pf         = (gl < 0.0) ? (gw / MathAbs(gl)) : 0.0;
+   sum.win_rate_pct = (sum.n_deals > 0) ? (100.0 * wins / sum.n_deals) : 0.0;
+
+   double worst = 0.0;
+   for(int k = 0; k < n_days; k++)
+   {
+      if(day_sums[k] < worst) worst = day_sums[k];
+      if(day_sums[k] <= -300.0) sum.n_worst_day_over_300++;
+   }
+   sum.worst_day = worst;
+
+   Print("=====================================================================");
+   Print("  CK_QM_NATIVE_v1 -- Block 7 ONTESTER SUMMARY (deposit basis $6,000)");
+   Print("=====================================================================");
+   PrintFormat("  deals              : %d  (wins %d / losses %d / be %d)", sum.n_deals, wins, losses, be_count);
+   PrintFormat("  net (all-in)       : $%.2f   (%.2f%% on $6k)", sum.net, 100.0*sum.net/6000.0);
+   PrintFormat("  gross win/loss     : $%.2f / $%.2f", gw, gl);
+   PrintFormat("  profit factor      : %.3f", sum.pf);
+   PrintFormat("  win rate           : %.1f%%", sum.win_rate_pct);
+   PrintFormat("  min / peak balance : $%.2f / $%.2f", sum.min_balance, sum.peak_balance);
+   PrintFormat("  max drawdown       : $%.2f", sum.max_dd);
+   PrintFormat("  worst realized day : $%.2f", sum.worst_day);
+   PrintFormat("  FN daily breaches  : %d  ($300 line)", sum.n_worst_day_over_300);
+   Print("  --- funnel counters ---");
+   PrintFormat("  M15 bars processed  : %I64d", g_barsSeen);
+   PrintFormat("  M15 swings h/l      : %I64d / %I64d", g_shWritten, g_slWritten);
+   PrintFormat("  H4  swings h/l      : %I64d / %I64d", g_h4ShWritten, g_h4SlWritten);
+   PrintFormat("  MSS detected        : bear=%I64d bull=%I64d (total %I64d)",
+               g_mssBearCount, g_mssBullCount, g_mssBearCount + g_mssBullCount);
+   PrintFormat("  setups enqueued     : %I64d", g_qm_added_total);
+   PrintFormat("  setups entered      : %I64d", g_qm_entered_total);
+   PrintFormat("  setups expired      : %I64d", g_qm_expired_total);
+   Print("=====================================================================");
+   Print("  CSV: MQL5\\Common\\Files\\ck_qm_native_deals.csv");
+   Print("  Compare to qm_signalplayer_deals_baseline.csv via");
+   Print("  python tools/qm_native_parity.py  (see repo).");
+   Print("=====================================================================");
+   return(0.0);
 }
 
 //==================== END OF FILE ==================================
