@@ -371,14 +371,281 @@ int QM_ExpireOverdue(const datetime now_bar_time)
 }
 
 //==================== END BLOCK 1 ==================================
-// Block 2 (M15 structure detection) will add:  OnNewM15Bar() +
-// QM_DetectSwings() + QM_DetectMSS().
+
+
+//==================== BLOCK 2: M15 STRUCTURE DETECTION =============
+// On every closed M15 bar:
+//   1) confirm a NEW swing at shift (pivot+1) if its two pivot-bar
+//      wings are both smaller (swing high) or both larger (swing low)
+//      than the checked bar's high/low.  This is the streaming
+//      equivalent of qm_detect.py's detect_swings() with a fixed
+//      pivot-bars-per-side rule.
+//   2) evaluate an MSS on the just-closed bar (shift 1): a body close
+//      beyond the MOST RECENT confirmed swing in the required
+//      direction, with |close-open|/ATR14 >= InpDispATR.
+//      This mirrors qm_detect.py's detect_mss().
+//
+// Block 2 is DETECT-only.  It stores swings + prints per-bar
+// diagnostics; it does NOT create QMSetup queue entries yet.  Block 3
+// (ERL + POI + IDM computation) will call QM_OnMSSDetected() to
+// actually pair the shift with the auxiliary structure and enqueue.
 //===================================================================
+
+#define QM_SWING_RING       64        // rolling history of confirmed swings
+#define QM_ATR_MIN_BARS     20        // require at least this many closed M15 bars before evaluating
+
+//---- swing record ---------------------------------------------------
+struct QMSwing
+{
+   datetime time;                   // close-time of the swing bar
+   double   price;                  // swing high / low value
+   int      shift_at_confirm;       // M15 shift at confirmation moment (diagnostics)
+};
+
+QMSwing  g_swingHighs[QM_SWING_RING];
+QMSwing  g_swingLows [QM_SWING_RING];
+int      g_shTop = -1;               // index of most-recently-written swing high (ring)
+int      g_slTop = -1;               // index of most-recently-written swing low  (ring)
+long     g_shWritten = 0;            // lifetime swing-high count
+long     g_slWritten = 0;            // lifetime swing-low  count
+
+//---- MSS event counters (diagnostics + block 7 comparison target) --
+long     g_mssBearCount = 0;
+long     g_mssBullCount = 0;
+long     g_barsSeen     = 0;
+
+//---- M15 bar tracking ----------------------------------------------
+datetime g_lastM15Time  = 0;
+int      g_hATR_M15     = INVALID_HANDLE;
+
+//---- ATR reader ----------------------------------------------------
+// Returns ATR value on M15 at shift 1 (the just-closed bar). Returns
+// 0.0 if the buffer isn't ready yet (early history).
+double QM_M15_ATR_shift1()
+{
+   if(g_hATR_M15 == INVALID_HANDLE) return(0.0);
+   double b[1];
+   if(CopyBuffer(g_hATR_M15, 0, 1, 1, b) < 1) return(0.0);
+   return(b[0]);
+}
+
+//---- swing storage helpers -----------------------------------------
+void QM_AddSwingHigh(const datetime t, const double p, const int shift_at_confirm)
+{
+   g_shTop = (g_shTop + 1) % QM_SWING_RING;
+   g_swingHighs[g_shTop].time  = t;
+   g_swingHighs[g_shTop].price = p;
+   g_swingHighs[g_shTop].shift_at_confirm = shift_at_confirm;
+   g_shWritten++;
+}
+
+void QM_AddSwingLow(const datetime t, const double p, const int shift_at_confirm)
+{
+   g_slTop = (g_slTop + 1) % QM_SWING_RING;
+   g_swingLows[g_slTop].time  = t;
+   g_swingLows[g_slTop].price = p;
+   g_swingLows[g_slTop].shift_at_confirm = shift_at_confirm;
+   g_slWritten++;
+}
+
+// Look up the most recent CONFIRMED swing high whose time is strictly
+// before the given cutoff time. Returns true + fills out if found.
+bool QM_MostRecentSwingHighBefore(const datetime cutoff, QMSwing &out)
+{
+   if(g_shWritten == 0) return(false);
+   // Walk backwards from g_shTop
+   int limit = (int)MathMin((long)QM_SWING_RING, g_shWritten);
+   for(int step = 0; step < limit; step++)
+   {
+      int idx = (g_shTop - step + QM_SWING_RING) % QM_SWING_RING;
+      if(g_swingHighs[idx].time < cutoff)
+      {
+         out = g_swingHighs[idx];
+         return(true);
+      }
+   }
+   return(false);
+}
+
+bool QM_MostRecentSwingLowBefore(const datetime cutoff, QMSwing &out)
+{
+   if(g_slWritten == 0) return(false);
+   int limit = (int)MathMin((long)QM_SWING_RING, g_slWritten);
+   for(int step = 0; step < limit; step++)
+   {
+      int idx = (g_slTop - step + QM_SWING_RING) % QM_SWING_RING;
+      if(g_swingLows[idx].time < cutoff)
+      {
+         out = g_swingLows[idx];
+         return(true);
+      }
+   }
+   return(false);
+}
+
+//---- streaming swing detector --------------------------------------
+// Called on each new closed M15 bar. Checks whether the bar at shift
+// (pivot+1) is a fresh swing high / low based on strict comparisons
+// on both wings. Same-price ties do not create a new swing (mirrors
+// qm_detect.py behaviour for gold's typical strict-swing conventions).
+void QM_DetectSwings()
+{
+   const int p = InpPivot;
+   const int checkShift = p + 1;
+
+   // Need at least (2*p + 2) bars of history to evaluate the wings + check-bar
+   const int minBars = 2 * p + 2;
+   if(Bars(_Symbol, PERIOD_M15) < minBars) return;
+
+   const double checkH = iHigh(_Symbol, PERIOD_M15, checkShift);
+   const double checkL = iLow (_Symbol, PERIOD_M15, checkShift);
+   const datetime checkT = iTime(_Symbol, PERIOD_M15, checkShift);
+   if(checkH <= 0.0 || checkT == 0) return;
+
+   // swing high test
+   bool isHigh = true;
+   for(int k = 1; k <= p; k++)
+   {
+      double lH = iHigh(_Symbol, PERIOD_M15, checkShift + k); // older neighbour
+      double rH = iHigh(_Symbol, PERIOD_M15, checkShift - k); // newer neighbour
+      if(lH >= checkH || rH >= checkH) { isHigh = false; break; }
+   }
+   if(isHigh) QM_AddSwingHigh(checkT, checkH, checkShift);
+
+   // swing low test
+   bool isLow = true;
+   for(int k = 1; k <= p; k++)
+   {
+      double lL = iLow(_Symbol, PERIOD_M15, checkShift + k);
+      double rL = iLow(_Symbol, PERIOD_M15, checkShift - k);
+      if(lL <= checkL || rL <= checkL) { isLow = false; break; }
+   }
+   if(isLow) QM_AddSwingLow(checkT, checkL, checkShift);
+}
+
+//---- MSS detector on the just-closed M15 bar (shift 1) ------------
+// Returns:
+//   0 = no shift on this bar
+//  -1 = bearish MSS (close body-breaks below most-recent confirmed swing low)
+//  +1 = bullish MSS (close body-breaks above most-recent confirmed swing high)
+// Displacement gate is |close-open|/ATR14 >= InpDispATR (LOCKED per
+// steering §5 default; do NOT tune during the port).
+int QM_DetectMSS(double &disp_out, datetime &shift_time_out, double &close_out, QMSwing &brokenSwing_out)
+{
+   disp_out = 0.0;
+   shift_time_out = 0;
+   close_out = 0.0;
+   ZeroMemory(brokenSwing_out);
+
+   const double o1 = iOpen (_Symbol, PERIOD_M15, 1);
+   const double c1 = iClose(_Symbol, PERIOD_M15, 1);
+   const datetime t1 = iTime(_Symbol, PERIOD_M15, 1);
+   if(t1 == 0 || o1 <= 0.0 || c1 <= 0.0) return(0);
+
+   double atr = QM_M15_ATR_shift1();
+   if(atr <= 0.0) return(0);
+
+   double disp = MathAbs(c1 - o1) / atr;
+   disp_out       = disp;
+   shift_time_out = t1;
+   close_out      = c1;
+
+   if(disp < InpDispATR) return(0);   // displacement gate fails
+
+   // Bearish MSS: close is BELOW the most recent confirmed swing low BEFORE this bar
+   QMSwing recentLow;
+   if(QM_MostRecentSwingLowBefore(t1, recentLow) && c1 < recentLow.price)
+   {
+      brokenSwing_out = recentLow;
+      return(-1);
+   }
+   // Bullish MSS: close is ABOVE the most recent confirmed swing high BEFORE this bar
+   QMSwing recentHigh;
+   if(QM_MostRecentSwingHighBefore(t1, recentHigh) && c1 > recentHigh.price)
+   {
+      brokenSwing_out = recentHigh;
+      return(+1);
+   }
+   return(0);
+}
+
+//---- MSS event hook (Block 3+ will populate this with real work) --
+// Block 3 will replace the print body with ERL+POI+IDM computation
+// and a QM_AddSetup() call. For now this is a stub that only logs
+// so Block 2 remains detect-only per the plan.
+void QM_OnMSSDetected(const int direction,
+                      const datetime shift_time,
+                      const double close_price,
+                      const double disp,
+                      const QMSwing &brokenSwing)
+{
+   PrintFormat("[QM_NATIVE] MSS_DETECTED  dir=%s  bar=%s  close=%.2f  disp=%.2f  broken_swing=%.2f@%s",
+               (direction < 0 ? "BEAR" : "BULL"),
+               TimeToString(shift_time, TIME_DATE|TIME_MINUTES),
+               close_price, disp,
+               brokenSwing.price,
+               TimeToString(brokenSwing.time, TIME_DATE|TIME_MINUTES));
+}
+
+//---- new-M15-bar dispatcher (called from OnTick) -------------------
+void QM_OnNewM15Bar()
+{
+   g_barsSeen++;
+
+   // 1) confirm any new swing at shift (pivot + 1)
+   QM_DetectSwings();
+
+   // 2) evaluate MSS on the just-closed bar (shift 1)
+   double   disp = 0.0;
+   datetime st   = 0;
+   double   cx   = 0.0;
+   QMSwing  brk;
+   int mss = QM_DetectMSS(disp, st, cx, brk);
+
+   // per-bar debug (short line so it survives long backtests without
+   // flooding the Experts tab too badly)
+   if(InpQueueDebug)
+   {
+      string shiftLabel = (mss == 0) ? "none" : ((mss < 0) ? "bear" : "bull");
+      PrintFormat("[QM_NATIVE] bar t=%s close=%.2f disp=%.2f shift=%s  swings[h=%I64d l=%I64d]",
+                  TimeToString(st, TIME_DATE|TIME_MINUTES), cx, disp, shiftLabel,
+                  g_shWritten, g_slWritten);
+   }
+
+   if(mss != 0)
+   {
+      if(mss < 0) g_mssBearCount++; else g_mssBullCount++;
+      QM_OnMSSDetected(mss, st, cx, disp, brk);
+   }
+}
+
+//==================== END BLOCK 2 ==================================
+// Block 3 (ERL + POI + IDM detection) will replace the body of
+// QM_OnMSSDetected() with the real structural pairing + queue add.
+//===================================================================
+
 
 //==================== EA LIFECYCLE ================================
 int OnInit()
 {
    QM_Init();
+
+   // Block 2 setup: ATR M15 handle for the displacement gate.
+   g_hATR_M15 = iATR(_Symbol, PERIOD_M15, InpAtrPeriod);
+   if(g_hATR_M15 == INVALID_HANDLE)
+   {
+      Print("[QM_NATIVE] init FAIL - could not create iATR(M15,", InpAtrPeriod, ") handle");
+      return(INIT_FAILED);
+   }
+   g_lastM15Time  = 0;
+   g_shTop        = -1;
+   g_slTop        = -1;
+   g_shWritten    = 0;
+   g_slWritten    = 0;
+   g_mssBearCount = 0;
+   g_mssBullCount = 0;
+   g_barsSeen     = 0;
+
    // Block 1 sanity: prove we can add + expire + GC end-to-end.
    // Runs once at startup and leaves the queue empty.
    const int probe = QM_AddSetup(
@@ -399,18 +666,32 @@ int OnInit()
       QM_GC();
    }
    QM_DumpQueue();
-   return INIT_SUCCEEDED;
+   Print("[QM_NATIVE] Block 2 armed - M15 structure detector live (pivot=", InpPivot,
+         "  disp>=", DoubleToString(InpDispATR, 2), "  ATR(M15,", InpAtrPeriod, "))");
+   return(INIT_SUCCEEDED);
 }
 
 void OnDeinit(const int reason)
 {
    Print("[QM_NATIVE] deinit reason=", reason);
+   PrintFormat("[QM_NATIVE] Block 2 stats: barsSeen=%I64d  swingH=%I64d  swingL=%I64d  MSS_bear=%I64d  MSS_bull=%I64d",
+               g_barsSeen, g_shWritten, g_slWritten, g_mssBearCount, g_mssBullCount);
+   if(g_hATR_M15 != INVALID_HANDLE) IndicatorRelease(g_hATR_M15);
    QM_DumpQueue();
 }
 
 void OnTick()
 {
-   // Block 1 no-op. Blocks 2/4/5 will drive detection + advance on new M15/M5 closes.
+   // New-M15-bar detection: on the first tick after a bar closes,
+   // iTime(shift=0) returns the NEW forming bar's open time - different
+   // from the previous open time we cached.
+   datetime cur = iTime(_Symbol, PERIOD_M15, 0);
+   if(cur != g_lastM15Time && cur != 0)
+   {
+      // exclude the very first init tick (g_lastM15Time == 0 seed).
+      if(g_lastM15Time != 0) QM_OnNewM15Bar();
+      g_lastM15Time = cur;
+   }
 }
 
 //==================== END OF FILE ==================================
