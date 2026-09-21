@@ -64,29 +64,34 @@ All items below confirmed by FN support (agent Allen) on 2026-09-21 unless flagg
 - **EA banned on Match-Trader.** Confirmed 2026-09-21. Use MT5.
 - **EA allowed on accounts < $50,000** (accounts $50k and above are manual-only).
 - **Gold leverage 1:15.**
-- **EA / EA+VPS add-on fee: ONE-TIME per account, NOT monthly.** Payable at challenge
-  purchase (or add-on activation). Once paid, the EA (and VPS if bundled) remains
-  available for the entire life of that account — no monthly renewal until the account
-  is breached, at which point the fee would apply again on a new account. FN support
-  did NOT disclose the exact figure; confirm the specific amount on the client area at
-  purchase. **Any earlier assumption of a monthly EA fee (~$5/mo) in this repo is
-  SUPERSEDED by this one-time model.** For income projections, treat the fee as a
-  small (< ~$100) one-shot deduction from year-one net; year-two-onwards has no
-  further fee unless a new account is opened.
-- **Payout cadence:**
-  - **Standard option:** first payout cycle = **21 days**, subsequent cycles = **14
-    days each**. Confirmed 2026-09-21.
-  - **On-Demand Reward option:** payout on fulfilling "specified criteria"
-    (unspecified by support; verify in the client area at purchase). This may be
-    the "21-Day payout with no min days" option referred to in earlier notes.
-- **Minimum withdrawal: $20.** Confirmed 2026-09-21. Not restrictive for any of our
-  income plans.
-- **Minimum trading days per phase:** FN support did not explicitly state a number.
-  Steering assumes **5 valid days per phase** as a safe default until the client-area
-  dashboard confirms otherwise (Standard option). On-Demand may waive this — verify.
-- **No first-payout cap disclosed.** FN's answer covered cadence but not a first-payout
-  dollar cap; assume none (the GFT-style "$3,000 daily / 6% first-payout" cap that
-  earlier drafts referenced was Goat Funded Trader, not FundedNext).
+- **EA / EA+VPS add-on fee: ONE-TIME per account, NOT monthly.** Confirmed 2026-09-21.
+  Applies until the account is breached; on a new account the fee applies again. Exact
+  figures for a Stellar 2-Step **$6,000** account (confirmed by FN support 2026-09-21):
+  - **EA-only add-on: $5 one-time**
+  - **EA + VPS bundle: $10 one-time**
+  Both are effectively rounding-error costs on year-one net (well under 1% of expected
+  annual take-home). The bundle is a no-brainer if you don't already have a stable VPS.
+  Any earlier assumption of a $5/mo recurring EA fee in this repo is SUPERSEDED.
+- **Reward-share options** (choice is made at CHECKOUT; cannot be changed later —
+  confirmed 2026-09-21):
+  - **Standard payout cadence: 80% split.** First cycle = **21 days**, subsequent
+    cycles = **14 days each**. Predictable, no consistency rule. Simpler.
+  - **On-Demand Performance Reward: 90% split.** Payout when both conditions are met:
+    (a) at least **2% account growth** since account start (or since last payout — verify
+    at checkout), (b) **40% consistency rule** — the single best trading day's profit
+    must be ≤ 40% of total generated profit at the time of the request (formula:
+    `highest_profit_day / total_profit * 100 ≤ 40`; not a daily cap, only evaluated at
+    request time). Once both conditions hold, request any time; processed within 24
+    hours. Reward share 90% (or 95% with a separate "Lifetime Reward 95%" paid add-on).
+    Ref: help.fundednext.com/en/articles/15586820.
+- **Minimum withdrawal: $20.** Confirmed 2026-09-21. Not restrictive.
+- **Minimum trading days per phase:** not explicitly stated by FN support on
+  2026-09-21. Steering assumes **5 valid days per phase** for the Standard option as
+  a safe default; On-Demand may waive this if fulfillment criteria are met — verify
+  in the client area at purchase.
+- **No first-payout cap disclosed.** FN's answer covered cadence but not a dollar cap
+  on the first payout; assume none (the GFT-style "$3,000 daily / 6% first-payout" cap
+  in earlier drafts was Goat Funded Trader, not FundedNext).
 
 ## 4. EA guardrails (DERIVED — enforce with buffer, never sit at a hard limit)
 - **Static halt** — close all + stop for good when equity ≤ **8% below initial**

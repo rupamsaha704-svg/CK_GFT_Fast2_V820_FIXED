@@ -5,11 +5,18 @@ INR conversion @ ₹115/USD. All numbers below come from MT5 real-tick (Model 4)
 run through `_compare_plans.py`. Steering §5 pins these as truth — no Python-only claim
 counts.
 
-**EA fee model (corrected 2026-09-21 per FN support):** EA / EA+VPS add-on is a **one-time
-per-account fee**, NOT monthly. Exact amount undisclosed; steering §3 assumes < ~$100.
-The tables below show gross take-80 without a monthly-fee deduction; subtract the one-time
-fee once from year-one net when it becomes known. Earlier drafts of this doc assumed
-$5/mo → slightly under-reported income; corrected numbers below.
+**EA fee model (confirmed 2026-09-21 by FN support Allen):** EA / EA+VPS add-on is a
+**one-time per-account fee**, NOT monthly. Exact figures on Stellar 2-Step $6,000:
+**EA-only $5, EA+VPS bundle $10**. Rounding-error costs on year-one net — do not affect
+the comparison. Numbers below are take-share **gross** (choose your split — 80% Standard
+or 90% On-Demand — see §1.5).
+
+**Payout options (confirmed 2026-09-21):** picked at CHECKOUT, cannot switch afterwards:
+- **Standard:** 80% split, first cycle 21 days, subsequent 14 days. Simple, no
+  consistency rule.
+- **On-Demand:** 90% split, payout when (a) ≥ 2% account growth since account start,
+  and (b) 40% consistency rule holds (best single-day profit ≤ 40% of total profit at
+  request time). Processed within 24h.
 
 Both plans face the FN hard rules: **5% daily = $300 line**, **10% static = $5,400 floor**,
 **3% funded risk = $180 line** (funded stage only).
@@ -23,23 +30,90 @@ Both plans face the FN hard rules: **5% daily = $300 line**, **10% static = $5,4
 | PF | 1.422 | **1.492** |
 | Win rate | 25.6% | 22.7% |
 | Expectancy per trade | +$8.29 | **+$26.09** |
-| FN compliance at reference risk | **PASS** (daily + static) | **FAIL** (1 daily breach + 1 static breach at $85) |
-| FN-safe risk | 0.02 lot (as-shipped) | $75 max, NOT $85 |
-| Take-80 income @ FN-safe risk (gross) | **~$155.82/mo ≈ ₹17,920/mo** | **~$137.43/mo ≈ ₹15,804/mo** |
-| Take-80 income at 90% split (scale-up) | ~$175.30/mo ≈ ₹20,159/mo | ~$154.60/mo ≈ ₹17,780/mo |
-| Yearly (take-80, FN-safe, gross) | ~$1,870 ≈ ₹215,050 | ~$1,649 ≈ ₹189,635 |
-| One-time EA fee (year-1 only) | small (< ~$100), TBD | small (< ~$100), TBD |
+| FN daily / static compliance | **PASS** at 0.02 lot | **FAIL at $85** (must scale to $75) |
+| FN-safe risk | 0.02 lot (as-shipped) | $75 max |
+| **40% consistency rule** (biggest-day / total) | **PASS — 36.2%** (biggest day $809.72 vs $2,240 total) | **FAIL — 58.9%** (biggest day $1,352.25 vs $2,296 total) |
+| **On-Demand eligible?** | **YES — 90% split available** | **NO — cannot use 90% On-Demand** |
+| Standard 80% monthly gross | $155.82 ≈ **₹17,920/mo** | $137.43 ≈ ₹15,804/mo |
+| On-Demand 90% monthly gross | **$175.30 ≈ ₹20,159/mo** | not available (consistency FAIL) |
+| Yearly gross at best available option | **~$2,103 ≈ ₹241,801** (On-Demand 90%) | ~$1,649 ≈ ₹189,635 (Standard 80% only) |
+| One-time EA+VPS fee | $10 total | $10 total |
 | Ops load | single .ex5 autopilot | Python engine + weekly signal refresh + EA restart |
 | Live-refresh gap | none | present; workaround = weekly restart |
 | Deploy folder | `experiments/combo_fnext_03/` | `experiments/qm_erl_h4/` |
-| **Recommendation** | **default** — Steering §11 | on explicit user preference only |
+| **Recommendation** | **BEST: Plan C + On-Demand 90%** | on explicit user preference only |
 
-**Bottom line:** Plan C wins by **~$18.39/mo ≈ ₹2,116/mo take-80** (~13% more income)
-at safe risk, with far simpler operations and cleaner FN compliance headroom. The delta
-is unchanged by the one-time-fee correction (both plans pay the same fee once), so the
-relative ranking is unaffected. Plan Q's higher PF and expectancy don't offset the ~$46
-static breach + ~$14 daily breach at reference $85 risk, forcing a haircut to $75 that
-erases the income advantage seen in the raw numbers.
+**Bottom line:** The consistency-rule check makes Plan C the clear winner **twice
+over**. First, Plan C's biggest single day is 36.2% of yearly total (passes the 40%
+rule); Plan Q's is 58.9% (fails by 18.9 points). Second, Plan C can therefore elect
+**On-Demand at 90% split**, lifting its take from ₹17,920 → ₹20,159/mo — a gain of
+₹2,239/mo that is not available to Plan Q at any risk sizing.
+
+**Plan C + On-Demand vs Plan Q + Standard (both at FN-safe sizing):**
+income delta ≈ **₹4,355/mo ≈ 28% more income**, plus simpler ops, plus cleaner
+compliance headroom. Not a close call.
+
+## 1.5. Consistency-rule detail (why Plan Q cannot use On-Demand)
+
+FN formula (help.fundednext.com/en/articles/15586820):
+`consistency_score = highest_profit_day / total_profit × 100`. Must be ≤ 40% at the
+moment of the payout request. Not a daily cap — evaluated only at request time.
+
+Top winning days from the real-tick deals CSVs (see `_consistency_check.py`):
+
+Plan C (combo FIX 0.02):
+- 2026-01-29: +$809.72 → 36.2% of yearly total → PASS margin 3.8 pts
+- 2026-02-23: +$348.71 → 15.6%
+- 2025-10-17: +$255.23 → 11.4%
+- All other days ≤ $250
+
+Plan Q (QM signal-player at $85 baseline):
+- 2025-12-22: **+$1,352.25 → 58.9%** → FAIL by 18.9 pts
+- 2025-09-29: +$846.19 → 36.9%
+- 2026-05-07: +$794.79 → 34.6%
+
+Scaling Plan Q to $75 safe risk (factor 0.882): every P&L number scales the same
+way, so the ratio is unchanged. Biggest day at $75 = $1,193; total = $2,025; ratio
+still 58.9%. Plan Q fails consistency at ANY FN-compliant risk sizing.
+
+The Plan Q setup earns its edge in a few huge runs to external liquidity (that is the
+QM/ICT edge). Those runs are exactly what break the consistency rule. A structural
+change to Plan Q (partial-close at fixed R multiples, hard win cap) would fix
+consistency at the cost of the edge itself — the previously-refuted trailing/harvest
+mechanisms (ledger seq232, seq272 H2 ATR trail) confirm this. **Plan Q is
+On-Demand-incompatible by construction.**
+
+## 1.6. On-Demand "build phase" for Plan C
+
+Plan C passes consistency at year-end (36.2%). But EARLY in the account life, before
+much profit has accumulated, big single days can easily exceed 40% of the running
+total.
+
+Example: month 1 net ~$155. If a $200-day happened in month 1, ratio = 129%.
+Cannot request payout. Must wait until total profit grows enough that the biggest
+day fits under 40%.
+
+At Plan C's pace ($155/mo net gross), the running total reaches:
+- ~$310 after 2 months → biggest day (from backtest max $809 in Jan-29) would still
+  be ~260% → still cannot request
+- ~$620 after 4 months → biggest day up to that point historically was ~$400 →
+  might pass
+- ~$930 after 6 months → biggest days pass more comfortably
+- ~$1,860 after 12 months → biggest days easily pass
+
+**Practical Plan C On-Demand workflow:**
+- Months 1–3: no payout requests. Let profits compound.
+- Months 4+: check consistency ratio weekly; request payout when total is high enough
+  that the biggest single day so far is ≤ 40% of it.
+- Ongoing: expect ~2–4 payout requests per month once past the build phase.
+
+**Alternative:** pick Standard 80% at checkout. First payout in 21 days. Predictable
+14-day cadence. Cost: ~₹2,239/mo of upside vs On-Demand.
+
+**Recommendation:** if the user can wait ~3 months for the first cash withdrawal,
+On-Demand 90% is the clear winner. If monthly cash flow from day-21 onwards is
+essential, Standard 80% is the safer pick. Both use the same EA and .set — the
+choice is a payout-option one-liner at checkout, not a strategy change.
 
 ## 2. Full metrics table
 
@@ -152,33 +226,59 @@ lets Plan C survive one bad month; Plan Q at $75 might not.
 
 ## 6. Recommendation
 
-**Plan C (combo FIX 0.02) is the default deployment.**
+**BEST DEPLOYMENT: Plan C + On-Demand 90% payout option.**
+
+Second-best: Plan C + Standard 80% payout option (if faster first cash matters more
+than yearly total).
 
 Reasons in priority order:
 
-1. **FN compliance headroom** — Plan C has $50 daily + $514 static buffer; Plan Q at
+1. **On-Demand eligibility** — Plan C's biggest single day is 36.2% of yearly total,
+   under FN's 40% consistency ceiling by 3.8 points. Plan Q is at 58.9% — over by
+   almost 19 points, and cannot pass at any FN-compliant risk sizing (the ratio is
+   scale-invariant). This unlocks 90% split for Plan C only.
+2. **FN compliance headroom** — Plan C has $50 daily + $514 static buffer; Plan Q at
    the safe $75 sizing has $22 + $30. Plan C survives noise; Plan Q barely.
-2. **Income at FN-safe risk** — Plan C wins by ~₹2,100/mo take-80 (~14%).
-3. **Ops simplicity** — Plan C is a single-binary autopilot. Plan Q needs a Python
-   engine and manual weekly touch to stay alive.
-4. **Live-refresh gap** — Plan Q's EA reads the signal CSV only at OnInit, so live
+3. **Income at best available option** — Plan C + On-Demand 90% earns
+   ~$175.30/mo ≈ ₹20,159/mo vs Plan Q + Standard 80% at ~$137.43/mo ≈ ₹15,804/mo. A
+   ₹4,355/mo (~28%) advantage. Even Plan C + Standard 80% at ~$155.82/mo ≈ ₹17,920
+   beats Plan Q by ~₹2,100/mo.
+4. **Ops simplicity** — Plan C is a single-binary autopilot. Plan Q needs a Python
+   engine, weekly signal refresh, and manual EA restart cadence.
+5. **Live-refresh gap** — Plan Q's EA reads the signal CSV only at OnInit, so live
    deployment requires a workaround (weekly restart) or an EA patch (~30 line change)
    or the full native rewrite. Plan C has no equivalent gap.
-5. **Concentration risk** — Plan Q's yearly edge lives in 2 months out of 12 (123%
-   concentration). Plan C's is 103%. Both are gold-typical, but Plan C's is milder.
-6. **Deploy readiness** — Plan C is genuinely same-day-launchable via
-   `experiments/combo_fnext_03/install_combo_fnext.ps1`. Plan Q's kit exists at
-   `experiments/qm_erl_h4/` but its FORWARD_DEMO.md explicitly requires re-running an
-   MT5 backtest at $75 before the demo starts — Plan Q ships with a prerequisite Plan C
-   does not.
+6. **Concentration risk** — Plan Q's yearly edge lives in 2 months (123% concentration).
+   Plan C's in 2 months = 103%. Plan C's monthly stdev is ~40% lower.
+7. **Deploy readiness** — Plan C is genuinely same-day-launchable via
+   `experiments/combo_fnext_03/install_combo_fnext.ps1`. Plan Q's kit at
+   `experiments/qm_erl_h4/` requires an MT5 backtest at $75 before its forward-demo can
+   start.
 
-**Plan Q remains a valid choice IF:**
+### When to choose Standard vs On-Demand at CHECKOUT
+
+- **Choose Standard 80%** if: monthly cash flow from day-21-after-funded onwards is
+  essential for living expenses, or you don't want to think about the consistency
+  rule. Simpler mental model. Costs ~₹2,239/mo of upside.
+- **Choose On-Demand 90%** if: you can wait ~3 months for the first cash withdrawal
+  (so the running total builds up enough to make the consistency ratio comfortable),
+  and you want the extra 10% profit share for the long run. Best long-term income.
+
+The choice cannot be changed after checkout (per FN support 2026-09-21). Pick with
+that in mind. My recommendation: On-Demand if cash-flow flexibility exists;
+Standard otherwise.
+
+### Plan Q remains a valid choice IF
+
 - The user specifically prefers the QM setup for reasons outside pure income
-- The user is willing to run the operational overhead (Python + weekly restart)
+- The user is willing to run the Python + weekly-restart operational overhead
 - The user accepts thinner FN buffers as a trade-off for a slightly higher PF
+- The user accepts that Plan Q is On-Demand-incompatible → stuck at Standard 80%
 
-**Do not choose Plan Q for higher income — the raw MT5 numbers appear to suggest that,
-but they are the non-compliant $85 numbers. At $75-safe, Plan C is clearly ahead.**
+**Do not choose Plan Q for higher income.** The raw MT5 numbers appear to suggest
+that (net +$2,296 vs +$2,240), but they are the non-compliant $85 numbers. At
+$75-safe, Plan C is ahead. When both plans are compared at their best available
+payout options (Plan C On-Demand vs Plan Q Standard), Plan C wins by ~28%.
 
 ## 7. What still could shift the answer
 
@@ -206,10 +306,16 @@ plans absorb their respective rework overheads.
   checklist).
 - `experiments/qm_erl_h4/` — Plan Q deploy kit (parity structure, with the
   live-refresh caveats documented).
-- `_compare_plans.py` — reusable analyzer that produced these numbers.
+- `_compare_plans.py` — reusable analyzer for take-home comparison.
+- `_consistency_check.py` — reusable analyzer for FN 40% consistency-rule feasibility.
 - `SPEC/FN_REPLY_DECISION.md` — the pre-declared decision framework that was resolved
   by Allen's reply on 2026-09-21.
-- Steering §5 (MT5 = truth), §5a (signal-player pattern), §6 (funded 3% risk rework),
-  §7 (safe risk sizing), §11 (FN reply outcome).
+- Steering §3 (payout / fees, updated 2026-09-21 with confirmed numbers), §5 (MT5 =
+  truth), §5a (signal-player pattern), §6 (funded 3% risk rework), §7 (safe risk
+  sizing), §11 (FN reply outcome).
+- FN Help Article 15586820 — On-Demand Performance Reward details incl. the 40%
+  consistency formula.
 - Ledger seq255 (Plan C real-tick reference), seq270 (Plan Q real-tick reference),
-  seq275 (FN reply), seq276 (this comparison, pending commit).
+  seq275 (FN reply Article 8020351 hedging rule), seq276 (this comparison v1),
+  seq277 (FN payout / fee answers batch), seq278 (Plan C + On-Demand recommendation
+  after consistency-rule check).
