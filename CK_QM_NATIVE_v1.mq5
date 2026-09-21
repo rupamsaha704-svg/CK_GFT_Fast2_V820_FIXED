@@ -608,6 +608,11 @@ void QM_OnNewM15Bar()
       if(mss < 0) g_mssBearCount++; else g_mssBullCount++;
       QM_OnMSSDetected(mss, st, cx, disp, brk);
    }
+
+   // Block 4: advance every existing queue setup against the fresh bar
+   // AFTER Block 2 detection ran so any new MSS is already in the queue
+   // and gets its head-broken / deadline checks starting from next bar.
+   QM_AdvanceSetupsOnM15();
 }
 
 //==================== END BLOCK 2 ==================================
@@ -993,10 +998,140 @@ void QM_OnMSSDetected(const int direction,
 }
 
 //==================== END BLOCK 3 ==================================
-// Block 4 (queue advance on M15 close: POI return + IDM clear) will
-// iterate g_qm_setups[] on each new M15 bar and transition slots from
-// WAIT_POI_RETURN to WAIT_M5_CONFIRM. Block 5 then fires the trade on
-// the M5 confirmation candle.
+
+
+//==================== BLOCK 4: QUEUE ADVANCE ON M15 =================
+// On each new closed M15 bar, walk the queue and advance every
+// setup in WAIT_POI_RETURN. Three exit paths per slot:
+//   (a) HEAD BROKEN         -> EXPIRE (thesis dead)
+//   (b) DEADLINE PASSED    -> EXPIRE (timeout)
+//   (c) POI TOUCHED THIS BAR:
+//         - IDM cleared over [shift_time..this_bar]?
+//           if InpIdmClearRequired and NOT cleared -> EXPIRE
+//           otherwise -> transition to WAIT_M5_CONFIRM
+//
+// Every EXPIRE logs a one-line "EXPIRE slot=... reason=..." print
+// through the existing QM_ExpireSetup helper. Every state transition
+// prints one "TRANSITION slot=... state=..." line so Block 7's parity
+// check can measure the funnel: WAIT_POI_RETURN -> WAIT_M5_CONFIRM.
+//===================================================================
+
+//---- IDM-clear check over an inclusive [shift_time .. cutoff_time] window
+// bear setup: IDM = swing HIGH; clear = any bar HIGH > idm_level (wick mode)
+// bull setup: IDM = swing LOW;  clear = any bar LOW  < idm_level (wick mode)
+// Uses iHigh / iLow on M15 via iBarShift to find the two shift bounds.
+bool QM_IdmClearedOverWindow(const ENUM_QM_DIR direction,
+                             const double idm_level,
+                             const datetime shift_time,
+                             const datetime cutoff_time)
+{
+   if(idm_level <= 0.0) return(false);
+   int sh_shift = iBarShift(_Symbol, PERIOD_M15, shift_time, false);
+   int cu_shift = iBarShift(_Symbol, PERIOD_M15, cutoff_time, false);
+   if(sh_shift < 0 || cu_shift < 0) return(false);
+   // sh_shift is OLDER = larger shift value; cu_shift is NEWER = smaller.
+   // Walk shifts from (sh_shift - 1) DOWN to cu_shift so we scan bars strictly
+   // AFTER the shift bar through the cutoff bar inclusive. Mirrors
+   // idm_detect.py idm_cleared(start=shift_index, mode='wick').
+   int start_shift = sh_shift - 1;   // strictly after the shift bar
+   int end_shift   = cu_shift;
+   if(start_shift < end_shift) return(false);   // empty window
+
+   for(int s = start_shift; s >= end_shift; s--)
+   {
+      if(direction == QM_DIR_BEAR)
+      {
+         double bh = iHigh(_Symbol, PERIOD_M15, s);
+         if(bh > idm_level) return(true);
+      }
+      else
+      {
+         double bl = iLow(_Symbol, PERIOD_M15, s);
+         if(bl > 0.0 && bl < idm_level) return(true);
+      }
+   }
+   return(false);
+}
+
+// Walk the queue and advance each WAIT_POI_RETURN setup. Called from
+// QM_OnNewM15Bar AFTER swings + MSS are updated so state changes see
+// the most recent structure.
+void QM_AdvanceSetupsOnM15()
+{
+   // Just-closed bar (shift 1) - the bar we're testing this pass.
+   double h1 = iHigh (_Symbol, PERIOD_M15, 1);
+   double l1 = iLow  (_Symbol, PERIOD_M15, 1);
+   datetime t1 = iTime(_Symbol, PERIOD_M15, 1);
+   if(t1 == 0 || h1 <= 0.0) return;
+
+   for(int i = 0; i < MAX_QM_SETUPS; i++)
+   {
+      QMSetup s = g_qm_setups[i];
+      if(s.state != QM_STATE_WAIT_POI_RETURN) continue;
+
+      // (a) HEAD BROKEN invalidation: thesis dead the moment price
+      //     retakes the head extreme in the reversal direction.
+      //     bear head is a HIGH: if we push ABOVE it, the reversal is undone.
+      //     bull head is a LOW : if we push BELOW it, the reversal is undone.
+      if(s.direction == QM_DIR_BEAR && h1 > s.poi_head_price)
+      {
+         QM_ExpireSetup(i, "head_broken");
+         continue;
+      }
+      if(s.direction == QM_DIR_BULL && l1 > 0.0 && l1 < s.poi_head_price)
+      {
+         QM_ExpireSetup(i, "head_broken");
+         continue;
+      }
+
+      // (b) DEADLINE: (t1 >= expires_at) means we've waited too long.
+      if(s.expires_at > 0 && t1 >= s.expires_at)
+      {
+         QM_ExpireSetup(i, "wait_poi_timeout");
+         continue;
+      }
+
+      // (c) POI TOUCH on this bar?
+      bool touched = false;
+      if(s.direction == QM_DIR_BEAR)
+         touched = (h1 >= s.poi_bottom);      // price came UP into supply band
+      else
+         touched = (l1 > 0.0 && l1 <= s.poi_top);   // price came DOWN into demand band
+
+      if(!touched) continue;
+
+      // POI reached. Check IDM-clear over [shift_time .. this_bar_time].
+      bool cleared = QM_IdmClearedOverWindow(s.direction, s.idm_level, s.mss_shift_time, t1);
+      if(InpIdmClearRequired && !cleared)
+      {
+         if(InpQueueDebug)
+            PrintFormat("[QM_NATIVE] POI_TOUCH but IDM not cleared -> EXPIRE slot=%d dir=%s IDM=%.2f",
+                        i, QM_DirName(s.direction), s.idm_level);
+         QM_ExpireSetup(i, "idm_not_cleared");
+         continue;
+      }
+
+      // Transition WAIT_POI_RETURN -> WAIT_M5_CONFIRM.
+      g_qm_setups[i].poi_return_time = t1;
+      g_qm_setups[i].idm_cleared     = cleared;   // record actual outcome even if not required
+      g_qm_setups[i].state            = QM_STATE_WAIT_M5_CONFIRM;
+      g_qm_setups[i].m5_confirm_bars  = 0;
+      if(InpQueueDebug)
+         PrintFormat("[QM_NATIVE] TRANSITION slot=%d dir=%s  WAIT_POI_RETURN -> WAIT_M5_CONFIRM  poi_return=%s  IDM_cleared=%s",
+                     i, QM_DirName(s.direction),
+                     TimeToString(t1, TIME_DATE|TIME_MINUTES),
+                     (cleared ? "YES" : "NO"));
+   }
+
+   // Housekeeping: reclaim slots that are already DEAD/ENTERED so the
+   // queue has room for new MSS detections. Cheap - just a scan of 16.
+   QM_GC();
+}
+
+//==================== END BLOCK 4 ==================================
+// Block 5 (M5 confirmation + entry fire) will walk WAIT_M5_CONFIRM
+// slots on each new M5 bar close, detect the "1 rejection" candle,
+// and open a market order via CTrade.
 //===================================================================
 
 
