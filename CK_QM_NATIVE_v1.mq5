@@ -569,23 +569,14 @@ int QM_DetectMSS(double &disp_out, datetime &shift_time_out, double &close_out, 
    return(0);
 }
 
-//---- MSS event hook (Block 3+ will populate this with real work) --
-// Block 3 will replace the print body with ERL+POI+IDM computation
-// and a QM_AddSetup() call. For now this is a stub that only logs
-// so Block 2 remains detect-only per the plan.
+//---- MSS event hook forward declaration (real body is in Block 3) --
+// Block 3 gives this the real ERL+POI+IDM computation and the
+// QM_AddSetup() enqueue call.
 void QM_OnMSSDetected(const int direction,
                       const datetime shift_time,
                       const double close_price,
                       const double disp,
-                      const QMSwing &brokenSwing)
-{
-   PrintFormat("[QM_NATIVE] MSS_DETECTED  dir=%s  bar=%s  close=%.2f  disp=%.2f  broken_swing=%.2f@%s",
-               (direction < 0 ? "BEAR" : "BULL"),
-               TimeToString(shift_time, TIME_DATE|TIME_MINUTES),
-               close_price, disp,
-               brokenSwing.price,
-               TimeToString(brokenSwing.time, TIME_DATE|TIME_MINUTES));
-}
+                      const QMSwing &brokenSwing);
 
 //---- new-M15-bar dispatcher (called from OnTick) -------------------
 void QM_OnNewM15Bar()
@@ -620,8 +611,392 @@ void QM_OnNewM15Bar()
 }
 
 //==================== END BLOCK 2 ==================================
-// Block 3 (ERL + POI + IDM detection) will replace the body of
-// QM_OnMSSDetected() with the real structural pairing + queue add.
+
+
+//==================== BLOCK 3: ERL + POI + IDM ======================
+// When Block 2 detects an MSS on the just-closed M15 bar, Block 3
+// resolves the auxiliary structure and enqueues a QMSetup via
+// QM_AddSetup(). The mapping:
+//   - IDM (inducement)  = most recent confirmed opposite-side M15
+//                         swing at/before the MSS bar (block 2's ring).
+//                         idm_detect.py find_idm_for_shift equivalent.
+//   - POI zone          = left-shoulder QM band. LS = swing high (bear)
+//                         or low (bull) with LS.price < HEAD.price
+//                         (bear) / LS.price > HEAD.price (bull),
+//                         and HEAD is the swing directly before the
+//                         MSS neckline that raids LS liquidity.
+//                         Zone = LS-bar body-to-wick supply/demand band.
+//                         poi_zone.py detect_poi 'qm' variant.
+//   - ERL target        = extreme of last N H4 swings on the OPPOSITE
+//                         side of the shift. Winner variant erl_h4
+//                         from the multi-TF sweep (steering §5a).
+//                         erl_detect.py erl_levels equivalent, TF=H4,
+//                         pivot=2, lookback=5.
+//
+// Everything below is DETERMINISTIC and CAUSAL. No parameter is
+// tuned during the port; every value matches the Python DEFAULT_CONFIG
+// or the erl_h4 variant. If Block 7 parity check reveals a gap, we
+// FIX the port, not the parameters.
+//===================================================================
+
+#define QM_ERL_LOOKBACK      5     // per steering winner variant erl_h4
+#define QM_H4_SWING_RING     32    // rolling history of confirmed H4 swings (per side)
+
+//---- H4 swing tracker (mirrors the M15 tracker in Block 2) ---------
+QMSwing  g_h4SwingHighs[QM_H4_SWING_RING];
+QMSwing  g_h4SwingLows [QM_H4_SWING_RING];
+int      g_h4ShTop = -1;
+int      g_h4SlTop = -1;
+long     g_h4ShWritten = 0;
+long     g_h4SlWritten = 0;
+datetime g_lastH4Time  = 0;
+
+void QM_H4_AddSwingHigh(const datetime t, const double p)
+{
+   g_h4ShTop = (g_h4ShTop + 1) % QM_H4_SWING_RING;
+   g_h4SwingHighs[g_h4ShTop].time  = t;
+   g_h4SwingHighs[g_h4ShTop].price = p;
+   g_h4SwingHighs[g_h4ShTop].shift_at_confirm = -1;   // shift meaningless on H4 ring
+   g_h4ShWritten++;
+}
+void QM_H4_AddSwingLow(const datetime t, const double p)
+{
+   g_h4SlTop = (g_h4SlTop + 1) % QM_H4_SWING_RING;
+   g_h4SwingLows[g_h4SlTop].time  = t;
+   g_h4SwingLows[g_h4SlTop].price = p;
+   g_h4SwingLows[g_h4SlTop].shift_at_confirm = -1;
+   g_h4SlWritten++;
+}
+
+// On each new closed H4 bar, check whether the bar at H4-shift (pivot+1)
+// is a confirmed swing. Uses the same InpPivot as M15 so the two swing
+// rules are consistent.
+void QM_H4_DetectSwings()
+{
+   const int p = InpPivot;
+   const int checkShift = p + 1;
+   const int minBars = 2 * p + 2;
+   if(Bars(_Symbol, PERIOD_H4) < minBars) return;
+
+   const double h  = iHigh(_Symbol, PERIOD_H4, checkShift);
+   const double l  = iLow (_Symbol, PERIOD_H4, checkShift);
+   const datetime t = iTime(_Symbol, PERIOD_H4, checkShift);
+   if(h <= 0.0 || t == 0) return;
+
+   // swing high?
+   bool isHigh = true;
+   for(int k = 1; k <= p; k++)
+   {
+      double lH = iHigh(_Symbol, PERIOD_H4, checkShift + k);
+      double rH = iHigh(_Symbol, PERIOD_H4, checkShift - k);
+      if(lH >= h || rH >= h) { isHigh = false; break; }
+   }
+   if(isHigh) QM_H4_AddSwingHigh(t, h);
+
+   // swing low?
+   bool isLow = true;
+   for(int k = 1; k <= p; k++)
+   {
+      double lL = iLow(_Symbol, PERIOD_H4, checkShift + k);
+      double rL = iLow(_Symbol, PERIOD_H4, checkShift - k);
+      if(lL <= l || rL <= l) { isLow = false; break; }
+   }
+   if(isLow) QM_H4_AddSwingLow(t, l);
+}
+
+// Called from OnTick on H4 new-bar detection.
+void QM_OnNewH4Bar()
+{
+   QM_H4_DetectSwings();
+   if(InpQueueDebug)
+   {
+      PrintFormat("[QM_NATIVE] H4_BAR  swingsH=%I64d swingsL=%I64d",
+                  g_h4ShWritten, g_h4SlWritten);
+   }
+}
+
+//---- ERL computation: extreme of last N H4 swings on opposite side --
+// For a BEAR MSS the setup goes DOWN toward external LOWER liquidity =
+// lowest of the last LOOKBACK confirmed H4 swing LOWS. Mirror for BULL.
+// Returns 0.0 if we don't have enough H4 swings yet (early history).
+double QM_ComputeERL(const ENUM_QM_DIR direction)
+{
+   int n_needed = QM_ERL_LOOKBACK;
+   if(direction == QM_DIR_BEAR)
+   {
+      // lowest of last N swing lows
+      int have = (int)MathMin((long)QM_H4_SWING_RING, g_h4SlWritten);
+      if(have < 1) return(0.0);
+      int count = MathMin(have, n_needed);
+      double lowest = DBL_MAX;
+      for(int step = 0; step < count; step++)
+      {
+         int idx = (g_h4SlTop - step + QM_H4_SWING_RING) % QM_H4_SWING_RING;
+         if(g_h4SwingLows[idx].price < lowest) lowest = g_h4SwingLows[idx].price;
+      }
+      return(lowest == DBL_MAX ? 0.0 : lowest);
+   }
+   else
+   {
+      // highest of last N swing highs
+      int have = (int)MathMin((long)QM_H4_SWING_RING, g_h4ShWritten);
+      if(have < 1) return(0.0);
+      int count = MathMin(have, n_needed);
+      double highest = -DBL_MAX;
+      for(int step = 0; step < count; step++)
+      {
+         int idx = (g_h4ShTop - step + QM_H4_SWING_RING) % QM_H4_SWING_RING;
+         if(g_h4SwingHighs[idx].price > highest) highest = g_h4SwingHighs[idx].price;
+      }
+      return(highest == -DBL_MAX ? 0.0 : highest);
+   }
+}
+
+//---- QM structure finder: identify LS + HEAD from M15 swing ring ---
+// For a bearish MSS whose broken swing (neckline) is at time neck_t:
+//   HEAD  = most recent M15 swing HIGH with time strictly before neck_t
+//   LS    = most recent M15 swing HIGH with time strictly before HEAD.time
+//           and price < HEAD.price  (so HEAD raids LS's buy-side liquidity)
+// If either is missing or LS is not lower than HEAD, no valid QM structure.
+// Returns true + fills out on success.
+bool QM_FindQMStructure_Bear(const datetime neck_t, QMSwing &headOut, QMSwing &lsOut)
+{
+   ZeroMemory(headOut);
+   ZeroMemory(lsOut);
+   if(g_shWritten < 2) return(false);
+
+   int limit = (int)MathMin((long)QM_SWING_RING, g_shWritten);
+   // find HEAD: most recent swing HIGH with time < neck_t
+   int headFoundStep = -1;
+   for(int step = 0; step < limit; step++)
+   {
+      int idx = (g_shTop - step + QM_SWING_RING) % QM_SWING_RING;
+      if(g_swingHighs[idx].time < neck_t)
+      {
+         headOut = g_swingHighs[idx];
+         headFoundStep = step;
+         break;
+      }
+   }
+   if(headFoundStep < 0) return(false);
+
+   // find LS: walk further back for a swing HIGH strictly before HEAD.time
+   // with LS.price < HEAD.price
+   for(int step = headFoundStep + 1; step < limit; step++)
+   {
+      int idx = (g_shTop - step + QM_SWING_RING) % QM_SWING_RING;
+      if(g_swingHighs[idx].time < headOut.time &&
+         g_swingHighs[idx].price < headOut.price)
+      {
+         lsOut = g_swingHighs[idx];
+         return(true);
+      }
+   }
+   return(false);
+}
+
+// Bullish mirror: LS + HEAD are swing LOWS; HEAD.price < LS.price.
+bool QM_FindQMStructure_Bull(const datetime neck_t, QMSwing &headOut, QMSwing &lsOut)
+{
+   ZeroMemory(headOut);
+   ZeroMemory(lsOut);
+   if(g_slWritten < 2) return(false);
+
+   int limit = (int)MathMin((long)QM_SWING_RING, g_slWritten);
+   int headFoundStep = -1;
+   for(int step = 0; step < limit; step++)
+   {
+      int idx = (g_slTop - step + QM_SWING_RING) % QM_SWING_RING;
+      if(g_swingLows[idx].time < neck_t)
+      {
+         headOut = g_swingLows[idx];
+         headFoundStep = step;
+         break;
+      }
+   }
+   if(headFoundStep < 0) return(false);
+
+   for(int step = headFoundStep + 1; step < limit; step++)
+   {
+      int idx = (g_slTop - step + QM_SWING_RING) % QM_SWING_RING;
+      if(g_swingLows[idx].time < headOut.time &&
+         g_swingLows[idx].price > headOut.price)
+      {
+         lsOut = g_swingLows[idx];
+         return(true);
+      }
+   }
+   return(false);
+}
+
+//---- POI zone from LS candle -------------------------------------
+// The LS candle's body-to-wick band:
+//   bear POI = [min(open,close), high] of the LS bar (supply above)
+//   bull POI = [low, max(open,close)] of the LS bar (demand below)
+// LS is identified by its close time (ls_time). We convert that to a
+// bar shift on M15 and read the OHLC from there.
+bool QM_ComputePOI(const ENUM_QM_DIR direction,
+                   const datetime ls_time,
+                   double &poi_top_out,
+                   double &poi_bottom_out,
+                   int &head_bar_shift_out,
+                   double &head_price_out)
+{
+   poi_top_out = 0.0;
+   poi_bottom_out = 0.0;
+   head_bar_shift_out = -1;
+   head_price_out = 0.0;
+
+   int shift = iBarShift(_Symbol, PERIOD_M15, ls_time, false);
+   if(shift < 0) return(false);
+
+   double o = iOpen (_Symbol, PERIOD_M15, shift);
+   double c = iClose(_Symbol, PERIOD_M15, shift);
+   double h = iHigh (_Symbol, PERIOD_M15, shift);
+   double l = iLow  (_Symbol, PERIOD_M15, shift);
+   if(o <= 0.0 || c <= 0.0) return(false);
+
+   if(direction == QM_DIR_BEAR)
+   {
+      poi_bottom_out = MathMin(o, c);
+      poi_top_out    = h;
+      head_price_out = h;   // will be overwritten by caller with HEAD's price
+   }
+   else
+   {
+      poi_bottom_out = l;
+      poi_top_out    = MathMax(o, c);
+      head_price_out = l;
+   }
+   head_bar_shift_out = shift;   // provisional; caller sets to actual HEAD shift below
+   return(true);
+}
+
+//---- IDM identifier: most recent opposite-side M15 swing before MSS
+// bear MSS: IDM = most recent swing HIGH with time < mss_time (buy-side
+//           liquidity above, to be cleared before POI return continues).
+// bull MSS: mirror with swing LOW.
+// Returns (level, side, ok).
+bool QM_ComputeIDM(const ENUM_QM_DIR direction,
+                   const datetime mss_time,
+                   double &idm_level_out,
+                   ENUM_QM_DIR &idm_side_out)
+{
+   idm_level_out = 0.0;
+   idm_side_out  = QM_DIR_BEAR;
+
+   QMSwing found;
+   if(direction == QM_DIR_BEAR)
+   {
+      if(!QM_MostRecentSwingHighBefore(mss_time, found)) return(false);
+      idm_level_out = found.price;
+      idm_side_out  = QM_DIR_BULL;   // side to be SWEPT is the opposite of setup dir
+   }
+   else
+   {
+      if(!QM_MostRecentSwingLowBefore(mss_time, found)) return(false);
+      idm_level_out = found.price;
+      idm_side_out  = QM_DIR_BEAR;
+   }
+   return(true);
+}
+
+//---- MSS event hook -- REAL BODY (replaces the Block 2 stub) -------
+// Called by Block 2's QM_OnNewM15Bar when an MSS is detected on the
+// just-closed bar. Resolves the structural pairing and enqueues the
+// setup for later state advancement (WAIT_POI_RETURN by default).
+void QM_OnMSSDetected(const int direction,
+                      const datetime shift_time,
+                      const double close_price,
+                      const double disp,
+                      const QMSwing &brokenSwing)
+{
+   const ENUM_QM_DIR dir = (direction < 0) ? QM_DIR_BEAR : QM_DIR_BULL;
+
+   // 1) find the QM structure (LS + HEAD) using the broken swing as the
+   //    neckline anchor. Fail early if no valid QM shape can be built.
+   QMSwing head, ls;
+   bool haveQM = (dir == QM_DIR_BEAR)
+                 ? QM_FindQMStructure_Bear(brokenSwing.time, head, ls)
+                 : QM_FindQMStructure_Bull(brokenSwing.time, head, ls);
+   if(!haveQM)
+   {
+      if(InpQueueDebug)
+         PrintFormat("[QM_NATIVE] MSS_DROPPED  reason=no_qm_structure  dir=%s  bar=%s  neck=%.2f@%s",
+                     QM_DirName(dir),
+                     TimeToString(shift_time, TIME_DATE|TIME_MINUTES),
+                     brokenSwing.price,
+                     TimeToString(brokenSwing.time, TIME_DATE|TIME_MINUTES));
+      return;
+   }
+
+   // 2) POI zone from LS candle.
+   double poi_top = 0.0, poi_bot = 0.0, head_price_from_poi = 0.0;
+   int head_bar_shift = -1;
+   if(!QM_ComputePOI(dir, ls.time, poi_top, poi_bot, head_bar_shift, head_price_from_poi))
+   {
+      if(InpQueueDebug)
+         PrintFormat("[QM_NATIVE] MSS_DROPPED  reason=poi_lookup_failed  dir=%s  ls=%.2f@%s",
+                     QM_DirName(dir), ls.price,
+                     TimeToString(ls.time, TIME_DATE|TIME_MINUTES));
+      return;
+   }
+
+   // 3) IDM level from the M15 swing ring.
+   double idm_level = 0.0;
+   ENUM_QM_DIR idm_side = QM_DIR_BEAR;
+   if(!QM_ComputeIDM(dir, shift_time, idm_level, idm_side))
+   {
+      if(InpQueueDebug)
+         PrintFormat("[QM_NATIVE] MSS_DROPPED  reason=no_idm  dir=%s",  QM_DirName(dir));
+      return;
+   }
+
+   // 4) External target from H4 ERL (winner variant erl_h4).
+   double erl_target = QM_ComputeERL(dir);
+   if(erl_target <= 0.0)
+   {
+      if(InpQueueDebug)
+         PrintFormat("[QM_NATIVE] MSS_DROPPED  reason=erl_not_ready  dir=%s (H4 swings h=%I64d l=%I64d)",
+                     QM_DirName(dir), g_h4ShWritten, g_h4SlWritten);
+      return;
+   }
+
+   // 5) Enqueue.
+   const int shift_idx = 0;   // M15 shift bookkeeping; useful for diagnostics only
+   const double atr    = QM_M15_ATR_shift1();
+   const int slot = QM_AddSetup(
+                       dir,
+                       shift_time,
+                       shift_idx,
+                       disp,
+                       poi_top,
+                       poi_bot,
+                       head_bar_shift,
+                       head.price,
+                       erl_target,
+                       idm_level,
+                       idm_side,
+                       atr);
+   if(slot < 0)
+   {
+      // queue full; QM_AddSetup already logged. Nothing to do.
+      return;
+   }
+
+   if(InpQueueDebug)
+      PrintFormat("[QM_NATIVE] MSS_ENQUEUED slot=%d dir=%s  ls=%.2f@%s  head=%.2f@%s  neck=%.2f  poi=[%.2f..%.2f]  IDM=%.2f  ERL=%.2f  atr=%.2f",
+                  slot, QM_DirName(dir),
+                  ls.price,   TimeToString(ls.time,   TIME_DATE|TIME_MINUTES),
+                  head.price, TimeToString(head.time, TIME_DATE|TIME_MINUTES),
+                  brokenSwing.price, poi_bot, poi_top, idm_level, erl_target, atr);
+}
+
+//==================== END BLOCK 3 ==================================
+// Block 4 (queue advance on M15 close: POI return + IDM clear) will
+// iterate g_qm_setups[] on each new M15 bar and transition slots from
+// WAIT_POI_RETURN to WAIT_M5_CONFIRM. Block 5 then fires the trade on
+// the M5 confirmation candle.
 //===================================================================
 
 
@@ -645,6 +1020,13 @@ int OnInit()
    g_mssBearCount = 0;
    g_mssBullCount = 0;
    g_barsSeen     = 0;
+
+   // Block 3: reset H4 swing tracker state.
+   g_lastH4Time   = 0;
+   g_h4ShTop      = -1;
+   g_h4SlTop      = -1;
+   g_h4ShWritten  = 0;
+   g_h4SlWritten  = 0;
 
    // Block 1 sanity: prove we can add + expire + GC end-to-end.
    // Runs once at startup and leaves the queue empty.
@@ -676,13 +1058,24 @@ void OnDeinit(const int reason)
    Print("[QM_NATIVE] deinit reason=", reason);
    PrintFormat("[QM_NATIVE] Block 2 stats: barsSeen=%I64d  swingH=%I64d  swingL=%I64d  MSS_bear=%I64d  MSS_bull=%I64d",
                g_barsSeen, g_shWritten, g_slWritten, g_mssBearCount, g_mssBullCount);
+   PrintFormat("[QM_NATIVE] Block 3 stats: H4_swingH=%I64d  H4_swingL=%I64d  queue_added=%I64d  entered=%I64d  expired=%I64d",
+               g_h4ShWritten, g_h4SlWritten,
+               g_qm_added_total, g_qm_entered_total, g_qm_expired_total);
    if(g_hATR_M15 != INVALID_HANDLE) IndicatorRelease(g_hATR_M15);
    QM_DumpQueue();
 }
 
 void OnTick()
 {
-   // New-M15-bar detection: on the first tick after a bar closes,
+   // Block 3: new-H4-bar detection (fires 4x/day) - update H4 swing ring.
+   datetime curH4 = iTime(_Symbol, PERIOD_H4, 0);
+   if(curH4 != g_lastH4Time && curH4 != 0)
+   {
+      if(g_lastH4Time != 0) QM_OnNewH4Bar();
+      g_lastH4Time = curH4;
+   }
+
+   // Block 2: new-M15-bar detection: on the first tick after a bar closes,
    // iTime(shift=0) returns the NEW forming bar's open time - different
    // from the previous open time we cached.
    datetime cur = iTime(_Symbol, PERIOD_M15, 0);
