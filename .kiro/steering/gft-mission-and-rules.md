@@ -19,10 +19,16 @@
 - Every EA / config / change **must respect all rules below WITH a safety buffer**.
   Never ship a config that can even touch a hard limit.
 
-## 1. Account: FundedNext $5,000 — Stellar 2-Step model
-(Confirmed from help.fundednext.com + user. If the real account is a different FundedNext
-model — Stellar Lite / Express / 1-Step / Evaluation — RE-VERIFY on the dashboard; targets,
-daily basis and min-days differ. FundedNext also changes terms over time — confirm live.)
+## 1. Account: FundedNext Stellar 2-Step (smallest = **$6,000**, not $5k)
+(Confirmed from help.fundednext.com + user + ledger seq260 + user re-confirm 2026-09-21. The
+FundedNext Stellar 2-Step's actual smallest offering is **$6,000**, not $5,000 as an earlier
+draft assumed. All rules below scale proportionally to initial deposit — no change to the
+percent limits, only the dollar amounts. For $6k basis: daily $300, static $600 = floor
+$5,400, funded 3% risk = $180. Any Python/spreadsheet analysis that used $5k must be
+re-computed for the $6k reality before it's actionable. If the real account is a different
+FundedNext model — Stellar Lite / Express / 1-Step / Evaluation — RE-VERIFY on the dashboard;
+targets, daily basis and min-days differ. FundedNext also changes terms over time — confirm
+live.)
 
 | Rule | Step 1 (Eval) | Step 2 (Eval) | Funded |
 |---|---|---|---|
@@ -37,14 +43,16 @@ daily basis and min-days differ. FundedNext also changes terms over time — con
 \* *Min trading days + exact payout cadence changed by FundedNext across versions — RE-VERIFY on the live dashboard before relying on 3 vs 5.*
 
 ## 2. Hard-breach definitions (a single breach kills the account)
-- **Max overall loss — 10% STATIC**: the absolute floor = 90% of starting capital =
-  **$4,500 on a $5,000 account**, FIXED, never trails up with profit. Account equity OR
-  balance must never touch or cross $4,500.
+- **Max overall loss — 10% STATIC**: the absolute floor = 90% of starting capital. Dollar
+  values by account size: $4,500 floor on $5k / **$5,400 floor on $6k (LIVE)** / $9,000 on
+  $10k / $13,500 on $15k. FIXED, never trails up with profit. Account equity OR balance must
+  never touch or cross the floor.
 - **Daily drawdown — 5% of INITIAL**: within one trading day, loss must not reach 5% of the
-  **fixed initial balance** (**$250** on $5k). FundedNext counts **closed + floating + swap +
-  commission** toward it (equity-based, includes open P&L). Resets at FundedNext's daily
-  rollover (**00:00 server time**, GMT+2/+3). Because it is % of INITIAL (not day-start), our
-  EA references the daily limit against the fixed initial via `Combo_DailyRefInitial=true`.
+  **fixed initial balance**. Dollar values: $250 on $5k / **$300 on $6k (LIVE)** / $500 on
+  $10k / $750 on $15k. FundedNext counts **closed + floating + swap + commission** toward it
+  (equity-based, includes open P&L). Resets at FundedNext's daily rollover (**00:00 server
+  time**, GMT+2/+3). Because it is % of INITIAL (not day-start), our EA references the daily
+  limit against the fixed initial via `Combo_DailyRefInitial=true`.
 
 ## 3. Payout / funded terms
 - Profit split **80%** to trader, scaling to **90%** under FundedNext's scale-up plan.
@@ -73,24 +81,47 @@ daily basis and min-days differ. FundedNext also changes terms over time — con
 - A guard must always sit **inside** the limit with margin, never exactly on it.
 
 ## 5. Testing & honesty discipline
-- **MT5 Strategy Tester = truth.** Python only analyzes MT5 outputs; it never invents results.
+- **MT5 Strategy Tester = truth. Python is EXPLORATION, never verdict.** Python may enumerate
+  variants, filter data, or generate signals, but the number that decides deploy-vs-drop is
+  ALWAYS the MT5 real-tick (Model 4) result. Any income projection, PF, DD or FN-compliance
+  claim must come from an actual MT5 run — not a Python simulator.
+- **The Python-vs-MT5 haircut is real and material.** Concrete evidence, ledger seq227 vs
+  2026-09-21 signal-player run (QM/ICT erl_h4 + dedupe, $6k, $85/trade, 2025-08→2026-07):
+  Python theoretical net $3,110 → **MT5 real-tick net $2,296 (-26% haircut)**; PF 1.58 → 1.49;
+  win rate 38.1% → 22.7% (tight SLs get nicked by spread); 105 signals → 88 fired (17 skipped
+  by tolerance/spread gate). MT5 also revealed **1 daily-line breach** (2026-03-23 = -$314.66
+  = 5.24% of $6k, over the $300 line) that Python did not surface. **Never** approve deploy on
+  Python numbers alone; always require the MT5 real-tick pass first.
 - **No faking, ever.** Every number reported must come from an MT5 run, a CSV the EA wrote,
   or a chart actually read.
 - **Hash-chained ledger** `SPEC/dof_ledger.jsonl`: pre-register experiments BEFORE running;
   log results after. Verify integrity.
 - Report drawdown as the htm **"Balance / Equity Drawdown Absolute"** (distance below the
-  initial $5,000) — that is the FundedNext-relevant static number. Trailing "Maximal" DD is
+  initial deposit) — that is the FundedNext-relevant static number. Trailing "Maximal" DD is
   irrelevant on a static-drawdown firm.
 - **Real money only after a forward-demo passes on the real FundedNext feed AND the human
   approves** (protocol: `experiments/combo_fnext_03/FORWARD_DEMO.md`, ledger seq223).
 
+### 5a. Signal-player pattern (Python decides, MT5 executes)
+When a strategy is prototyped in Python (e.g. QM/ICT state machine), the canonical way to
+verdict-test it in MT5 without a full MQL5 rewrite is the **signal-player** pattern:
+1. Python engine dumps trades to CSV with columns `datetime,direction,entry_price,sl_price,tp_price`.
+2. A tiny MQL5 EA (`CK_QM_SignalPlayer.mq5`) reads that CSV from `Common/Files/` and places a
+   market order at each row's time with the given SL/TP; lot is risk-based
+   (`InpRiskUSD / (SL_dist × contract_size)`).
+3. MT5 Strategy Tester Model 4 (real ticks) then executes the strategy with real spread,
+   slippage, and swap. The output is the honest MT5 verdict.
+This pattern is faster than a full MQL5 port (~2h vs ~25h) and produces the same
+authoritative MT5 numbers. The full MQL5 port is only needed for live deployment (so the EA
+can decide signals on its own, without needing Python running alongside).
+
 ## 6. FUNDED-STAGE RISK LIMITS on FundedNext (confirmed 2026-09-18) — THREE separate limits
 FundedNext has NO Goat Guard, but the funded ("FundedNext") account carries a **3% RISK LIMIT** we
 did not originally know about (help article 14702245). The three funded limits:
-- **5% daily loss** of INITIAL, **INCLUDES floating** — HARD BREACH = account dead. (~$250 on $5k)
-- **10% max loss**, STATIC of initial — HARD BREACH = account dead. (floor $4,500)
+- **5% daily loss** of INITIAL, **INCLUDES floating** — HARD BREACH = account dead. ($250 on $5k / **$300 on $6k LIVE** / $500 on $10k)
+- **10% max loss**, STATIC of initial — HARD BREACH = account dead. (floor $4,500 on $5k / **$5,400 on $6k LIVE** / $9,000 on $10k)
 - **3% RISK limit** (funded only): at any instant, (max potential SL loss) + (combined realized +
-  unrealized/floating loss across ALL open trades), vs INITIAL, must stay <= 3% = **$150 on $5k**
+  unrealized/floating loss across ALL open trades), vs INITIAL, must stay <= 3% = **$150 on $5k / $180 on $6k LIVE**
   (swap/commission excluded). NOT an instant kill: 1st breach = warning + 100% of the violating
   trades' profit deducted that cycle; 2nd breach = PERMANENT reclassification to a **1%** risk cap;
   later breaches keep deducting. It silently strips funded profit, so we MUST stay under it.
