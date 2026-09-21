@@ -200,6 +200,44 @@ to C: instead. Final state:
   permanent fix, at the user's convenience. Software-side is fully
   neutralised in the meantime.
 
+### Hang-safety: any shell/tool operation that waits indefinitely = KILL immediately
+**Origin:** user instruction 2026-09-21 (Bengali; *"দিক্স থেকে জিনিসটা আসছে
+না এবং ওয়েটিং এ থাকছে এইভাবে হার্ট শাট ডাউন পরে করা হচ্ছে"* — roughly:
+"stuff isn't coming from disk and it's waiting like this, and later a hard
+shutdown happens; don't do work like that; if it happens, kill it right away;
+don't take from THE disk, take from other drives; lock this rule in and tell
+everyone"). This is a permanent, cross-session rule.
+
+**Historical context:** the E: HDD's failing sectors caused commands that
+touched it to appear to "wait forever" while the kernel watchdog timed out
+and issued a Kernel-Power 41 hard shutdown (§8 above). Even now that E: is
+offlined, ANY future hang against a slow disk is the same physics.
+
+**Rules (never soften, never skip):**
+- If a shell command, tool call, or file read APPEARS TO HANG or BLOCK for
+  more than a few seconds without progress, KILL it immediately. Do NOT wait
+  it out, do NOT retry the same path.
+- Diagnose only from a KNOWN-GOOD path on C: (`C:\Users\prita\CK_GFT_Repo\`,
+  `C:\Program Files\MetaTrader 5\`, etc.). If a specific path causes a hang,
+  that path is suspect and must not be re-entered in the same session.
+- NEVER take input from `E:\` or any offline / suspect drive. Read only from
+  C: (and OneDrive-backed folders under C:). "Take from all drives" in the
+  user's instruction means "use whatever GOOD drive is available", NOT "try
+  every drive including the sick one".
+- Every PowerShell invocation must include `-NoProfile -NonInteractive`
+  (also codified in §10). The default profile enumerates all drives on
+  start-up and historically hung on the sick HDD.
+- NEVER redirect a shell command's output to a bare filename without a full
+  path (also in §10). A stray `> out.txt` will land wherever `cwd` is, which
+  can silently touch a slow / protected drive.
+- If ambiguous whether a hang is disk-related or tool-related, TREAT IT AS
+  DISK-RELATED and abort. Tool-related hangs are recoverable; disk-related
+  hangs cost the box.
+- If ever a NEW slow / suspicious drive appears (SMART warning, growing
+  reallocated-sector count, prolonged seek latency), OFFLINE IT and register
+  a boot-time guardian task like `OfflineSickHDD_Daichi` before doing any
+  further work.
+
 **Machine-load rules** (still apply — the box is real hardware, not a server;
 CPU still limits parallel MT5 work regardless of drive):
 - Run only **ONE backtest at a time**; never chain or parallelise heavy MT5 runs.
@@ -257,3 +295,56 @@ gone. To make sure this class of mistake never happens again:
   scratch files** created for that job (Section 9 rule). Keep only durable
   artefacts (real logs the user might want as evidence) and note their
   paths in the ledger or steering.
+
+## 11. FundedNext Trading-Ethics reply (2026-09-21) — Plan Z′ officially BLOCKED
+On 2026-09-21 the user forwarded FN Trading Ethics support (agent **Allen**) response to
+the email sent earlier that day about Article 8020351 (mirrored / opposite positions
+across two FundedNext accounts).
+
+**Allen's answer** (paraphrased for licensing compliance): as a support agent he cannot
+specify which strategies are permitted, but if a strategy is not on the restricted-
+strategies list, we may proceed to use it. This is a referral to the rulebook, not a
+case-by-case exception.
+
+**The restricted-strategies list is unambiguous** (help.fundednext.com Article 8020351
++ the general-rules page):
+- "Hedging Across Various Accounts" is listed as prohibited: buying 1 lot of X on
+  account A and simultaneously selling 1 lot of X on account B is banned.
+- "Mirrored or opposite positions across two FundedNext accounts are prohibited,
+  even when both belong to you."
+
+Allen's referral to that list therefore CONFIRMS **Plan Z′ (two accounts, combo EA on
+one + QM signal-player on the other, whose coincidental opposite-direction XAUUSD
+positions were the whole edge) is prohibited.** No case-by-case exception is available
+from support.
+
+### Resolved deployment plan
+**Plan C — CK_GOLD_COMBO FIX 0.02 solo — is the deployment path.** Reasons:
+- Fully MT5-real-tick verified (JOURNAL_FundedNext.md, ledger seq255): 270 trades,
+  +$2,240 on $5k basis, PF 1.35, win 25.6%, 1 daily-line touch that the governor caught.
+  On $6k basis (same 0.02 lot) ≈ +37.3%/yr = **~$139/mo take-80 minus $5 EA fee =
+  ~Rs 15,900/mo**; scales to ~Rs 17,900/mo at the 90% split.
+- Fully deploy-ready: `experiments/combo_fnext_03/` ships install script, VPS setup
+  guide, forward-demo protocol, daily/weekly checklist.
+- Single MT5 binary, no Python signal-refresh, no VPS Python-runtime, no signal-CSV
+  freshness worries.
+
+Plan Q (QM signal-player solo, ~Rs 15,200/mo) remains a valid alternative if the user
+specifically wants to run the QM setup for reasons outside pure income — but Plan Q
+requires ~2–3h of extra prep (VPS-side Python + weekly signal refresh), and its income
+is ~Rs 700/mo lower than Plan C. Choose Plan Q only on explicit user preference.
+
+Plan Z′ is dead. Do not attempt a 2-account portfolio that could produce
+coincidental opposite positions. The ~Rs 33k/mo target that Z′ chased is not
+achievable on a single sub-$50k FundedNext account with these two strategies; the
+income ceiling is the FundedNext scale-up plan on that single account.
+
+### Full decision framework
+`SPEC/FN_REPLY_DECISION.md` — the pre-declared reply-pattern → plan mapping used to
+resolve this. Ledger `seq275` — the hash-chained record of the FN reply itself.
+
+### Standing rule going forward
+Any strategy that could produce mirrored / opposite positions across FundedNext
+accounts is banned. If a future strategy proposal involves multiple FN accounts
+under one profile, re-read Article 8020351 first and abort at the design stage,
+not after implementation.

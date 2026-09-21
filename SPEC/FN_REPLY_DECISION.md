@@ -1,11 +1,17 @@
 # FundedNext Trading-Ethics Reply — Decision Framework
 
-Status: **BLOCKED — awaiting reply** from `tradingethics@fundednext.com` on Article 8020351
-(mirrored / opposite positions across two FundedNext accounts). Diana at FN live-chat
-routed the strategy question here on 2026-09-21.
+Status: **RESOLVED 2026-09-21** — FN support agent **Allen** replied. Interpretation
+maps to matrix row **"Ambiguous / referral to formal review"** with a strengthening:
+Allen explicitly pointed at the restricted-strategies list, and that list explicitly
+prohibits mirrored / opposite positions across accounts (Article 8020351). Therefore
+**Plan Z′ is BLOCKED** and the deployment default is **Plan C** unless the user
+prefers Plan Q. Steering §11 records the outcome; ledger seq275 is the hash-chained
+record. The doc below is preserved as historical decision-framework evidence.
 
-Purpose of this doc: pre-decide what to do for EVERY plausible reply, so the moment the
-user forwards the email response, deployment starts in one turn — no re-analysis, no
+---
+
+Purpose of this doc: pre-decided what to do for EVERY plausible reply, so the moment the
+user forwarded the email response, deployment started in one turn — no re-analysis, no
 re-computing numbers.
 
 ## 1. What we asked
