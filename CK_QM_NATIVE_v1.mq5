@@ -54,6 +54,11 @@ input group  "=== queue guards (this block) ==="
 input int    InpSetupExpiryM15Bars = 96;         // 24h of M15 -> expire if no POI return
 input bool   InpQueueDebug         = true;       // Experts-log every queue transition
 
+input group  "=== M5 confirmation + entry (block 5) ==="
+input int    InpM5ConfirmTimeout   = 288;        // max M5 bars in WAIT_M5_CONFIRM before expiry (Python default 288 = 24h)
+input double InpSLBufferATR        = 0.5;        // SL beyond head_price by this * ATR(M15,14) (Python winner default)
+input int    InpMaxDeviationPoints = 30;         // trade.SetDeviationInPoints for market fills
+
 //==================== BLOCK 1: SETUP QUEUE =========================
 // Everything below is Block 1's deliverable.  Blocks 2..7 will call these
 // helpers; nothing here fires an order.
@@ -1129,9 +1134,212 @@ void QM_AdvanceSetupsOnM15()
 }
 
 //==================== END BLOCK 4 ==================================
-// Block 5 (M5 confirmation + entry fire) will walk WAIT_M5_CONFIRM
-// slots on each new M5 bar close, detect the "1 rejection" candle,
-// and open a market order via CTrade.
+
+
+//==================== BLOCK 5: M5 CONFIRM + MARKET ENTRY ============
+// On each new closed M5 bar, walk every setup in WAIT_M5_CONFIRM.
+// Fire a market order the first time we see an M5 confirmation
+// candle (bearish body for a bear setup, bullish body for a bull
+// setup) at/after the POI-return time. Faithful to
+// qm_state_machine.py _m5_confirmation with entry_mode='confirm_close'.
+//
+// SL = head_price + InpSLBufferATR * ATR(M15,14) on bear (mirror bull).
+// TP = external_target (H4 ERL from Block 3).
+// Projected RR must be >= InpMinProjRR (Python default 1.0) or we
+// skip the fill and let the timeout expire the slot.
+//
+// Lot sizing = InpRiskPerTradeUSD / (SL distance * contract_size),
+// clamped to broker vmin/vmax/step. Spread must be under
+// InpMaxSpreadPrice or we skip and wait for the next M5 bar.
+// A successful fill sets the slot state to QM_STATE_ENTERED via
+// QM_MarkEntered so it won't fire twice.
+//===================================================================
+
+CTrade   g_qmTrade;                  // one CTrade shared across all slots (per-slot magic set per fill)
+datetime g_lastM5Time = 0;
+
+//---- helpers used by Block 5 ---------------------------------------
+bool QM_M5_SpreadOK()
+{
+   double pt = SymbolInfoDouble(_Symbol, SYMBOL_POINT);
+   long   sp = (long)SymbolInfoInteger(_Symbol, SYMBOL_SPREAD);
+   if(pt <= 0.0) return(true);
+   long maxPts = (long)MathRound(InpMaxSpreadPrice / pt);
+   return(sp <= maxPts);
+}
+
+double QM_ComputeLot(const double slDistancePrice)
+{
+   if(slDistancePrice <= 0.0) return(0.0);
+   double contract = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_CONTRACT_SIZE);
+   if(contract <= 0.0) contract = 100.0;
+   double lossPerLot = slDistancePrice * contract;
+   if(lossPerLot <= 0.0) return(0.0);
+   double lot = InpRiskPerTradeUSD / lossPerLot;
+
+   double step = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_STEP);
+   double vmin = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN);
+   double vmax = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MAX);
+   if(step > 0.0) lot = MathFloor(lot / step) * step;
+   if(lot < vmin) lot = vmin;
+   if(vmax > 0.0 && lot > vmax) lot = vmax;
+   return(lot);
+}
+
+// M5 confirmation-candle test on the just-closed M5 bar (shift 1).
+// Returns:
+//   true  = confirmation bar found; fills out entry_price / conf_time.
+//   false = no confirmation on this M5 bar; caller keeps waiting.
+// The caller then applies the SL/TP/RR gate before firing an order.
+bool QM_TryConfirmM5(const int slot_idx,
+                     datetime &conf_time_out,
+                     double   &conf_close_out)
+{
+   conf_time_out  = 0;
+   conf_close_out = 0.0;
+
+   const QMSetup s = g_qm_setups[slot_idx];
+   const datetime m5_close_time = iTime(_Symbol, PERIOD_M5, 1);
+   if(m5_close_time == 0) return(false);
+
+   // only look at M5 bars at/after the POI return time
+   if(s.poi_return_time > 0 && m5_close_time < s.poi_return_time) return(false);
+
+   const double o = iOpen (_Symbol, PERIOD_M5, 1);
+   const double c = iClose(_Symbol, PERIOD_M5, 1);
+   if(o <= 0.0 || c <= 0.0) return(false);
+
+   bool ok = false;
+   if(s.direction == QM_DIR_BEAR) ok = (c < o);   // bearish body confirms bear setup
+   else                            ok = (c > o);   // bullish body confirms bull setup
+   if(!ok) return(false);
+
+   conf_time_out  = m5_close_time;
+   conf_close_out = c;
+   return(true);
+}
+
+// Place the market order for a confirmed slot. Returns true on fill.
+bool QM_PlaceMarketOrder(const int slot_idx, const double conf_close)
+{
+   QMSetup s = g_qm_setups[slot_idx];
+   int dg = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
+
+   // Use current bid/ask as the reference "entry" for lot sizing +
+   // projected-RR (this is the real fill price after slippage). The
+   // Python engine uses the confirmation bar's close; that value is
+   // preserved in the diagnostic print for cross-check.
+   double entry_ref = (s.direction == QM_DIR_BEAR)
+                      ? SymbolInfoDouble(_Symbol, SYMBOL_BID)
+                      : SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+   if(entry_ref <= 0.0) return(false);
+
+   double buf = s.atr_at_shift * InpSLBufferATR;
+   if(buf <= 0.0)
+   {
+      // fall back to a live ATR value if the stored value is stale
+      buf = QM_M15_ATR_shift1() * InpSLBufferATR;
+   }
+   if(buf <= 0.0) return(false);
+
+   double sl = 0.0, tp = 0.0;
+   if(s.direction == QM_DIR_BEAR)
+   {
+      sl = NormalizeDouble(s.poi_head_price + buf, dg);
+      tp = NormalizeDouble(s.external_target,       dg);
+      if(!(sl > entry_ref && tp < entry_ref)) return(false);   // geometry sanity
+   }
+   else
+   {
+      sl = NormalizeDouble(s.poi_head_price - buf, dg);
+      tp = NormalizeDouble(s.external_target,       dg);
+      if(!(sl < entry_ref && tp > entry_ref)) return(false);
+   }
+
+   double slDist = MathAbs(entry_ref - sl);
+   double rewDist = MathAbs(tp - entry_ref);
+   if(slDist <= 0.0) return(false);
+   double projRR = rewDist / slDist;
+   if(projRR < InpMinProjRR)
+   {
+      if(InpQueueDebug)
+         PrintFormat("[QM_NATIVE] SKIP_FILL slot=%d dir=%s reason=RR_below_min  proj=%.2f  min=%.2f",
+                     slot_idx, QM_DirName(s.direction), projRR, InpMinProjRR);
+      return(false);
+   }
+   if(!QM_M5_SpreadOK())
+   {
+      if(InpQueueDebug)
+         PrintFormat("[QM_NATIVE] SKIP_FILL slot=%d dir=%s reason=spread_too_wide", slot_idx, QM_DirName(s.direction));
+      return(false);
+   }
+   double lot = QM_ComputeLot(slDist);
+   if(lot <= 0.0)
+   {
+      if(InpQueueDebug)
+         PrintFormat("[QM_NATIVE] SKIP_FILL slot=%d dir=%s reason=lot_zero  slDist=%.2f", slot_idx, QM_DirName(s.direction), slDist);
+      return(false);
+   }
+
+   g_qmTrade.SetExpertMagicNumber(s.magic);
+   g_qmTrade.SetDeviationInPoints(InpMaxDeviationPoints);
+   g_qmTrade.SetTypeFillingBySymbol(_Symbol);
+   g_qmTrade.LogLevel(LOG_LEVEL_NO);
+
+   bool ok = false;
+   if(s.direction == QM_DIR_BEAR) ok = g_qmTrade.Sell(lot, _Symbol, 0.0, sl, tp);
+   else                            ok = g_qmTrade.Buy (lot, _Symbol, 0.0, sl, tp);
+
+   if(!ok)
+   {
+      if(InpQueueDebug)
+         PrintFormat("[QM_NATIVE] FILL_FAIL slot=%d dir=%s err=%d  lot=%.2f entry_ref=%.2f sl=%.2f tp=%.2f",
+                     slot_idx, QM_DirName(s.direction), GetLastError(), lot, entry_ref, sl, tp);
+      return(false);
+   }
+
+   QM_MarkEntered(slot_idx);
+   if(InpQueueDebug)
+      PrintFormat("[QM_NATIVE] FILLED slot=%d dir=%s magic=%I64d lot=%.2f entry_ref=%.2f conf_close=%.2f sl=%.2f tp=%.2f projRR=%.2f",
+                  slot_idx, QM_DirName(s.direction), s.magic, lot, entry_ref, conf_close, sl, tp, projRR);
+   return(true);
+}
+
+// Dispatcher: on each new closed M5 bar, walk WAIT_M5_CONFIRM slots.
+void QM_AdvanceSetupsOnM5()
+{
+   for(int i = 0; i < MAX_QM_SETUPS; i++)
+   {
+      QMSetup s = g_qm_setups[i];
+      if(s.state != QM_STATE_WAIT_M5_CONFIRM) continue;
+
+      // increment the confirm-wait counter
+      g_qm_setups[i].m5_confirm_bars = s.m5_confirm_bars + 1;
+
+      // timeout: no confirmation within InpM5ConfirmTimeout M5 bars -> expire.
+      if(g_qm_setups[i].m5_confirm_bars > InpM5ConfirmTimeout)
+      {
+         QM_ExpireSetup(i, "m5_confirm_timeout");
+         continue;
+      }
+
+      // try to fill on this M5 bar
+      datetime cft = 0; double cclose = 0.0;
+      if(!QM_TryConfirmM5(i, cft, cclose)) continue;
+
+      // confirmation candle found on this bar; attempt the market order.
+      QM_PlaceMarketOrder(i, cclose);
+      // If it succeeded, slot state is now ENTERED. If it failed
+      // (spread / RR / lot=0), the slot stays WAIT_M5_CONFIRM and
+      // will retry on the next M5 bar until timeout.
+   }
+}
+
+//==================== END BLOCK 5 ==================================
+// Block 6 (session / daily-cap / projected-RR gates) will wrap Block 5's
+// entry attempts with additional pre-trade filters (NY session,
+// max_trades_per_day). Projected-RR gate is already enforced inside
+// QM_PlaceMarketOrder above.
 //===================================================================
 
 
@@ -1162,6 +1370,9 @@ int OnInit()
    g_h4SlTop      = -1;
    g_h4ShWritten  = 0;
    g_h4SlWritten  = 0;
+
+   // Block 5: reset M5 confirmation tracker.
+   g_lastM5Time   = 0;
 
    // Block 1 sanity: prove we can add + expire + GC end-to-end.
    // Runs once at startup and leaves the queue empty.
@@ -1219,6 +1430,16 @@ void OnTick()
       // exclude the very first init tick (g_lastM15Time == 0 seed).
       if(g_lastM15Time != 0) QM_OnNewM15Bar();
       g_lastM15Time = cur;
+   }
+
+   // Block 5: new-M5-bar detection (fires 12x per M15 window) - advance
+   // WAIT_M5_CONFIRM slots. Runs BEFORE returning so a confirm on the
+   // same tick that a new M5 bar closes can be filled immediately.
+   datetime curM5 = iTime(_Symbol, PERIOD_M5, 0);
+   if(curM5 != g_lastM5Time && curM5 != 0)
+   {
+      if(g_lastM5Time != 0) QM_AdvanceSetupsOnM5();
+      g_lastM5Time = curM5;
    }
 }
 
