@@ -55,14 +55,38 @@ live.)
   limit against the fixed initial via `Combo_DailyRefInitial=true`.
 
 ## 3. Payout / funded terms
+All items below confirmed by FN support (agent Allen) on 2026-09-21 unless flagged.
+
 - Profit split **80%** to trader, scaling to **90%** under FundedNext's scale-up plan.
-- News handling (funded): news-trade **profit counted at 40%** (loss counted in full);
-  weekend holding OK; no minimum hold time.
-- EA allowed on **MT5** (small EA-usage fee scaled by account size); EA is **banned on
-  Match-Trader**; EA allowed only on accounts **< $50,000**. Gold leverage **1:15**.
-- Payout cadence / first-payout caps / min valid days: **confirm on the live dashboard** —
-  FundedNext offers options (e.g. a 21-Day payout with no min days). Do NOT hard-code the
-  GFT-style "$3,000 daily cap / 6% first-payout cap" here; those were Goat Funded Trader.
+- **News trades:** trader receives **40% profit share** on news-trade profits (losses count
+  in full — this is a profit haircut, not a rule). Confirmed 2026-09-21.
+- **Weekend and overnight holdings permitted** (Eval AND Funded). Confirmed 2026-09-21.
+- **EA banned on Match-Trader.** Confirmed 2026-09-21. Use MT5.
+- **EA allowed on accounts < $50,000** (accounts $50k and above are manual-only).
+- **Gold leverage 1:15.**
+- **EA / EA+VPS add-on fee: ONE-TIME per account, NOT monthly.** Payable at challenge
+  purchase (or add-on activation). Once paid, the EA (and VPS if bundled) remains
+  available for the entire life of that account — no monthly renewal until the account
+  is breached, at which point the fee would apply again on a new account. FN support
+  did NOT disclose the exact figure; confirm the specific amount on the client area at
+  purchase. **Any earlier assumption of a monthly EA fee (~$5/mo) in this repo is
+  SUPERSEDED by this one-time model.** For income projections, treat the fee as a
+  small (< ~$100) one-shot deduction from year-one net; year-two-onwards has no
+  further fee unless a new account is opened.
+- **Payout cadence:**
+  - **Standard option:** first payout cycle = **21 days**, subsequent cycles = **14
+    days each**. Confirmed 2026-09-21.
+  - **On-Demand Reward option:** payout on fulfilling "specified criteria"
+    (unspecified by support; verify in the client area at purchase). This may be
+    the "21-Day payout with no min days" option referred to in earlier notes.
+- **Minimum withdrawal: $20.** Confirmed 2026-09-21. Not restrictive for any of our
+  income plans.
+- **Minimum trading days per phase:** FN support did not explicitly state a number.
+  Steering assumes **5 valid days per phase** as a safe default until the client-area
+  dashboard confirms otherwise (Standard option). On-Demand may waive this — verify.
+- **No first-payout cap disclosed.** FN's answer covered cadence but not a first-payout
+  dollar cap; assume none (the GFT-style "$3,000 daily / 6% first-payout" cap that
+  earlier drafts referenced was Goat Funded Trader, not FundedNext).
 
 ## 4. EA guardrails (DERIVED — enforce with buffer, never sit at a hard limit)
 - **Static halt** — close all + stop for good when equity ≤ **8% below initial**

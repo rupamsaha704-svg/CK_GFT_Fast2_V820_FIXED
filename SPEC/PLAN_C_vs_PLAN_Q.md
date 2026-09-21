@@ -1,9 +1,15 @@
 # Plan C vs Plan Q — Side-by-Side Comparison
 
-**Basis:** FundedNext Stellar 2-Step **$6,000** Funded, take-80 split minus $5/mo EA fee,
+**Basis:** FundedNext Stellar 2-Step **$6,000** Funded, take-80 split,
 INR conversion @ ₹115/USD. All numbers below come from MT5 real-tick (Model 4) deals CSVs
 run through `_compare_plans.py`. Steering §5 pins these as truth — no Python-only claim
 counts.
+
+**EA fee model (corrected 2026-09-21 per FN support):** EA / EA+VPS add-on is a **one-time
+per-account fee**, NOT monthly. Exact amount undisclosed; steering §3 assumes < ~$100.
+The tables below show gross take-80 without a monthly-fee deduction; subtract the one-time
+fee once from year-one net when it becomes known. Earlier drafts of this doc assumed
+$5/mo → slightly under-reported income; corrected numbers below.
 
 Both plans face the FN hard rules: **5% daily = $300 line**, **10% static = $5,400 floor**,
 **3% funded risk = $180 line** (funded stage only).
@@ -19,18 +25,21 @@ Both plans face the FN hard rules: **5% daily = $300 line**, **10% static = $5,4
 | Expectancy per trade | +$8.29 | **+$26.09** |
 | FN compliance at reference risk | **PASS** (daily + static) | **FAIL** (1 daily breach + 1 static breach at $85) |
 | FN-safe risk | 0.02 lot (as-shipped) | $75 max, NOT $85 |
-| Take-80 income @ FN-safe risk | **~$150.82/mo ≈ ₹17,345/mo** | **~$132.43/mo ≈ ₹15,229/mo** |
-| Take-80 income at 90% split (scale-up) | ~$170.30/mo ≈ ₹19,584/mo | ~$149.60/mo ≈ ₹17,205/mo |
-| Yearly (take-80, FN-safe) | ~$1,810 ≈ ₹208,135 | ~$1,589 ≈ ₹182,747 |
+| Take-80 income @ FN-safe risk (gross) | **~$155.82/mo ≈ ₹17,920/mo** | **~$137.43/mo ≈ ₹15,804/mo** |
+| Take-80 income at 90% split (scale-up) | ~$175.30/mo ≈ ₹20,159/mo | ~$154.60/mo ≈ ₹17,780/mo |
+| Yearly (take-80, FN-safe, gross) | ~$1,870 ≈ ₹215,050 | ~$1,649 ≈ ₹189,635 |
+| One-time EA fee (year-1 only) | small (< ~$100), TBD | small (< ~$100), TBD |
 | Ops load | single .ex5 autopilot | Python engine + weekly signal refresh + EA restart |
 | Live-refresh gap | none | present; workaround = weekly restart |
 | Deploy folder | `experiments/combo_fnext_03/` | `experiments/qm_erl_h4/` |
 | **Recommendation** | **default** — Steering §11 | on explicit user preference only |
 
-**Bottom line:** Plan C wins by **~₹2,100/mo take-80** (~14% more income) at safe risk,
-with far simpler operations and cleaner FN compliance headroom. Plan Q's higher PF and
-expectancy don't offset the ~$46 static breach + ~$14 daily breach at reference $85
-risk, forcing a haircut to $75 that erases the income advantage seen in the raw numbers.
+**Bottom line:** Plan C wins by **~$18.39/mo ≈ ₹2,116/mo take-80** (~13% more income)
+at safe risk, with far simpler operations and cleaner FN compliance headroom. The delta
+is unchanged by the one-time-fee correction (both plans pay the same fee once), so the
+relative ranking is unaffected. Plan Q's higher PF and expectancy don't offset the ~$46
+static breach + ~$14 daily breach at reference $85 risk, forcing a haircut to $75 that
+erases the income advantage seen in the raw numbers.
 
 ## 2. Full metrics table
 

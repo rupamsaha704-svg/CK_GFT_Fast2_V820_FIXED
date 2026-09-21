@@ -33,7 +33,11 @@ PLAN_Q_CSV = r'C:\Users\prita\AppData\Roaming\MetaQuotes\Terminal\Common\Files\q
 INITIAL       = 6000.0    # FundedNext Stellar 2-Step $6k
 DAILY_LIMIT   = 300.0     # 5% of initial
 STATIC_FLOOR  = 5400.0    # 90% of initial
-EA_FEE_USD_PER_MONTH = 5.0
+# EA fee is ONE-TIME per account (confirmed by FN support 2026-09-21, agent Allen),
+# NOT monthly. Set the fee constant to 0 here so the projections show gross take-80.
+# The one-time fee (undisclosed by support; expected < ~$100) should be subtracted
+# once from year-one net when the actual number is known. Steering §3 documents this.
+EA_FEE_USD_PER_MONTH = 0.0
 INR_PER_USD   = 115.0     # user-stated rate (steering §5a implied)
 
 def parse_dt(s):
@@ -176,10 +180,10 @@ def print_plan(name, csv_path, deals, schema):
         th80 = take_home(yr['yearly_gross'], 80, EA_FEE_USD_PER_MONTH)
         th90 = take_home(yr['yearly_gross'], 90, EA_FEE_USD_PER_MONTH)
         print('  ---')
-        print(f'  take-home @ 80% split, minus $5 EA fee/mo:')
+        print(f'  take-home @ 80% split (gross; one-time EA fee to subtract once, TBD):')
         print(f'    ${th80["usd_per_month"]:+.2f}/mo    (~Rs {th80["inr_per_month"]:>+8,.0f}/mo)')
         print(f'    ${th80["usd_per_year"]:+.2f}/yr    (~Rs {th80["inr_per_year"]:>+8,.0f}/yr)')
-        print(f'  take-home @ 90% split, minus $5 EA fee/mo:')
+        print(f'  take-home @ 90% split (gross; one-time EA fee to subtract once, TBD):')
         print(f'    ${th90["usd_per_month"]:+.2f}/mo    (~Rs {th90["inr_per_month"]:>+8,.0f}/mo)')
         print(f'    ${th90["usd_per_year"]:+.2f}/yr    (~Rs {th90["inr_per_year"]:>+8,.0f}/yr)')
     return stats, comp, yr
@@ -222,7 +226,7 @@ if __name__ == '__main__':
     # Winner
     print()
     print('=' * 78)
-    print('  WINNER (yearly extrapolated, take-80 minus $5 EA fee)')
+    print('  WINNER (yearly extrapolated, take-80 gross; one-time EA fee TBD)')
     print('=' * 78)
     if yr_c and yr_q:
         th80_c = take_home(yr_c['yearly_gross'], 80, EA_FEE_USD_PER_MONTH)
