@@ -9,3 +9,13 @@ v1_lab/evidence_manifest.jsonl
 # Scratch shell scripts (per steering Section 9 discipline)
 # Temp _*.ps1 helpers created during ad-hoc jobs; not durable artifacts.
 _*.ps1
+
+# Scratch analyze/run outputs and one-off logs (steering Section 9 - clean up after every job)
+_*.log
+_*.txt
+_*.csv
+_*.py
+
+# MT5 compiled binaries and per-EA logs (regenerated on each compile)
+*.ex5
+CK_*.log

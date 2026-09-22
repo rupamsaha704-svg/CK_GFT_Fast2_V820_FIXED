@@ -62,7 +62,8 @@ input double Inp_MinZoneHeightUSD   = 3.0;  // absolute floor in $
 input double Inp_ZoneDepthAvgPct    = 40.0; // avg vol in zone <= this% of max bin
 input int    Inp_TopK               = 4;    // keep only deepest 4 zones
 
-//====================== M5 ENTRY LOGIC =============================
+//====================== ENTRY LOGIC =============================
+input ENUM_TIMEFRAMES Inp_EntryTF   = PERIOD_M5;  // v12: switch to PERIOD_M15 for less noise, fewer trades
 input int    Inp_ATRPeriodM5        = 14;
 input double Inp_SLBufferATR        = 0.30; // SL = 0.30 * ATR beyond zone far-side
 input double Inp_R_Multiple_Fallback= 2.0;  // TP fallback if no next zone
@@ -75,8 +76,18 @@ input int    Inp_ForceCloseHour     = 23;   // flat all positions at this hour:m
 input int    Inp_ForceCloseMinute   = 30;
 input bool   Inp_BlockFridayEvening = true;
 input int    Inp_FridayBlockHour    = 20;
+input bool   Inp_UseForceClose      = true;    // v11: set false to let SL/TP run naturally (overnight OK on FN)
+
+//====================== v14 DAILY GOVERNOR =========================
+input bool   Inp_UseDailyBudget     = false;   // v14: pre-trade skip if today loss + this SL would breach budget
+input double Inp_DailyLossBudget    = 150.0;   // max $ loss allowed per day (FN $6k = $300 hard, $150 safe buffer)
 input bool   Inp_UseNewsGate        = true;
 input int    Inp_NewsBlockMin       = 6;
+
+//====================== TREND FILTER (v7) ==========================
+input bool   Inp_UseTrendFilter     = false;         // v7: align with gold's trend edge
+input ENUM_TIMEFRAMES Inp_TrendEMATF = PERIOD_H1;    // H1 EMA for trend direction
+input int    Inp_TrendEMAPeriod     = 200;           // 200-period EMA (classic trend filter)
 
 //====================== INTERNAL STATE =============================
 enum ZoneState { ST_IDLE, ST_INSIDE, ST_TOUCHED50, ST_ARMED, ST_TAKEN, ST_EXPIRED };
@@ -100,9 +111,11 @@ datetime  g_last_m5_bar_time   = 0;
 datetime  g_last_m30_bar_time  = 0;
 int       g_atrM5_handle       = INVALID_HANDLE;
 int       g_atrM30_handle      = INVALID_HANDLE;
+int       g_trendEMA_handle    = INVALID_HANDLE;   // v7 trend filter
 int       g_today_ymd          = 0;   // YYYYMMDD int of current day - tracked via TimeCurrent, robust to D1 bar edge cases
 datetime  g_day_start          = 0;   // today's 00:00 server
 int       g_trades_today       = 0;
+double    g_day_start_balance  = 0;   // v14: balance snapshot at daily rollover (for daily budget check)
 int       g_arm_pending_idx    = -1;  // zone index that ARMED this bar, execute next tick
 
 //===================================================================
@@ -112,11 +125,18 @@ int OnInit(){
    trade.SetTypeFillingBySymbol(_Symbol);
    trade.LogLevel(LOG_LEVEL_NO);
    ArrayResize(g_zones, Inp_TopK);
-   g_atrM5_handle  = iATR(_Symbol, PERIOD_M5,  Inp_ATRPeriodM5);
+   g_atrM5_handle  = iATR(_Symbol, Inp_EntryTF,  Inp_ATRPeriodM5);
    g_atrM30_handle = iATR(_Symbol, PERIOD_M30, 14);
    if(g_atrM5_handle == INVALID_HANDLE || g_atrM30_handle == INVALID_HANDLE){
       Print("ATR handle init FAILED");
       return(INIT_FAILED);
+   }
+   if(Inp_UseTrendFilter){
+      g_trendEMA_handle = iMA(_Symbol, Inp_TrendEMATF, Inp_TrendEMAPeriod, 0, MODE_EMA, PRICE_CLOSE);
+      if(g_trendEMA_handle == INVALID_HANDLE){
+         Print("Trend EMA handle init FAILED");
+         return(INIT_FAILED);
+      }
    }
    // Sentinel: force OnTick's day-rollover check to fire on first tick
    g_today_ymd       = 0;
@@ -131,6 +151,19 @@ int OnInit(){
 void OnDeinit(const int reason){
    if(g_atrM5_handle  != INVALID_HANDLE) IndicatorRelease(g_atrM5_handle);
    if(g_atrM30_handle != INVALID_HANDLE) IndicatorRelease(g_atrM30_handle);
+   if(g_trendEMA_handle != INVALID_HANDLE) IndicatorRelease(g_trendEMA_handle);
+}
+
+// v7 trend filter: check if signal direction aligns with H1 EMA200 trend
+bool TrendAlignedForDirection(bool is_long){
+   if(!Inp_UseTrendFilter) return(true);   // filter off, always pass
+   if(g_trendEMA_handle == INVALID_HANDLE) return(true);
+   double buf[]; ArraySetAsSeries(buf, true);
+   if(CopyBuffer(g_trendEMA_handle, 0, 0, 1, buf) <= 0) return(true);
+   double ema = buf[0];
+   double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+   if(is_long)  return(bid > ema);   // LONG only in uptrend (price above EMA)
+   else         return(bid < ema);   // SHORT only in downtrend
 }
 
 //===================================================================
@@ -148,7 +181,7 @@ double ATR_M30(){
 }
 
 bool IsNewM5Bar(){
-   datetime t = iTime(_Symbol, PERIOD_M5, 0);
+   datetime t = iTime(_Symbol, Inp_EntryTF, 0);
    if(t != g_last_m5_bar_time){ g_last_m5_bar_time = t; return(true); }
    return(false);
 }
@@ -399,13 +432,13 @@ bool RebuildZones(){
 //===================================================================
 // STATE MACHINE PER ZONE (M5 bar close)
 //===================================================================
-// For each new M5 bar close, advance each zone through the state machine.
+// For each new entry-TF bar close, advance each zone through the state machine.
 void ProcessZones(){
-   double c1 = iClose(_Symbol, PERIOD_M5, 1);
-   double o1 = iOpen (_Symbol, PERIOD_M5, 1);
-   double h1 = iHigh (_Symbol, PERIOD_M5, 1);
-   double l1 = iLow  (_Symbol, PERIOD_M5, 1);
-   double c2 = iClose(_Symbol, PERIOD_M5, 2);   // bar prior to the just-closed one
+   double c1 = iClose(_Symbol, Inp_EntryTF, 1);
+   double o1 = iOpen (_Symbol, Inp_EntryTF, 1);
+   double h1 = iHigh (_Symbol, Inp_EntryTF, 1);
+   double l1 = iLow  (_Symbol, Inp_EntryTF, 1);
+   double c2 = iClose(_Symbol, Inp_EntryTF, 2);   // bar prior to the just-closed one
 
    for(int z = 0; z < g_num_zones; z++){
       Zone zn = g_zones[z];
@@ -419,7 +452,7 @@ void ProcessZones(){
             zn.entry_side = (c2 > zn.upper) ? SIDE_TOP : SIDE_BOTTOM;
             zn.state = ST_INSIDE;
             zn.bars_since_inside = 0;
-            zn.entered_at = iTime(_Symbol, PERIOD_M5, 1);
+            zn.entered_at = iTime(_Symbol, Inp_EntryTF, 1);
          }
          g_zones[z] = zn;
          continue;
@@ -507,6 +540,36 @@ void ExecuteArmedZone(int z){
    if(!SpreadOK()) return;   // spread might improve on next tick, don't expire
 
    bool is_long = (g_zones[z].entry_side == SIDE_BOTTOM);
+
+   // v14 daily budget check - pre-trade governor
+   if(Inp_UseDailyBudget){
+      double today_realized = AccountInfoDouble(ACCOUNT_BALANCE) - g_day_start_balance;
+      double atr5 = ATR_M5();
+      double sl_dist_price = Inp_SLBufferATR * atr5;
+      // Add zone half-width as approximate "distance to SL from entry"
+      double zone_half = (g_zones[z].upper - g_zones[z].lower) * 0.5;
+      double sl_dist_total = sl_dist_price + zone_half;
+      double contract = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_CONTRACT_SIZE);
+      if(contract <= 0) contract = 100.0;
+      double worst_case_loss = sl_dist_total * contract * Inp_FixedLot;   // negative outcome
+      double projected_day_pnl = today_realized - worst_case_loss;
+      if(projected_day_pnl < -Inp_DailyLossBudget){
+         PrintFormat("[LOOKBACK] DAILY_BUDGET_BLOCK today_pnl=%.2f worst_case=%.2f projected=%.2f budget=%.2f",
+                     today_realized, -worst_case_loss, projected_day_pnl, -Inp_DailyLossBudget);
+         g_zones[z].state = ST_EXPIRED;
+         return;
+      }
+   }
+
+   // v7 trend filter: skip counter-trend entries when filter enabled
+   if(!TrendAlignedForDirection(is_long)){
+      g_zones[z].state = ST_EXPIRED;
+      if(Inp_UseTrendFilter){
+         PrintFormat("[LOOKBACK] TREND_BLOCKED zone[%d] direction=%s (H1 EMA200 misaligned)",
+                     z, is_long ? "LONG" : "SHORT");
+      }
+      return;
+   }
    double atr5 = ATR_M5();
    if(atr5 <= 0){ g_zones[z].state = ST_EXPIRED; return; }
    double buf = Inp_SLBufferATR * atr5;
@@ -561,6 +624,7 @@ void ExecuteArmedZone(int z){
 // SESSION FORCE-CLOSE
 //===================================================================
 void ForceCloseIfCutoff(){
+   if(!Inp_UseForceClose) return;   // v11: bypass force close, let SL/TP handle exits
    if(IsForceCloseTime() && MyPositions() > 0){
       CloseAllMyPositions();
    }
@@ -642,8 +706,8 @@ void OnTick(){
    // to avoid missing OnTick invocations on quiet ticks in Model 1 tester.
    if(!IsNewM5Bar()) return;
 
-   // Daily rollover check based on the NEW M5 bar's time (not TimeCurrent).
-   datetime m5_open = iTime(_Symbol, PERIOD_M5, 0);
+   // Daily rollover check based on the NEW entry-TF bar's time (not TimeCurrent).
+   datetime m5_open = iTime(_Symbol, Inp_EntryTF, 0);
    MqlDateTime mt; TimeToStruct(m5_open, mt);
    int today_ymd = mt.year * 10000 + mt.mon * 100 + mt.day;
    if(today_ymd != g_today_ymd){
@@ -653,6 +717,7 @@ void OnTick(){
       g_day_start = StructToTime(mt);
       g_trades_today = 0;
       g_arm_pending_idx = -1;
+      g_day_start_balance = AccountInfoDouble(ACCOUNT_BALANCE);   // v14 daily budget baseline
       RebuildZones();
    }
 

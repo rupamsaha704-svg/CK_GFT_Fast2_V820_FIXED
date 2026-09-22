@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CK_GOLD_COMBO_v2 - Complete Proof of Authorship</title>
+    <style>
+        @media print {
+            body { font-size: 10pt; }
+            .page-break { page-break-before: always; }
+            h1 { page-break-after: avoid; }
+            h2 { page-break-after: avoid; }
+            table { page-break-inside: avoid; }
+            .no-print { display: none; }
+        }
+        
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.5;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            color: #333;
+            background: #fff;
+        }
+        
+        h1 {
+            color: #1a5f7a;
+            border-bottom: 3px solid #1a5f7a;
+            padding-bottom: 12px;
+            margin-bottom: 8px;
+            font-size: 1.8em;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 6px;
+            margin-top: 28px;
+            font-size: 1.3em;
+        }
+        
+        h3 {
+            color: #34495e;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        
+        .meta-box {
+            background: #f0f4f8;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-left: 4px solid #1a5f7a;
+        }
+        
+        .meta-box table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+        }
+        
+        .meta-box td {
+            padding: 6px 10px;
+            border: none;
+            vertical-align: top;
+        }
+        
+        .meta-box td:first-child {
+            font-weight: 600;
+            width: 150px;
+            color: #1a5f7a;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        
+        th {
+            background: #1a5f7a;
+            color: white;
+            padding: 10px 8px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 4px solid #4caf50;
+            padding: 12px 16px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .warning {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left: 4px solid #ff9800;
+            padding: 12px 16px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .code-box {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85em;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+        
+        .pass { color: #2e7d32; font-weight: bold; }
+        .fail { color: #c62828; font-weight: bold; }
+        .pos { color: #2e7d32; }
+        .neg { color: #c62828; }
+        
+        code {
+            background: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.88em;
+        }
+        
+        ul, ol { margin: 12px 0; padding-left: 22px; }
+        li { margin: 6px 0; }
+        
+        .qa-section {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .qa-section h4 {
+            color: #1a5f7a;
+            margin: 0 0 8px 0;
+            font-size: 1em;
+        }
+        
+        .qa-section p {
+            margin: 0;
+            color: #444;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 2px solid #e0e0e0;
+            text-align: center;
+            color: #666;
+            font-size: 0.85em;
+        }
+        
+        .signature-area {
+            margin-top: 50px;
+            display: flex;
+            gap: 40px;
+        }
+        
+        .signature-box {
+            flex: 1;
+            border-top: 1px solid #333;
+            padding-top: 8px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<h1>CK_GOLD_COMBO_v2 Expert Advisor</h1>
+<p class="subtitle">Complete Proof of Authorship &amp; Technical Documentation</p>
+
+<div class="meta-box">
+    <table>
+        <tr><td>EA File Name</td><td><strong>CK_GOLD_COMBO_v2.mq5</strong></td></tr>
+        <tr><td>Version</td><td>2.00</td></tr>
+        <tr><td>Symbol</td><td>XAUUSD only</td></tr>
+        <tr><td>Platform</td><td>MetaTrader 5 (MT5)</td></tr>
+        <tr><td>Target Account</td><td>FundedNext Stellar 2-Step $6,000</td></tr>
+        <tr><td>Document Date</td><td>September 22, 2026</td></tr>
+        <tr><td>Author</td><td>Account Holder (the trader)</td></tr>
+        <tr><td>Compilation</td><td><span class="pass">✓ 0 errors, 0 warnings</span></td></tr>
+    </table>
+</div>
+
+<h2>1. Statement of Authorship</h2>
+
+<p>I, the account holder, developed <strong>CK_GOLD_COMBO_v2</strong> as my personal Expert Advisor for trading XAUUSD on FundedNext. This EA is:</p>
+
+<ul>
+    <li><strong>NOT purchased</strong> from any marketplace (MQL5 Market, etc.)</li>
+    <li><strong>NOT licensed</strong> from any third party</li>
+    <li><strong>NOT copied</strong> from any existing EA</li>
+    <li><strong>Uniquely developed</strong> for my FundedNext account</li>
+</ul>
+
+<div class="highlight">
+    <strong>Development Evidence:</strong>
+    <ul style="margin-bottom: 0;">
+        <li><strong>278+ ledger records</strong> in <code>SPEC/dof_ledger.jsonl</code> (SHA-256 hash-chained, tamper-evident)</li>
+        <li><strong>26 development days</strong> (August 28 → September 22, 2026)</li>
+        <li><strong>58+ pre-registrations</strong> (hypothesis declared BEFORE running backtest)</li>
+        <li><strong>15+ explicit rejections</strong> (failed variants dropped, not tuned)</li>
+        <li>Ledger verification: <code>python SPEC/dof_ledger.py verify</code> → <span class="pass">"integrity: OK"</span></li>
+    </ul>
+</div>
+
+<h2>2. What This EA Does</h2>
+
+<p>CK_GOLD_COMBO_v2 runs <strong>three independent validated strategies</strong> on XAUUSD:</p>
+
+<table>
+    <tr>
+        <th>Strategy</th>
+        <th>Magic Number</th>
+        <th>Logic</th>
+        <th>Direction</th>
+    </tr>
+    <tr>
+        <td><strong>FIX09</strong></td>
+        <td>20260716</td>
+        <td>H1 EMA-200 trend + M15 pullback breakout</td>
+        <td>Long/Short</td>
+    </tr>
+    <tr>
+        <td><strong>DTREND</strong></td>
+        <td>20260930</td>
+        <td>H4 EMA crossover + D1 trend confirmation</td>
+        <td>Long only</td>
+    </tr>
+    <tr>
+        <td><strong>DONCHIAN</strong></td>
+        <td>20260903</td>
+        <td>20-bar M15 close breakout (Turtle style)</td>
+        <td>Long/Short</td>
+    </tr>
+</table>
+
+<h3>Master Account Guards (FundedNext Compliance)</h3>
+<ul>
+    <li><strong>Static DD Halt</strong>: Stops at 8% loss (buffer under FN 10% rule)</li>
+    <li><strong>Daily Loss Flatten</strong>: Closes all at 4.5% daily loss (buffer under FN 5% rule)</li>
+    <li><strong>Predictive Daily Governor</strong>: Blocks entries that could breach daily limit</li>
+    <li><strong>Combined SL Risk Check</strong>: Prevents multi-position overnight disasters</li>
+    <li><strong>Margin Ceiling</strong>: Max 60% margin used (buffer under FN 80% rule)</li>
+    <li><strong>News Gate</strong>: ±6 minute block around high-impact releases</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h2>3. Backtest Results — $6,000 Account</h2>
+
+<p>Period: October 2025 → September 2026 (11.5 months), Model 1 (1-min OHLC)</p>
+
+<table>
+    <tr>
+        <th>Month</th>
+        <th>Gross P&amp;L</th>
+        <th>Trades</th>
+        <th>80% Take</th>
+        <th>BDT (Rs 120/$)</th>
+    </tr>
+    <tr><td>2025-10</td><td class="pos">+$1,360</td><td>88</td><td>$1,088</td><td><strong>Rs 130,602</strong></td></tr>
+    <tr><td>2025-11</td><td class="pos">+$434</td><td>68</td><td>$347</td><td>Rs 41,617</td></tr>
+    <tr><td>2025-12</td><td class="pos">+$238</td><td>78</td><td>$191</td><td>Rs 22,861</td></tr>
+    <tr><td>2026-01</td><td class="pos">+$503</td><td>74</td><td>$403</td><td>Rs 48,334</td></tr>
+    <tr><td>2026-02</td><td class="neg">−$258</td><td>60</td><td>−$206</td><td class="neg">Rs −24,727</td></tr>
+    <tr><td>2026-03</td><td class="pos">+$1,000</td><td>66</td><td>$800</td><td><strong>Rs 95,987</strong></td></tr>
+    <tr><td>2026-04</td><td class="neg">−$457</td><td>69</td><td>−$366</td><td class="neg">Rs −43,915</td></tr>
+    <tr><td>2026-05</td><td class="pos">+$75</td><td>70</td><td>$60</td><td>Rs 7,169</td></tr>
+    <tr><td>2026-06</td><td class="pos">+$495</td><td>71</td><td>$396</td><td>Rs 47,502</td></tr>
+    <tr><td>2026-07</td><td class="neg">−$215</td><td>81</td><td>−$172</td><td class="neg">Rs −20,642</td></tr>
+    <tr><td>2026-08</td><td class="pos">+$615</td><td>80</td><td>$492</td><td>Rs 59,017</td></tr>
+    <tr><td>2026-09</td><td class="pos">+$252</td><td>41</td><td>$201</td><td>Rs 24,145</td></tr>
+</table>
+
+<div class="highlight">
+    <table style="margin: 0; background: transparent;">
+        <tr><td style="width: 200px;"><strong>Total Trades</strong></td><td>846</td></tr>
+        <tr><td><strong>Total Gross Profit</strong></td><td>$4,041.15</td></tr>
+        <tr><td><strong>Take-home (80% split)</strong></td><td><strong>$3,232.91</strong></td></tr>
+        <tr><td><strong>Win Rate</strong></td><td>26.6% (225 W / 621 L)</td></tr>
+        <tr><td><strong>Worst Single Day</strong></td><td>−$249.02 (Jan 28)</td></tr>
+        <tr><td><strong>Days Exceeding $300</strong></td><td><span class="pass">0 (FN compliant)</span></td></tr>
+        <tr><td><strong>Average Monthly</strong></td><td><strong>$269 = Rs 32,329</strong></td></tr>
+        <tr><td><strong>Annual Return</strong></td><td><strong>70.3% on $6k</strong></td></tr>
+    </table>
+</div>
+
+<h2>4. FundedNext Rule Compliance</h2>
+
+<table>
+    <tr>
+        <th>Rule</th>
+        <th>FN Threshold</th>
+        <th>EA Configuration</th>
+        <th>Backtest Result</th>
+    </tr>
+    <tr>
+        <td>Daily Loss</td>
+        <td>5% = $300</td>
+        <td>Governor at 4%</td>
+        <td><span class="pass">PASS</span> — worst day −$249</td>
+    </tr>
+    <tr>
+        <td>Max Overall Loss</td>
+        <td>10% = floor $5,400</td>
+        <td>Halt at 8%</td>
+        <td><span class="pass">PASS</span> — never approached</td>
+    </tr>
+    <tr>
+        <td>Margin Usage</td>
+        <td>Max 80%</td>
+        <td>Clamp at 60%</td>
+        <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+        <td>EA Allowed</td>
+        <td>Yes (&lt; $50k accounts)</td>
+        <td>MT5 EA</td>
+        <td><span class="pass">PASS</span></td>
+    </tr>
+    <tr>
+        <td>Weekend Holdings</td>
+        <td>Permitted</td>
+        <td>Allowed</td>
+        <td><span class="pass">PASS</span></td>
+    </tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>5. Bug Discovered and Fixed During Development</h2>
+
+<p>This section proves this EA was developed iteratively, not purchased.</p>
+
+<h3>Bug: September 2, 2026 Daily Breach</h3>
+<ul>
+    <li><strong>Symptom</strong>: −$497.70 loss on Sep 2 (exceeds FN $300 daily limit)</li>
+    <li><strong>Cause</strong>: Two overnight SELL positions hit stop-loss together</li>
+</ul>
+
+<h3>Root Causes Found</h3>
+<ol>
+    <li><strong>Integer Overflow</strong>: <code>DN_Magic = 20260921003</code> exceeded int32 max (2,147,483,647), became −1,213,915,477 in MT5 → position tracking failed</li>
+    <li><strong>Missing Combined Risk Check</strong>: The EA checked each new trade's risk but not the combined SL risk of already-open positions</li>
+</ol>
+
+<h3>Fixes Applied (Ledger seq276b)</h3>
+<div class="code-box">
+// Fix 1: Changed DN_Magic to fit int32
+input long DN_Magic = 20260903;  // was 20260921003 (overflow)
+
+// Fix 2: Added combined SL risk function
+double G_OpenSLRisk(){
+   double totalRisk = 0;
+   for(int i = PositionsTotal()-1; i >= 0; i--){
+      // ... calculates worst-case SL loss of ALL open positions
+      totalRisk += slDist * lot * moneyPerPoint;
+   }
+   return(totalRisk);
+}
+
+// Fix 3: Modified G_RiskBlocksEntry() to include existing risk
+double existingSLRisk = G_OpenSLRisk();
+if(usedToday + existingSLRisk + newTradeRisk > dailyBudget)
+   return(true);  // block the new entry
+</div>
+
+<div class="highlight">
+    <strong>Result After Fix:</strong>
+    <ul style="margin-bottom: 0;">
+        <li>Sep 2, 2026: −$497 → <strong>+$224.74</strong> (breach eliminated)</li>
+        <li>Net profit: $2,430 → <strong>$4,041</strong> (+67% improvement)</li>
+        <li>Daily breach days: 1 → <strong>0</strong></li>
+    </ul>
+</div>
+
+<h2>6. Development Timeline</h2>
+
+<table>
+    <tr>
+        <th>Seq</th>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Decision</th>
+    </tr>
+    <tr><td>1</td><td>2026-08-28</td><td>BASELINE_FREEZE</td><td>Design v1.0 locked; XAUUSD-only</td></tr>
+    <tr><td>148</td><td>2026-09-01</td><td>RESEARCH</td><td>Gold trend edge confirmed across 22 variants</td></tr>
+    <tr><td>182</td><td>2026-09-03</td><td>FUNDED_FIX_CONFIRM</td><td>Funded config validated (real-tick)</td></tr>
+    <tr><td>208</td><td>2026-09-15</td><td>CRITICAL</td><td>Margin ceiling rule discovered</td></tr>
+    <tr><td>252</td><td>2026-09-18</td><td>PREREG</td><td>Settlement window block added</td></tr>
+    <tr><td>276</td><td>2026-09-22</td><td>BUG_FIX</td><td>Combined SL risk check (seq276b)</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>7. Frequently Asked Questions</h2>
+
+<div class="qa-section">
+    <h4>Q: Where did you get this EA?</h4>
+    <p><strong>A:</strong> I developed it myself over 26 days (Aug 28 – Sep 22, 2026). Every design decision is recorded in a hash-chained ledger with 278+ entries. No purchased EA comes with this level of documentation.</p>
+</div>
+
+<div class="qa-section">
+    <h4>Q: How can I verify you wrote it?</h4>
+    <p><strong>A:</strong> Run <code>python SPEC/dof_ledger.py verify</code> in my repository. The ledger is SHA-256 hash-chained — any tampering breaks the chain and is detectable. Each entry has a timestamp, hypothesis (PREREG), and result.</p>
+</div>
+
+<div class="qa-section">
+    <h4>Q: Why does a purchased EA not have this?</h4>
+    <p><strong>A:</strong> Purchased EAs are black boxes — you get the compiled .ex5 file only. My EA has the full .mq5 source code (820+ lines), every decision logged, 15+ failed experiments honestly recorded, and bugs I discovered and fixed myself (like the int32 overflow).</p>
+</div>
+
+<div class="qa-section">
+    <h4>Q: What strategies does it use?</h4>
+    <p><strong>A:</strong> Three independent strategies: (1) FIX09 — H1 trend + M15 pullback breakout, (2) DTREND — H4 EMA crossover trend-follow, long-only, (3) DONCHIAN — 20-bar M15 close breakout. Each has its own magic number so trades don't collide.</p>
+</div>
+
+<div class="qa-section">
+    <h4>Q: How does it stay within FundedNext rules?</h4>
+    <p><strong>A:</strong> The EA has multiple guards: (1) Static DD halt at 8% (under your 10%), (2) Daily loss flatten at 4.5% (under your 5%), (3) Predictive governor blocks risky entries, (4) Combined SL risk check prevents multi-position disasters, (5) Margin ceiling at 60% (under your 80%).</p>
+</div>
+
+<div class="qa-section">
+    <h4>Q: Can you show me the source code?</h4>
+    <p><strong>A:</strong> Yes. The full source is in <code>CK_GOLD_COMBO_v2.mq5</code> (820+ lines). I can share any section you want to inspect. The file compiles with 0 errors, 0 warnings.</p>
+</div>
+
+<div class="qa-section">
+    <h4>Q: What is the win rate?</h4>
+    <p><strong>A:</strong> 26.6% (225 wins / 621 losses) over 846 trades in 11.5 months. This is a trend-following system — it has many small losses and fewer large wins, resulting in +$4,041 gross profit (+70.3% on $6k).</p>
+</div>
+
+<div class="qa-section">
+    <h4>Q: What was the worst day?</h4>
+    <p><strong>A:</strong> −$249.02 on January 28, 2026. This is under the FundedNext $300 daily limit. After fixing the Sep 2 bug, there are zero days that exceeded $300.</p>
+</div>
+
+<div class="qa-section">
+    <h4>Q: Does it trade during news?</h4>
+    <p><strong>A:</strong> The EA has an optional news gate (<code>Combo_UseNewsGate</code>) that blocks entries ±6 minutes around high-impact releases. This helps avoid the 40% profit haircut on news trades in funded accounts.</p>
+</div>
+
+<div class="qa-section">
+    <h4>Q: What if I need to verify the ledger?</h4>
+    <p><strong>A:</strong> The ledger file is <code>SPEC/dof_ledger.jsonl</code>. Each line is a JSON record with: sequence number, timestamp, type (PREREG/RESULT/BUG_FIX), description, and SHA-256 hash of the previous record. The verification script checks that every hash matches.</p>
+</div>
+
+<h2>8. Technical Verification Commands</h2>
+
+<div class="code-box">
+# Verify ledger integrity
+python SPEC/dof_ledger.py verify
+
+# Count ledger entries
+(Get-Content SPEC/dof_ledger.jsonl).Count
+
+# Compile the EA (0 errors expected)
+metaeditor64.exe /compile:CK_GOLD_COMBO_v2.mq5
+
+# Check magic numbers in code
+Select-String -Path CK_GOLD_COMBO_v2.mq5 -Pattern "Magic\s*="
+</div>
+
+<div class="signature-area">
+    <div class="signature-box">
+        Account Holder Signature
+    </div>
+    <div class="signature-box">
+        Date
+    </div>
+</div>
+
+<div class="footer">
+    <p>Document generated: September 22, 2026<br>
+    EA: <strong>CK_GOLD_COMBO_v2.mq5</strong> (Version 2.00)<br>
+    Backtest period: October 2025 – September 2026</p>
+</div>
+
+</body>
+</html>
